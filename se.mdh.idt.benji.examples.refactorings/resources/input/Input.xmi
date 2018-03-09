@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamodel:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:metamodel="http://www.mdh.se/examples/refactorings/Metamodel"
+    xsi:schemaLocation="http://www.mdh.se/examples/refactorings/Metamodel ../../../se.mdh.idt.benji.examples.refactorings.metamodel/model/Metamodel.xcore#/EPackage"
+    name="Package_0"
+    uri="Package_0">
+  <classifiers
+      xsi:type="metamodel:Class"
+      name="Class_0"
+      subClasses="//@classifiers.5">
+    <structuralFeatures
+        xsi:type="metamodel:Attribute"
+        name="attribute_0"
+        type="//@classifiers.2"/>
+    <structuralFeatures
+        xsi:type="metamodel:Attribute"
+        name="attribute_2"
+        type="//@classifiers.2"/>
+    <structuralFeatures
+        xsi:type="metamodel:Attribute"
+        name="attribute_1"
+        type="//@classifiers.3"/>
+    <structuralFeatures
+        xsi:type="metamodel:Reference"
+        name="reference_0"
+        type="//@classifiers.4"/>
+    <structuralFeatures
+        xsi:type="metamodel:Reference"
+        name="reference_1"
+        type="//@classifiers.5"/>
+  </classifiers>
+  <classifiers
+      xsi:type="metamodel:Class"
+      name="Class_1"
+      subClasses="//@classifiers.4">
+    <structuralFeatures
+        xsi:type="metamodel:Attribute"
+        name="attribute_0"
+        type="//@classifiers.2"/>
+    <structuralFeatures
+        xsi:type="metamodel:Attribute"
+        name="attribute_1"
+        type="//@classifiers.2"/>
+  </classifiers>
+  <classifiers
+      xsi:type="metamodel:DataType"
+      name="DataType_0"/>
+  <classifiers
+      xsi:type="metamodel:DataType"
+      name="DataType_1"/>
+  <classifiers
+      xsi:type="metamodel:Class"
+      name="Class_2"
+      superClasses="//@classifiers.1"
+      subClasses="//@classifiers.5"/>
+  <classifiers
+      xsi:type="metamodel:Class"
+      name="Class_3"
+      superClasses="//@classifiers.4 //@classifiers.0"/>
+</metamodel:Package>

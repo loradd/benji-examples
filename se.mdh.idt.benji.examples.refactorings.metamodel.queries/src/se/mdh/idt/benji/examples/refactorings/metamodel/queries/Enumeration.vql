@@ -1,0 +1,85 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// enumeration - preserved
+pattern preserved_enumeration (initial_enumeration : Enumeration, current_enumeration : Enumeration) {
+	find preserved_dataType (initial_enumeration, current_enumeration); 	
+}
+
+// enumeration - created
+pattern created_enumeration (current_enumeration : Enumeration) {
+	find created_dataType (current_enumeration); 
+}
+
+// enumeration - deleted
+pattern deleted_enumeration (initial_enumeration : Enumeration) {
+	find deleted_dataType (initial_enumeration); 	
+}
+
+// enumeration - name
+pattern enumeration_name (enumeration : Enumeration, name : java String) {
+	find dataType_name (enumeration, name); 
+}
+
+// enumeration - name - preserved
+pattern preserved_enumeration_name (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_name : java String, current_name : java String) {
+	find preserved_dataType_name (initial_enumeration, current_enumeration, initial_name, current_name); 
+}
+
+// enumeration - name - changed
+pattern changed_enumeration_name (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_name : java String, current_name : java String) {
+	find changed_dataType_name (initial_enumeration, current_enumeration, initial_name, current_name); 	
+}
+
+// enumeration - package
+pattern enumeration_package (enumeration : Enumeration, ^package : Package) {
+	find dataType_package (enumeration, ^package); 
+}
+
+// enumeration - package - preserved
+pattern preserved_enumeration_package (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_package : Package, current_package : Package) {
+	find preserved_dataType_package (initial_enumeration, current_enumeration, initial_package, current_package); 
+}
+
+// enumeration - package - changed
+pattern changed_enumeration_package (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_package : Package, current_package : Package) {
+	find changed_dataType_package (initial_enumeration, current_enumeration, initial_package, current_package); 	
+}
+
+// enumeration - literals
+pattern enumeration_literal (enumeration : Enumeration, literal : EnumerationLiteral) {
+	Enumeration.literals (enumeration, literal); 
+}
+
+// enumeration - literals - preserved
+pattern preserved_enumeration_literal (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral) {
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find preserved_enumerationLiteral (initial_literal, current_literal); 
+	find enumeration_literal (initial_enumeration, initial_literal); 
+	find enumeration_literal (current_enumeration, current_literal); 
+}
+
+// enumeration - literals - added
+pattern added_enumeration_literal (initial_enumeration : Enumeration, current_enumeration : Enumeration, current_literal : EnumerationLiteral) {
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find created_enumerationLiteral (current_literal); 
+	find enumeration_literal (current_enumeration, current_literal); 	
+} or {
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find preserved_enumerationLiteral (initial_literal, current_literal); 
+	neg find enumeration_literal (initial_enumeration, initial_literal); 
+	find enumeration_literal (current_enumeration, current_literal); 
+}
+
+// enumeration - literals - removed
+pattern removed_enumeration_literal (initial_enumeration : Enumeration, current_enumeration : Enumeration, initial_literal : EnumerationLiteral) {
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find deleted_enumerationLiteral (initial_literal); 
+	find enumeration_literal (initial_enumeration, initial_literal); 
+} or {
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find preserved_enumerationLiteral (initial_literal, current_literal); 
+	find enumeration_literal (initial_enumeration, initial_literal); 
+	neg find enumeration_literal (current_enumeration, current_literal); 
+}

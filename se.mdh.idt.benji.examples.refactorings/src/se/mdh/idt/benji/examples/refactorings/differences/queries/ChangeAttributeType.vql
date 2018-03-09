@@ -1,0 +1,43 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_dataType
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_type
+
+// ACA12 - Change Attribute Type - Precondition
+pattern ChangeAttributeTypePrecondition (
+	initial_package : Package, current_package : Package, 
+	initial_class : Class, current_class : Class, 
+	initial_attribute : Attribute, current_attribute : Attribute,
+	initial_attribute_type : DataType, current_attribute_type : DataType, 
+	initial_type : DataType, current_type : DataType
+) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_dataType (initial_package, current_package, initial_type, current_type);
+	find preserved_package_dataType (initial_package, current_package, initial_attribute_type, current_attribute_type);  
+	find preserved_class_attribute (initial_class, current_class, initial_attribute, current_attribute); 
+	find preserved_attribute_type (initial_attribute, current_attribute, initial_attribute_type, current_attribute_type); 
+	initial_attribute_type != initial_type;  
+	initial_attribute_type != current_type; 	
+}
+
+// ACA12 - Change Attribute Type - Postcondition
+pattern ChangeAttributeTypePostcondition (
+	initial_package : Package, current_package : Package, 
+	initial_class : Class, current_class : Class, 
+	initial_attribute : Attribute, current_attribute : Attribute,
+	initial_attribute_type : DataType, current_attribute_type : DataType,  
+	initial_type : DataType, current_type : DataType
+) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_dataType (initial_package, current_package, initial_type, current_type);
+	find preserved_package_dataType (initial_package, current_package, initial_attribute_type, current_attribute_type);  
+	find preserved_class_attribute (initial_class, current_class, initial_attribute, current_attribute);
+	find changed_attribute_type (initial_attribute, current_attribute, initial_attribute_type, current_type);
+	initial_attribute_type != initial_type; 
+	current_attribute_type != current_type;   
+}

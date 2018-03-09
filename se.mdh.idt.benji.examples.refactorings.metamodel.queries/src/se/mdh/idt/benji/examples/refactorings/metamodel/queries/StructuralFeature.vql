@@ -1,0 +1,96 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// structuralFeature - preserved
+pattern preserved_structuralFeature (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature) {
+	find preserved_modelElement (initial_structuralFeature, current_structuralFeature); 
+}
+
+// structuralFeature - created
+pattern created_structuralFeature (current_structuralFeature : StructuralFeature) {
+	find created_modelElement (current_structuralFeature); 
+}
+
+// structuralFeature - deleted
+pattern deleted_structuralFeature (initial_structuralFeature : StructuralFeature) {
+	find deleted_modelElement (initial_structuralFeature); 
+}
+
+// structuralFeature - name
+pattern structuralFeature_name (structuralFeature : StructuralFeature, name : java String) {
+	find modelElement_name (structuralFeature, name); 
+}
+
+// structuralFeature - name - preserved
+pattern preserved_structuralFeature_name (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_name : java String, current_name : java String) {
+	find preserved_modelElement_name (initial_structuralFeature, current_structuralFeature, initial_name, current_name); 
+}
+
+// structuralFeature - name - changed
+pattern changed_structuralFeature_name (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_name : java String, current_name : java String) {
+	find changed_modelElement_name (initial_structuralFeature, current_structuralFeature, initial_name, current_name); 
+}
+
+// structuralFeature - owner
+pattern structuralFeature_owner (structuralFeature : StructuralFeature, owner : Class) {
+	StructuralFeature.owner (structuralFeature, owner); 
+}
+
+// structuralFeature - owner - preserved
+pattern preserved_structuralFeature_owner (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_owner : Class, current_owner : Class) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	find preserved_class (initial_owner, current_owner); 
+	find structuralFeature_owner (initial_structuralFeature, initial_owner); 
+	find structuralFeature_owner (current_structuralFeature, current_owner); 
+}
+
+// structuralFeature - owner - changed
+pattern changed_structuralFeature_owner (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_owner : Class, current_owner : Class) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	neg find preserved_class (initial_owner, current_owner); 
+	find structuralFeature_owner (initial_structuralFeature, initial_owner); 
+	find structuralFeature_owner (current_structuralFeature, current_owner); 
+}
+
+// structuralFeature - lower
+pattern structuralFeature_lower (structuralFeature : StructuralFeature, lower : java Integer) {
+	StructuralFeature.lower (structuralFeature, lower); 
+}
+
+// structuralFeature - lower - preserved
+pattern preserved_structuralFeature_lower (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_lower : java Integer, current_lower : java Integer) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	find structuralFeature_lower (initial_structuralFeature, initial_lower); 
+	find structuralFeature_lower (current_structuralFeature, current_lower); 
+	check (initial_lower == current_lower); 
+}
+
+// structuralFeature - lower - changed
+pattern changed_structuralFeature_lower (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_lower : java Integer, current_lower : java Integer) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	find structuralFeature_lower (initial_structuralFeature, initial_lower); 
+	find structuralFeature_lower (current_structuralFeature, current_lower); 
+	check (initial_lower != current_lower); 
+}
+
+// structuralFeature - upper
+pattern structuralFeature_upper (structuralFeature : StructuralFeature, upper : java Integer) {
+	StructuralFeature.upper (structuralFeature, upper); 
+}
+
+// structuralFeature - upper - preserved
+pattern preserved_structuralFeature_upper (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_upper : java Integer, current_upper : java Integer) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	find structuralFeature_upper (initial_structuralFeature, initial_upper); 
+	find structuralFeature_upper (current_structuralFeature, current_upper); 
+	check (initial_upper == current_upper); 
+}
+
+// structuralFeature - upper - changed
+pattern changed_structuralFeature_upper (initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature, initial_upper : java Integer, current_upper : java Integer) {
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature); 
+	find structuralFeature_upper (initial_structuralFeature, initial_upper); 
+	find structuralFeature_upper (current_structuralFeature, current_upper); 
+	check (initial_upper != current_upper); 
+}

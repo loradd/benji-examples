@@ -1,0 +1,74 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_subClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_reference_typed
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_reference_typed_weak
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_superClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_superClass
+
+// Utils - Common Class Attribute
+pattern common_class_attribute (left_class : Class, right_class : Class, left_attribute : Attribute, right_attribute : Attribute) {
+	find class_attribute (left_class, left_attribute); 
+	find class_attribute (right_class, right_attribute); 
+	find attribute_name (left_attribute, attribute_name); 
+	find attribute_name (right_attribute, attribute_name); 
+	find attribute_type (left_attribute, attribute_type); 
+	find attribute_type (right_attribute, attribute_type); 	
+}
+
+// Utils - Common Class References
+pattern common_class_reference (left_class : Class, right_class : Class, left_reference : Reference, right_reference : Reference) {
+	find class_reference (left_class, left_reference); 
+	find class_reference (right_class, right_reference);
+	find reference_name (left_reference, reference_name); 
+	find reference_name (right_reference, reference_name);
+	find reference_type (left_reference, reference_type); 
+	find reference_type (right_reference, reference_type); 
+}
+
+// Utils - Common Class Superclass
+pattern common_class_superClass (super_class : Class, left_class : Class, right_class : Class) {
+	find class_superClass+ (left_class, super_class); 
+	find class_superClass+ (right_class, super_class); 
+}
+
+// Utils - Split Class Reference
+pattern split_class_reference (initial_class : Class, current_class : Class, initial_reference : Reference) {
+	find removed_class_reference_typed (initial_class, current_class, initial_reference, initial_type); 
+	find preserved_class (initial_type, current_type); 
+	count find added_class_reference_typed_weak (initial_class, current_class, _, current_type) == type_references;
+	count find class_subClass (current_type, _) == type_subTypes; 
+	check (type_references == type_subTypes);   
+}
+
+// Utils - Flattened Package Class
+pattern flattened_package_class (initial_package : Package, current_package : Package, initial_class : Class) {
+	find removed_package_class (initial_package, current_package, initial_class); 
+	count find class_subClass (initial_class, _) == class_subClasses; 
+	count find flattened_class_superClass (_, _, initial_class) == flattened_class_subClasses; 
+	check (class_subClasses == flattened_class_subClasses); 
+} 
+
+// Utils - Flattened Class Superclass
+pattern flattened_class_superClass (initial_class : Class, current_class : Class, initial_superClass : Class) {
+	find removed_class_superClass (initial_class, current_class, initial_superClass); 
+	count find class_attribute (initial_superClass, _) == super_attributes; 
+	count find class_reference (initial_superClass, _) == super_references; 
+	count find class_superClass (initial_superClass, _) == super_superClasses; 
+	count find common_class_attribute (initial_superClass, current_class, _, _) == common_attributes;
+	count find common_class_reference (initial_superClass, current_class, _, _) == common_references;
+	count find common_class_superClass (_, initial_superClass, current_class) == common_superClasses; 
+	check (super_attributes == common_attributes); 
+	check (super_references == common_references); 
+	check (super_superClasses == common_superClasses);  
+}

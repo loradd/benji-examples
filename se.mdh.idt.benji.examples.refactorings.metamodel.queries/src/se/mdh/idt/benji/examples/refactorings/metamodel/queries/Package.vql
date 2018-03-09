@@ -1,0 +1,198 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// package - preserved
+pattern preserved_package (initial_package : Package, current_package : Package) {
+	find preserved_classifier (initial_package, current_package); 	
+}
+
+// package - created
+pattern created_package (current_package : Package) {
+	find created_classifier (current_package); 
+}
+
+// package - deleted
+pattern deleted_package (initial_package : Package) {
+	find deleted_classifier (initial_package); 
+}
+	
+// package - name
+pattern package_name (^package : Package, name : java String) {
+	Package.name (^package, name); 
+}
+
+// package - name - preserved
+pattern preserved_package_name (initial_package : Package, current_package : Package, initial_name : java String, current_name : java String) {
+	find preserved_package (initial_package, current_package); 
+	find package_name (initial_package, initial_name); 
+	find package_name (current_package, current_name); 
+	check (initial_name == current_name); 	
+}
+
+// package - name - changed
+pattern changed_package_name (initial_package : Package, current_package : Package, initial_name : java String, current_name : java String) {
+	find preserved_package (initial_package, current_package); 
+	find package_name (initial_package, initial_name); 
+	find package_name (current_package, current_name); 
+	check (initial_name != current_name); 	
+}
+
+// package - superPackage
+pattern package_superPackage (^package : Package, superPackage : Package) {
+	Package.^package (^package, superPackage); 	
+}
+
+// package - superPackage - preserved
+pattern preserved_package_superPackage (initial_package : Package, current_package : Package, initial_superPackage : Package, current_superPackage : Package) {
+	find preserved_package (initial_package, current_package); 
+	find preserved_package (initial_superPackage, current_superPackage); 
+	find package_superPackage (initial_package, initial_superPackage); 
+	find package_superPackage (current_package, current_superPackage);	
+}
+
+// package - superPackage - changed
+pattern changed_package_superPackage (initial_package : Package, current_package : Package, initial_superPackage : Package, current_superPackage : Package) {
+	find preserved_package (initial_package, current_package); 
+	neg find preserved_package (initial_superPackage, current_superPackage); 
+	find package_superPackage (initial_package, initial_superPackage); 
+	find package_superPackage (current_package, current_superPackage); 	
+}
+
+// package - uri
+pattern package_uri (^package : Package, uri : java String) {
+	Package.uri (^package, uri); 	
+} 
+
+// package - uri - preserved
+pattern preserved_package_uri (initial_package : Package, current_package : Package, initial_uri : java String, current_uri : java String) {
+	find preserved_package (initial_package, current_package); 
+	find package_uri (initial_package, initial_uri); 
+	find package_uri (current_package, current_uri); 
+	check (initial_uri == current_uri); 	
+}
+
+// package - uri - changed
+pattern changed_package_uri (initial_package : Package, current_package : Package, initial_uri : java String, current_uri : java String) {
+	find preserved_package (initial_package, current_package); 
+	find package_uri (initial_package, initial_uri); 
+	find package_uri (current_package, current_uri); 
+	check (initial_uri != current_uri); 	
+}
+
+// package - classifiers
+pattern package_classifier (^package : Package, classifier : Classifier) {
+	Package.classifiers (^package, classifier); 
+}
+
+// package - classifiers (subPackage)
+pattern package_subPackage (^package : Package, subPackage : Package) {
+	find package_classifier (^package, subPackage); 	
+}
+
+// package - classifiers (class)
+pattern package_class (^package : Package, class : Class) {
+	find package_classifier (^package, class); 
+}
+
+// package - classifiers (dataType)
+pattern package_dataType (^package : Package, dataType : DataType) {
+	find package_classifier (^package, dataType); 
+}
+
+// package - classifiers (enumeration)
+pattern package_enumeration (^package : Package, enumeration : Enumeration) {
+	find package_classifier (^package, enumeration); 
+}
+
+// package - classifiers - preserved
+pattern preserved_package_classifier (initial_package : Package, current_package : Package, initial_classifier : Classifier, current_classifier : Classifier) {
+	find preserved_package (initial_package, current_package); 
+	find preserved_classifier (initial_classifier, current_classifier); 
+	find package_classifier (initial_package, initial_classifier); 
+	find package_classifier (current_package, current_classifier);	
+}
+
+// package - classifiers (subPackage) - preserved
+pattern preserved_package_subPackage (initial_package : Package, current_package : Package, initial_subPackage : Package, current_subPackage : Package) {
+	find preserved_package_classifier (initial_package, current_package, initial_subPackage, current_subPackage); 
+}
+
+// package - classifiers (class) - preserved
+pattern preserved_package_class (initial_package : Package, current_package : Package, initial_class : Class, current_class : Class) {
+	find preserved_package_classifier (initial_package, current_package, initial_class, current_class); 
+}
+
+// package - classifiers (dataType) - preserved
+pattern preserved_package_dataType (initial_package : Package, current_package : Package, initial_dataType : DataType, current_dataType : DataType) {
+	find preserved_package_classifier (initial_package, current_package, initial_dataType, current_dataType);	
+}
+
+// package - classifiers (enumeration) - preserved
+pattern preserved_package_enuemration (initial_package : Package, current_package : Package, initial_enumeration : Enumeration, current_enumeration : Enumeration) {
+	find preserved_package_classifier (initial_package, current_package, initial_enumeration, current_enumeration); 
+}
+
+// package - classifiers - added
+pattern added_package_classifier (initial_package : Package, current_package : Package, current_classifier : Classifier) {
+	find preserved_package (initial_package, current_package); 
+	find created_classifier (current_classifier); 
+	find package_classifier (current_package, current_classifier); 	
+} or {
+	find preserved_package (initial_package, current_package); 
+	find preserved_classifier (initial_classifier, current_classifier); 
+	neg find package_classifier (initial_package, initial_classifier); 
+	find package_classifier (current_package, current_classifier); 
+}
+
+// package - classifiers (subPackage) - added
+pattern added_package_subPackage (initial_package : Package, current_package : Package, current_subPackage : Package) {
+	find added_package_classifier (initial_package, current_package, current_subPackage); 
+}
+
+// package - classifiers (class) - added
+pattern added_package_class (initial_package : Package, current_package : Package, current_class : Class) {
+	find added_package_classifier (initial_package, current_package, current_class); 
+}
+
+// package - classifiers (dataType) - added
+pattern added_package_dataType (initial_package : Package, current_package : Package, current_dataType : DataType) {
+	find added_package_classifier (initial_package, current_package, current_dataType); 
+}
+
+// package - classifiers (enumeration) - added
+pattern added_package_enumeration (initial_package : Package, current_package : Package, current_enumeration : Enumeration) {
+	find added_package_classifier (initial_package, current_package, current_enumeration); 
+}
+
+// package - classifiers - removed
+pattern removed_package_classifier (initial_package : Package, current_package : Package, initial_classifier : Classifier) {
+	find preserved_package (initial_package, current_package); 
+	find deleted_classifier (initial_classifier); 
+	find package_classifier (initial_package, initial_classifier); 	
+} or {
+	find preserved_package (initial_package, current_package);
+	find preserved_classifier (initial_classifier, current_classifier); 
+	find package_classifier (initial_package, initial_classifier); 
+	neg find package_classifier (current_package, current_classifier);  
+}
+
+// package - classifiers (subPackage) - removed
+pattern removed_package_subPackage (initial_package : Package, current_package : Package, initial_subPackage : Package) {
+	find removed_package_classifier (initial_package, current_package, initial_subPackage); 
+}
+
+// package - classifiers (class) - removed
+pattern removed_package_class (initial_package : Package, current_package : Package, initial_class : Class) {
+	find removed_package_classifier (initial_package, current_package, initial_class); 
+}
+
+// package - classifiers (dataType) - removed
+pattern removed_package_dataType (initial_package : Package, current_package : Package, initial_dataType : DataType) {
+	find removed_package_classifier (initial_package, current_package, initial_dataType); 	
+}
+
+// package - classifiers (enumeration) - removed
+pattern removed_package_enumeration (initial_package : Package, current_package : Package, initial_enumeration : Enumeration) {
+	find removed_package_classifier (initial_package, current_package, initial_enumeration); 
+}

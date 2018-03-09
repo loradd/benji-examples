@@ -1,0 +1,19 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_reference_typed
+
+// AACR13 - Add Reference - Precondition
+pattern AddReferencePrecondition (initial_package : Package, current_package : Package, initial_class : Class, current_class : Class, initial_type : Class, current_type : Class) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_class (initial_package, current_package, initial_type, current_type); 	
+}
+
+// AACR13 - Add Reference - Postcondition
+pattern AddReferencePostcondition (initial_package : Package, current_package : Package, initial_class : Class, current_class : Class, initial_type : Class, current_type : Class, current_reference : Reference) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_class (initial_package, current_package, initial_type, current_type); 
+	find added_class_reference_typed (initial_class, current_class, current_reference, current_type); 
+}

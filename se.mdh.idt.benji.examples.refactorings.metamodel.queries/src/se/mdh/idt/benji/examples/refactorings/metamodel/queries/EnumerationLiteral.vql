@@ -1,0 +1,54 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// enumeration literal - preserved
+pattern preserved_enumerationLiteral (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral) {
+	find preserved_modelElement (initial_literal, current_literal); 
+}
+
+// enumeration literal - created
+pattern created_enumerationLiteral (current_literal : EnumerationLiteral) {
+	find created_modelElement (current_literal); 
+}
+
+// enumeration literal - deleted
+pattern deleted_enumerationLiteral (initial_literal : EnumerationLiteral) {
+	find deleted_modelElement (initial_literal); 	
+}
+
+// enumeration literal - name
+pattern enumerationLiteral_name (literal : EnumerationLiteral, name : java String) {
+	find modelElement_name (literal, name); 
+}
+
+// enumeration literal - name - preserved
+pattern preserved_enumerationLiteral_name (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_name : java String, current_name : java String) {
+	find preserved_modelElement_name (initial_literal, current_literal, initial_name, current_name); 	
+}
+
+// enumeration literal - name - changed
+pattern changed_enumerationLiteral_name (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_name : java String, current_name : java String) {
+	find changed_modelElement_name (initial_literal, current_literal, initial_name, current_name); 
+}
+
+// enumeration literal - enumeration
+pattern enumerationLiteral_enumeration (literal : EnumerationLiteral, enumeration : Enumeration) {
+	EnumerationLiteral.enumeration (literal, enumeration); 	
+}
+
+// enumeration literal - enumeration - preserved
+pattern preserved_enumerationLiteral_enumeration (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_enumeration : Enumeration, current_enumeration : Enumeration) {
+	find preserved_enumerationLiteral (initial_literal, current_literal); 
+	find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find enumerationLiteral_enumeration (initial_literal, initial_enumeration); 
+	find enumerationLiteral_enumeration (current_literal, current_enumeration); 	
+}
+
+// enumeration literal - enumeration - changed
+pattern changed_enumerationLiteral_enumeration (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_enumeration : Enumeration, current_enumeration : Enumeration) {
+	find preserved_enumerationLiteral (initial_literal, current_literal); 
+	neg find preserved_enumeration (initial_enumeration, current_enumeration); 
+	find enumerationLiteral_enumeration (initial_literal, initial_enumeration);
+	find enumerationLiteral_enumeration (current_literal, current_enumeration);  
+}

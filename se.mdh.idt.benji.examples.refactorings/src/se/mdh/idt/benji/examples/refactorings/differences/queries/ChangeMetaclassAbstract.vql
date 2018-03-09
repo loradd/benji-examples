@@ -1,0 +1,16 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_abstract
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_class_abstract
+
+// ACC19 - Change Metaclass Abstract - Precondition
+pattern ChangeMetaclassAbstractPrecondition (initial_metaclass : Class, current_metaclass : Class) {
+	find preserved_class_abstract (initial_metaclass, current_metaclass, false, false); 
+}
+
+// ACC19 - Change Metaclass Abstract - Postcondition
+pattern ChangeMetaclassAbstractPostcondition (initial_metaclass : Class, current_metaclass : Class) {
+	find changed_class_abstract (initial_metaclass, current_metaclass, false, true); 
+}

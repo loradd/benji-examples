@@ -1,0 +1,27 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_subClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_owner
+
+// CDACA22 - Push Down Property - Precondition
+pattern PushDownPropertyPrecondition (
+	initial_class : Class, current_class : Class, 
+	initial_subClass : Class, current_subClass : Class, 
+	initial_property : Attribute, current_property : Attribute
+) {
+	find preserved_class_attribute (initial_class, current_class, initial_property, current_property); 
+	find preserved_class_subClass (initial_class, current_class, initial_subClass, current_subClass); 
+}
+
+// CDACA22 - Push Down Property - Postcondition
+pattern PushDownPropertyPostcondition (
+	initial_class : Class, current_class : Class, 
+	initial_subClass : Class, current_subClass : Class, 
+	initial_property : Attribute, current_property : Attribute
+) {
+	find changed_attribute_owner (initial_property, current_property, initial_class, current_subClass); 
+	find preserved_class_subClass (initial_class, current_class, initial_subClass, current_subClass); 
+}

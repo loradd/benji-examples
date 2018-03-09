@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_attribute_type"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_class_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_superClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.common_class_superClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_superClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_superClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_superClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_subClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_subClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_subClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_subClass"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference_typed"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference_typed_weak"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_attribute_typed"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_reference_typed"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_class_reference_typed_weak"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_reference_typed"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_class_reference_typed_weak"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.equals_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.equals_class_reference"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.classifier_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_classifier_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_classifier_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.classifier_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_classifier_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_classifier_package"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.dataType_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_dataType_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_dataType_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.dataType_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_dataType_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_dataType_package"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.enumeration_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumeration_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_enumeration_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.enumeration_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumeration_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_enumeration_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.enumeration_literal"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumeration_literal"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_enumeration_literal"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_enumeration_literal"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_enumerationLiteral_enumeration"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ModelElement" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.ModelElement" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ModelElement">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_modelElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_modelElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_modelElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.modelElement_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_modelElement_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_modelElement_name"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_superPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_superPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_package_superPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_subPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.package_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_subPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_enuemration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_subPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_classifier"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_subPackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_dataType"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_enumeration"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_containment"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_containment"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_containment"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.reference_type_weak"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_type"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.created_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_structuralFeature"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.structuralFeature_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_structuralFeature_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_structuralFeature_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.structuralFeature_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_structuralFeature_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_structuralFeature_owner"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.structuralFeature_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_structuralFeature_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_structuralFeature_lower"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.structuralFeature_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_structuralFeature_upper"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_structuralFeature_upper"/>
+    </group>
+  </extension>
+</plugin>

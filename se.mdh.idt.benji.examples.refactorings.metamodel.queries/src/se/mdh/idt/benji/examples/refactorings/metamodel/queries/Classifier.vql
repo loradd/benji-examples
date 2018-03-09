@@ -1,0 +1,54 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// classifier - preserved
+pattern preserved_classifier (initial_classifier : Classifier, current_classifier : Classifier) {
+	find preserved_modelElement (initial_classifier, current_classifier); 
+}
+
+// classifier - created
+pattern created_classifier (current_classifier : Classifier) {
+	find created_modelElement (current_classifier); 
+}
+
+// classifier - deleted
+pattern deleted_classifier (initial_classifier : Classifier) {
+	find deleted_modelElement (initial_classifier); 	
+}
+
+// classifier - name
+pattern classifier_name (classifier : Classifier, name : java String) {
+	find modelElement_name (classifier, name); 
+}
+
+// classifier - name - preserved
+pattern preserved_classifier_name (initial_classifier : Classifier, current_classifier : Classifier, initial_name : java String, current_name : java String) {
+	find preserved_modelElement_name (initial_classifier, current_classifier, initial_name, current_name); 
+}
+
+// classifier - name - changed
+pattern changed_classifier_name (initial_classifier : Classifier, current_classifier : Classifier, initial_name : java String, current_name : java String) {
+	find changed_modelElement_name (initial_classifier, current_classifier, initial_name, current_name); 
+}
+
+// classifier - package
+pattern classifier_package (classifier : Classifier, ^package : Package) {
+	Classifier.^package (classifier, ^package); 
+}
+
+// classifier - package - preserved
+pattern preserved_classifier_package (initial_classifier : Classifier, current_classifier : Classifier, initial_package : Package, current_package : Package) {
+	find preserved_classifier (initial_classifier, current_classifier); 
+	find preserved_package (initial_package, current_package); 
+	find classifier_package (initial_classifier, initial_package); 
+	find classifier_package (current_classifier, current_package); 	
+}
+
+// classifier - package - changed
+pattern changed_classifier_package (initial_classifier : Classifier, current_classifier : Classifier, initial_package : Package, current_package : Package) {
+	find preserved_classifier (initial_classifier, current_classifier); 
+	neg find preserved_package (initial_package, current_package);  
+	find classifier_package (initial_classifier, initial_package); 
+	find classifier_package (current_classifier, current_package); 
+} 

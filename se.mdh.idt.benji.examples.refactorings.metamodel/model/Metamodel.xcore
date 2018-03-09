@@ -1,0 +1,76 @@
+@Ecore(name = "Metamodel", nsURI = "http://www.mdh.se/examples/refactorings/Metamodel")
+@GenModel(name = "Metamodel", modelName = "Metamodel", modelDirectory = "se.mdh.idt.benji.examples.refactorings.metamodel/src")
+package se.mdh.idt.benji.examples.refactorings.metamodel
+
+// named element
+abstract class ModelElement {
+	// attribute - name
+	String[1..1] name = ""
+}
+
+// package
+class Package extends Classifier {
+	// attribute - uri
+	String[1..1] uri = ""
+	// containment - classifiers
+	contains Classifier[0..*] classifiers opposite ^package
+}
+
+// classifier
+abstract class Classifier extends ModelElement {
+	// container - package
+	container Package[0..1] ^package opposite classifiers
+}
+
+// class
+class Class extends Classifier {
+	// attribute - abstract
+	Boolean[1..1] ^abstract = "false"
+	// reference - superClasses
+	refers Class[0..*] superClasses opposite subClasses
+	// reference - subClasses
+	refers Class[0..*] subClasses opposite superClasses
+	// containment - structuralFeatures
+	contains StructuralFeature[0..*] structuralFeatures opposite owner
+}
+
+// datatype
+class DataType extends Classifier {}
+
+// enumeration
+class Enumeration extends DataType {
+	// containment - literals
+	contains EnumerationLiteral[0..*] literals opposite enumeration
+}
+
+// enumeration literal
+class EnumerationLiteral extends ModelElement {
+	// container - enumeration
+	container Enumeration[1..1] enumeration opposite literals
+}
+
+// structural feature
+abstract class StructuralFeature extends ModelElement {
+	// container - owner
+	container Class[1..1] ^owner opposite structuralFeatures
+	// attribute - lower
+	Integer[1..1] lower = "0"
+	// attribute - upper
+	Integer[1..1] upper = "-1"
+}
+
+// attribute
+class Attribute extends StructuralFeature {
+	// reference - type
+	refers DataType[1..1] ^type
+}
+
+// reference
+class Reference extends StructuralFeature {
+	// attribute - containment
+	Boolean[1..1] containment = "false"
+	// reference - opposite
+	refers Reference[0..1] ^opposite
+	// reference - type
+	refers Class[1..1] ^type
+}

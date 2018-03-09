@@ -1,0 +1,99 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// attribute - preserved
+pattern preserved_attribute (initial_attribute : Attribute, current_attribute : Attribute) {
+	find preserved_structuralFeature (initial_attribute, current_attribute); 
+}
+
+// attribute - created
+pattern created_attribute (current_attribute : Attribute) {
+	find created_structuralFeature (current_attribute); 
+} 
+
+// attribute - deleted
+pattern deleted_attribute (initial_attribute : Attribute) {
+	find deleted_structuralFeature (initial_attribute); 	
+}
+
+// attribute - name
+pattern attribute_name (attribute : Attribute, name : java String) {
+	find structuralFeature_name (attribute, name); 
+}
+
+// attribute - name - preserved
+pattern preserved_attribute_name (initial_attribute : Attribute, current_attribute : Attribute, initial_name : java String, current_name : java String) {
+	find preserved_structuralFeature_name (initial_attribute, current_attribute, initial_name, current_name); 
+}
+
+// attribute - name - changed
+pattern changed_attribute_name (initial_attribute : Attribute, current_attribute : Attribute, initial_name : java String, current_name : java String) {
+	find changed_structuralFeature_name (initial_attribute, current_attribute, initial_name, current_name); 	
+}
+
+// attribute - owner
+pattern attribute_owner (attribute : Attribute, owner : Class) {
+	find structuralFeature_owner (attribute, owner); 
+}
+
+// attribute - owner - preserved
+pattern preserved_attribute_owner (initial_attribute : Attribute, current_attribute : Attribute, initial_owner : Class, current_owner : Class) {
+	find preserved_structuralFeature_owner (initial_attribute, current_attribute, initial_owner, current_owner);
+}
+
+// attribute - owner - changed
+pattern changed_attribute_owner (initial_attribute : Attribute, current_attribute : Attribute, initial_owner : Class, current_owner : Class) {
+	find changed_structuralFeature_owner (initial_attribute, current_attribute, initial_owner, current_owner); 	
+}
+
+// attribute - lower
+pattern attribute_lower (attribute : Attribute, lower : java Integer) {
+	find structuralFeature_lower (attribute, lower); 
+}
+
+// attribute - lower - preserved
+pattern preserved_attribute_lower (initial_attribute : Attribute, current_attribute : Attribute, initial_lower : java Integer, current_lower : java Integer) {
+	find preserved_structuralFeature_lower (initial_attribute, current_attribute, initial_lower, current_lower); 
+}
+
+// attribute - lower - changed
+pattern changed_attribute_lower (initial_attribute : Attribute, current_attribute : Attribute, initial_lower : java Integer, current_lower : java Integer) {
+	find changed_structuralFeature_lower (initial_attribute, current_attribute, initial_lower, current_lower); 	
+}
+
+// attribute - upper
+pattern attribute_upper (attribute : Attribute, upper : java Integer) {
+	find structuralFeature_upper (attribute, upper); 
+}
+
+// attribute - upper - preserved
+pattern preserved_attribute_upper (initial_attribute : Attribute, current_attribute : Attribute, initial_upper : java Integer, current_upper : java Integer) {
+	find preserved_structuralFeature_upper (initial_attribute, current_attribute, initial_upper, current_upper); 	
+}
+
+// attribute - upper - changed
+pattern changed_attribute_upper (initial_attribute : Attribute, current_attribute : Attribute, initial_upper : java Integer, current_upper : java Integer) {
+	find changed_structuralFeature_upper (initial_attribute, current_attribute, initial_upper, current_upper); 	
+}
+
+// attribute - type
+pattern attribute_type (attribute : Attribute, type : DataType) {
+	Attribute.type (attribute, type); 
+}
+
+// attribute - type - preserved
+pattern preserved_attribute_type (initial_attribute : Attribute, current_attribute : Attribute, initial_type : DataType, current_type : DataType) {
+	find preserved_attribute (initial_attribute, current_attribute); 
+	find preserved_dataType (initial_type, current_type); 
+	find attribute_type (initial_attribute, initial_type);
+	find attribute_type (current_attribute, current_type); 	
+}
+
+// attribute - type - changed
+pattern changed_attribute_type (initial_attribute : Attribute, current_attribute : Attribute, initial_type : DataType, current_type : DataType) {
+	find preserved_attribute (initial_attribute, current_attribute); 
+	neg find preserved_dataType (initial_type, current_type); 
+	find attribute_type (initial_attribute, initial_type); 
+	find attribute_type (current_attribute, current_type);
+}

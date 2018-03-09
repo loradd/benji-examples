@@ -1,0 +1,48 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// dataType - preserved
+pattern preserved_dataType (initial_dataType : DataType, current_dataType : DataType) {
+	find preserved_classifier (initial_dataType, current_dataType); 
+}
+
+// dataType - created
+pattern created_dataType (current_dataType : DataType) {
+	find created_classifier (current_dataType); 
+}
+
+// dataType - deleted
+pattern deleted_dataType (initial_dataType : DataType) {
+	find deleted_classifier (initial_dataType); 
+}
+
+// dataType - name
+pattern dataType_name (dataType : DataType, name : java String) {
+	find classifier_name (dataType, name); 
+}
+
+// dataType - name - preserved
+pattern preserved_dataType_name (initial_dataType : DataType, current_dataType : DataType, initial_name : java String, current_name : java String) {
+	find preserved_classifier_name (initial_dataType, current_dataType, initial_name, current_name); 	
+}
+
+// dataType - name - changed
+pattern changed_dataType_name (initial_dataType : DataType, current_dataType : DataType, initial_name : java String, current_name : java String) {
+	find changed_classifier_name (initial_dataType, current_dataType, initial_name, current_name); 	
+}
+
+// dataType - package
+pattern dataType_package (dataType : DataType, ^package : Package) {
+	find classifier_package (dataType, ^package); 
+}
+
+// dataType - package - preserved
+pattern preserved_dataType_package (initial_dataType : DataType, current_dataType : DataType, initial_package : Package, current_package : Package) {
+	find preserved_classifier_package (initial_dataType, current_dataType, initial_package, current_package); 
+}
+
+// dataType - package - changed
+pattern changed_dataType_package (initial_dataType : DataType, current_dataType : DataType, initial_package : Package, current_package : Package) {
+	find changed_classifier_package (initial_dataType, current_dataType, initial_package, current_package); 
+}

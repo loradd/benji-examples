@@ -1,0 +1,149 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// reference - preserved
+pattern preserved_reference (initial_reference : Reference, current_reference : Reference) {
+	find preserved_structuralFeature (initial_reference, current_reference);
+}
+
+// reference - created
+pattern created_reference (current_reference : Reference) {
+	find created_structuralFeature (current_reference);
+}
+
+// reference - deleted
+pattern deleted_reference (initial_reference : Reference) {
+	find deleted_structuralFeature (initial_reference); 
+}
+
+// reference - name
+pattern reference_name (reference : Reference, name : java String) {
+	find structuralFeature_name (reference, name); 
+}
+
+// reference - name - preserved
+pattern preserved_reference_name (initial_reference : Reference, current_reference : Reference, initial_name : java String, current_name : java String) {
+	find preserved_structuralFeature_name (initial_reference, current_reference, initial_name, current_name); 
+}
+
+// reference - name - changed
+pattern changed_reference_name (initial_reference : Reference, current_reference : Reference, initial_name : java String, current_name : java String) {
+	find changed_structuralFeature_name (initial_reference, current_reference, initial_name, current_name); 	
+}
+
+// reference - owner
+pattern reference_owner (reference : Reference, owner : Class) {
+	find structuralFeature_owner (reference, owner); 
+}
+
+// reference - owner - preserved
+pattern preserved_reference_owner (initial_reference : Reference, current_reference : Reference, initial_owner : Class, current_owner : Class) {
+	find preserved_structuralFeature_owner (initial_reference, current_reference, initial_owner, current_owner); 
+}
+
+// reference - owner - changed
+pattern changed_reference_owner (initial_reference : Reference, current_reference : Reference, initial_owner : Class, current_owner : Class) {
+	find changed_structuralFeature_owner (initial_reference, current_reference, initial_owner, current_owner); 
+}
+
+// reference - lower
+pattern reference_lower (reference : Reference, lower : java Integer) {
+	find structuralFeature_lower (reference, lower); 
+}
+
+// reference - lower - preserved
+pattern preserved_reference_lower (initial_reference : Reference, current_reference : Reference, initial_lower : java Integer, current_lower : java Integer) {
+	find preserved_structuralFeature_lower (initial_reference, current_reference, initial_lower, current_lower); 
+}
+
+// reference - lower - changed
+pattern changed_reference_lower (initial_reference : Reference, current_reference : Reference, initial_lower : java Integer, current_lower : java Integer) {
+	find changed_structuralFeature_lower (initial_reference, current_reference, initial_lower, current_lower);
+}
+
+// reference - upper
+pattern reference_upper (reference : Reference, upper : java Integer) {
+	find structuralFeature_upper (reference, upper);	
+}
+
+// reference - upper - preserved
+pattern preserved_reference_upper (initial_reference : Reference, current_reference : Reference, initial_upper : java Integer, current_upper : java Integer) {
+	find preserved_structuralFeature_upper (initial_reference, current_reference, initial_upper, current_upper); 
+}
+
+// reference - upper - changed
+pattern changed_reference_upper (initial_reference : Reference, current_reference : Reference, initial_upper : java Integer, current_upper : java Integer) {
+	find changed_structuralFeature_upper (initial_reference, current_reference, initial_upper, current_upper);
+}
+
+// reference - containment
+pattern reference_containment (reference : Reference, containment : java Boolean) {
+	Reference.containment (reference, containment); 
+}
+
+// reference - containment - preserved
+pattern preserved_reference_containment (initial_reference : Reference, current_reference : Reference, initial_containment : java Boolean, current_containment : java Boolean) {
+	find preserved_reference (initial_reference, current_reference);
+	find reference_containment (initial_reference, initial_containment); 
+	find reference_containment (current_reference, current_containment); 
+	check (initial_containment == current_containment); 
+}
+
+// reference - containment - changed
+pattern changed_reference_containment (initial_reference : Reference, current_reference : Reference, initial_containment : java Boolean, current_containment : java Boolean) {
+	find preserved_reference (initial_reference, current_reference); 
+	find reference_containment (initial_reference, initial_containment); 
+	find reference_containment (current_reference, current_containment); 
+	check (initial_containment != current_containment); 
+}
+
+// reference - opposite
+pattern reference_opposite (reference : Reference, opposite : Reference) {
+	Reference.opposite (reference, opposite); 	
+}
+
+// reference - opposite - preserved
+pattern preserved_reference_opposite (initial_reference : Reference, current_reference : Reference, initial_opposite : Reference, current_opposite : Reference) {
+	find preserved_reference (initial_reference, current_reference); 
+	find preserved_reference (initial_opposite, current_opposite); 
+	find reference_opposite (initial_reference, initial_opposite); 
+	find reference_opposite (current_reference, current_opposite); 
+}
+
+// reference - opposite - changed
+pattern changed_reference_opposite (initial_reference : Reference, current_reference : Reference, initial_opposite : Reference, current_opposite : Reference) {
+	find preserved_reference (initial_reference, current_reference); 
+	find preserved_reference (initial_opposite, current_opposite);
+	find reference_opposite (initial_reference, initial_opposite); 
+	neg find reference_opposite (current_reference, current_opposite); 
+}
+
+// reference - type
+pattern reference_type (reference : Reference, type : Class) {
+	Reference.type (reference, type);  
+}
+
+// reference - type (weak)
+pattern reference_type_weak (reference : Reference, type : Class) {
+	find reference_type (reference, type); 
+} or {
+	find reference_type (reference, reference_type); 
+	find class_subClass+ (type, reference_type); 
+}
+
+// reference - type - preserved
+pattern preserved_reference_type (initial_reference : Reference, current_reference : Reference, initial_type : Class, current_type : Class) {
+	find preserved_reference (initial_reference, current_reference); 
+	find preserved_class (initial_type, current_type);
+	find reference_type (initial_reference, initial_type);
+	find reference_type (current_reference, current_type);
+}
+
+// reference - type - changed
+pattern changed_reference_type (initial_reference : Reference, current_reference : Reference, initial_type : Class, current_type : Class) {
+	find preserved_reference (initial_reference, current_reference); 
+	neg find preserved_class (initial_type, current_type); 
+	find reference_type (initial_reference, initial_type); 
+	find reference_type (current_reference, current_type);
+}

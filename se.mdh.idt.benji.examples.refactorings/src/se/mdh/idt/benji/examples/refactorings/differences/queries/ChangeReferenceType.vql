@@ -1,0 +1,42 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_class_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_reference_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.changed_reference_type
+
+// ACCR17 - Change Reference Type - Precondition
+pattern ChangeReferenceTypePrecondition (
+	initial_package : Package, current_package : Package, 
+	initial_class : Class, current_class : Class, 
+	initial_reference : Reference, current_reference : Reference, 
+	initial_reference_type : Class, current_reference_type : Class, 
+	initial_type : Class, current_type : Class
+) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_class (initial_package, current_package, initial_type, current_type); 
+	find preserved_package_class (initial_package, current_package, initial_reference_type, current_reference_type);
+	find preserved_class_reference (initial_class, current_class, initial_reference, current_reference); 
+	find preserved_reference_type (initial_reference, current_reference, initial_reference_type, current_reference_type); 
+	initial_reference_type != initial_type; 
+	current_reference_type != current_type;  
+}
+
+// ACCR17 - Change Reference Type - Postcondition
+pattern ChangeReferenceTypePostcondition (
+	initial_package : Package, current_package : Package, 
+	initial_class : Class, current_class : Class, 
+	initial_reference : Reference, current_reference : Reference,
+	initial_reference_type : Class, current_reference_type : Class, 
+	initial_type : Class, current_type : Class
+) {
+	find preserved_package_class (initial_package, current_package, initial_class, current_class); 
+	find preserved_package_class (initial_package, current_package, initial_type, current_type); 
+	find preserved_package_class (initial_package, current_package, initial_reference_type, current_reference_type); 
+	find preserved_class_reference (initial_class, current_class, initial_reference, current_reference);
+	find changed_reference_type (initial_reference, current_reference, initial_reference_type, current_type);
+	initial_reference_type != initial_type; 
+	current_reference_type != current_type;  
+}

@@ -1,0 +1,288 @@
+package se.mdh.idt.benji.examples.refactorings.metamodel.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+// class - preserved
+pattern preserved_class (initial_class : Class, current_class : Class) {
+	find preserved_classifier (initial_class, current_class); 
+}
+
+// class - created
+pattern created_class (current_class : Class) {
+	find created_classifier (current_class); 
+}
+
+// class - deleted
+pattern deleted_class (initial_class : Class) {
+	find deleted_classifier (initial_class); 
+}
+
+// class - name
+pattern class_name (class : Class, name : java String) {
+	find classifier_name (class, name); 
+}
+
+// class - name - preserved
+pattern preserved_class_name (initial_class : Class, current_class : Class, initial_name : java String, current_name : java String) {
+	find preserved_classifier_name (initial_class, current_class, initial_name, current_name); 
+}
+
+// class - name - changed
+pattern changed_class_name (initial_class : Class, current_class : Class, initial_name : java String, current_name : java String) {
+	find changed_classifier_name (initial_class, current_class, initial_name, current_name); 	
+}
+
+// class - package
+pattern class_package (class : Class, ^package : Package) {
+	find classifier_package (class, ^package); 
+}
+
+// class - package - preserved
+pattern preserved_class_package (initial_class : Class, current_class : Class, initial_package : Package, current_package : Package) {
+	find preserved_classifier_package (initial_class, current_class, initial_package, current_package); 	
+}
+
+// class - package - changed
+pattern changed_class_package (initial_class : Class, current_class : Class, initial_package : Package, current_package : Package) {
+	find changed_classifier_package (initial_class, current_class, initial_package, current_package); 	
+}
+
+// class - abstract
+pattern class_abstract (class : Class, abstract : java Boolean) {
+	Class.abstract (class, abstract); 	
+}
+
+// class - abstract - preserved
+pattern preserved_class_abstract (initial_class : Class, current_class : Class, initial_abstract : java Boolean, current_abstract : java Boolean) {
+	find preserved_class (initial_class, current_class); 
+	find class_abstract (initial_class, initial_abstract); 
+	find class_abstract (current_class, current_abstract); 
+	check (initial_abstract == current_abstract); 	
+}
+
+// class - abstract - changed
+pattern changed_class_abstract (initial_class : Class, current_class : Class, initial_abstract : java Boolean, current_abstract : java Boolean) {
+	find preserved_class (initial_class, current_class); 
+	find class_abstract (initial_class, initial_abstract); 
+	find class_abstract (current_class, current_abstract); 
+	check (initial_abstract != current_abstract); 	
+}
+
+// class - superClasses
+pattern class_superClass (class : Class, superClass : Class) {
+	Class.superClasses (class, superClass); 
+}
+
+// @TODO class - superClasses - common
+pattern common_class_superClass (left_class : Class, right_class : Class, super_class : Class) {
+	find class_superClass+(left_class, super_class); 
+	find class_superClass+(right_class, super_class); 
+}
+
+// class - superClasses - preserved
+pattern preserved_class_superClass (initial_class : Class, current_class : Class, initial_superClass : Class, current_superClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_superClass, current_superClass); 
+	find class_superClass (initial_class, initial_superClass); 
+	find class_superClass (current_class, current_superClass); 
+}
+
+// class - superClasses - added
+pattern added_class_superClass (initial_class : Class, current_class : Class, current_superClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find created_class (current_superClass); 
+	find class_superClass (current_class, current_superClass); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_superClass, current_superClass); 
+	neg find class_superClass (initial_class, initial_superClass); 
+	find class_superClass (current_class, current_superClass); 
+}
+
+// class - superClasses - removed
+pattern removed_class_superClass (initial_class : Class, current_class : Class, initial_superClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find deleted_class (initial_superClass); 
+	find class_superClass (initial_class, initial_superClass); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_superClass, current_superClass); 
+	find class_superClass (initial_class, initial_superClass); 
+	neg find class_superClass (current_class, current_superClass); 
+}
+
+// class - subClasses
+pattern class_subClass (class : Class, subClass : Class) {
+	Class.subClasses (class, subClass); 
+}
+
+// class - subClasses - preserved
+pattern preserved_class_subClass (initial_class : Class, current_class : Class, initial_subClass : Class, current_subClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_subClass, current_subClass); 
+	find class_subClass (initial_class, initial_subClass); 
+	find class_subClass (current_class, current_subClass); 
+}
+
+// class - subClasses - added
+pattern added_class_subClass (initial_class : Class, current_class : Class, current_subClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find created_class (current_subClass); 
+	find class_subClass (current_class, current_subClass); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_subClass, current_subClass); 
+	neg find class_subClass (initial_class, initial_subClass); 
+	find class_subClass (current_class, current_subClass); 
+}
+
+// class - subClasses - removed
+pattern removed_class_subClass (initial_class : Class, current_class : Class, initial_subClass : Class) {
+	find preserved_class (initial_class, current_class); 
+	find deleted_class (initial_subClass); 
+	find class_subClass (initial_class, initial_subClass); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_class (initial_subClass, current_subClass); 
+	find class_subClass (initial_class, initial_subClass); 
+	neg find class_subClass (current_class, current_subClass); 
+}
+
+// class - structuralFeatures
+pattern class_structuralFeature (class : Class, structuralFeature : StructuralFeature) {
+	Class.structuralFeatures (class, structuralFeature); 
+}
+
+// class - structuralFeature (attribute)
+pattern class_attribute (class : Class, attribute : Attribute) {
+	find class_structuralFeature (class, attribute); 
+}
+
+// class - structuralFeature (reference)
+pattern class_reference (class : Class, reference : Reference) {
+	find class_structuralFeature (class, reference); 	
+}
+
+// class - structuralFeature (reference) - typed
+pattern class_reference_typed (class : Class, reference : Reference, type : Class) {
+	find class_reference (class, reference); 
+	find reference_type (reference, type); 
+}
+
+// class - structuralFeature (reference) - weak typed
+pattern class_reference_typed_weak (class : Class, reference : Reference, type : Class) {
+	find class_reference (class, reference); 
+	find reference_type_weak(reference, type);
+}
+
+// class - structuralFeatures - preserved
+pattern preserved_class_structuralFeature (initial_class : Class, current_class : Class, initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature) {
+	find preserved_class (initial_class, current_class); 
+	find preserved_modelElement (initial_structuralFeature, current_structuralFeature); // structuralFeature 
+	find class_structuralFeature (initial_class, initial_structuralFeature); 
+	find class_structuralFeature (current_class, current_structuralFeature); 
+}
+
+// class - structuralFeatures (attribute) - preserved
+pattern preserved_class_attribute (initial_class : Class, current_class : Class, initial_attribute : Attribute, current_attribute : Attribute) {
+	find preserved_class_structuralFeature (initial_class, current_class, initial_attribute, current_attribute); 	
+}
+
+// class - structuralFeatures (reference) - preserved
+pattern preserved_class_reference (initial_class : Class, current_class : Class, initial_reference : Reference, current_reference : Reference) {
+	find preserved_class_structuralFeature (initial_class, current_class, initial_reference, current_reference); 
+}
+
+// class - structuralFeatures - added
+pattern added_class_structuralFeature (initial_class : Class, current_class : Class, current_structuralFeature : StructuralFeature) {
+	find preserved_class (initial_class, current_class); 
+	find created_structuralFeature (current_structuralFeature);
+	find class_structuralFeature (current_class, current_structuralFeature); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature);
+	neg find class_structuralFeature (initial_class, initial_structuralFeature); 
+	find class_structuralFeature (current_class, current_structuralFeature);  
+}
+
+// class - structuralFeatures (attribute) - added
+pattern added_class_attribute (initial_class : Class, current_class : Class, current_attribute : Attribute) {
+	find added_class_structuralFeature (initial_class, current_class, current_attribute); 
+}
+
+// class - structuralFeatures (attribute) - added - typed
+pattern added_class_attribute_typed (initial_class : Class, current_class : Class, current_attribute : Attribute, current_type : DataType) {
+	find added_class_attribute (initial_class, current_class, current_attribute); 
+	find attribute_type (current_attribute, current_type);  
+}
+
+// class - structuralFeatures (reference) - added
+pattern added_class_reference (initial_class : Class, current_class : Class, current_reference : Reference) {
+	find added_class_structuralFeature (initial_class, current_class, current_reference); 
+}
+
+// class - structuralFeatures (references) - added - typed
+pattern added_class_reference_typed (initial_class : Class, current_class : Class, current_reference : Reference, current_type : Class) {
+	find added_class_reference (initial_class, current_class, current_reference); 
+	find reference_type (current_reference, current_type); 
+}
+
+// class - structuralFeatures (references) - added - typed (weak)
+pattern added_class_reference_typed_weak (initial_class : Class, current_class : Class, current_reference : Reference, current_type : Class) {
+	find added_class_reference (initial_class, current_class, current_reference); 
+	find reference_type_weak (current_reference, current_type);
+}
+
+// class - structuralFeatures - removed
+pattern removed_class_structuralFeature (initial_class : Class, current_class : Class, initial_structuralFeature : StructuralFeature) {
+	find preserved_class (initial_class, current_class); 
+	find deleted_structuralFeature (initial_structuralFeature);
+	find class_structuralFeature (initial_class, initial_structuralFeature); 
+} or {
+	find preserved_class (initial_class, current_class); 
+	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature);
+	find class_structuralFeature (initial_class, initial_structuralFeature); 
+	neg find class_structuralFeature (current_class, current_structuralFeature);  
+}
+
+// class - structuralFeatures (attribute) - removed
+pattern removed_class_attribute (initial_class : Class, current_class : Class, initial_attribute : Attribute) {
+	find removed_class_structuralFeature (initial_class, current_class, initial_attribute); 
+}
+
+// class - structuralFeature (reference) - removed
+pattern removed_class_reference (initial_class : Class, current_class : Class, initial_reference : Reference) {
+	find removed_class_structuralFeature (initial_class, current_class, initial_reference); 
+}
+
+// class - structuralFeatures (reference) - removed - typed
+pattern removed_class_reference_typed (initial_class : Class, current_class : Class, initial_reference : Reference, initial_type : Class) {
+	find removed_class_reference (initial_class, current_class, initial_reference); 
+	find reference_type (initial_reference, initial_type); 
+}
+
+// class - structuralFeatures (reference) - removed - typed - weak
+pattern removed_class_reference_typed_weak (initial_class : Class, current_class : Class, initial_reference : Reference, initial_type : Class) {
+	find removed_class_reference (initial_class, current_class, initial_reference); 
+	find reference_type_weak (initial_reference, initial_type); 
+}
+
+// @TODO class - structuralFeatures (attribute) - equals
+pattern equals_class_attribute (left_class : Class, right_class : Class, left_attribute : Attribute, right_attribute : Attribute) {
+	find class_attribute (left_class, left_attribute);  
+	find class_attribute (right_class, right_attribute); 
+	find attribute_name (left_attribute, attribute_name); 
+	find attribute_name (right_attribute, attribute_name); 
+	find attribute_type (left_attribute, attribute_type); 
+	find attribute_type (right_attribute, attribute_type); 
+}
+
+// @TODO class - structuralFeature (reference) - equals 
+pattern equals_class_reference (left_class : Class, right_class : Class, left_reference : Reference, right_reference : Reference) {
+	find class_reference (left_class, left_reference); 
+	find class_reference (right_class, right_reference); 
+	find reference_name (left_reference, reference_name); 
+	find reference_name (right_reference, reference_name); 
+	find reference_type (left_reference, reference_type); 
+	find reference_type (right_reference, reference_type); 
+}

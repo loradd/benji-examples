@@ -1,0 +1,42 @@
+package se.mdh.idt.benji.examples.refactorings.differences.queries
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.preserved_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.removed_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.added_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.class_reference_typed
+
+// CADCCAR9 - Merge Metaclasses - Precondition
+pattern MergeMetaclassesPrecondition (initial_package : Package, current_package : Package, initial_left_metaclass : Class, current_left_metaclass : Class, initial_right_metaclass : Class, current_right_metaclass : Class) {
+	find preserved_package_class (initial_package, current_package, initial_left_metaclass, current_left_metaclass);
+	find preserved_package_class (initial_package, current_package, initial_right_metaclass, current_right_metaclass); 
+	initial_left_metaclass != initial_right_metaclass; 
+	current_left_metaclass != current_right_metaclass; 	
+}
+
+// CADCCAR9 - Merge Metaclasses - Postcondition
+pattern MergeMetaclassesPostcondition (initial_package : Package, current_package : Package, initial_left_metaclass : Class, initial_right_metaclass : Class, current_merged_metaclass : Class) {
+	find removed_package_class (initial_package, current_package, initial_left_metaclass); 
+	find removed_package_class (initial_package, current_package, initial_right_metaclass); 
+	find added_package_class (initial_package, current_package, current_merged_metaclass); 
+	// attributes
+	count find class_attribute (current_merged_metaclass, _) == merged_attributes; 
+	count find common_class_attribute (initial_left_metaclass, initial_right_metaclass, _, _) == common_attributes; 
+	count find common_class_attribute (initial_left_metaclass, current_merged_metaclass, _, _) == left_attributes; 
+	count find common_class_attribute (initial_right_metaclass, current_merged_metaclass, _, _) == right_attributes;
+	check (merged_attributes == left_attributes + right_attributes - common_attributes);  
+	// references - out
+	count find class_reference (current_merged_metaclass, _) == merged_references_out; 
+	count find common_class_reference (initial_left_metaclass, initial_right_metaclass, _, _) == common_references_out; 
+	count find common_class_reference (initial_left_metaclass, current_merged_metaclass, _, _) == left_references_out; 
+	count find common_class_reference (initial_right_metaclass, current_merged_metaclass, _, _) == right_references_out; 
+	check (merged_references_out == left_references_out + right_references_out - common_references_out); 
+	// references - in
+	count find class_reference_typed (_, _, initial_left_metaclass) == left_references_in; 
+	count find class_reference_typed (_, _, initial_right_metaclass) == right_references_in; 
+	count find class_reference_typed (_, _, current_merged_metaclass) == merged_references_in; 
+	check (merged_references_in == left_references_in + right_references_in); 
+}
