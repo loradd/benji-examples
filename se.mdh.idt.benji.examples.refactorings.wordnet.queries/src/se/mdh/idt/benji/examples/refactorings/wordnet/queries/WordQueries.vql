@@ -1,0 +1,97 @@
+package se.mdh.idt.benji.examples.refactorings.wordnet.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/examples/refactorings/WordNet"
+
+import se.mdh.idt.benji.trace.api.current
+import se.mdh.idt.benji.trace.api.initial
+
+// word - get
+pattern get_word (word : TraceLink) {
+	find initial_word (word, _initial_word);
+	find current_word (word, _current_word);
+}
+
+// word - create
+pattern create_word (word : TraceLink) {
+	neg find initial_word (word, _initial_word);
+	find current_word (word, _current_word);	
+}
+
+// word - delete
+pattern delete_word (word : TraceLink) {
+	find initial_word (word, _initial_word);
+	neg find current_word (word, _current_word);	
+}
+
+// word - initial
+pattern initial_word (word : TraceLink, initial_word : Word) {
+	find initial (word, initial_word);	
+}
+
+// word - current
+pattern current_word (word : TraceLink, current_word : Word) {
+	find current (word, current_word);
+}
+
+// word - name - get
+pattern get_word_name (word : TraceLink, name : java String) {
+	find initial_word_name (word, _initial_word, name);
+	find current_word_name (word, _current_word, name);	
+}
+
+// word - name - set
+pattern set_word_name (word : TraceLink, name : java String) {
+	neg find initial_word_name (word, _initial_word, name);
+	find current_word_name (word, _current_word, name); 	
+}
+
+// word - name - unset
+pattern unset_word_name (word : TraceLink, name : java String) {
+	find initial_word_name (word, _initial_word, name);
+	neg find current_word_name (word, _current_word, name);
+}
+
+// word - name - initial
+pattern initial_word_name (word : TraceLink, initial_word : Word, name : java String) {
+	find initial_word (word, initial_word);
+	Word.name (initial_word, name);	
+}
+
+// word - name - current
+pattern current_word_name (word : TraceLink, current_word : Word, name : java String) {
+	find current_word (word, current_word);
+	Word.name (current_word, name);	
+}
+
+// word - synsets - get
+pattern get_word_synset (word : TraceLink, synset : TraceLink) {
+	find initial_word_synset (word, _initial_word, synset, _initial_synset);
+	find current_word_synset (word, _current_word, synset, _current_synset);	
+}
+
+// word - synsets - insert
+pattern insert_word_synset (word : TraceLink, synset : TraceLink) {
+	neg find initial_word_synset (word, _initial_word, synset, _initial_synset);
+	find current_word_synset (word, _current_word, synset, _current_synset);	
+}
+
+// word - synsets - remove
+pattern remove_word_synset (word : TraceLink, synset : TraceLink) {
+	find initial_word_synset (word, _initial_word, synset, _initial_synset);
+	neg find current_word_synset (word, _current_word, synset, _current_synset);
+}
+
+// word - synsets - initial
+pattern initial_word_synset (word : TraceLink, initial_word : Word, synset : TraceLink, initial_synset : Synset) {
+	find initial_word (word, initial_word);
+	find initial_synset (synset, initial_synset);
+	Word.synsets (initial_word, initial_synset);	
+}
+
+// word - synsets - remove
+pattern current_word_synset (word : TraceLink, current_word : Word, synset : TraceLink, current_synset : Synset) {
+	find current_word (word, current_word);
+	find current_synset (synset, current_synset);
+	Word.synsets (current_word, current_synset);
+}

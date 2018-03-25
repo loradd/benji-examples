@@ -1,0 +1,27 @@
+@Ecore(name = "WordNet", nsURI = "http://www.mdh.se/examples/refactorings/WordNet")
+@GenModel(name = "WordNet", modelName = "WordNet", modelDirectory = "se.mdh.idt.benji.examples.refactorings.wordnet/src")
+package se.mdh.idt.benji.examples.refactorings.wordnet
+
+// synset
+class Synset {
+	// attribute - gloss
+	String[1..1] gloss
+	// reference - words
+	refers Word[1..1] words opposite synsets
+	// reference - hyponyms
+	refers Synset[0..*] hyponyms opposite hyperonyms
+	// reference - hyperonyms
+	refers Synset[0..*] hyperonyms opposite hyponyms
+	// reference - meronyms
+	refers Synset[0..*] meronyms opposite holonyms
+	// reference - holonyms
+	refers Synset[0..*] holonyms opposite meronyms
+}
+
+// word
+class Word {
+	// attribute - name
+	String[1..1] name
+	// containment - synsets
+	refers Synset[1..*] synsets opposite words
+}

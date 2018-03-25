@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension id="se.mdh.idt.benji.examples.refactorings.wordnet.queries.SynsetQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.wordnet.queries.SynsetQueries" id="se.mdh.idt.benji.examples.refactorings.wordnet.queries.SynsetQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_gloss"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.set_synset_gloss"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.unset_synset_gloss"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_gloss"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_gloss"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_synset_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_synset_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_hyponym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_synset_hyponym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_synset_hyponym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_hyponym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_hyponym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_hyperonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_synset_hyperonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_synset_hyperonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_hyperonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_hyperonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_meronym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_synset_meronym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_synset_meronym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_meronym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_meronym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_synset_holonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_synset_holonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_synset_holonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_synset_holonym"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset_holonym"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.wordnet.queries.WordQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.wordnet.queries.WordQueries" id="se.mdh.idt.benji.examples.refactorings.wordnet.queries.WordQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.create_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.delete_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_word"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_word_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.set_word_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.unset_word_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_word_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_word_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.get_word_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.insert_word_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.remove_word_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.initial_word_synset"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_word_synset"/>
+    </group>
+  </extension>
+</plugin>
