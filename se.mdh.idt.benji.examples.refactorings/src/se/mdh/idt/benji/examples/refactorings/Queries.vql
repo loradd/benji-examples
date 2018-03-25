@@ -1,0 +1,571 @@
+package se.mdh.idt.benji.examples.refactorings
+
+import "http://www.mdh.se/examples/refactorings/Metamodel"
+import "http://www.mdh.se/idt/benji/trace/Trace"
+
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_package
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_package
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_package
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_package_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_package_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_package_uri
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_package_uri
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.insert_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.remove_package_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.insert_package_subPackage
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_class
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_class_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_abstract
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_class_abstract
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_superClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_subClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.insert_class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.remove_class_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.insert_class_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.remove_class_reference
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_reference
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_reference_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_reference_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_reference_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_reference_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference_upper
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_reference_upper
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_reference_upper
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_attribute
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_attribute_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_attribute_name
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_attribute_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_attribute_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_attribute_type
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_attribute_name
+
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_datatype
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference_lower
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class_subClass
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_class_superClass
+
+// ACP1 - Rename Package - Precondition
+pattern RenamePackagePrecondition ($package : TraceLink, $name : java String) {
+	find get_package_name ($package, $package_name);
+	$name == eval("renamed_" + $package_name); 
+}
+
+// ACP1 - Rename Package - Postcondition
+pattern RenamePackagePostcondition ($package : TraceLink, $name : java String) {
+	find set_package_name ($package, $name);
+}
+
+// ACP2 - Rename URI Package - Precondition
+pattern RenameURIPackagePrecondition ($package : TraceLink, $uri : java String) {
+	find get_package_uri ($package, $package_uri); 
+	$uri == eval("renamed_" + $package_uri);	
+}
+
+// ACP2 - Rename URI Package - Postcondition
+pattern RenameURIPackagePostcondition ($package : TraceLink, $uri : java String) {
+	find set_package_uri ($package, $uri); 
+}
+
+// CDPR3 - Delete Package - Precondition
+pattern DeletePackagePrecondition ($package : TraceLink) {
+	find get_package ($package);
+}
+
+// CDPR3 - Delete Package - Postcondition
+pattern DeletePackagePostcondition ($package : TraceLink) {
+	find delete_package ($package);
+}
+
+// AAP4 - Add Package - Precondition
+pattern AddPackagePrecondition ($package : TraceLink, $subPackage_name : java String) {
+	find get_package ($package);	
+	$subPackage_index == count find create_package_subPackage ($package, _); 
+	$subPackage_name == eval("created_package_" + $subPackage_index);  
+}
+
+// AAP4 - Add Package - Postcondition
+pattern AddPackagePostcondition ($package : TraceLink, $subPackage_name : java String, $subPackage : TraceLink) {
+	find create_package ($subPackage);
+	find set_package_name ($subPackage, $subPackage_name);
+	find insert_package_subPackage ($package, $subPackage);
+}
+
+// AAC5 - Add Class - Precondition
+pattern AddClassPrecondition ($package : TraceLink, $class_name : java String) {
+	find get_package($package);
+	$class_index == count find create_package_class ($package, _); 
+	$class_name == eval("created_class_" + $class_index); 
+}
+
+// AAC5 - Add Class - Postcondition
+pattern AddClassPostcondition ($package : TraceLink, $class_name : java String, $class : TraceLink) {
+	find create_class ($class);
+	find set_class_name ($class, $class_name);
+	find insert_package_class ($package, $class);	
+}
+
+// ACC6 - Rename Class - Precondition
+pattern RenameClassPrecondition ($class : TraceLink, $name : java String) {
+	find get_class_name ($class, $class_name);
+	$name == eval ("renamed_" + $class_name); 	
+}
+
+// ACC6 - Rename Class - Postcondition
+pattern RenameClassPostcondition ($class : TraceLink, $name : java String) {
+	find set_class_name ($class, $name); 
+}
+
+// CDCR7 - Delete Class - Precondition
+pattern DeleteClassPrecondition ($class : TraceLink) {
+	find get_class ($class);
+}
+
+// CDCR7 - Delete Class - Postcondition
+pattern DeleteClassPostcondition ($class : TraceLink) {
+	find delete_package_class (_, $class);
+	// find delete_class ($class);
+}
+
+// CCAC8 - Extract Class - Precondition
+pattern ExtractClassPrecondition ($package : TraceLink, $class : TraceLink, $attribute : TraceLink, $attribute_class_name : java String, $attribute_reference_name : java String) {
+	find get_package_class ($package, $class);
+	find get_class_attribute ($class, $attribute);	
+	find get_attribute_name ($attribute, $attribute_name);
+	$attribute_class_name == eval($attribute_name.toFirstUpper + "Class");
+	$attribute_reference_name == eval($attribute_name + "Reference"); 
+}
+
+// CCAC8 - Extract Class - Postcondition
+pattern ExtractClassPostcondition ($package : TraceLink, $class : TraceLink, $attribute : TraceLink, $attribute_class_name : java String, $attribute_reference_name : java String, $attribute_class : TraceLink, $attribute_reference : TraceLink) {
+	find create_package_class ($package, $attribute_class);
+	find set_class_name ($attribute_class, $attribute_class_name); 
+	find create_class_reference ($class, $attribute_reference);
+	find set_reference_name ($attribute_reference, $attribute_reference_name);
+	find set_reference_type ($attribute_reference, $attribute_class);
+	find delete_class_attribute ($class, $attribute); 
+}
+
+// CADCCAR9 - Merge Classes - Precondition
+pattern MergeClassesPrecondition ($package : TraceLink, $left_class : TraceLink, $right_class : TraceLink, $merged_class_name : java String) {
+	find get_package_class ($package, $left_class);
+	find get_package_class ($package, $right_class);
+	$right_class != $left_class;
+	$merged_class_index == count find create_package_class($package, _); 
+	$merged_class_name == eval("merged_class_" + $merged_class_index); 
+}
+
+// CADCCAR9 - Merge Classes - Postcondition
+pattern MergeClassesPostcondition ($package : TraceLink, $left_class : TraceLink, $right_class : TraceLink, 
+	$merged_class : TraceLink, $merged_class_name : java String
+) {
+	find create_package_class ($package, $merged_class);
+	find set_class_name ($merged_class, $merged_class_name); 
+	count find delete_class_attribute_intersection ($left_class, $right_class, _, _) 
+	== count find merge_class_attribute_intersection ($left_class, $right_class, _, _, $merged_class);
+	count find delete_class_attribute_difference ($left_class, $right_class, _)
+	== count find move_class_attribute_difference ($left_class, $right_class, _, $merged_class);
+	count find delete_class_attribute_difference ($right_class, $left_class, _)
+	== count find move_class_attribute_difference ($right_class, $left_class, _, $merged_class);
+	count find delete_class_reference_intersection ($left_class, $right_class, _, _)
+	== count find merge_class_reference_intersection ($left_class, $right_class, _, _, $merged_class);
+	count find delete_class_reference_difference ($left_class, $right_class, _)
+	== count find move_class_reference_difference ($left_class, $right_class, _, $merged_class);
+	count find delete_class_reference_difference ($right_class, $left_class, _)
+	== count find move_class_reference_difference ($right_class, $left_class, _, $merged_class);
+	count find unset_reference_type (_, $left_class)
+	== count find change_reference_type (_, $left_class, $merged_class);
+	count find unset_reference_type (_, $right_class)
+	== count find change_reference_type (_, $right_class, $merged_class);
+	find delete_package_class ($package, $left_class);
+	find delete_package_class ($package, $right_class);
+}
+
+// AAA10 - Add Attribute - Precondition (cartesian)
+pattern AddAttributePrecondition ($class : TraceLink, $type : TraceLink, $name : java String) {
+	find get_class ($class);
+	find get_datatype ($type);
+	$attribute_index == count find create_class_attribute ($class, _); 
+	$name == eval ("created_attribute_" + $attribute_index);
+}
+
+// AAA10 - Add Attribute - Postcondition
+pattern AddAttributePostcondition ($class : TraceLink, $type : TraceLink, $name : java String, $attribute : TraceLink) {
+	find create_class_attribute ($class, $attribute);
+	find set_attribute_name ($attribute, $name);
+	find set_attribute_type ($attribute, $type);
+}
+
+// ADA11 - Delete Attribute - Precondition
+pattern DeleteAttributePrecondition ($attribute : TraceLink) {
+	find get_attribute ($attribute);	
+}
+
+// ADA11 - Delete Attribute - Postcondition
+pattern DeleteAttributePostcondition ($attribute : TraceLink) {
+	find delete_attribute ($attribute);	
+}
+
+// ACA12 - Change Attribute Type - Precondition
+pattern ChangeAttributeTypePrecondition ($attribute : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find get_attribute_type ($attribute, $source_type);
+	find get_datatype ($target_type);
+	$source_type != $target_type;	
+}
+
+// ACA12 - Change Attribute Type - Postcondition
+pattern ChangeAttributeTypePostcondition ($attribute : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find change_attribute_type ($attribute, $source_type, $target_type);
+}
+
+// AACR13 - Add Reference - Precondition
+pattern AddReferencePrecondition ($class : TraceLink, $type : TraceLink, $name : java String) {
+	find get_class ($class);
+	find get_class ($type);
+	$index == count find create_class_reference ($class, _); 
+	$name == eval ("created_reference_" + $index);	
+}
+
+// AACR13 - Add Reference - Precondition
+pattern AddReferencePostcondition ($class : TraceLink, $type : TraceLink, $name : java String, $reference : TraceLink) {
+	find create_reference ($reference);
+	find set_reference_name ($reference,  $name);
+	find set_reference_type ($reference, $type);
+	find insert_class_reference ($class, $reference);	
+}
+
+// ADCR14 - Delete Reference - Precondition
+pattern DeleteReferencePrecondition ($reference : TraceLink) {
+	find get_reference ($reference);	
+}
+
+// ADCR14 - Delete Reference - Postcondition
+pattern DeleteReferencePostcondition ($reference : TraceLink) {
+	find delete_reference ($reference);	
+}
+
+// CADCR15 - Split Reference [TODO]
+
+// CADCCR16 - Merge References - Precondition
+pattern MergeReferencesPrecondition ($class : TraceLink, $left_reference : TraceLink, $right_reference : TraceLink) {
+	find get_class_reference ($class, $left_reference);
+	find get_class_reference ($class, $right_reference);
+	find get_reference_name ($left_reference, $left_reference_name);
+	find get_reference_name ($right_reference, $right_reference_name);
+	find get_reference_type ($left_reference, $left_reference_type);
+	find get_reference_type ($right_reference, $right_reference_type);
+	$left_reference != $right_reference;
+	$left_reference_name == $right_reference_name; 
+	find get_class_superClass_intersection ($left_reference_type, $right_reference_type, _);
+}
+
+// CADCCR16 - Merge References - Postcondition
+pattern MergeReferencesPostcondition ($class : TraceLink, $left_reference : TraceLink, $right_reference : TraceLink) {
+	find merge_class_reference ($class, $class, $left_reference, $right_reference, $class);	
+}
+
+// ACCR17 - Change Reference Type - Precondition
+pattern ChangeReferenceTypePrecondition ($reference : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find get_reference_type ($reference, $source_type);
+	find get_class ($target_type);
+	$source_type != $target_type;
+}
+
+// ACCR17 - Change Reference Type - Postcondition
+pattern ChangeReferenceTypePostcondition ($reference : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find change_reference_type ($reference, $source_type, $target_type);	
+}
+
+// CADCAR18 - Extract Superclass - Precondition
+pattern ExtractSuperclassPrecondition ($package : TraceLink, $class : TraceLink, $attribute : TraceLink, $reference : TraceLink, $source_superClass : TraceLink) {
+	find get_package_class ($package, $class);
+	find get_class_attribute ($class, $attribute);
+	find get_class_reference ($class, $reference);
+	find get_class_superClass ($class, $source_superClass);
+}
+
+// CADCAR18 - Extract Superclass - Postcondition
+pattern ExtractSuperclassPostcondition ($package : TraceLink, $class : TraceLink, $attribute : TraceLink, $reference : TraceLink, $source_superClass : TraceLink, $target_superClass : TraceLink) {
+	find create_package_class ($package, $target_superClass);
+	find get_class_name ($class, $class_name);
+	$superClass_name == eval ("super_" + $class_name);
+	find set_class_name ($target_superClass, $superClass_name);
+	find move_class_reference ($class, $reference, $target_superClass);
+	find move_class_attribute ($class, $attribute, $target_superClass);
+	find set_class_superClass ($class, $target_superClass);
+	find set_class_superClass ($target_superClass, $source_superClass); 
+}
+
+// ACC19 - Change Class Abstract - Precondition
+pattern ChangeClassAbstractPrecondition ($class : TraceLink) {
+	find get_class_abstract ($class, _$abstract);	
+}
+
+// ACC19 - Change Class Abstract - Postcondition
+pattern ChangeClassAbstractPostcondition ($class : TraceLink) {
+	find set_class_abstract ($class, _$abstract);
+}
+
+// ACCR20 - Restrict Reference - Precondition
+pattern RestrictReferencePrecondition ($reference : TraceLink, $source_upper : java Integer, $source_lower : java Integer) {
+	find get_reference_lower ($reference, $source_lower);
+	find get_reference_upper ($reference, $source_upper);	
+	check ($source_upper != 1);
+}
+
+// ACCR20 - Restrict Reference - Postcondition
+pattern RestrictReferencePostcondition ($reference : TraceLink, $source_upper : java Integer, $source_lower : java Integer) {
+	find get_reference_lower ($reference, $source_lower);
+	find unset_reference_upper ($reference, $source_upper);
+	find set_reference_upper ($reference, $target_upper);
+	check ($source_lower <= $target_upper);
+	check ($source_upper == -1 && $source_upper < $target_upper
+		|| $source_upper != -1 && $source_upper > $target_upper);
+}
+
+// CADCCAR21 - Flatten Hierarchy [TODO]
+
+// CDACA22 - Push Down Attribute - Precondition
+pattern PushDownAttributePrecondition ($class : TraceLink, $subClass : TraceLink, $attribute : TraceLink) {
+	find get_class_subClass ($class, $subClass);
+	find get_class_attribute ($class, $attribute);
+}
+
+// CDACA22 - Push Down Attribute - Postcondition
+pattern PushDownAttributePostcondition ($class : TraceLink, $subClass : TraceLink, $attribute : TraceLink) {
+	find move_class_attribute ($class, $attribute, $subClass);	
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Utils - create_package_class
+private pattern create_package_class ($package : TraceLink, $class : TraceLink) {
+	find create_class ($class);
+	find insert_package_class ($package, $class);
+}
+
+// Utils - create_package_subPackage
+private pattern create_package_subPackage ($package : TraceLink, $subPackage : TraceLink) {
+	find create_package ($subPackage);
+	find insert_package_subPackage ($package, $subPackage);
+}
+
+// Utils - create_class_attribute
+private pattern create_class_attribute ($class : TraceLink, $attribute : TraceLink) {
+	find create_attribute ($attribute);
+	find insert_class_attribute ($class, $attribute);
+}
+
+// Utils - create_class_reference 
+private pattern create_class_reference ($class : TraceLink, $reference : TraceLink) {
+	find create_reference ($reference);
+	find insert_class_reference ($class, $reference);
+}
+
+// Utils - delete_package_class
+private pattern delete_package_class ($package : TraceLink, $class : TraceLink) {
+	find remove_package_class ($package, $class);
+	find delete_class ($class);
+}
+
+// Utils - delete_class_attribute_intersection
+private pattern delete_class_attribute_intersection ($left_class : TraceLink, $right_class : TraceLink, $left_attribute : TraceLink, $right_attribute : TraceLink) {
+	find delete_class_attribute_name ($left_class, $left_attribute, $name); 
+	find delete_class_attribute_name ($right_class, $right_attribute, $name); 
+}
+
+// Utils - delete_class_reference_intersection
+private pattern delete_class_reference_intersection ($left_class : TraceLink, $right_class : TraceLink, $left_reference : TraceLink, $right_reference : TraceLink) {
+	find delete_class_reference_name ($left_class, $left_reference, $name);
+	find delete_class_reference_name ($right_class, $right_reference, $name);
+}
+
+// Utils - delete_class_attribute_difference 
+private pattern delete_class_attribute_difference ($left_class : TraceLink, $right_class : TraceLink, $left_attribute : TraceLink) {
+	find delete_class_attribute_name ($left_class, $left_attribute, $name); 
+	neg find delete_class_attribute_name ($right_class, _$right_attribute, $name);
+}
+
+// Utils - delete_class_reference_difference
+private pattern delete_class_reference_difference ($left_class : TraceLink, $right_class : TraceLink, $left_reference : TraceLink) {
+	find delete_class_reference_name ($left_class, $left_reference, $name);
+	neg find delete_class_reference_name ($right_class, _$right_reference, $name);
+}
+
+// Utils - delete_class_attribute_name
+private pattern delete_class_attribute_name ($class : TraceLink, $attribute : TraceLink, $name : java String) {
+	find unset_attribute_name ($attribute, $name);
+	find delete_class_attribute ($class, $attribute);	
+}
+
+// Utils - delete_class_reference_name
+private pattern delete_class_reference_name ($class : TraceLink, $reference : TraceLink, $name : java String) {
+	find unset_reference_name ($reference, $name);
+	find delete_class_reference ($class, $reference);
+}
+
+// Utils - delete_class_attribute
+private pattern delete_class_attribute ($class : TraceLink, $attribute : TraceLink) {
+	find remove_class_attribute ($class, $attribute);
+	find delete_attribute ($attribute);
+}
+
+// Utils - delete_class_reference
+private pattern delete_class_reference ($class : TraceLink, $reference : TraceLink) {
+	find remove_class_reference ($class, $reference);
+	find delete_reference ($reference);
+}
+
+// Utils - merge_class_attribute_intersection
+private pattern merge_class_attribute_intersection ($left_class : TraceLink, $right_class : TraceLink, $left_attribute : TraceLink, $right_attribute : TraceLink, $target_class : TraceLink) {
+	find delete_class_attribute_intersection ($left_class, $right_class, $left_attribute, $right_attribute); 
+	find merge_class_attribute ($left_class, $right_class, $left_attribute, $right_attribute, $target_class);
+}
+
+// Utils - merge_class_reference_intersection
+private pattern merge_class_reference_intersection ($left_class : TraceLink, $right_class : TraceLink, $left_reference : TraceLink, $right_reference : TraceLink, $target_class : TraceLink) {
+	find delete_class_reference_intersection ($left_class, $right_class, $left_reference, $right_reference);
+	find merge_class_reference ($left_class, $right_class, $left_reference, $right_reference, $target_class);
+}
+
+// Utils - move_class_attribute_difference
+private pattern move_class_attribute_difference ($left_class : TraceLink, $right_class : TraceLink, $left_attribute : TraceLink, $target_class : TraceLink) {
+	find delete_class_attribute_difference ($left_class, $right_class, $left_attribute);
+	find move_class_attribute ($left_class, $left_attribute, $target_class);
+}
+
+// Utils - move_class_reference_difference
+private pattern move_class_reference_difference ($left_class : TraceLink, $right_class : TraceLink, $left_reference : TraceLink, $target_class : TraceLink) {
+	find delete_class_reference_difference ($left_class, $right_class, $left_reference);
+	find move_class_reference ($left_class, $left_reference, $target_class);
+}
+
+// Utils - merge_class_attribute
+private pattern merge_class_attribute ($left_class : TraceLink, $right_class : TraceLink, $left_attribute : TraceLink, $right_attribute : TraceLink, $target_class : TraceLink) {
+	find create_class_attribute ($target_class, $target_attribute);
+	find merge_attribute_name ($left_attribute, $right_attribute, $target_attribute); 
+	find merge_attribute_type ($left_attribute, $right_attribute, $target_attribute);
+	find delete_class_attribute ($left_class, $left_attribute);
+	find delete_class_attribute ($right_class, $right_attribute);
+}
+
+// Utils - merge_class_reference
+private pattern merge_class_reference ($left_class : TraceLink, $right_class : TraceLink, $left_reference : TraceLink, $right_reference : TraceLink, $target_class : TraceLink) {
+	find create_class_reference ($target_class, $target_reference);
+	find merge_reference_name ($left_reference, $right_reference, $target_reference);
+	find merge_reference_type ($left_reference, $right_reference, $target_reference);
+	find delete_class_reference ($left_class, $left_reference);
+	find delete_class_reference ($right_class, $right_reference);
+}
+
+// Utils - move_class_attribute
+private pattern move_class_attribute ($source_class : TraceLink, $source_attribute : TraceLink, $target_class : TraceLink) {
+	find create_class_attribute ($target_class, $target_attribute);
+	find move_attribute_name ($source_attribute, $target_attribute);
+	find move_attribute_type ($source_attribute, $target_attribute);
+	find delete_class_attribute ($source_class, $source_attribute);
+} 
+
+// Utils - move_class_reference
+private pattern move_class_reference ($source_class : TraceLink, $source_reference : TraceLink, $target_class : TraceLink) {
+	find create_class_reference ($target_class, $target_reference);
+	find move_reference_name ($source_reference, $target_reference);
+	find move_reference_type ($source_reference, $target_reference);
+	find delete_class_reference ($source_class, $source_reference);
+} 
+ 
+// Utils - merge_attribute_name
+private pattern merge_attribute_name ($left_attribute : TraceLink, $right_attribute : TraceLink, $target_attribute : TraceLink) {
+	find unset_attribute_name ($left_attribute, $name);
+	find unset_attribute_name ($right_attribute, $name);
+	find set_attribute_name ($target_attribute, $name);
+} 
+
+// Utils - merge reference name
+private pattern merge_reference_name ($left_reference : TraceLink, $right_reference : TraceLink, $target_reference : TraceLink) {
+	find unset_reference_name ($left_reference, $name);
+	find unset_reference_name ($right_reference, $name); 
+	find set_reference_name ($target_reference, $name);
+}
+
+// Utils - move_attribute_name 
+private pattern move_attribute_name ($source_attribute : TraceLink, $target_attribute : TraceLink) {
+	find unset_attribute_name ($source_attribute, $name);
+	find set_attribute_name ($target_attribute, $name);
+}
+
+// Utils - move_reference_name
+private pattern move_reference_name ($source_reference : TraceLink, $target_reference : TraceLink) {
+	find unset_reference_name ($source_reference, $name);
+	find set_reference_name ($target_reference, $name);	
+}
+
+// Utils - merge_attribute_type 
+private pattern merge_attribute_type ($left_attribute : TraceLink, $right_attribute : TraceLink, $target_attribute : TraceLink) {
+	find unset_attribute_type ($left_attribute, $type);
+	find unset_attribute_type ($right_attribute, $type);
+	find set_attribute_type ($target_attribute, $type);
+} 
+
+// Utils - merge_reference_type 
+private pattern merge_reference_type ($left_reference : TraceLink, $right_reference : TraceLink, $target_reference : TraceLink) {
+	find unset_reference_type ($left_reference, $left_type); 
+	find unset_reference_type ($right_reference, $right_type);
+	find get_class_superClass_intersection ($left_type, $right_type, $target_type);
+	find set_reference_type ($target_reference, $target_type);
+}
+
+// Utils - move_attribute_type
+private pattern move_attribute_type ($source_attribute : TraceLink, $target_attribute : TraceLink) {
+	find unset_attribute_type ($source_attribute, $type);
+	find set_attribute_type ($target_attribute, $type);
+}
+
+// Utils - move reference type
+private pattern move_reference_type ($source_reference : TraceLink, $target_reference : TraceLink) {
+	find unset_reference_type ($source_reference, $type);
+	find set_reference_type ($target_reference, $type);
+}
+
+// Utils - change_attribute_type
+private pattern change_attribute_type ($attribute : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find unset_attribute_type ($attribute, $source_type);
+	find set_attribute_type ($attribute, $target_type);
+}
+
+// Utils - change_reference_type
+private pattern change_reference_type ($reference : TraceLink, $source_type : TraceLink, $target_type : TraceLink) {
+	find unset_reference_type ($reference, $source_type);
+	find set_reference_type ($reference, $target_type); 
+}
+
+// Utils - get_class_superClass_intersection
+private pattern get_class_superClass_intersection ($left_class : TraceLink, $right_class : TraceLink, $target_class : TraceLink) { 
+	$left_class == $target_class;
+	$right_class == $target_class;
+} or {
+	find get_class_superClass+ ($left_class, $right_class);
+	$right_class == $target_class;
+} or {
+	find get_class_superClass+ ($right_class, $left_class);
+ 	$left_class == $target_class; 
+} or {
+	find get_class_superClass+ ($left_class, $target_class);
+	find get_class_superClass+ ($right_class, $target_class);
+}

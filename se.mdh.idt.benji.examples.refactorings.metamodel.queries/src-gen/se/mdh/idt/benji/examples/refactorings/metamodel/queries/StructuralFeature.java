@@ -6,21 +6,31 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_structuralFeature_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_structuralFeature_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_structuralFeature_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_structuralFeature_upper;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_structuralFeature_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_structuralFeature_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_structuralFeature_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_structuralFeature_upper;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_structuralFeature_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_structuralFeature_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_structuralFeature_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_structuralFeature_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_structuralFeature_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_structuralFeature_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_structuralFeature_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_structuralFeature_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_structuralFeature_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_structuralFeature_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_structuralFeature_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_structuralFeature_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_structuralFeature_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_structuralFeature_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_structuralFeature_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_structuralFeature_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_structuralFeature_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_structuralFeature_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_structuralFeature_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_structuralFeature_upper;
 
 /**
  * A pattern group formed of all public patterns defined in StructuralFeature.vql.
@@ -30,28 +40,38 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeatur
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_structuralFeature</li>
- * <li>created_structuralFeature</li>
- * <li>deleted_structuralFeature</li>
- * <li>structuralFeature_name</li>
- * <li>preserved_structuralFeature_name</li>
- * <li>changed_structuralFeature_name</li>
- * <li>structuralFeature_owner</li>
- * <li>preserved_structuralFeature_owner</li>
- * <li>changed_structuralFeature_owner</li>
- * <li>structuralFeature_lower</li>
- * <li>preserved_structuralFeature_lower</li>
- * <li>changed_structuralFeature_lower</li>
- * <li>structuralFeature_upper</li>
- * <li>preserved_structuralFeature_upper</li>
- * <li>changed_structuralFeature_upper</li>
+ * <li>get_structuralFeature</li>
+ * <li>create_structuralFeature</li>
+ * <li>delete_structuralFeature</li>
+ * <li>initial_structuralFeature</li>
+ * <li>current_structuralFeature</li>
+ * <li>get_structuralFeature_name</li>
+ * <li>set_structuralFeature_name</li>
+ * <li>unset_structuralFeature_name</li>
+ * <li>initial_structuralFeature_name</li>
+ * <li>current_structuralFeature_name</li>
+ * <li>get_structuralFeature_owner</li>
+ * <li>set_structuralFeature_owner</li>
+ * <li>unset_structuralFeature_owner</li>
+ * <li>initial_structuralFeature_owner</li>
+ * <li>current_structuralFeature_owner</li>
+ * <li>get_structuralFeature_lower</li>
+ * <li>set_structuralFeature_lower</li>
+ * <li>unset_structuralFeature_lower</li>
+ * <li>initial_structuralFeature_lower</li>
+ * <li>current_structuralFeature_lower</li>
+ * <li>get_structuralFeature_upper</li>
+ * <li>set_structuralFeature_upper</li>
+ * <li>unset_structuralFeature_upper</li>
+ * <li>initial_structuralFeature_upper</li>
+ * <li>current_structuralFeature_upper</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:34+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class StructuralFeature extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -70,140 +90,230 @@ public final class StructuralFeature extends BaseGeneratedPatternGroup {
   private static StructuralFeature INSTANCE;
   
   private StructuralFeature() {
-    querySpecifications.add(Preserved_structuralFeature.instance());
-    querySpecifications.add(Created_structuralFeature.instance());
-    querySpecifications.add(Deleted_structuralFeature.instance());
-    querySpecifications.add(StructuralFeature_name.instance());
-    querySpecifications.add(Preserved_structuralFeature_name.instance());
-    querySpecifications.add(Changed_structuralFeature_name.instance());
-    querySpecifications.add(StructuralFeature_owner.instance());
-    querySpecifications.add(Preserved_structuralFeature_owner.instance());
-    querySpecifications.add(Changed_structuralFeature_owner.instance());
-    querySpecifications.add(StructuralFeature_lower.instance());
-    querySpecifications.add(Preserved_structuralFeature_lower.instance());
-    querySpecifications.add(Changed_structuralFeature_lower.instance());
-    querySpecifications.add(StructuralFeature_upper.instance());
-    querySpecifications.add(Preserved_structuralFeature_upper.instance());
-    querySpecifications.add(Changed_structuralFeature_upper.instance());
+    querySpecifications.add(Get_structuralFeature.instance());
+    querySpecifications.add(Create_structuralFeature.instance());
+    querySpecifications.add(Delete_structuralFeature.instance());
+    querySpecifications.add(Initial_structuralFeature.instance());
+    querySpecifications.add(Current_structuralFeature.instance());
+    querySpecifications.add(Get_structuralFeature_name.instance());
+    querySpecifications.add(Set_structuralFeature_name.instance());
+    querySpecifications.add(Unset_structuralFeature_name.instance());
+    querySpecifications.add(Initial_structuralFeature_name.instance());
+    querySpecifications.add(Current_structuralFeature_name.instance());
+    querySpecifications.add(Get_structuralFeature_owner.instance());
+    querySpecifications.add(Set_structuralFeature_owner.instance());
+    querySpecifications.add(Unset_structuralFeature_owner.instance());
+    querySpecifications.add(Initial_structuralFeature_owner.instance());
+    querySpecifications.add(Current_structuralFeature_owner.instance());
+    querySpecifications.add(Get_structuralFeature_lower.instance());
+    querySpecifications.add(Set_structuralFeature_lower.instance());
+    querySpecifications.add(Unset_structuralFeature_lower.instance());
+    querySpecifications.add(Initial_structuralFeature_lower.instance());
+    querySpecifications.add(Current_structuralFeature_lower.instance());
+    querySpecifications.add(Get_structuralFeature_upper.instance());
+    querySpecifications.add(Set_structuralFeature_upper.instance());
+    querySpecifications.add(Unset_structuralFeature_upper.instance());
+    querySpecifications.add(Initial_structuralFeature_upper.instance());
+    querySpecifications.add(Current_structuralFeature_upper.instance());
   }
   
-  public Preserved_structuralFeature getPreserved_structuralFeature() {
-    return Preserved_structuralFeature.instance();
+  public Get_structuralFeature getGet_structuralFeature() {
+    return Get_structuralFeature.instance();
   }
   
-  public Preserved_structuralFeature.Matcher getPreserved_structuralFeature(final ViatraQueryEngine engine) {
-    return Preserved_structuralFeature.Matcher.on(engine);
+  public Get_structuralFeature.Matcher getGet_structuralFeature(final ViatraQueryEngine engine) {
+    return Get_structuralFeature.Matcher.on(engine);
   }
   
-  public Created_structuralFeature getCreated_structuralFeature() {
-    return Created_structuralFeature.instance();
+  public Create_structuralFeature getCreate_structuralFeature() {
+    return Create_structuralFeature.instance();
   }
   
-  public Created_structuralFeature.Matcher getCreated_structuralFeature(final ViatraQueryEngine engine) {
-    return Created_structuralFeature.Matcher.on(engine);
+  public Create_structuralFeature.Matcher getCreate_structuralFeature(final ViatraQueryEngine engine) {
+    return Create_structuralFeature.Matcher.on(engine);
   }
   
-  public Deleted_structuralFeature getDeleted_structuralFeature() {
-    return Deleted_structuralFeature.instance();
+  public Delete_structuralFeature getDelete_structuralFeature() {
+    return Delete_structuralFeature.instance();
   }
   
-  public Deleted_structuralFeature.Matcher getDeleted_structuralFeature(final ViatraQueryEngine engine) {
-    return Deleted_structuralFeature.Matcher.on(engine);
+  public Delete_structuralFeature.Matcher getDelete_structuralFeature(final ViatraQueryEngine engine) {
+    return Delete_structuralFeature.Matcher.on(engine);
   }
   
-  public StructuralFeature_name getStructuralFeature_name() {
-    return StructuralFeature_name.instance();
+  public Initial_structuralFeature getInitial_structuralFeature() {
+    return Initial_structuralFeature.instance();
   }
   
-  public StructuralFeature_name.Matcher getStructuralFeature_name(final ViatraQueryEngine engine) {
-    return StructuralFeature_name.Matcher.on(engine);
+  public Initial_structuralFeature.Matcher getInitial_structuralFeature(final ViatraQueryEngine engine) {
+    return Initial_structuralFeature.Matcher.on(engine);
   }
   
-  public Preserved_structuralFeature_name getPreserved_structuralFeature_name() {
-    return Preserved_structuralFeature_name.instance();
+  public Current_structuralFeature getCurrent_structuralFeature() {
+    return Current_structuralFeature.instance();
   }
   
-  public Preserved_structuralFeature_name.Matcher getPreserved_structuralFeature_name(final ViatraQueryEngine engine) {
-    return Preserved_structuralFeature_name.Matcher.on(engine);
+  public Current_structuralFeature.Matcher getCurrent_structuralFeature(final ViatraQueryEngine engine) {
+    return Current_structuralFeature.Matcher.on(engine);
   }
   
-  public Changed_structuralFeature_name getChanged_structuralFeature_name() {
-    return Changed_structuralFeature_name.instance();
+  public Get_structuralFeature_name getGet_structuralFeature_name() {
+    return Get_structuralFeature_name.instance();
   }
   
-  public Changed_structuralFeature_name.Matcher getChanged_structuralFeature_name(final ViatraQueryEngine engine) {
-    return Changed_structuralFeature_name.Matcher.on(engine);
+  public Get_structuralFeature_name.Matcher getGet_structuralFeature_name(final ViatraQueryEngine engine) {
+    return Get_structuralFeature_name.Matcher.on(engine);
   }
   
-  public StructuralFeature_owner getStructuralFeature_owner() {
-    return StructuralFeature_owner.instance();
+  public Set_structuralFeature_name getSet_structuralFeature_name() {
+    return Set_structuralFeature_name.instance();
   }
   
-  public StructuralFeature_owner.Matcher getStructuralFeature_owner(final ViatraQueryEngine engine) {
-    return StructuralFeature_owner.Matcher.on(engine);
+  public Set_structuralFeature_name.Matcher getSet_structuralFeature_name(final ViatraQueryEngine engine) {
+    return Set_structuralFeature_name.Matcher.on(engine);
   }
   
-  public Preserved_structuralFeature_owner getPreserved_structuralFeature_owner() {
-    return Preserved_structuralFeature_owner.instance();
+  public Unset_structuralFeature_name getUnset_structuralFeature_name() {
+    return Unset_structuralFeature_name.instance();
   }
   
-  public Preserved_structuralFeature_owner.Matcher getPreserved_structuralFeature_owner(final ViatraQueryEngine engine) {
-    return Preserved_structuralFeature_owner.Matcher.on(engine);
+  public Unset_structuralFeature_name.Matcher getUnset_structuralFeature_name(final ViatraQueryEngine engine) {
+    return Unset_structuralFeature_name.Matcher.on(engine);
   }
   
-  public Changed_structuralFeature_owner getChanged_structuralFeature_owner() {
-    return Changed_structuralFeature_owner.instance();
+  public Initial_structuralFeature_name getInitial_structuralFeature_name() {
+    return Initial_structuralFeature_name.instance();
   }
   
-  public Changed_structuralFeature_owner.Matcher getChanged_structuralFeature_owner(final ViatraQueryEngine engine) {
-    return Changed_structuralFeature_owner.Matcher.on(engine);
+  public Initial_structuralFeature_name.Matcher getInitial_structuralFeature_name(final ViatraQueryEngine engine) {
+    return Initial_structuralFeature_name.Matcher.on(engine);
   }
   
-  public StructuralFeature_lower getStructuralFeature_lower() {
-    return StructuralFeature_lower.instance();
+  public Current_structuralFeature_name getCurrent_structuralFeature_name() {
+    return Current_structuralFeature_name.instance();
   }
   
-  public StructuralFeature_lower.Matcher getStructuralFeature_lower(final ViatraQueryEngine engine) {
-    return StructuralFeature_lower.Matcher.on(engine);
+  public Current_structuralFeature_name.Matcher getCurrent_structuralFeature_name(final ViatraQueryEngine engine) {
+    return Current_structuralFeature_name.Matcher.on(engine);
   }
   
-  public Preserved_structuralFeature_lower getPreserved_structuralFeature_lower() {
-    return Preserved_structuralFeature_lower.instance();
+  public Get_structuralFeature_owner getGet_structuralFeature_owner() {
+    return Get_structuralFeature_owner.instance();
   }
   
-  public Preserved_structuralFeature_lower.Matcher getPreserved_structuralFeature_lower(final ViatraQueryEngine engine) {
-    return Preserved_structuralFeature_lower.Matcher.on(engine);
+  public Get_structuralFeature_owner.Matcher getGet_structuralFeature_owner(final ViatraQueryEngine engine) {
+    return Get_structuralFeature_owner.Matcher.on(engine);
   }
   
-  public Changed_structuralFeature_lower getChanged_structuralFeature_lower() {
-    return Changed_structuralFeature_lower.instance();
+  public Set_structuralFeature_owner getSet_structuralFeature_owner() {
+    return Set_structuralFeature_owner.instance();
   }
   
-  public Changed_structuralFeature_lower.Matcher getChanged_structuralFeature_lower(final ViatraQueryEngine engine) {
-    return Changed_structuralFeature_lower.Matcher.on(engine);
+  public Set_structuralFeature_owner.Matcher getSet_structuralFeature_owner(final ViatraQueryEngine engine) {
+    return Set_structuralFeature_owner.Matcher.on(engine);
   }
   
-  public StructuralFeature_upper getStructuralFeature_upper() {
-    return StructuralFeature_upper.instance();
+  public Unset_structuralFeature_owner getUnset_structuralFeature_owner() {
+    return Unset_structuralFeature_owner.instance();
   }
   
-  public StructuralFeature_upper.Matcher getStructuralFeature_upper(final ViatraQueryEngine engine) {
-    return StructuralFeature_upper.Matcher.on(engine);
+  public Unset_structuralFeature_owner.Matcher getUnset_structuralFeature_owner(final ViatraQueryEngine engine) {
+    return Unset_structuralFeature_owner.Matcher.on(engine);
   }
   
-  public Preserved_structuralFeature_upper getPreserved_structuralFeature_upper() {
-    return Preserved_structuralFeature_upper.instance();
+  public Initial_structuralFeature_owner getInitial_structuralFeature_owner() {
+    return Initial_structuralFeature_owner.instance();
   }
   
-  public Preserved_structuralFeature_upper.Matcher getPreserved_structuralFeature_upper(final ViatraQueryEngine engine) {
-    return Preserved_structuralFeature_upper.Matcher.on(engine);
+  public Initial_structuralFeature_owner.Matcher getInitial_structuralFeature_owner(final ViatraQueryEngine engine) {
+    return Initial_structuralFeature_owner.Matcher.on(engine);
   }
   
-  public Changed_structuralFeature_upper getChanged_structuralFeature_upper() {
-    return Changed_structuralFeature_upper.instance();
+  public Current_structuralFeature_owner getCurrent_structuralFeature_owner() {
+    return Current_structuralFeature_owner.instance();
   }
   
-  public Changed_structuralFeature_upper.Matcher getChanged_structuralFeature_upper(final ViatraQueryEngine engine) {
-    return Changed_structuralFeature_upper.Matcher.on(engine);
+  public Current_structuralFeature_owner.Matcher getCurrent_structuralFeature_owner(final ViatraQueryEngine engine) {
+    return Current_structuralFeature_owner.Matcher.on(engine);
+  }
+  
+  public Get_structuralFeature_lower getGet_structuralFeature_lower() {
+    return Get_structuralFeature_lower.instance();
+  }
+  
+  public Get_structuralFeature_lower.Matcher getGet_structuralFeature_lower(final ViatraQueryEngine engine) {
+    return Get_structuralFeature_lower.Matcher.on(engine);
+  }
+  
+  public Set_structuralFeature_lower getSet_structuralFeature_lower() {
+    return Set_structuralFeature_lower.instance();
+  }
+  
+  public Set_structuralFeature_lower.Matcher getSet_structuralFeature_lower(final ViatraQueryEngine engine) {
+    return Set_structuralFeature_lower.Matcher.on(engine);
+  }
+  
+  public Unset_structuralFeature_lower getUnset_structuralFeature_lower() {
+    return Unset_structuralFeature_lower.instance();
+  }
+  
+  public Unset_structuralFeature_lower.Matcher getUnset_structuralFeature_lower(final ViatraQueryEngine engine) {
+    return Unset_structuralFeature_lower.Matcher.on(engine);
+  }
+  
+  public Initial_structuralFeature_lower getInitial_structuralFeature_lower() {
+    return Initial_structuralFeature_lower.instance();
+  }
+  
+  public Initial_structuralFeature_lower.Matcher getInitial_structuralFeature_lower(final ViatraQueryEngine engine) {
+    return Initial_structuralFeature_lower.Matcher.on(engine);
+  }
+  
+  public Current_structuralFeature_lower getCurrent_structuralFeature_lower() {
+    return Current_structuralFeature_lower.instance();
+  }
+  
+  public Current_structuralFeature_lower.Matcher getCurrent_structuralFeature_lower(final ViatraQueryEngine engine) {
+    return Current_structuralFeature_lower.Matcher.on(engine);
+  }
+  
+  public Get_structuralFeature_upper getGet_structuralFeature_upper() {
+    return Get_structuralFeature_upper.instance();
+  }
+  
+  public Get_structuralFeature_upper.Matcher getGet_structuralFeature_upper(final ViatraQueryEngine engine) {
+    return Get_structuralFeature_upper.Matcher.on(engine);
+  }
+  
+  public Set_structuralFeature_upper getSet_structuralFeature_upper() {
+    return Set_structuralFeature_upper.instance();
+  }
+  
+  public Set_structuralFeature_upper.Matcher getSet_structuralFeature_upper(final ViatraQueryEngine engine) {
+    return Set_structuralFeature_upper.Matcher.on(engine);
+  }
+  
+  public Unset_structuralFeature_upper getUnset_structuralFeature_upper() {
+    return Unset_structuralFeature_upper.instance();
+  }
+  
+  public Unset_structuralFeature_upper.Matcher getUnset_structuralFeature_upper(final ViatraQueryEngine engine) {
+    return Unset_structuralFeature_upper.Matcher.on(engine);
+  }
+  
+  public Initial_structuralFeature_upper getInitial_structuralFeature_upper() {
+    return Initial_structuralFeature_upper.instance();
+  }
+  
+  public Initial_structuralFeature_upper.Matcher getInitial_structuralFeature_upper(final ViatraQueryEngine engine) {
+    return Initial_structuralFeature_upper.Matcher.on(engine);
+  }
+  
+  public Current_structuralFeature_upper getCurrent_structuralFeature_upper() {
+    return Current_structuralFeature_upper.instance();
+  }
+  
+  public Current_structuralFeature_upper.Matcher getCurrent_structuralFeature_upper(final ViatraQueryEngine engine) {
+    return Current_structuralFeature_upper.Matcher.on(engine);
   }
 }

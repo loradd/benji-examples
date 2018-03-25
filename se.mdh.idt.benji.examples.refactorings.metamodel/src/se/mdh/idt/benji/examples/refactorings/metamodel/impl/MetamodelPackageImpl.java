@@ -248,7 +248,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_SuperClasses() {
+	public EReference getClass_SuperClass() {
 		return (EReference)classEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -293,7 +293,7 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEnumeration_Literals() {
+	public EReference getEnumeration_EnumerationLiterals() {
 		return (EReference)enumerationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -436,23 +436,23 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 		modelElementEClass = createEClass(MODEL_ELEMENT);
 		createEAttribute(modelElementEClass, MODEL_ELEMENT__NAME);
 
+		classifierEClass = createEClass(CLASSIFIER);
+		createEReference(classifierEClass, CLASSIFIER__PACKAGE);
+
 		packageEClass = createEClass(PACKAGE);
 		createEAttribute(packageEClass, PACKAGE__URI);
 		createEReference(packageEClass, PACKAGE__CLASSIFIERS);
 
-		classifierEClass = createEClass(CLASSIFIER);
-		createEReference(classifierEClass, CLASSIFIER__PACKAGE);
-
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__ABSTRACT);
-		createEReference(classEClass, CLASS__SUPER_CLASSES);
+		createEReference(classEClass, CLASS__SUPER_CLASS);
 		createEReference(classEClass, CLASS__SUB_CLASSES);
 		createEReference(classEClass, CLASS__STRUCTURAL_FEATURES);
 
 		dataTypeEClass = createEClass(DATA_TYPE);
 
 		enumerationEClass = createEClass(ENUMERATION);
-		createEReference(enumerationEClass, ENUMERATION__LITERALS);
+		createEReference(enumerationEClass, ENUMERATION__ENUMERATION_LITERALS);
 
 		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
 		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
@@ -502,8 +502,8 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		packageEClass.getESuperTypes().add(this.getClassifier());
 		classifierEClass.getESuperTypes().add(this.getModelElement());
+		packageEClass.getESuperTypes().add(this.getClassifier());
 		classEClass.getESuperTypes().add(this.getClassifier());
 		dataTypeEClass.getESuperTypes().add(this.getClassifier());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
@@ -516,26 +516,26 @@ public class MetamodelPackageImpl extends EPackageImpl implements MetamodelPacka
 		initEClass(modelElementEClass, ModelElement.class, "ModelElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModelElement_Name(), theEcorePackage.getEString(), "name", "", 1, 1, ModelElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassifier_Package(), this.getPackage(), this.getPackage_Classifiers(), "package", null, 0, 1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(packageEClass, se.mdh.idt.benji.examples.refactorings.metamodel.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackage_Uri(), theEcorePackage.getEString(), "uri", "", 1, 1, se.mdh.idt.benji.examples.refactorings.metamodel.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_Classifiers(), this.getClassifier(), this.getClassifier_Package(), "classifiers", null, 0, -1, se.mdh.idt.benji.examples.refactorings.metamodel.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassifier_Package(), this.getPackage(), this.getPackage_Classifiers(), "package", null, 0, 1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(classEClass, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClass_Abstract(), theEcorePackage.getEBooleanObject(), "abstract", "false", 1, 1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_SuperClasses(), this.getClass_(), this.getClass_SubClasses(), "superClasses", null, 0, -1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_SubClasses(), this.getClass_(), this.getClass_SuperClasses(), "subClasses", null, 0, -1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_SuperClass(), this.getClass_(), this.getClass_SubClasses(), "superClass", null, 0, 1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_SubClasses(), this.getClass_(), this.getClass_SuperClass(), "subClasses", null, 0, -1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_StructuralFeatures(), this.getStructuralFeature(), this.getStructuralFeature_Owner(), "structuralFeatures", null, 0, -1, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeration_Literals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enumeration(), "literals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEnumeration_EnumerationLiterals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enumeration(), "enumerationLiterals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationLiteralEClass, EnumerationLiteral.class, "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_Literals(), "enumeration", null, 1, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_EnumerationLiterals(), "enumeration", null, 1, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structuralFeatureEClass, StructuralFeature.class, "StructuralFeature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructuralFeature_Owner(), this.getClass_(), this.getClass_StructuralFeatures(), "owner", null, 1, 1, StructuralFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

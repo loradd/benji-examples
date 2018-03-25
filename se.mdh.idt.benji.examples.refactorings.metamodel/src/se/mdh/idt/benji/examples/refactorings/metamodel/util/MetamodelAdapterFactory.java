@@ -80,12 +80,12 @@ public class MetamodelAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementAdapter();
 			}
 			@Override
-			public Adapter casePackage(se.mdh.idt.benji.examples.refactorings.metamodel.Package object) {
-				return createPackageAdapter();
-			}
-			@Override
 			public Adapter caseClassifier(Classifier object) {
 				return createClassifierAdapter();
+			}
+			@Override
+			public Adapter casePackage(se.mdh.idt.benji.examples.refactorings.metamodel.Package object) {
+				return createPackageAdapter();
 			}
 			@Override
 			public Adapter caseClass(se.mdh.idt.benji.examples.refactorings.metamodel.Class object) {

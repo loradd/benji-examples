@@ -26,22 +26,21 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.MetamodelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.EnumerationImpl#getLiterals <em>Literals</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.EnumerationImpl#getEnumerationLiterals <em>Enumeration Literals</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	/**
-	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
+	 * The cached value of the '{@link #getEnumerationLiterals() <em>Enumeration Literals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLiterals()
+	 * @see #getEnumerationLiterals()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EnumerationLiteral> literals;
-
+	protected EList<EnumerationLiteral> enumerationLiterals;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,11 +65,11 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EnumerationLiteral> getLiterals() {
-		if (literals == null) {
-			literals = new EObjectContainmentWithInverseEList<EnumerationLiteral>(EnumerationLiteral.class, this, MetamodelPackage.ENUMERATION__LITERALS, MetamodelPackage.ENUMERATION_LITERAL__ENUMERATION);
+	public EList<EnumerationLiteral> getEnumerationLiterals() {
+		if (enumerationLiterals == null) {
+			enumerationLiterals = new EObjectContainmentWithInverseEList<EnumerationLiteral>(EnumerationLiteral.class, this, MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS, MetamodelPackage.ENUMERATION_LITERAL__ENUMERATION);
 		}
-		return literals;
+		return enumerationLiterals;
 	}
 
 	/**
@@ -82,8 +81,8 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLiterals()).basicAdd(otherEnd, msgs);
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEnumerationLiterals()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -96,8 +95,8 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				return ((InternalEList<?>)getEnumerationLiterals()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -110,8 +109,8 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				return getLiterals();
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				return getEnumerationLiterals();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -125,9 +124,9 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				getLiterals().clear();
-				getLiterals().addAll((Collection<? extends EnumerationLiteral>)newValue);
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				getEnumerationLiterals().clear();
+				getEnumerationLiterals().addAll((Collection<? extends EnumerationLiteral>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,8 +140,8 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				getLiterals().clear();
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				getEnumerationLiterals().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -156,8 +155,8 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MetamodelPackage.ENUMERATION__LITERALS:
-				return literals != null && !literals.isEmpty();
+			case MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS:
+				return enumerationLiterals != null && !enumerationLiterals.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

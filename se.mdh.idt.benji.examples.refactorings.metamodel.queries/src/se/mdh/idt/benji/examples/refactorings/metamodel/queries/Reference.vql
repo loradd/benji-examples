@@ -1,149 +1,238 @@
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries
 
 import "http://www.mdh.se/examples/refactorings/Metamodel"
+import "http://www.mdh.se/idt/benji/trace/Trace"
 
-// reference - preserved
-pattern preserved_reference (initial_reference : Reference, current_reference : Reference) {
-	find preserved_structuralFeature (initial_reference, current_reference);
+// reference - get
+pattern get_reference (reference : TraceLink) {
+	find initial_reference (reference, _initial_reference);
+	find current_reference (reference, _current_reference);
 }
 
-// reference - created
-pattern created_reference (current_reference : Reference) {
-	find created_structuralFeature (current_reference);
+// reference - create
+pattern create_reference (reference : TraceLink) {
+	neg find initial_reference (reference, _initial_reference);
+	find current_reference (reference, _current_reference); 	
 }
 
-// reference - deleted
-pattern deleted_reference (initial_reference : Reference) {
-	find deleted_structuralFeature (initial_reference); 
+// reference - delete
+pattern delete_reference (reference : TraceLink) {
+	find initial_reference (reference, _initial_reference);
+	neg find current_reference (reference, _current_reference);	
 }
 
-// reference - name
-pattern reference_name (reference : Reference, name : java String) {
-	find structuralFeature_name (reference, name); 
+// reference - initial
+pattern initial_reference (reference : TraceLink, initial_reference : Reference) {
+	find initial_structuralFeature (reference, initial_reference);	
 }
 
-// reference - name - preserved
-pattern preserved_reference_name (initial_reference : Reference, current_reference : Reference, initial_name : java String, current_name : java String) {
-	find preserved_structuralFeature_name (initial_reference, current_reference, initial_name, current_name); 
+// reference - current
+pattern current_reference (reference : TraceLink, current_reference : Reference) {
+	find current_structuralFeature (reference, current_reference);
 }
 
-// reference - name - changed
-pattern changed_reference_name (initial_reference : Reference, current_reference : Reference, initial_name : java String, current_name : java String) {
-	find changed_structuralFeature_name (initial_reference, current_reference, initial_name, current_name); 	
+// reference - name - get
+pattern get_reference_name (reference : TraceLink, name : java String) {
+	find initial_reference_name (reference, _initial_reference, name);
+	find current_reference_name (reference, _current_reference, name);
 }
 
-// reference - owner
-pattern reference_owner (reference : Reference, owner : Class) {
-	find structuralFeature_owner (reference, owner); 
+// reference - name - set
+pattern set_reference_name (reference : TraceLink, name : java String) {
+	neg find initial_reference_name (reference, _initial_reference, name);
+	find current_reference_name (reference, _current_reference, name);	
 }
 
-// reference - owner - preserved
-pattern preserved_reference_owner (initial_reference : Reference, current_reference : Reference, initial_owner : Class, current_owner : Class) {
-	find preserved_structuralFeature_owner (initial_reference, current_reference, initial_owner, current_owner); 
+// reference - name - unset
+pattern unset_reference_name (reference : TraceLink, name : java String) {
+	find initial_reference_name (reference, _initial_reference, name);
+	neg find current_reference_name (reference, _current_reference, name);
 }
 
-// reference - owner - changed
-pattern changed_reference_owner (initial_reference : Reference, current_reference : Reference, initial_owner : Class, current_owner : Class) {
-	find changed_structuralFeature_owner (initial_reference, current_reference, initial_owner, current_owner); 
+// reference - name - initial
+pattern initial_reference_name (reference : TraceLink, initial_reference : Reference, name : java String) {
+	find initial_structuralFeature_name (reference, initial_reference, name);	
 }
 
-// reference - lower
-pattern reference_lower (reference : Reference, lower : java Integer) {
-	find structuralFeature_lower (reference, lower); 
+// reference - name - current
+pattern current_reference_name (reference : TraceLink, current_reference : Reference, name : java String) {
+	find current_structuralFeature_name (reference, current_reference, name);
 }
 
-// reference - lower - preserved
-pattern preserved_reference_lower (initial_reference : Reference, current_reference : Reference, initial_lower : java Integer, current_lower : java Integer) {
-	find preserved_structuralFeature_lower (initial_reference, current_reference, initial_lower, current_lower); 
+// reference - owner - get
+pattern get_reference_owner (reference : TraceLink, owner : TraceLink) {
+	find initial_reference_owner (reference, _initial_reference, owner, _initial_owner);
+	find current_reference_owner (reference, _current_reference, owner, _current_owner);
 }
 
-// reference - lower - changed
-pattern changed_reference_lower (initial_reference : Reference, current_reference : Reference, initial_lower : java Integer, current_lower : java Integer) {
-	find changed_structuralFeature_lower (initial_reference, current_reference, initial_lower, current_lower);
+// reference - owner - set
+pattern set_reference_owner (reference : TraceLink, owner : TraceLink) {
+	neg find initial_reference_owner (reference, _initial_reference, owner, _initial_owner);
+	find current_reference_owner (reference, _current_reference, owner, _current_owner);	
 }
 
-// reference - upper
-pattern reference_upper (reference : Reference, upper : java Integer) {
-	find structuralFeature_upper (reference, upper);	
+// reference - owner - unset
+pattern unset_reference_owner (reference : TraceLink, owner : TraceLink) {
+	find initial_reference_owner (reference, _initial_reference, owner, _initial_owner);
+	neg find current_reference_owner (reference, _current_reference, owner, _current_owner);
 }
 
-// reference - upper - preserved
-pattern preserved_reference_upper (initial_reference : Reference, current_reference : Reference, initial_upper : java Integer, current_upper : java Integer) {
-	find preserved_structuralFeature_upper (initial_reference, current_reference, initial_upper, current_upper); 
+// reference - owner - initial
+pattern initial_reference_owner (reference : TraceLink, initial_reference : Reference, owner : TraceLink, initial_owner : Class) {
+	find initial_structuralFeature_owner (reference, initial_reference, owner, initial_owner);	
 }
 
-// reference - upper - changed
-pattern changed_reference_upper (initial_reference : Reference, current_reference : Reference, initial_upper : java Integer, current_upper : java Integer) {
-	find changed_structuralFeature_upper (initial_reference, current_reference, initial_upper, current_upper);
+// reference - owner - current
+pattern current_reference_owner (reference : TraceLink, current_reference : Reference, owner : TraceLink, current_owner : Class) {
+	find current_structuralFeature_owner (reference, current_reference, owner, current_owner);
 }
 
-// reference - containment
-pattern reference_containment (reference : Reference, containment : java Boolean) {
-	Reference.containment (reference, containment); 
+// reference - lower - get
+pattern get_reference_lower (reference : TraceLink, lower : java Integer) {
+	find initial_reference_lower (reference, _initial_reference, lower);
+	find current_reference_lower (reference, _current_reference, lower);
 }
 
-// reference - containment - preserved
-pattern preserved_reference_containment (initial_reference : Reference, current_reference : Reference, initial_containment : java Boolean, current_containment : java Boolean) {
-	find preserved_reference (initial_reference, current_reference);
-	find reference_containment (initial_reference, initial_containment); 
-	find reference_containment (current_reference, current_containment); 
-	check (initial_containment == current_containment); 
+// reference - lower - set
+pattern set_reference_lower (reference : TraceLink, lower : java Integer) {
+	neg find initial_reference_lower (reference, _initial_reference, lower);
+	find current_reference_lower (reference, _current_reference, lower);
 }
 
-// reference - containment - changed
-pattern changed_reference_containment (initial_reference : Reference, current_reference : Reference, initial_containment : java Boolean, current_containment : java Boolean) {
-	find preserved_reference (initial_reference, current_reference); 
-	find reference_containment (initial_reference, initial_containment); 
-	find reference_containment (current_reference, current_containment); 
-	check (initial_containment != current_containment); 
+// reference - lower - unset
+pattern unset_reference_lower (reference : TraceLink, lower : java Integer) {
+	find initial_reference_lower (reference, _initial_reference, lower);
+	neg find current_reference_lower (reference, _current_reference, lower);	
 }
 
-// reference - opposite
-pattern reference_opposite (reference : Reference, opposite : Reference) {
-	Reference.opposite (reference, opposite); 	
+// reference - lower - initial
+pattern initial_reference_lower (reference : TraceLink, initial_reference : Reference, lower : java Integer) {
+	find initial_structuralFeature_lower (reference, initial_reference, lower);	
 }
 
-// reference - opposite - preserved
-pattern preserved_reference_opposite (initial_reference : Reference, current_reference : Reference, initial_opposite : Reference, current_opposite : Reference) {
-	find preserved_reference (initial_reference, current_reference); 
-	find preserved_reference (initial_opposite, current_opposite); 
-	find reference_opposite (initial_reference, initial_opposite); 
-	find reference_opposite (current_reference, current_opposite); 
+// reference - lower - current
+pattern current_reference_lower (reference : TraceLink, current_reference : Reference, lower : java Integer) {
+	find current_structuralFeature_lower (reference, current_reference, lower);
 }
 
-// reference - opposite - changed
-pattern changed_reference_opposite (initial_reference : Reference, current_reference : Reference, initial_opposite : Reference, current_opposite : Reference) {
-	find preserved_reference (initial_reference, current_reference); 
-	find preserved_reference (initial_opposite, current_opposite);
-	find reference_opposite (initial_reference, initial_opposite); 
-	neg find reference_opposite (current_reference, current_opposite); 
+// reference - upper - get
+pattern get_reference_upper (reference : TraceLink, upper : java Integer) {
+	find initial_reference_upper (reference, _initial_reference, upper);
+	find current_reference_upper (reference, _current_reference, upper);
 }
 
-// reference - type
-pattern reference_type (reference : Reference, type : Class) {
-	Reference.type (reference, type);  
+// reference - upper - set
+pattern set_reference_upper (reference : TraceLink, upper : java Integer) {
+	neg find initial_reference_upper (reference, _initial_reference, upper);
+	find current_reference_upper (reference, _current_reference, upper);
 }
 
-// reference - type (weak)
-pattern reference_type_weak (reference : Reference, type : Class) {
-	find reference_type (reference, type); 
-} or {
-	find reference_type (reference, reference_type); 
-	find class_subClass+ (type, reference_type); 
+// reference - upper - unset
+pattern unset_reference_upper (reference : TraceLink, upper : java Integer) {
+	find initial_reference_upper (reference, _initial_reference, upper);
+	neg find current_reference_upper (reference, _current_reference, upper);	
 }
 
-// reference - type - preserved
-pattern preserved_reference_type (initial_reference : Reference, current_reference : Reference, initial_type : Class, current_type : Class) {
-	find preserved_reference (initial_reference, current_reference); 
-	find preserved_class (initial_type, current_type);
-	find reference_type (initial_reference, initial_type);
-	find reference_type (current_reference, current_type);
+// reference - upper - initial
+pattern initial_reference_upper (reference : TraceLink, initial_reference : Reference, upper : java Integer) {
+	find initial_structuralFeature_upper (reference, initial_reference, upper);	
 }
 
-// reference - type - changed
-pattern changed_reference_type (initial_reference : Reference, current_reference : Reference, initial_type : Class, current_type : Class) {
-	find preserved_reference (initial_reference, current_reference); 
-	neg find preserved_class (initial_type, current_type); 
-	find reference_type (initial_reference, initial_type); 
-	find reference_type (current_reference, current_type);
+// reference - upper - current
+pattern current_reference_upper (reference : TraceLink, current_reference : Reference, upper : java Integer) {
+	find current_structuralFeature_upper (reference, current_reference, upper);
+}
+
+// reference - type - get
+pattern get_reference_type (reference : TraceLink, type : TraceLink) {
+	find initial_reference_type (reference, _initial_reference, type, _initial_type);
+	find current_reference_type (reference, _current_reference, type, _current_type);
+}
+
+// reference - type - set
+pattern set_reference_type (reference : TraceLink, type : TraceLink) {
+	neg find initial_reference_type (reference, _initial_reference, type, _initial_type);
+	find current_reference_type (reference, _current_reference, type, _current_type);	
+}
+
+// reference - type - unset
+pattern unset_reference_type (reference : TraceLink, type : TraceLink) {
+	find initial_reference_type (reference, _initial_reference, type, _initial_type);
+	neg find current_reference_type (reference, _current_reference, type, _current_type);
+}
+
+// reference - type - initial
+pattern initial_reference_type (reference : TraceLink, initial_reference : Reference, type : TraceLink, initial_type : Class) {
+	find initial_reference (reference, initial_reference);
+	find initial_class (type, initial_type);
+	Reference.type (initial_reference, initial_type);
+}
+
+// reference - type - current
+pattern current_reference_type (reference : TraceLink, current_reference : Reference, type : TraceLink, current_type : Class) {
+	find current_reference (reference, current_reference);
+	find	 current_class (type, current_type);
+	Reference.type (current_reference, current_type);
+}
+
+// reference - containment - get
+pattern get_reference_containment (reference : TraceLink, containment : java Boolean) {
+	find initial_reference_containment (reference, _initial_reference, containment);
+	find current_reference_containment (reference, _current_reference, containment);
+}
+
+// reference - containment - set
+pattern set_reference_containment (reference : TraceLink, containment : java Boolean) {
+	neg find initial_reference_containment (reference, _initial_reference, containment);
+	find current_reference_containment (reference, _current_reference, containment);	
+}
+
+// reference - containment - unset
+pattern unset_reference_containment (reference : TraceLink, containment : java Boolean) {
+	find initial_reference_containment (reference, _initial_reference, containment);
+	neg find current_reference_containment (reference, _current_reference, containment);
+}
+
+// reference - containment - initial
+pattern initial_reference_containment (reference : TraceLink, initial_reference : Reference, containment : java Boolean) {
+	find initial_reference (reference, initial_reference); 	
+	Reference.containment (initial_reference, containment);
+}
+
+// reference - containment - current
+pattern current_reference_containment (reference : TraceLink, current_reference : Reference, containment : java Boolean) {
+	find current_reference (reference, current_reference);
+	Reference.containment (current_reference, containment);
+}
+
+// reference - opposite - get
+pattern get_reference_opposite (reference : TraceLink, opposite : TraceLink) {
+	find initial_reference_opposite (reference, _initial_reference, opposite, _initial_opposite);
+	find current_reference_opposite (reference, _current_reference, opposite, _current_opposite);
+}
+
+// reference - opposite - set
+pattern set_reference_opposite (reference : TraceLink, opposite : TraceLink) {
+	neg find initial_reference_opposite (reference, _initial_reference, opposite, _initial_opposite);
+	find current_reference_opposite (reference, _current_reference, opposite, _current_opposite);	
+}
+
+// reference - opposite - unset
+pattern unset_reference_opposite (reference : TraceLink, opposite : TraceLink) {
+	find initial_reference_opposite (reference, _initial_reference, opposite, _initial_opposite);
+	neg find current_reference_opposite (reference, _current_reference, opposite, _current_opposite);
+}
+
+// reference - opposite - initial
+pattern initial_reference_opposite (reference : TraceLink, initial_reference : Reference, opposite : TraceLink, initial_opposite : Reference) {
+	find initial_reference (reference, initial_reference);
+	find initial_reference (opposite, initial_opposite);
+	Reference.opposite (initial_reference, initial_opposite);
+}
+
+// reference - opposite - current
+pattern current_reference_opposite (reference : TraceLink, current_reference : Reference, opposite : TraceLink, current_opposite : Reference) {
+	find current_reference (reference, current_reference);
+	find current_reference (opposite, current_opposite);
+	Reference.opposite (current_reference, current_opposite);
 }

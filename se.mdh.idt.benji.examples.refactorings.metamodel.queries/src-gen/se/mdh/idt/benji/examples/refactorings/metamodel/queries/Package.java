@@ -6,38 +6,51 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_package_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_package_classifier;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_package_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_package_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_package_subPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_package_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_package_superPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_package_uri;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_classifier;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_subPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_superPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package_uri;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_classifier;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_enuemration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_subPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_superPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_package_uri;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_classifier;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_classifier;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_superPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_package_uri;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_classifier;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_superPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_uri;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_classifier;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_superPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_package_uri;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_classifier;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_package_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_package_classifier;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_package_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_package_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_package_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_package_superPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_package_uri;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_superPackage;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_uri;
 
 /**
  * A pattern group formed of all public patterns defined in Package.vql.
@@ -47,45 +60,58 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_package_
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_package</li>
- * <li>created_package</li>
- * <li>deleted_package</li>
- * <li>package_name</li>
- * <li>preserved_package_name</li>
- * <li>changed_package_name</li>
- * <li>package_superPackage</li>
- * <li>preserved_package_superPackage</li>
- * <li>changed_package_superPackage</li>
- * <li>package_uri</li>
- * <li>preserved_package_uri</li>
- * <li>changed_package_uri</li>
- * <li>package_classifier</li>
- * <li>package_subPackage</li>
- * <li>package_class</li>
- * <li>package_dataType</li>
- * <li>package_enumeration</li>
- * <li>preserved_package_classifier</li>
- * <li>preserved_package_subPackage</li>
- * <li>preserved_package_class</li>
- * <li>preserved_package_dataType</li>
- * <li>preserved_package_enuemration</li>
- * <li>added_package_classifier</li>
- * <li>added_package_subPackage</li>
- * <li>added_package_class</li>
- * <li>added_package_dataType</li>
- * <li>added_package_enumeration</li>
- * <li>removed_package_classifier</li>
- * <li>removed_package_subPackage</li>
- * <li>removed_package_class</li>
- * <li>removed_package_dataType</li>
- * <li>removed_package_enumeration</li>
+ * <li>get_package</li>
+ * <li>create_package</li>
+ * <li>delete_package</li>
+ * <li>initial_package</li>
+ * <li>current_package</li>
+ * <li>get_package_name</li>
+ * <li>set_package_name</li>
+ * <li>unset_package_name</li>
+ * <li>initial_package_name</li>
+ * <li>current_package_name</li>
+ * <li>get_package_superPackage</li>
+ * <li>set_package_superPackage</li>
+ * <li>unset_package_superPackage</li>
+ * <li>initial_package_superPackage</li>
+ * <li>current_package_superPackage</li>
+ * <li>get_package_uri</li>
+ * <li>set_package_uri</li>
+ * <li>unset_package_uri</li>
+ * <li>initial_package_uri</li>
+ * <li>current_package_uri</li>
+ * <li>get_package_classifier</li>
+ * <li>insert_package_classifier</li>
+ * <li>remove_package_classifier</li>
+ * <li>initial_package_classifier</li>
+ * <li>current_package_classifier</li>
+ * <li>get_package_subPackage</li>
+ * <li>insert_package_subPackage</li>
+ * <li>remove_package_subPackage</li>
+ * <li>initial_package_subPackage</li>
+ * <li>current_package_subPackage</li>
+ * <li>get_package_class</li>
+ * <li>insert_package_class</li>
+ * <li>remove_package_class</li>
+ * <li>initial_package_class</li>
+ * <li>current_package_class</li>
+ * <li>get_package_datatype</li>
+ * <li>insert_package_datatype</li>
+ * <li>remove_package_datatype</li>
+ * <li>initial_package_datatype</li>
+ * <li>current_package_datatype</li>
+ * <li>get_package_enumeration</li>
+ * <li>insert_package_enumeration</li>
+ * <li>remove_package_enumeration</li>
+ * <li>initial_package_enumeration</li>
+ * <li>current_package_enumeration</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:34+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class Package extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -104,293 +130,410 @@ public final class Package extends BaseGeneratedPatternGroup {
   private static Package INSTANCE;
   
   private Package() {
-    querySpecifications.add(Preserved_package.instance());
-    querySpecifications.add(Created_package.instance());
-    querySpecifications.add(Deleted_package.instance());
-    querySpecifications.add(Package_name.instance());
-    querySpecifications.add(Preserved_package_name.instance());
-    querySpecifications.add(Changed_package_name.instance());
-    querySpecifications.add(Package_superPackage.instance());
-    querySpecifications.add(Preserved_package_superPackage.instance());
-    querySpecifications.add(Changed_package_superPackage.instance());
-    querySpecifications.add(Package_uri.instance());
-    querySpecifications.add(Preserved_package_uri.instance());
-    querySpecifications.add(Changed_package_uri.instance());
-    querySpecifications.add(Package_classifier.instance());
-    querySpecifications.add(Package_subPackage.instance());
-    querySpecifications.add(Package_class.instance());
-    querySpecifications.add(Package_dataType.instance());
-    querySpecifications.add(Package_enumeration.instance());
-    querySpecifications.add(Preserved_package_classifier.instance());
-    querySpecifications.add(Preserved_package_subPackage.instance());
-    querySpecifications.add(Preserved_package_class.instance());
-    querySpecifications.add(Preserved_package_dataType.instance());
-    querySpecifications.add(Preserved_package_enuemration.instance());
-    querySpecifications.add(Added_package_classifier.instance());
-    querySpecifications.add(Added_package_subPackage.instance());
-    querySpecifications.add(Added_package_class.instance());
-    querySpecifications.add(Added_package_dataType.instance());
-    querySpecifications.add(Added_package_enumeration.instance());
-    querySpecifications.add(Removed_package_classifier.instance());
-    querySpecifications.add(Removed_package_subPackage.instance());
-    querySpecifications.add(Removed_package_class.instance());
-    querySpecifications.add(Removed_package_dataType.instance());
-    querySpecifications.add(Removed_package_enumeration.instance());
+    querySpecifications.add(Get_package.instance());
+    querySpecifications.add(Create_package.instance());
+    querySpecifications.add(Delete_package.instance());
+    querySpecifications.add(Initial_package.instance());
+    querySpecifications.add(Current_package.instance());
+    querySpecifications.add(Get_package_name.instance());
+    querySpecifications.add(Set_package_name.instance());
+    querySpecifications.add(Unset_package_name.instance());
+    querySpecifications.add(Initial_package_name.instance());
+    querySpecifications.add(Current_package_name.instance());
+    querySpecifications.add(Get_package_superPackage.instance());
+    querySpecifications.add(Set_package_superPackage.instance());
+    querySpecifications.add(Unset_package_superPackage.instance());
+    querySpecifications.add(Initial_package_superPackage.instance());
+    querySpecifications.add(Current_package_superPackage.instance());
+    querySpecifications.add(Get_package_uri.instance());
+    querySpecifications.add(Set_package_uri.instance());
+    querySpecifications.add(Unset_package_uri.instance());
+    querySpecifications.add(Initial_package_uri.instance());
+    querySpecifications.add(Current_package_uri.instance());
+    querySpecifications.add(Get_package_classifier.instance());
+    querySpecifications.add(Insert_package_classifier.instance());
+    querySpecifications.add(Remove_package_classifier.instance());
+    querySpecifications.add(Initial_package_classifier.instance());
+    querySpecifications.add(Current_package_classifier.instance());
+    querySpecifications.add(Get_package_subPackage.instance());
+    querySpecifications.add(Insert_package_subPackage.instance());
+    querySpecifications.add(Remove_package_subPackage.instance());
+    querySpecifications.add(Initial_package_subPackage.instance());
+    querySpecifications.add(Current_package_subPackage.instance());
+    querySpecifications.add(Get_package_class.instance());
+    querySpecifications.add(Insert_package_class.instance());
+    querySpecifications.add(Remove_package_class.instance());
+    querySpecifications.add(Initial_package_class.instance());
+    querySpecifications.add(Current_package_class.instance());
+    querySpecifications.add(Get_package_datatype.instance());
+    querySpecifications.add(Insert_package_datatype.instance());
+    querySpecifications.add(Remove_package_datatype.instance());
+    querySpecifications.add(Initial_package_datatype.instance());
+    querySpecifications.add(Current_package_datatype.instance());
+    querySpecifications.add(Get_package_enumeration.instance());
+    querySpecifications.add(Insert_package_enumeration.instance());
+    querySpecifications.add(Remove_package_enumeration.instance());
+    querySpecifications.add(Initial_package_enumeration.instance());
+    querySpecifications.add(Current_package_enumeration.instance());
   }
   
-  public Preserved_package getPreserved_package() {
-    return Preserved_package.instance();
+  public Get_package getGet_package() {
+    return Get_package.instance();
   }
   
-  public Preserved_package.Matcher getPreserved_package(final ViatraQueryEngine engine) {
-    return Preserved_package.Matcher.on(engine);
+  public Get_package.Matcher getGet_package(final ViatraQueryEngine engine) {
+    return Get_package.Matcher.on(engine);
   }
   
-  public Created_package getCreated_package() {
-    return Created_package.instance();
+  public Create_package getCreate_package() {
+    return Create_package.instance();
   }
   
-  public Created_package.Matcher getCreated_package(final ViatraQueryEngine engine) {
-    return Created_package.Matcher.on(engine);
+  public Create_package.Matcher getCreate_package(final ViatraQueryEngine engine) {
+    return Create_package.Matcher.on(engine);
   }
   
-  public Deleted_package getDeleted_package() {
-    return Deleted_package.instance();
+  public Delete_package getDelete_package() {
+    return Delete_package.instance();
   }
   
-  public Deleted_package.Matcher getDeleted_package(final ViatraQueryEngine engine) {
-    return Deleted_package.Matcher.on(engine);
+  public Delete_package.Matcher getDelete_package(final ViatraQueryEngine engine) {
+    return Delete_package.Matcher.on(engine);
   }
   
-  public Package_name getPackage_name() {
-    return Package_name.instance();
+  public Initial_package getInitial_package() {
+    return Initial_package.instance();
   }
   
-  public Package_name.Matcher getPackage_name(final ViatraQueryEngine engine) {
-    return Package_name.Matcher.on(engine);
+  public Initial_package.Matcher getInitial_package(final ViatraQueryEngine engine) {
+    return Initial_package.Matcher.on(engine);
   }
   
-  public Preserved_package_name getPreserved_package_name() {
-    return Preserved_package_name.instance();
+  public Current_package getCurrent_package() {
+    return Current_package.instance();
   }
   
-  public Preserved_package_name.Matcher getPreserved_package_name(final ViatraQueryEngine engine) {
-    return Preserved_package_name.Matcher.on(engine);
+  public Current_package.Matcher getCurrent_package(final ViatraQueryEngine engine) {
+    return Current_package.Matcher.on(engine);
   }
   
-  public Changed_package_name getChanged_package_name() {
-    return Changed_package_name.instance();
+  public Get_package_name getGet_package_name() {
+    return Get_package_name.instance();
   }
   
-  public Changed_package_name.Matcher getChanged_package_name(final ViatraQueryEngine engine) {
-    return Changed_package_name.Matcher.on(engine);
+  public Get_package_name.Matcher getGet_package_name(final ViatraQueryEngine engine) {
+    return Get_package_name.Matcher.on(engine);
   }
   
-  public Package_superPackage getPackage_superPackage() {
-    return Package_superPackage.instance();
+  public Set_package_name getSet_package_name() {
+    return Set_package_name.instance();
   }
   
-  public Package_superPackage.Matcher getPackage_superPackage(final ViatraQueryEngine engine) {
-    return Package_superPackage.Matcher.on(engine);
+  public Set_package_name.Matcher getSet_package_name(final ViatraQueryEngine engine) {
+    return Set_package_name.Matcher.on(engine);
   }
   
-  public Preserved_package_superPackage getPreserved_package_superPackage() {
-    return Preserved_package_superPackage.instance();
+  public Unset_package_name getUnset_package_name() {
+    return Unset_package_name.instance();
   }
   
-  public Preserved_package_superPackage.Matcher getPreserved_package_superPackage(final ViatraQueryEngine engine) {
-    return Preserved_package_superPackage.Matcher.on(engine);
+  public Unset_package_name.Matcher getUnset_package_name(final ViatraQueryEngine engine) {
+    return Unset_package_name.Matcher.on(engine);
   }
   
-  public Changed_package_superPackage getChanged_package_superPackage() {
-    return Changed_package_superPackage.instance();
+  public Initial_package_name getInitial_package_name() {
+    return Initial_package_name.instance();
   }
   
-  public Changed_package_superPackage.Matcher getChanged_package_superPackage(final ViatraQueryEngine engine) {
-    return Changed_package_superPackage.Matcher.on(engine);
+  public Initial_package_name.Matcher getInitial_package_name(final ViatraQueryEngine engine) {
+    return Initial_package_name.Matcher.on(engine);
   }
   
-  public Package_uri getPackage_uri() {
-    return Package_uri.instance();
+  public Current_package_name getCurrent_package_name() {
+    return Current_package_name.instance();
   }
   
-  public Package_uri.Matcher getPackage_uri(final ViatraQueryEngine engine) {
-    return Package_uri.Matcher.on(engine);
+  public Current_package_name.Matcher getCurrent_package_name(final ViatraQueryEngine engine) {
+    return Current_package_name.Matcher.on(engine);
   }
   
-  public Preserved_package_uri getPreserved_package_uri() {
-    return Preserved_package_uri.instance();
+  public Get_package_superPackage getGet_package_superPackage() {
+    return Get_package_superPackage.instance();
   }
   
-  public Preserved_package_uri.Matcher getPreserved_package_uri(final ViatraQueryEngine engine) {
-    return Preserved_package_uri.Matcher.on(engine);
+  public Get_package_superPackage.Matcher getGet_package_superPackage(final ViatraQueryEngine engine) {
+    return Get_package_superPackage.Matcher.on(engine);
   }
   
-  public Changed_package_uri getChanged_package_uri() {
-    return Changed_package_uri.instance();
+  public Set_package_superPackage getSet_package_superPackage() {
+    return Set_package_superPackage.instance();
   }
   
-  public Changed_package_uri.Matcher getChanged_package_uri(final ViatraQueryEngine engine) {
-    return Changed_package_uri.Matcher.on(engine);
+  public Set_package_superPackage.Matcher getSet_package_superPackage(final ViatraQueryEngine engine) {
+    return Set_package_superPackage.Matcher.on(engine);
   }
   
-  public Package_classifier getPackage_classifier() {
-    return Package_classifier.instance();
+  public Unset_package_superPackage getUnset_package_superPackage() {
+    return Unset_package_superPackage.instance();
   }
   
-  public Package_classifier.Matcher getPackage_classifier(final ViatraQueryEngine engine) {
-    return Package_classifier.Matcher.on(engine);
+  public Unset_package_superPackage.Matcher getUnset_package_superPackage(final ViatraQueryEngine engine) {
+    return Unset_package_superPackage.Matcher.on(engine);
   }
   
-  public Package_subPackage getPackage_subPackage() {
-    return Package_subPackage.instance();
+  public Initial_package_superPackage getInitial_package_superPackage() {
+    return Initial_package_superPackage.instance();
   }
   
-  public Package_subPackage.Matcher getPackage_subPackage(final ViatraQueryEngine engine) {
-    return Package_subPackage.Matcher.on(engine);
+  public Initial_package_superPackage.Matcher getInitial_package_superPackage(final ViatraQueryEngine engine) {
+    return Initial_package_superPackage.Matcher.on(engine);
   }
   
-  public Package_class getPackage_class() {
-    return Package_class.instance();
+  public Current_package_superPackage getCurrent_package_superPackage() {
+    return Current_package_superPackage.instance();
   }
   
-  public Package_class.Matcher getPackage_class(final ViatraQueryEngine engine) {
-    return Package_class.Matcher.on(engine);
+  public Current_package_superPackage.Matcher getCurrent_package_superPackage(final ViatraQueryEngine engine) {
+    return Current_package_superPackage.Matcher.on(engine);
   }
   
-  public Package_dataType getPackage_dataType() {
-    return Package_dataType.instance();
+  public Get_package_uri getGet_package_uri() {
+    return Get_package_uri.instance();
   }
   
-  public Package_dataType.Matcher getPackage_dataType(final ViatraQueryEngine engine) {
-    return Package_dataType.Matcher.on(engine);
+  public Get_package_uri.Matcher getGet_package_uri(final ViatraQueryEngine engine) {
+    return Get_package_uri.Matcher.on(engine);
   }
   
-  public Package_enumeration getPackage_enumeration() {
-    return Package_enumeration.instance();
+  public Set_package_uri getSet_package_uri() {
+    return Set_package_uri.instance();
   }
   
-  public Package_enumeration.Matcher getPackage_enumeration(final ViatraQueryEngine engine) {
-    return Package_enumeration.Matcher.on(engine);
+  public Set_package_uri.Matcher getSet_package_uri(final ViatraQueryEngine engine) {
+    return Set_package_uri.Matcher.on(engine);
   }
   
-  public Preserved_package_classifier getPreserved_package_classifier() {
-    return Preserved_package_classifier.instance();
+  public Unset_package_uri getUnset_package_uri() {
+    return Unset_package_uri.instance();
   }
   
-  public Preserved_package_classifier.Matcher getPreserved_package_classifier(final ViatraQueryEngine engine) {
-    return Preserved_package_classifier.Matcher.on(engine);
+  public Unset_package_uri.Matcher getUnset_package_uri(final ViatraQueryEngine engine) {
+    return Unset_package_uri.Matcher.on(engine);
   }
   
-  public Preserved_package_subPackage getPreserved_package_subPackage() {
-    return Preserved_package_subPackage.instance();
+  public Initial_package_uri getInitial_package_uri() {
+    return Initial_package_uri.instance();
   }
   
-  public Preserved_package_subPackage.Matcher getPreserved_package_subPackage(final ViatraQueryEngine engine) {
-    return Preserved_package_subPackage.Matcher.on(engine);
+  public Initial_package_uri.Matcher getInitial_package_uri(final ViatraQueryEngine engine) {
+    return Initial_package_uri.Matcher.on(engine);
   }
   
-  public Preserved_package_class getPreserved_package_class() {
-    return Preserved_package_class.instance();
+  public Current_package_uri getCurrent_package_uri() {
+    return Current_package_uri.instance();
   }
   
-  public Preserved_package_class.Matcher getPreserved_package_class(final ViatraQueryEngine engine) {
-    return Preserved_package_class.Matcher.on(engine);
+  public Current_package_uri.Matcher getCurrent_package_uri(final ViatraQueryEngine engine) {
+    return Current_package_uri.Matcher.on(engine);
   }
   
-  public Preserved_package_dataType getPreserved_package_dataType() {
-    return Preserved_package_dataType.instance();
+  public Get_package_classifier getGet_package_classifier() {
+    return Get_package_classifier.instance();
   }
   
-  public Preserved_package_dataType.Matcher getPreserved_package_dataType(final ViatraQueryEngine engine) {
-    return Preserved_package_dataType.Matcher.on(engine);
+  public Get_package_classifier.Matcher getGet_package_classifier(final ViatraQueryEngine engine) {
+    return Get_package_classifier.Matcher.on(engine);
   }
   
-  public Preserved_package_enuemration getPreserved_package_enuemration() {
-    return Preserved_package_enuemration.instance();
+  public Insert_package_classifier getInsert_package_classifier() {
+    return Insert_package_classifier.instance();
   }
   
-  public Preserved_package_enuemration.Matcher getPreserved_package_enuemration(final ViatraQueryEngine engine) {
-    return Preserved_package_enuemration.Matcher.on(engine);
+  public Insert_package_classifier.Matcher getInsert_package_classifier(final ViatraQueryEngine engine) {
+    return Insert_package_classifier.Matcher.on(engine);
   }
   
-  public Added_package_classifier getAdded_package_classifier() {
-    return Added_package_classifier.instance();
+  public Remove_package_classifier getRemove_package_classifier() {
+    return Remove_package_classifier.instance();
   }
   
-  public Added_package_classifier.Matcher getAdded_package_classifier(final ViatraQueryEngine engine) {
-    return Added_package_classifier.Matcher.on(engine);
+  public Remove_package_classifier.Matcher getRemove_package_classifier(final ViatraQueryEngine engine) {
+    return Remove_package_classifier.Matcher.on(engine);
   }
   
-  public Added_package_subPackage getAdded_package_subPackage() {
-    return Added_package_subPackage.instance();
+  public Initial_package_classifier getInitial_package_classifier() {
+    return Initial_package_classifier.instance();
   }
   
-  public Added_package_subPackage.Matcher getAdded_package_subPackage(final ViatraQueryEngine engine) {
-    return Added_package_subPackage.Matcher.on(engine);
+  public Initial_package_classifier.Matcher getInitial_package_classifier(final ViatraQueryEngine engine) {
+    return Initial_package_classifier.Matcher.on(engine);
   }
   
-  public Added_package_class getAdded_package_class() {
-    return Added_package_class.instance();
+  public Current_package_classifier getCurrent_package_classifier() {
+    return Current_package_classifier.instance();
   }
   
-  public Added_package_class.Matcher getAdded_package_class(final ViatraQueryEngine engine) {
-    return Added_package_class.Matcher.on(engine);
+  public Current_package_classifier.Matcher getCurrent_package_classifier(final ViatraQueryEngine engine) {
+    return Current_package_classifier.Matcher.on(engine);
   }
   
-  public Added_package_dataType getAdded_package_dataType() {
-    return Added_package_dataType.instance();
+  public Get_package_subPackage getGet_package_subPackage() {
+    return Get_package_subPackage.instance();
   }
   
-  public Added_package_dataType.Matcher getAdded_package_dataType(final ViatraQueryEngine engine) {
-    return Added_package_dataType.Matcher.on(engine);
+  public Get_package_subPackage.Matcher getGet_package_subPackage(final ViatraQueryEngine engine) {
+    return Get_package_subPackage.Matcher.on(engine);
   }
   
-  public Added_package_enumeration getAdded_package_enumeration() {
-    return Added_package_enumeration.instance();
+  public Insert_package_subPackage getInsert_package_subPackage() {
+    return Insert_package_subPackage.instance();
   }
   
-  public Added_package_enumeration.Matcher getAdded_package_enumeration(final ViatraQueryEngine engine) {
-    return Added_package_enumeration.Matcher.on(engine);
+  public Insert_package_subPackage.Matcher getInsert_package_subPackage(final ViatraQueryEngine engine) {
+    return Insert_package_subPackage.Matcher.on(engine);
   }
   
-  public Removed_package_classifier getRemoved_package_classifier() {
-    return Removed_package_classifier.instance();
+  public Remove_package_subPackage getRemove_package_subPackage() {
+    return Remove_package_subPackage.instance();
   }
   
-  public Removed_package_classifier.Matcher getRemoved_package_classifier(final ViatraQueryEngine engine) {
-    return Removed_package_classifier.Matcher.on(engine);
+  public Remove_package_subPackage.Matcher getRemove_package_subPackage(final ViatraQueryEngine engine) {
+    return Remove_package_subPackage.Matcher.on(engine);
   }
   
-  public Removed_package_subPackage getRemoved_package_subPackage() {
-    return Removed_package_subPackage.instance();
+  public Initial_package_subPackage getInitial_package_subPackage() {
+    return Initial_package_subPackage.instance();
   }
   
-  public Removed_package_subPackage.Matcher getRemoved_package_subPackage(final ViatraQueryEngine engine) {
-    return Removed_package_subPackage.Matcher.on(engine);
+  public Initial_package_subPackage.Matcher getInitial_package_subPackage(final ViatraQueryEngine engine) {
+    return Initial_package_subPackage.Matcher.on(engine);
   }
   
-  public Removed_package_class getRemoved_package_class() {
-    return Removed_package_class.instance();
+  public Current_package_subPackage getCurrent_package_subPackage() {
+    return Current_package_subPackage.instance();
   }
   
-  public Removed_package_class.Matcher getRemoved_package_class(final ViatraQueryEngine engine) {
-    return Removed_package_class.Matcher.on(engine);
+  public Current_package_subPackage.Matcher getCurrent_package_subPackage(final ViatraQueryEngine engine) {
+    return Current_package_subPackage.Matcher.on(engine);
   }
   
-  public Removed_package_dataType getRemoved_package_dataType() {
-    return Removed_package_dataType.instance();
+  public Get_package_class getGet_package_class() {
+    return Get_package_class.instance();
   }
   
-  public Removed_package_dataType.Matcher getRemoved_package_dataType(final ViatraQueryEngine engine) {
-    return Removed_package_dataType.Matcher.on(engine);
+  public Get_package_class.Matcher getGet_package_class(final ViatraQueryEngine engine) {
+    return Get_package_class.Matcher.on(engine);
   }
   
-  public Removed_package_enumeration getRemoved_package_enumeration() {
-    return Removed_package_enumeration.instance();
+  public Insert_package_class getInsert_package_class() {
+    return Insert_package_class.instance();
   }
   
-  public Removed_package_enumeration.Matcher getRemoved_package_enumeration(final ViatraQueryEngine engine) {
-    return Removed_package_enumeration.Matcher.on(engine);
+  public Insert_package_class.Matcher getInsert_package_class(final ViatraQueryEngine engine) {
+    return Insert_package_class.Matcher.on(engine);
+  }
+  
+  public Remove_package_class getRemove_package_class() {
+    return Remove_package_class.instance();
+  }
+  
+  public Remove_package_class.Matcher getRemove_package_class(final ViatraQueryEngine engine) {
+    return Remove_package_class.Matcher.on(engine);
+  }
+  
+  public Initial_package_class getInitial_package_class() {
+    return Initial_package_class.instance();
+  }
+  
+  public Initial_package_class.Matcher getInitial_package_class(final ViatraQueryEngine engine) {
+    return Initial_package_class.Matcher.on(engine);
+  }
+  
+  public Current_package_class getCurrent_package_class() {
+    return Current_package_class.instance();
+  }
+  
+  public Current_package_class.Matcher getCurrent_package_class(final ViatraQueryEngine engine) {
+    return Current_package_class.Matcher.on(engine);
+  }
+  
+  public Get_package_datatype getGet_package_datatype() {
+    return Get_package_datatype.instance();
+  }
+  
+  public Get_package_datatype.Matcher getGet_package_datatype(final ViatraQueryEngine engine) {
+    return Get_package_datatype.Matcher.on(engine);
+  }
+  
+  public Insert_package_datatype getInsert_package_datatype() {
+    return Insert_package_datatype.instance();
+  }
+  
+  public Insert_package_datatype.Matcher getInsert_package_datatype(final ViatraQueryEngine engine) {
+    return Insert_package_datatype.Matcher.on(engine);
+  }
+  
+  public Remove_package_datatype getRemove_package_datatype() {
+    return Remove_package_datatype.instance();
+  }
+  
+  public Remove_package_datatype.Matcher getRemove_package_datatype(final ViatraQueryEngine engine) {
+    return Remove_package_datatype.Matcher.on(engine);
+  }
+  
+  public Initial_package_datatype getInitial_package_datatype() {
+    return Initial_package_datatype.instance();
+  }
+  
+  public Initial_package_datatype.Matcher getInitial_package_datatype(final ViatraQueryEngine engine) {
+    return Initial_package_datatype.Matcher.on(engine);
+  }
+  
+  public Current_package_datatype getCurrent_package_datatype() {
+    return Current_package_datatype.instance();
+  }
+  
+  public Current_package_datatype.Matcher getCurrent_package_datatype(final ViatraQueryEngine engine) {
+    return Current_package_datatype.Matcher.on(engine);
+  }
+  
+  public Get_package_enumeration getGet_package_enumeration() {
+    return Get_package_enumeration.instance();
+  }
+  
+  public Get_package_enumeration.Matcher getGet_package_enumeration(final ViatraQueryEngine engine) {
+    return Get_package_enumeration.Matcher.on(engine);
+  }
+  
+  public Insert_package_enumeration getInsert_package_enumeration() {
+    return Insert_package_enumeration.instance();
+  }
+  
+  public Insert_package_enumeration.Matcher getInsert_package_enumeration(final ViatraQueryEngine engine) {
+    return Insert_package_enumeration.Matcher.on(engine);
+  }
+  
+  public Remove_package_enumeration getRemove_package_enumeration() {
+    return Remove_package_enumeration.instance();
+  }
+  
+  public Remove_package_enumeration.Matcher getRemove_package_enumeration(final ViatraQueryEngine engine) {
+    return Remove_package_enumeration.Matcher.on(engine);
+  }
+  
+  public Initial_package_enumeration getInitial_package_enumeration() {
+    return Initial_package_enumeration.instance();
+  }
+  
+  public Initial_package_enumeration.Matcher getInitial_package_enumeration(final ViatraQueryEngine engine) {
+    return Initial_package_enumeration.Matcher.on(engine);
+  }
+  
+  public Current_package_enumeration getCurrent_package_enumeration() {
+    return Current_package_enumeration.instance();
+  }
+  
+  public Current_package_enumeration.Matcher getCurrent_package_enumeration(final ViatraQueryEngine engine) {
+    return Current_package_enumeration.Matcher.on(engine);
   }
 }

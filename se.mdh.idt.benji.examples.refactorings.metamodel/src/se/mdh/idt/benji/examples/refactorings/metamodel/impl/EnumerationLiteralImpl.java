@@ -92,7 +92,7 @@ public class EnumerationLiteralImpl extends ModelElementImpl implements Enumerat
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newEnumeration != null)
-				msgs = ((InternalEObject)newEnumeration).eInverseAdd(this, MetamodelPackage.ENUMERATION__LITERALS, Enumeration.class, msgs);
+				msgs = ((InternalEObject)newEnumeration).eInverseAdd(this, MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS, Enumeration.class, msgs);
 			msgs = basicSetEnumeration(newEnumeration, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -139,7 +139,7 @@ public class EnumerationLiteralImpl extends ModelElementImpl implements Enumerat
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case MetamodelPackage.ENUMERATION_LITERAL__ENUMERATION:
-				return eInternalContainer().eInverseRemove(this, MetamodelPackage.ENUMERATION__LITERALS, Enumeration.class, msgs);
+				return eInternalContainer().eInverseRemove(this, MetamodelPackage.ENUMERATION__ENUMERATION_LITERALS, Enumeration.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

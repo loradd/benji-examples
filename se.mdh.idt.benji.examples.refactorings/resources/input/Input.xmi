@@ -8,56 +8,72 @@
     name="Package_0"
     uri="Package_0">
   <classifiers
-      xsi:type="metamodel:Class"
-      name="Class_0"
-      subClasses="//@classifiers.5">
-    <structuralFeatures
-        xsi:type="metamodel:Attribute"
-        name="attribute_0"
-        type="//@classifiers.2"/>
-    <structuralFeatures
-        xsi:type="metamodel:Attribute"
-        name="attribute_2"
-        type="//@classifiers.2"/>
-    <structuralFeatures
-        xsi:type="metamodel:Attribute"
-        name="attribute_1"
-        type="//@classifiers.3"/>
-    <structuralFeatures
-        xsi:type="metamodel:Reference"
-        name="reference_0"
-        type="//@classifiers.4"/>
-    <structuralFeatures
-        xsi:type="metamodel:Reference"
-        name="reference_1"
-        type="//@classifiers.5"/>
+      xsi:type="metamodel:Package"
+      name="Package_1"
+      uri="Package_1">
+    <classifiers
+        xsi:type="metamodel:DataType"
+        name="DataType_0"/>
+    <classifiers
+        xsi:type="metamodel:Class"
+        name="Class_0">
+      <structuralFeatures
+          xsi:type="metamodel:Attribute"
+          name="Attribute_0"
+          upper="10"
+          type="//@classifiers.0/@classifiers.0"/>
+      <structuralFeatures
+          xsi:type="metamodel:Reference"
+          name="Lorenzo"
+          type="//@classifiers.2"/>
+    </classifiers>
+    <classifiers
+        xsi:type="metamodel:DataType"
+        name="DataType_1"/>
+    <classifiers
+        xsi:type="metamodel:Class"
+        name="Class_2"
+        subClasses="//@classifiers.0/@classifiers.4">
+      <structuralFeatures
+          xsi:type="metamodel:Attribute"
+          name="Attribute_0"
+          upper="10"
+          type="//@classifiers.0/@classifiers.0"/>
+      <structuralFeatures
+          xsi:type="metamodel:Attribute"
+          name="Attribute_18"
+          upper="10"
+          type="//@classifiers.0/@classifiers.0"/>
+      <structuralFeatures
+          xsi:type="metamodel:Reference"
+          name="Lorenzo"
+          type="//@classifiers.2"/>
+    </classifiers>
+    <classifiers
+        xsi:type="metamodel:Class"
+        name="Class_3"
+        superClass="//@classifiers.0/@classifiers.3">
+      <structuralFeatures
+          xsi:type="metamodel:Attribute"
+          name="Attribute_1"
+          upper="10"
+          type="//@classifiers.0/@classifiers.0"/>
+    </classifiers>
   </classifiers>
   <classifiers
+      xsi:type="metamodel:Package"
+      name="Package_2"
+      uri="Package_2"/>
+  <classifiers
       xsi:type="metamodel:Class"
-      name="Class_1"
-      subClasses="//@classifiers.4">
+      name="Class_1">
     <structuralFeatures
         xsi:type="metamodel:Attribute"
-        name="attribute_0"
-        type="//@classifiers.2"/>
+        name="Attribute_0"
+        type="//@classifiers.0/@classifiers.0"/>
     <structuralFeatures
-        xsi:type="metamodel:Attribute"
-        name="attribute_1"
-        type="//@classifiers.2"/>
+        xsi:type="metamodel:Reference"
+        name="Lorenzo"
+        type="//@classifiers.0/@classifiers.3"/>
   </classifiers>
-  <classifiers
-      xsi:type="metamodel:DataType"
-      name="DataType_0"/>
-  <classifiers
-      xsi:type="metamodel:DataType"
-      name="DataType_1"/>
-  <classifiers
-      xsi:type="metamodel:Class"
-      name="Class_2"
-      superClasses="//@classifiers.1"
-      subClasses="//@classifiers.5"/>
-  <classifiers
-      xsi:type="metamodel:Class"
-      name="Class_3"
-      superClasses="//@classifiers.4 //@classifiers.0"/>
 </metamodel:Package>

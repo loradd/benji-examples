@@ -22,7 +22,7 @@ package se.mdh.idt.benji.examples.refactorings.metamodel;
 public interface EnumerationLiteral extends ModelElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getLiterals <em>Literals</em>}'.
+	 * It is bidirectional and its opposite is '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getEnumerationLiterals <em>Enumeration Literals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Enumeration</em>' container reference isn't clear,
@@ -32,8 +32,8 @@ public interface EnumerationLiteral extends ModelElement {
 	 * @return the value of the '<em>Enumeration</em>' container reference.
 	 * @see #setEnumeration(Enumeration)
 	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.MetamodelPackage#getEnumerationLiteral_Enumeration()
-	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getLiterals
-	 * @model opposite="literals" required="true" transient="false"
+	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getEnumerationLiterals
+	 * @model opposite="enumerationLiterals" required="true" transient="false"
 	 * @generated
 	 */
 	Enumeration getEnumeration();

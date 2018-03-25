@@ -1,54 +1,91 @@
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries
 
 import "http://www.mdh.se/examples/refactorings/Metamodel"
+import "http://www.mdh.se/idt/benji/trace/Trace"
 
-// enumeration literal - preserved
-pattern preserved_enumerationLiteral (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral) {
-	find preserved_modelElement (initial_literal, current_literal); 
+// enumeration literal - get
+pattern get_enumerationLiteral (enumerationLiteral : TraceLink) {
+	find initial_enumerationLiteral (enumerationLiteral, _initial_enumerationLiteral);
+	find current_enumerationLiteral (enumerationLiteral, _current_enumerationLiteral);
 }
 
-// enumeration literal - created
-pattern created_enumerationLiteral (current_literal : EnumerationLiteral) {
-	find created_modelElement (current_literal); 
+// enumeration literal - create
+pattern create_enumerationLiteral (enumerationLiteral : TraceLink) {
+	neg find initial_enumerationLiteral (enumerationLiteral, _initial_enumerationLiteral);
+	find current_enumerationLiteral (enumerationLiteral, _current_enumerationLiteral);	
 }
 
-// enumeration literal - deleted
-pattern deleted_enumerationLiteral (initial_literal : EnumerationLiteral) {
-	find deleted_modelElement (initial_literal); 	
+// enumeration literal - delete
+pattern delete_enumerationLiteral (enumerationLiteral : TraceLink) {
+	find initial_enumerationLiteral (enumerationLiteral, _initial_enumerationLiteral);
+	neg find current_enumerationLiteral (enumerationLiteral, _current_enumerationLiteral);	
 }
 
-// enumeration literal - name
-pattern enumerationLiteral_name (literal : EnumerationLiteral, name : java String) {
-	find modelElement_name (literal, name); 
+// enumeration literal - initial
+pattern initial_enumerationLiteral (enumerationLiteral : TraceLink, initial_enumerationLiteral : EnumerationLiteral) {
+	find initial_modelElement (enumerationLiteral, initial_enumerationLiteral);
 }
 
-// enumeration literal - name - preserved
-pattern preserved_enumerationLiteral_name (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_name : java String, current_name : java String) {
-	find preserved_modelElement_name (initial_literal, current_literal, initial_name, current_name); 	
+// enumeration literal - current
+pattern current_enumerationLiteral (enumerationLiteral : TraceLink, current_enumerationLiteral : EnumerationLiteral) {
+	find current_modelElement (enumerationLiteral, current_enumerationLiteral);	
 }
 
-// enumeration literal - name - changed
-pattern changed_enumerationLiteral_name (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_name : java String, current_name : java String) {
-	find changed_modelElement_name (initial_literal, current_literal, initial_name, current_name); 
+// enumeration literal - name - get
+pattern get_enumerationLiteral_name (enumerationLiteral : TraceLink, name : java String) {
+	find initial_enumerationLiteral_name (enumerationLiteral, _initial_enumerationLiteral, name);
+	find current_enumerationLiteral_name (enumerationLiteral, _current_enumerationLiteral, name);
 }
 
-// enumeration literal - enumeration
-pattern enumerationLiteral_enumeration (literal : EnumerationLiteral, enumeration : Enumeration) {
-	EnumerationLiteral.enumeration (literal, enumeration); 	
+// enumeration literal - name - set
+pattern set_enumerationLiteral_name (enumerationLiteral : TraceLink, name : java String) {
+	neg find initial_enumerationLiteral_name (enumerationLiteral, _initial_enumerationLiteral, name);
+	find current_enumerationLiteral_name (enumerationLiteral, _current_enumerationLiteral, name);	
 }
 
-// enumeration literal - enumeration - preserved
-pattern preserved_enumerationLiteral_enumeration (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_enumeration : Enumeration, current_enumeration : Enumeration) {
-	find preserved_enumerationLiteral (initial_literal, current_literal); 
-	find preserved_enumeration (initial_enumeration, current_enumeration); 
-	find enumerationLiteral_enumeration (initial_literal, initial_enumeration); 
-	find enumerationLiteral_enumeration (current_literal, current_enumeration); 	
+// enumeration literal - name - unset
+pattern unset_enumerationLiteral_name (enumerationLiteral : TraceLink, name : java String) {
+	find initial_enumerationLiteral_name (enumerationLiteral, _initial_enumerationLiteral, name);
+	neg find current_enumerationLiteral_name (enumerationLiteral, _current_enumerationLiteral, name);
 }
 
-// enumeration literal - enumeration - changed
-pattern changed_enumerationLiteral_enumeration (initial_literal : EnumerationLiteral, current_literal : EnumerationLiteral, initial_enumeration : Enumeration, current_enumeration : Enumeration) {
-	find preserved_enumerationLiteral (initial_literal, current_literal); 
-	neg find preserved_enumeration (initial_enumeration, current_enumeration); 
-	find enumerationLiteral_enumeration (initial_literal, initial_enumeration);
-	find enumerationLiteral_enumeration (current_literal, current_enumeration);  
+// enumeration literal - name - initial
+pattern initial_enumerationLiteral_name (enumerationLiteral : TraceLink, initial_enumerationLiteral : EnumerationLiteral, name : java String) {
+	find initial_modelElement_name (enumerationLiteral, initial_enumerationLiteral, name);
+}
+// enumeration literal - name - current
+pattern current_enumerationLiteral_name (enumerationLiteral : TraceLink, current_enumerationLiteral : EnumerationLiteral, name : java String) {
+	find current_modelElement_name (enumerationLiteral, current_enumerationLiteral, name);
+}
+
+// enumeration literal - enumeration - get
+pattern get_enumerationLiteral_enumeration (enumerationLiteral : TraceLink, enumeration : TraceLink) {
+	find initial_enumerationLiteral_enumeration (enumerationLiteral, _initial_enumerationLiteral, enumeration, _initial_enumeration);
+	find current_enumerationLiteral_enumeration (enumerationLiteral, _current_enumerationLiteral, enumeration, _current_enumeration); 
+}
+
+// enumeration literal - enumeration - set
+pattern set_enumerationLiteral_enumeration (enumerationLiteral : TraceLink, enumeration : TraceLink) {
+	neg find initial_enumerationLiteral_enumeration (enumerationLiteral, _initial_enumerationLiteral, enumeration, _initial_enumeration);
+	find current_enumerationLiteral_enumeration (enumerationLiteral, _current_enumerationLiteral, enumeration, _current_enumeration); 	
+}
+
+// enumeration literal - enumeration - unset
+pattern unset_enumerationLiteral_enumeration (enumerationLiteral : TraceLink, enumeration : TraceLink) {
+	find initial_enumerationLiteral_enumeration (enumerationLiteral, _initial_enumerationLiteral, enumeration, _initial_enumeration);
+	neg find current_enumerationLiteral_enumeration (enumerationLiteral, _current_enumerationLiteral, enumeration, _current_enumeration);
+}
+
+// enumeration literal - enumeration - initial
+pattern initial_enumerationLiteral_enumeration (enumerationLiteral : TraceLink, initial_enumerationLiteral : EnumerationLiteral, enumeration : TraceLink, initial_enumeration : Enumeration) {
+	find initial_enumerationLiteral (enumerationLiteral, initial_enumerationLiteral);
+	find initial_enumeration (enumeration, initial_enumeration);
+	EnumerationLiteral.enumeration (initial_enumerationLiteral, initial_enumeration);
+}
+
+// enumeration literal - enumeration - current
+pattern current_enumerationLiteral_enumeration (enumerationLiteral : TraceLink, current_enumerationLiteral : EnumerationLiteral, enumeration : TraceLink, current_enumeration : Enumeration) {
+	find current_enumerationLiteral (enumerationLiteral, current_enumerationLiteral);
+	find current_enumeration (enumeration, current_enumeration); 
+	EnumerationLiteral.enumeration (current_enumerationLiteral, current_enumeration); 
 }

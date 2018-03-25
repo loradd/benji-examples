@@ -6,15 +6,21 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_dataType_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_dataType_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_dataType;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_dataType_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_dataType_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_datatype_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_datatype_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_datatype_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_datatype_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_datatype;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_datatype_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_datatype_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_datatype_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_datatype_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_datatype_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_datatype_package;
 
 /**
  * A pattern group formed of all public patterns defined in DataType.vql.
@@ -24,22 +30,28 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_dataTy
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_dataType</li>
- * <li>created_dataType</li>
- * <li>deleted_dataType</li>
- * <li>dataType_name</li>
- * <li>preserved_dataType_name</li>
- * <li>changed_dataType_name</li>
- * <li>dataType_package</li>
- * <li>preserved_dataType_package</li>
- * <li>changed_dataType_package</li>
+ * <li>get_datatype</li>
+ * <li>create_datatype</li>
+ * <li>delete_datatype</li>
+ * <li>initial_datatype</li>
+ * <li>current_datatype</li>
+ * <li>get_datatype_name</li>
+ * <li>set_datatype_name</li>
+ * <li>unset_datatype_name</li>
+ * <li>initial_datatype_name</li>
+ * <li>current_datatype_name</li>
+ * <li>get_datatype_package</li>
+ * <li>set_datatype_package</li>
+ * <li>unset_datatype_package</li>
+ * <li>initial_datatype_package</li>
+ * <li>current_datatype_package</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:33+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class DataType extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -58,86 +70,140 @@ public final class DataType extends BaseGeneratedPatternGroup {
   private static DataType INSTANCE;
   
   private DataType() {
-    querySpecifications.add(Preserved_dataType.instance());
-    querySpecifications.add(Created_dataType.instance());
-    querySpecifications.add(Deleted_dataType.instance());
-    querySpecifications.add(DataType_name.instance());
-    querySpecifications.add(Preserved_dataType_name.instance());
-    querySpecifications.add(Changed_dataType_name.instance());
-    querySpecifications.add(DataType_package.instance());
-    querySpecifications.add(Preserved_dataType_package.instance());
-    querySpecifications.add(Changed_dataType_package.instance());
+    querySpecifications.add(Get_datatype.instance());
+    querySpecifications.add(Create_datatype.instance());
+    querySpecifications.add(Delete_datatype.instance());
+    querySpecifications.add(Initial_datatype.instance());
+    querySpecifications.add(Current_datatype.instance());
+    querySpecifications.add(Get_datatype_name.instance());
+    querySpecifications.add(Set_datatype_name.instance());
+    querySpecifications.add(Unset_datatype_name.instance());
+    querySpecifications.add(Initial_datatype_name.instance());
+    querySpecifications.add(Current_datatype_name.instance());
+    querySpecifications.add(Get_datatype_package.instance());
+    querySpecifications.add(Set_datatype_package.instance());
+    querySpecifications.add(Unset_datatype_package.instance());
+    querySpecifications.add(Initial_datatype_package.instance());
+    querySpecifications.add(Current_datatype_package.instance());
   }
   
-  public Preserved_dataType getPreserved_dataType() {
-    return Preserved_dataType.instance();
+  public Get_datatype getGet_datatype() {
+    return Get_datatype.instance();
   }
   
-  public Preserved_dataType.Matcher getPreserved_dataType(final ViatraQueryEngine engine) {
-    return Preserved_dataType.Matcher.on(engine);
+  public Get_datatype.Matcher getGet_datatype(final ViatraQueryEngine engine) {
+    return Get_datatype.Matcher.on(engine);
   }
   
-  public Created_dataType getCreated_dataType() {
-    return Created_dataType.instance();
+  public Create_datatype getCreate_datatype() {
+    return Create_datatype.instance();
   }
   
-  public Created_dataType.Matcher getCreated_dataType(final ViatraQueryEngine engine) {
-    return Created_dataType.Matcher.on(engine);
+  public Create_datatype.Matcher getCreate_datatype(final ViatraQueryEngine engine) {
+    return Create_datatype.Matcher.on(engine);
   }
   
-  public Deleted_dataType getDeleted_dataType() {
-    return Deleted_dataType.instance();
+  public Delete_datatype getDelete_datatype() {
+    return Delete_datatype.instance();
   }
   
-  public Deleted_dataType.Matcher getDeleted_dataType(final ViatraQueryEngine engine) {
-    return Deleted_dataType.Matcher.on(engine);
+  public Delete_datatype.Matcher getDelete_datatype(final ViatraQueryEngine engine) {
+    return Delete_datatype.Matcher.on(engine);
   }
   
-  public DataType_name getDataType_name() {
-    return DataType_name.instance();
+  public Initial_datatype getInitial_datatype() {
+    return Initial_datatype.instance();
   }
   
-  public DataType_name.Matcher getDataType_name(final ViatraQueryEngine engine) {
-    return DataType_name.Matcher.on(engine);
+  public Initial_datatype.Matcher getInitial_datatype(final ViatraQueryEngine engine) {
+    return Initial_datatype.Matcher.on(engine);
   }
   
-  public Preserved_dataType_name getPreserved_dataType_name() {
-    return Preserved_dataType_name.instance();
+  public Current_datatype getCurrent_datatype() {
+    return Current_datatype.instance();
   }
   
-  public Preserved_dataType_name.Matcher getPreserved_dataType_name(final ViatraQueryEngine engine) {
-    return Preserved_dataType_name.Matcher.on(engine);
+  public Current_datatype.Matcher getCurrent_datatype(final ViatraQueryEngine engine) {
+    return Current_datatype.Matcher.on(engine);
   }
   
-  public Changed_dataType_name getChanged_dataType_name() {
-    return Changed_dataType_name.instance();
+  public Get_datatype_name getGet_datatype_name() {
+    return Get_datatype_name.instance();
   }
   
-  public Changed_dataType_name.Matcher getChanged_dataType_name(final ViatraQueryEngine engine) {
-    return Changed_dataType_name.Matcher.on(engine);
+  public Get_datatype_name.Matcher getGet_datatype_name(final ViatraQueryEngine engine) {
+    return Get_datatype_name.Matcher.on(engine);
   }
   
-  public DataType_package getDataType_package() {
-    return DataType_package.instance();
+  public Set_datatype_name getSet_datatype_name() {
+    return Set_datatype_name.instance();
   }
   
-  public DataType_package.Matcher getDataType_package(final ViatraQueryEngine engine) {
-    return DataType_package.Matcher.on(engine);
+  public Set_datatype_name.Matcher getSet_datatype_name(final ViatraQueryEngine engine) {
+    return Set_datatype_name.Matcher.on(engine);
   }
   
-  public Preserved_dataType_package getPreserved_dataType_package() {
-    return Preserved_dataType_package.instance();
+  public Unset_datatype_name getUnset_datatype_name() {
+    return Unset_datatype_name.instance();
   }
   
-  public Preserved_dataType_package.Matcher getPreserved_dataType_package(final ViatraQueryEngine engine) {
-    return Preserved_dataType_package.Matcher.on(engine);
+  public Unset_datatype_name.Matcher getUnset_datatype_name(final ViatraQueryEngine engine) {
+    return Unset_datatype_name.Matcher.on(engine);
   }
   
-  public Changed_dataType_package getChanged_dataType_package() {
-    return Changed_dataType_package.instance();
+  public Initial_datatype_name getInitial_datatype_name() {
+    return Initial_datatype_name.instance();
   }
   
-  public Changed_dataType_package.Matcher getChanged_dataType_package(final ViatraQueryEngine engine) {
-    return Changed_dataType_package.Matcher.on(engine);
+  public Initial_datatype_name.Matcher getInitial_datatype_name(final ViatraQueryEngine engine) {
+    return Initial_datatype_name.Matcher.on(engine);
+  }
+  
+  public Current_datatype_name getCurrent_datatype_name() {
+    return Current_datatype_name.instance();
+  }
+  
+  public Current_datatype_name.Matcher getCurrent_datatype_name(final ViatraQueryEngine engine) {
+    return Current_datatype_name.Matcher.on(engine);
+  }
+  
+  public Get_datatype_package getGet_datatype_package() {
+    return Get_datatype_package.instance();
+  }
+  
+  public Get_datatype_package.Matcher getGet_datatype_package(final ViatraQueryEngine engine) {
+    return Get_datatype_package.Matcher.on(engine);
+  }
+  
+  public Set_datatype_package getSet_datatype_package() {
+    return Set_datatype_package.instance();
+  }
+  
+  public Set_datatype_package.Matcher getSet_datatype_package(final ViatraQueryEngine engine) {
+    return Set_datatype_package.Matcher.on(engine);
+  }
+  
+  public Unset_datatype_package getUnset_datatype_package() {
+    return Unset_datatype_package.instance();
+  }
+  
+  public Unset_datatype_package.Matcher getUnset_datatype_package(final ViatraQueryEngine engine) {
+    return Unset_datatype_package.Matcher.on(engine);
+  }
+  
+  public Initial_datatype_package getInitial_datatype_package() {
+    return Initial_datatype_package.instance();
+  }
+  
+  public Initial_datatype_package.Matcher getInitial_datatype_package(final ViatraQueryEngine engine) {
+    return Initial_datatype_package.Matcher.on(engine);
+  }
+  
+  public Current_datatype_package getCurrent_datatype_package() {
+    return Current_datatype_package.instance();
+  }
+  
+  public Current_datatype_package.Matcher getCurrent_datatype_package(final ViatraQueryEngine engine) {
+    return Current_datatype_package.Matcher.on(engine);
   }
 }

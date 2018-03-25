@@ -4,7 +4,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.MetamodelPackage
 
 import static se.mdh.idt.benji.benchmark.api.Benchmark.ALL
 import static se.mdh.idt.benji.benchmark.api.BenchmarkFactory.benchmark
-import static se.mdh.idt.benji.examples.refactorings.differences.Differences.*
+import static se.mdh.idt.benji.examples.refactorings.Differences.*
 
 class Main {
 	
@@ -16,9 +16,10 @@ class Main {
 			// models
 			.model("resources/input/Input.xmi")
 			// differences
-			.difference(1, 1, mergeMetaclasses)
-			// .difference(1, 1, splitReference)
-			// .difference(1, 1, mergeReferences)
+ 			.difference(0, 3, renamePackage)
+			.difference(0, 4, renameClass)
+			.difference(0, 3, restrictReference)
+			.difference(0, 2, pushDownAttribute)
 		.build.generate(ALL, "resources/output")
 	}
 	

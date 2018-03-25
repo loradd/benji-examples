@@ -80,18 +80,18 @@ public class MetamodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MetamodelPackage.CLASSIFIER: {
+				Classifier classifier = (Classifier)theEObject;
+				T result = caseClassifier(classifier);
+				if (result == null) result = caseModelElement(classifier);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MetamodelPackage.PACKAGE: {
 				se.mdh.idt.benji.examples.refactorings.metamodel.Package package_ = (se.mdh.idt.benji.examples.refactorings.metamodel.Package)theEObject;
 				T result = casePackage(package_);
 				if (result == null) result = caseClassifier(package_);
 				if (result == null) result = caseModelElement(package_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MetamodelPackage.CLASSIFIER: {
-				Classifier classifier = (Classifier)theEObject;
-				T result = caseClassifier(classifier);
-				if (result == null) result = caseModelElement(classifier);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

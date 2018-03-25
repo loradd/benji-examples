@@ -6,24 +6,36 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute_type;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute_upper;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_attribute_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_attribute_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_attribute_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_attribute_type;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_attribute_upper;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute_lower;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute_owner;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute_type;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attribute_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_attribute_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_attribute_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_attribute_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_attribute_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_attribute_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_attribute_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_attribute_upper;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_lower;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_owner;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_upper;
 
 /**
  * A pattern group formed of all public patterns defined in Attribute.vql.
@@ -33,31 +45,43 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_attrib
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_attribute</li>
- * <li>created_attribute</li>
- * <li>deleted_attribute</li>
- * <li>attribute_name</li>
- * <li>preserved_attribute_name</li>
- * <li>changed_attribute_name</li>
- * <li>attribute_owner</li>
- * <li>preserved_attribute_owner</li>
- * <li>changed_attribute_owner</li>
- * <li>attribute_lower</li>
- * <li>preserved_attribute_lower</li>
- * <li>changed_attribute_lower</li>
- * <li>attribute_upper</li>
- * <li>preserved_attribute_upper</li>
- * <li>changed_attribute_upper</li>
- * <li>attribute_type</li>
- * <li>preserved_attribute_type</li>
- * <li>changed_attribute_type</li>
+ * <li>get_attribute</li>
+ * <li>create_attribute</li>
+ * <li>delete_attribute</li>
+ * <li>initial_attribute</li>
+ * <li>current_attribute</li>
+ * <li>get_attribute_name</li>
+ * <li>set_attribute_name</li>
+ * <li>unset_attribute_name</li>
+ * <li>initial_attribute_name</li>
+ * <li>current_attribute_name</li>
+ * <li>get_attribute_owner</li>
+ * <li>set_attribute_owner</li>
+ * <li>unset_attribute_owner</li>
+ * <li>initial_attribute_owner</li>
+ * <li>current_attribute_owner</li>
+ * <li>get_attribute_lower</li>
+ * <li>set_attribute_lower</li>
+ * <li>unset_attribute_lower</li>
+ * <li>initial_attribute_lower</li>
+ * <li>current_attribute_lower</li>
+ * <li>get_attribute_upper</li>
+ * <li>set_attribute_upper</li>
+ * <li>unset_attribute_upper</li>
+ * <li>initial_attribute_upper</li>
+ * <li>current_attribute_upper</li>
+ * <li>get_attribute_type</li>
+ * <li>set_attribute_type</li>
+ * <li>unset_attribute_type</li>
+ * <li>initial_attribute_type</li>
+ * <li>current_attribute_type</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:34+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class Attribute extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -76,167 +100,275 @@ public final class Attribute extends BaseGeneratedPatternGroup {
   private static Attribute INSTANCE;
   
   private Attribute() {
-    querySpecifications.add(Preserved_attribute.instance());
-    querySpecifications.add(Created_attribute.instance());
-    querySpecifications.add(Deleted_attribute.instance());
-    querySpecifications.add(Attribute_name.instance());
-    querySpecifications.add(Preserved_attribute_name.instance());
-    querySpecifications.add(Changed_attribute_name.instance());
-    querySpecifications.add(Attribute_owner.instance());
-    querySpecifications.add(Preserved_attribute_owner.instance());
-    querySpecifications.add(Changed_attribute_owner.instance());
-    querySpecifications.add(Attribute_lower.instance());
-    querySpecifications.add(Preserved_attribute_lower.instance());
-    querySpecifications.add(Changed_attribute_lower.instance());
-    querySpecifications.add(Attribute_upper.instance());
-    querySpecifications.add(Preserved_attribute_upper.instance());
-    querySpecifications.add(Changed_attribute_upper.instance());
-    querySpecifications.add(Attribute_type.instance());
-    querySpecifications.add(Preserved_attribute_type.instance());
-    querySpecifications.add(Changed_attribute_type.instance());
+    querySpecifications.add(Get_attribute.instance());
+    querySpecifications.add(Create_attribute.instance());
+    querySpecifications.add(Delete_attribute.instance());
+    querySpecifications.add(Initial_attribute.instance());
+    querySpecifications.add(Current_attribute.instance());
+    querySpecifications.add(Get_attribute_name.instance());
+    querySpecifications.add(Set_attribute_name.instance());
+    querySpecifications.add(Unset_attribute_name.instance());
+    querySpecifications.add(Initial_attribute_name.instance());
+    querySpecifications.add(Current_attribute_name.instance());
+    querySpecifications.add(Get_attribute_owner.instance());
+    querySpecifications.add(Set_attribute_owner.instance());
+    querySpecifications.add(Unset_attribute_owner.instance());
+    querySpecifications.add(Initial_attribute_owner.instance());
+    querySpecifications.add(Current_attribute_owner.instance());
+    querySpecifications.add(Get_attribute_lower.instance());
+    querySpecifications.add(Set_attribute_lower.instance());
+    querySpecifications.add(Unset_attribute_lower.instance());
+    querySpecifications.add(Initial_attribute_lower.instance());
+    querySpecifications.add(Current_attribute_lower.instance());
+    querySpecifications.add(Get_attribute_upper.instance());
+    querySpecifications.add(Set_attribute_upper.instance());
+    querySpecifications.add(Unset_attribute_upper.instance());
+    querySpecifications.add(Initial_attribute_upper.instance());
+    querySpecifications.add(Current_attribute_upper.instance());
+    querySpecifications.add(Get_attribute_type.instance());
+    querySpecifications.add(Set_attribute_type.instance());
+    querySpecifications.add(Unset_attribute_type.instance());
+    querySpecifications.add(Initial_attribute_type.instance());
+    querySpecifications.add(Current_attribute_type.instance());
   }
   
-  public Preserved_attribute getPreserved_attribute() {
-    return Preserved_attribute.instance();
+  public Get_attribute getGet_attribute() {
+    return Get_attribute.instance();
   }
   
-  public Preserved_attribute.Matcher getPreserved_attribute(final ViatraQueryEngine engine) {
-    return Preserved_attribute.Matcher.on(engine);
+  public Get_attribute.Matcher getGet_attribute(final ViatraQueryEngine engine) {
+    return Get_attribute.Matcher.on(engine);
   }
   
-  public Created_attribute getCreated_attribute() {
-    return Created_attribute.instance();
+  public Create_attribute getCreate_attribute() {
+    return Create_attribute.instance();
   }
   
-  public Created_attribute.Matcher getCreated_attribute(final ViatraQueryEngine engine) {
-    return Created_attribute.Matcher.on(engine);
+  public Create_attribute.Matcher getCreate_attribute(final ViatraQueryEngine engine) {
+    return Create_attribute.Matcher.on(engine);
   }
   
-  public Deleted_attribute getDeleted_attribute() {
-    return Deleted_attribute.instance();
+  public Delete_attribute getDelete_attribute() {
+    return Delete_attribute.instance();
   }
   
-  public Deleted_attribute.Matcher getDeleted_attribute(final ViatraQueryEngine engine) {
-    return Deleted_attribute.Matcher.on(engine);
+  public Delete_attribute.Matcher getDelete_attribute(final ViatraQueryEngine engine) {
+    return Delete_attribute.Matcher.on(engine);
   }
   
-  public Attribute_name getAttribute_name() {
-    return Attribute_name.instance();
+  public Initial_attribute getInitial_attribute() {
+    return Initial_attribute.instance();
   }
   
-  public Attribute_name.Matcher getAttribute_name(final ViatraQueryEngine engine) {
-    return Attribute_name.Matcher.on(engine);
+  public Initial_attribute.Matcher getInitial_attribute(final ViatraQueryEngine engine) {
+    return Initial_attribute.Matcher.on(engine);
   }
   
-  public Preserved_attribute_name getPreserved_attribute_name() {
-    return Preserved_attribute_name.instance();
+  public Current_attribute getCurrent_attribute() {
+    return Current_attribute.instance();
   }
   
-  public Preserved_attribute_name.Matcher getPreserved_attribute_name(final ViatraQueryEngine engine) {
-    return Preserved_attribute_name.Matcher.on(engine);
+  public Current_attribute.Matcher getCurrent_attribute(final ViatraQueryEngine engine) {
+    return Current_attribute.Matcher.on(engine);
   }
   
-  public Changed_attribute_name getChanged_attribute_name() {
-    return Changed_attribute_name.instance();
+  public Get_attribute_name getGet_attribute_name() {
+    return Get_attribute_name.instance();
   }
   
-  public Changed_attribute_name.Matcher getChanged_attribute_name(final ViatraQueryEngine engine) {
-    return Changed_attribute_name.Matcher.on(engine);
+  public Get_attribute_name.Matcher getGet_attribute_name(final ViatraQueryEngine engine) {
+    return Get_attribute_name.Matcher.on(engine);
   }
   
-  public Attribute_owner getAttribute_owner() {
-    return Attribute_owner.instance();
+  public Set_attribute_name getSet_attribute_name() {
+    return Set_attribute_name.instance();
   }
   
-  public Attribute_owner.Matcher getAttribute_owner(final ViatraQueryEngine engine) {
-    return Attribute_owner.Matcher.on(engine);
+  public Set_attribute_name.Matcher getSet_attribute_name(final ViatraQueryEngine engine) {
+    return Set_attribute_name.Matcher.on(engine);
   }
   
-  public Preserved_attribute_owner getPreserved_attribute_owner() {
-    return Preserved_attribute_owner.instance();
+  public Unset_attribute_name getUnset_attribute_name() {
+    return Unset_attribute_name.instance();
   }
   
-  public Preserved_attribute_owner.Matcher getPreserved_attribute_owner(final ViatraQueryEngine engine) {
-    return Preserved_attribute_owner.Matcher.on(engine);
+  public Unset_attribute_name.Matcher getUnset_attribute_name(final ViatraQueryEngine engine) {
+    return Unset_attribute_name.Matcher.on(engine);
   }
   
-  public Changed_attribute_owner getChanged_attribute_owner() {
-    return Changed_attribute_owner.instance();
+  public Initial_attribute_name getInitial_attribute_name() {
+    return Initial_attribute_name.instance();
   }
   
-  public Changed_attribute_owner.Matcher getChanged_attribute_owner(final ViatraQueryEngine engine) {
-    return Changed_attribute_owner.Matcher.on(engine);
+  public Initial_attribute_name.Matcher getInitial_attribute_name(final ViatraQueryEngine engine) {
+    return Initial_attribute_name.Matcher.on(engine);
   }
   
-  public Attribute_lower getAttribute_lower() {
-    return Attribute_lower.instance();
+  public Current_attribute_name getCurrent_attribute_name() {
+    return Current_attribute_name.instance();
   }
   
-  public Attribute_lower.Matcher getAttribute_lower(final ViatraQueryEngine engine) {
-    return Attribute_lower.Matcher.on(engine);
+  public Current_attribute_name.Matcher getCurrent_attribute_name(final ViatraQueryEngine engine) {
+    return Current_attribute_name.Matcher.on(engine);
   }
   
-  public Preserved_attribute_lower getPreserved_attribute_lower() {
-    return Preserved_attribute_lower.instance();
+  public Get_attribute_owner getGet_attribute_owner() {
+    return Get_attribute_owner.instance();
   }
   
-  public Preserved_attribute_lower.Matcher getPreserved_attribute_lower(final ViatraQueryEngine engine) {
-    return Preserved_attribute_lower.Matcher.on(engine);
+  public Get_attribute_owner.Matcher getGet_attribute_owner(final ViatraQueryEngine engine) {
+    return Get_attribute_owner.Matcher.on(engine);
   }
   
-  public Changed_attribute_lower getChanged_attribute_lower() {
-    return Changed_attribute_lower.instance();
+  public Set_attribute_owner getSet_attribute_owner() {
+    return Set_attribute_owner.instance();
   }
   
-  public Changed_attribute_lower.Matcher getChanged_attribute_lower(final ViatraQueryEngine engine) {
-    return Changed_attribute_lower.Matcher.on(engine);
+  public Set_attribute_owner.Matcher getSet_attribute_owner(final ViatraQueryEngine engine) {
+    return Set_attribute_owner.Matcher.on(engine);
   }
   
-  public Attribute_upper getAttribute_upper() {
-    return Attribute_upper.instance();
+  public Unset_attribute_owner getUnset_attribute_owner() {
+    return Unset_attribute_owner.instance();
   }
   
-  public Attribute_upper.Matcher getAttribute_upper(final ViatraQueryEngine engine) {
-    return Attribute_upper.Matcher.on(engine);
+  public Unset_attribute_owner.Matcher getUnset_attribute_owner(final ViatraQueryEngine engine) {
+    return Unset_attribute_owner.Matcher.on(engine);
   }
   
-  public Preserved_attribute_upper getPreserved_attribute_upper() {
-    return Preserved_attribute_upper.instance();
+  public Initial_attribute_owner getInitial_attribute_owner() {
+    return Initial_attribute_owner.instance();
   }
   
-  public Preserved_attribute_upper.Matcher getPreserved_attribute_upper(final ViatraQueryEngine engine) {
-    return Preserved_attribute_upper.Matcher.on(engine);
+  public Initial_attribute_owner.Matcher getInitial_attribute_owner(final ViatraQueryEngine engine) {
+    return Initial_attribute_owner.Matcher.on(engine);
   }
   
-  public Changed_attribute_upper getChanged_attribute_upper() {
-    return Changed_attribute_upper.instance();
+  public Current_attribute_owner getCurrent_attribute_owner() {
+    return Current_attribute_owner.instance();
   }
   
-  public Changed_attribute_upper.Matcher getChanged_attribute_upper(final ViatraQueryEngine engine) {
-    return Changed_attribute_upper.Matcher.on(engine);
+  public Current_attribute_owner.Matcher getCurrent_attribute_owner(final ViatraQueryEngine engine) {
+    return Current_attribute_owner.Matcher.on(engine);
   }
   
-  public Attribute_type getAttribute_type() {
-    return Attribute_type.instance();
+  public Get_attribute_lower getGet_attribute_lower() {
+    return Get_attribute_lower.instance();
   }
   
-  public Attribute_type.Matcher getAttribute_type(final ViatraQueryEngine engine) {
-    return Attribute_type.Matcher.on(engine);
+  public Get_attribute_lower.Matcher getGet_attribute_lower(final ViatraQueryEngine engine) {
+    return Get_attribute_lower.Matcher.on(engine);
   }
   
-  public Preserved_attribute_type getPreserved_attribute_type() {
-    return Preserved_attribute_type.instance();
+  public Set_attribute_lower getSet_attribute_lower() {
+    return Set_attribute_lower.instance();
   }
   
-  public Preserved_attribute_type.Matcher getPreserved_attribute_type(final ViatraQueryEngine engine) {
-    return Preserved_attribute_type.Matcher.on(engine);
+  public Set_attribute_lower.Matcher getSet_attribute_lower(final ViatraQueryEngine engine) {
+    return Set_attribute_lower.Matcher.on(engine);
   }
   
-  public Changed_attribute_type getChanged_attribute_type() {
-    return Changed_attribute_type.instance();
+  public Unset_attribute_lower getUnset_attribute_lower() {
+    return Unset_attribute_lower.instance();
   }
   
-  public Changed_attribute_type.Matcher getChanged_attribute_type(final ViatraQueryEngine engine) {
-    return Changed_attribute_type.Matcher.on(engine);
+  public Unset_attribute_lower.Matcher getUnset_attribute_lower(final ViatraQueryEngine engine) {
+    return Unset_attribute_lower.Matcher.on(engine);
+  }
+  
+  public Initial_attribute_lower getInitial_attribute_lower() {
+    return Initial_attribute_lower.instance();
+  }
+  
+  public Initial_attribute_lower.Matcher getInitial_attribute_lower(final ViatraQueryEngine engine) {
+    return Initial_attribute_lower.Matcher.on(engine);
+  }
+  
+  public Current_attribute_lower getCurrent_attribute_lower() {
+    return Current_attribute_lower.instance();
+  }
+  
+  public Current_attribute_lower.Matcher getCurrent_attribute_lower(final ViatraQueryEngine engine) {
+    return Current_attribute_lower.Matcher.on(engine);
+  }
+  
+  public Get_attribute_upper getGet_attribute_upper() {
+    return Get_attribute_upper.instance();
+  }
+  
+  public Get_attribute_upper.Matcher getGet_attribute_upper(final ViatraQueryEngine engine) {
+    return Get_attribute_upper.Matcher.on(engine);
+  }
+  
+  public Set_attribute_upper getSet_attribute_upper() {
+    return Set_attribute_upper.instance();
+  }
+  
+  public Set_attribute_upper.Matcher getSet_attribute_upper(final ViatraQueryEngine engine) {
+    return Set_attribute_upper.Matcher.on(engine);
+  }
+  
+  public Unset_attribute_upper getUnset_attribute_upper() {
+    return Unset_attribute_upper.instance();
+  }
+  
+  public Unset_attribute_upper.Matcher getUnset_attribute_upper(final ViatraQueryEngine engine) {
+    return Unset_attribute_upper.Matcher.on(engine);
+  }
+  
+  public Initial_attribute_upper getInitial_attribute_upper() {
+    return Initial_attribute_upper.instance();
+  }
+  
+  public Initial_attribute_upper.Matcher getInitial_attribute_upper(final ViatraQueryEngine engine) {
+    return Initial_attribute_upper.Matcher.on(engine);
+  }
+  
+  public Current_attribute_upper getCurrent_attribute_upper() {
+    return Current_attribute_upper.instance();
+  }
+  
+  public Current_attribute_upper.Matcher getCurrent_attribute_upper(final ViatraQueryEngine engine) {
+    return Current_attribute_upper.Matcher.on(engine);
+  }
+  
+  public Get_attribute_type getGet_attribute_type() {
+    return Get_attribute_type.instance();
+  }
+  
+  public Get_attribute_type.Matcher getGet_attribute_type(final ViatraQueryEngine engine) {
+    return Get_attribute_type.Matcher.on(engine);
+  }
+  
+  public Set_attribute_type getSet_attribute_type() {
+    return Set_attribute_type.instance();
+  }
+  
+  public Set_attribute_type.Matcher getSet_attribute_type(final ViatraQueryEngine engine) {
+    return Set_attribute_type.Matcher.on(engine);
+  }
+  
+  public Unset_attribute_type getUnset_attribute_type() {
+    return Unset_attribute_type.instance();
+  }
+  
+  public Unset_attribute_type.Matcher getUnset_attribute_type(final ViatraQueryEngine engine) {
+    return Unset_attribute_type.Matcher.on(engine);
+  }
+  
+  public Initial_attribute_type getInitial_attribute_type() {
+    return Initial_attribute_type.instance();
+  }
+  
+  public Initial_attribute_type.Matcher getInitial_attribute_type(final ViatraQueryEngine engine) {
+    return Initial_attribute_type.Matcher.on(engine);
+  }
+  
+  public Current_attribute_type getCurrent_attribute_type() {
+    return Current_attribute_type.instance();
+  }
+  
+  public Current_attribute_type.Matcher getCurrent_attribute_type(final ViatraQueryEngine engine) {
+    return Current_attribute_type.Matcher.on(engine);
   }
 }

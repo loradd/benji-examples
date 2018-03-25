@@ -2,10 +2,16 @@
 @GenModel(name = "Metamodel", modelName = "Metamodel", modelDirectory = "se.mdh.idt.benji.examples.refactorings.metamodel/src")
 package se.mdh.idt.benji.examples.refactorings.metamodel
 
-// named element
+// model element
 abstract class ModelElement {
 	// attribute - name
 	String[1..1] name = ""
+}
+
+// classifier
+abstract class Classifier extends ModelElement {
+	// container - package
+	container Package[0..1] ^package opposite classifiers
 }
 
 // package
@@ -16,20 +22,14 @@ class Package extends Classifier {
 	contains Classifier[0..*] classifiers opposite ^package
 }
 
-// classifier
-abstract class Classifier extends ModelElement {
-	// container - package
-	container Package[0..1] ^package opposite classifiers
-}
-
 // class
 class Class extends Classifier {
 	// attribute - abstract
 	Boolean[1..1] ^abstract = "false"
 	// reference - superClasses
-	refers Class[0..*] superClasses opposite subClasses
+	refers Class[0..1] superClass opposite subClasses
 	// reference - subClasses
-	refers Class[0..*] subClasses opposite superClasses
+	refers Class[0..*] subClasses opposite superClass
 	// containment - structuralFeatures
 	contains StructuralFeature[0..*] structuralFeatures opposite owner
 }
@@ -40,13 +40,13 @@ class DataType extends Classifier {}
 // enumeration
 class Enumeration extends DataType {
 	// containment - literals
-	contains EnumerationLiteral[0..*] literals opposite enumeration
+	contains EnumerationLiteral[0..*] enumerationLiterals opposite enumeration
 }
 
 // enumeration literal
 class EnumerationLiteral extends ModelElement {
 	// container - enumeration
-	container Enumeration[1..1] enumeration opposite literals
+	container Enumeration[1..1] enumeration opposite enumerationLiterals
 }
 
 // structural feature

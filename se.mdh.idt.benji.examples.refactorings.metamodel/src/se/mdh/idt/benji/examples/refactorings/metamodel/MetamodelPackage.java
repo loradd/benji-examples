@@ -102,7 +102,7 @@ public interface MetamodelPackage extends EPackage {
 	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.impl.MetamodelPackageImpl#getClassifier()
 	 * @generated
 	 */
-	int CLASSIFIER = 2;
+	int CLASSIFIER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -148,7 +148,7 @@ public interface MetamodelPackage extends EPackage {
 	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.impl.MetamodelPackageImpl#getPackage()
 	 * @generated
 	 */
-	int PACKAGE = 1;
+	int PACKAGE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -242,13 +242,13 @@ public interface MetamodelPackage extends EPackage {
 	int CLASS__ABSTRACT = CLASSIFIER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Super Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__SUPER_CLASSES = CLASSIFIER_FEATURE_COUNT + 1;
+	int CLASS__SUPER_CLASS = CLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Sub Classes</b></em>' reference list.
@@ -361,13 +361,13 @@ public interface MetamodelPackage extends EPackage {
 	int ENUMERATION__PACKAGE = DATA_TYPE__PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Enumeration Literals</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION__LITERALS = DATA_TYPE_FEATURE_COUNT + 0;
+	int ENUMERATION__ENUMERATION_LITERALS = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Enumeration</em>' class.
@@ -758,15 +758,15 @@ public interface MetamodelPackage extends EPackage {
 	EAttribute getClass_Abstract();
 
 	/**
-	 * Returns the meta object for the reference list '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Class#getSuperClasses <em>Super Classes</em>}'.
+	 * Returns the meta object for the reference '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Class#getSuperClass <em>Super Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Classes</em>'.
-	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Class#getSuperClasses()
+	 * @return the meta object for the reference '<em>Super Class</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Class#getSuperClass()
 	 * @see #getClass_()
 	 * @generated
 	 */
-	EReference getClass_SuperClasses();
+	EReference getClass_SuperClass();
 
 	/**
 	 * Returns the meta object for the reference list '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Class#getSubClasses <em>Sub Classes</em>}'.
@@ -811,15 +811,15 @@ public interface MetamodelPackage extends EPackage {
 	EClass getEnumeration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getLiterals <em>Literals</em>}'.
+	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getEnumerationLiterals <em>Enumeration Literals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literals</em>'.
-	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getLiterals()
+	 * @return the meta object for the containment reference list '<em>Enumeration Literals</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.metamodel.Enumeration#getEnumerationLiterals()
 	 * @see #getEnumeration()
 	 * @generated
 	 */
-	EReference getEnumeration_Literals();
+	EReference getEnumeration_EnumerationLiterals();
 
 	/**
 	 * Returns the meta object for class '{@link se.mdh.idt.benji.examples.refactorings.metamodel.EnumerationLiteral <em>Enumeration Literal</em>}'.
@@ -1053,12 +1053,12 @@ public interface MetamodelPackage extends EPackage {
 		EAttribute CLASS__ABSTRACT = eINSTANCE.getClass_Abstract();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Super Class</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__SUPER_CLASSES = eINSTANCE.getClass_SuperClasses();
+		EReference CLASS__SUPER_CLASS = eINSTANCE.getClass_SuperClass();
 
 		/**
 		 * The meta object literal for the '<em><b>Sub Classes</b></em>' reference list feature.
@@ -1097,12 +1097,12 @@ public interface MetamodelPackage extends EPackage {
 		EClass ENUMERATION = eINSTANCE.getEnumeration();
 
 		/**
-		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Enumeration Literals</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENUMERATION__LITERALS = eINSTANCE.getEnumeration_Literals();
+		EReference ENUMERATION__ENUMERATION_LITERALS = eINSTANCE.getEnumeration_EnumerationLiterals();
 
 		/**
 		 * The meta object literal for the '{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.

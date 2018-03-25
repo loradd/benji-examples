@@ -1,54 +1,95 @@
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries
 
 import "http://www.mdh.se/examples/refactorings/Metamodel"
+import "http://www.mdh.se/idt/benji/trace/Trace"
 
-// classifier - preserved
-pattern preserved_classifier (initial_classifier : Classifier, current_classifier : Classifier) {
-	find preserved_modelElement (initial_classifier, current_classifier); 
+//import se.mdh.idt.benji.trace.api.current
+//import se.mdh.idt.benji.trace.api.initial
+
+// classifier - get
+pattern get_classifier (classifier : TraceLink) {
+	find initial_classifier (classifier, _initial_classifier);
+	find current_classifier (classifier, _current_classifier);	
 }
 
-// classifier - created
-pattern created_classifier (current_classifier : Classifier) {
-	find created_modelElement (current_classifier); 
+// classifier - create 
+pattern create_classifier (classifier : TraceLink) {
+	neg find initial_classifier (classifier, _initial_classifier);
+	find current_classifier (classifier, _current_classifier);	
 }
 
-// classifier - deleted
-pattern deleted_classifier (initial_classifier : Classifier) {
-	find deleted_modelElement (initial_classifier); 	
+// classifier - delete
+pattern delete_classifier (classifier : TraceLink) {
+	find initial_classifier (classifier, _initial_classifier);
+	neg find current_classifier (classifier, _current_classifier);	
 }
 
-// classifier - name
-pattern classifier_name (classifier : Classifier, name : java String) {
-	find modelElement_name (classifier, name); 
+// classifier - initial
+pattern initial_classifier (classifier : TraceLink, initial_classifier : Classifier) {
+	find initial_modelElement (classifier, initial_classifier);
 }
 
-// classifier - name - preserved
-pattern preserved_classifier_name (initial_classifier : Classifier, current_classifier : Classifier, initial_name : java String, current_name : java String) {
-	find preserved_modelElement_name (initial_classifier, current_classifier, initial_name, current_name); 
+// classifier - current
+pattern current_classifier (classifier : TraceLink, current_classifier : Classifier) {
+	find current_modelElement (classifier, current_classifier);
 }
 
-// classifier - name - changed
-pattern changed_classifier_name (initial_classifier : Classifier, current_classifier : Classifier, initial_name : java String, current_name : java String) {
-	find changed_modelElement_name (initial_classifier, current_classifier, initial_name, current_name); 
+// classifier - name - get
+pattern get_classifier_name (classifier : TraceLink, name : java String) {
+	find initial_classifier_name (classifier, _initial_classifier, name);
+	find current_classifier_name (classifier, _current_classifier, name);	
 }
 
-// classifier - package
-pattern classifier_package (classifier : Classifier, ^package : Package) {
-	Classifier.^package (classifier, ^package); 
+// classifier - name - set
+pattern set_classifier_name (classifier : TraceLink, name : java String) {
+	neg find initial_classifier_name (classifier, _initial_classifier, name);
+	find current_classifier_name (classifier, _current_classifier, name);	
 }
 
-// classifier - package - preserved
-pattern preserved_classifier_package (initial_classifier : Classifier, current_classifier : Classifier, initial_package : Package, current_package : Package) {
-	find preserved_classifier (initial_classifier, current_classifier); 
-	find preserved_package (initial_package, current_package); 
-	find classifier_package (initial_classifier, initial_package); 
-	find classifier_package (current_classifier, current_package); 	
+// classifier - name - unset
+pattern unset_classifier_name (classifier : TraceLink, name : java String) {
+	find initial_classifier_name (classifier, _initial_classifier, name);
+	neg find current_classifier_name (classifier, _current_classifier, name);
 }
 
-// classifier - package - changed
-pattern changed_classifier_package (initial_classifier : Classifier, current_classifier : Classifier, initial_package : Package, current_package : Package) {
-	find preserved_classifier (initial_classifier, current_classifier); 
-	neg find preserved_package (initial_package, current_package);  
-	find classifier_package (initial_classifier, initial_package); 
-	find classifier_package (current_classifier, current_package); 
-} 
+// classifier - name - initial
+pattern initial_classifier_name (classifier : TraceLink, initial_classifier : Classifier, name : java String) {
+	find initial_modelElement_name (classifier, initial_classifier, name);
+}
+
+// classifier - name - current
+pattern current_classifier_name (classifier : TraceLink, current_classifier : Classifier, name : java String) {
+	find current_modelElement_name (classifier, current_classifier, name);	
+}
+
+// classifier - package - get
+pattern get_classifier_package (classifier : TraceLink, ^package : TraceLink) {
+	find initial_classifier_package (classifier, _initial_classifier, ^package, _initial_package);
+	find current_classifier_package (classifier, _current_classifier, ^package, _current_package);
+}
+
+// classifier - package - set
+pattern set_classifier_package (classifier : TraceLink, ^package : TraceLink) {
+	neg find initial_classifier_package (classifier, _initial_classifier, ^package, _initial_package);
+	find current_classifier_package (classifier, _current_classifier, ^package, _current_package);	
+}
+
+// classifier - package - unset
+pattern unset_classifier_package (classifier : TraceLink, ^package : TraceLink) {
+	find initial_classifier_package (classifier, _initial_classifier, ^package, _initial_package);
+	neg find current_classifier_package (classifier, _current_classifier, ^package, _current_package);
+}
+
+// classifier - package - initial
+pattern initial_classifier_package (classifier : TraceLink, initial_classifier : Classifier, ^package : TraceLink, initial_package : Package) {
+	find initial_classifier (classifier, initial_classifier);
+	find initial_package (^package, initial_package);
+	Classifier.^package (initial_classifier, initial_package);	
+}
+
+// classifier - package - current
+pattern current_classifier_package (classifier : TraceLink, current_classifier : Classifier, ^package : TraceLink, current_package : Package) {
+	find current_classifier (classifier, current_classifier);
+	find current_package (^package, current_package);
+	Classifier.^package (current_classifier, current_package);
+}

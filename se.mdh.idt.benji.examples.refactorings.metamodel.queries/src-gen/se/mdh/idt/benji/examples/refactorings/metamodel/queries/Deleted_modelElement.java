@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/ModelElement.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/ModelElementQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -25,6 +25,7 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -33,8 +34,9 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.ModelElement;
-import se.mdh.idt.benji.trace.api.Deleted;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_modelElement;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_modelElement;
+import se.mdh.idt.benji.trace.TraceLink;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -44,7 +46,7 @@ import se.mdh.idt.benji.trace.api.Deleted;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:33+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecification<Deleted_modelElement.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.metamodel.queries.deleted_modelElement pattern,
@@ -60,37 +62,37 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private ModelElement fInitial_modelElement;
+    private TraceLink fModelElement;
     
-    private static List<String> parameterNames = makeImmutableList("initial_modelElement");
+    private static List<String> parameterNames = makeImmutableList("modelElement");
     
-    private Match(final ModelElement pInitial_modelElement) {
-      this.fInitial_modelElement = pInitial_modelElement;
+    private Match(final TraceLink pModelElement) {
+      this.fModelElement = pModelElement;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("initial_modelElement".equals(parameterName)) return this.fInitial_modelElement;
+      if ("modelElement".equals(parameterName)) return this.fModelElement;
       return null;
     }
     
-    public ModelElement getInitial_modelElement() {
-      return this.fInitial_modelElement;
+    public TraceLink getModelElement() {
+      return this.fModelElement;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("initial_modelElement".equals(parameterName) ) {
-          this.fInitial_modelElement = (ModelElement) newValue;
+      if ("modelElement".equals(parameterName) ) {
+          this.fModelElement = (TraceLink) newValue;
           return true;
       }
       return false;
     }
     
-    public void setInitial_modelElement(final ModelElement pInitial_modelElement) {
+    public void setModelElement(final TraceLink pModelElement) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fInitial_modelElement = pInitial_modelElement;
+      this.fModelElement = pModelElement;
     }
     
     @Override
@@ -105,24 +107,24 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fInitial_modelElement};
+      return new Object[]{fModelElement};
     }
     
     @Override
     public Deleted_modelElement.Match toImmutable() {
-      return isMutable() ? newMatch(fInitial_modelElement) : this;
+      return isMutable() ? newMatch(fModelElement) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"initial_modelElement\"=" + prettyPrintValue(fInitial_modelElement));
+      result.append("\"modelElement\"=" + prettyPrintValue(fModelElement));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (fInitial_modelElement);
+      return Objects.hash (fModelElement);
     }
     
     @Override
@@ -134,7 +136,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
       }
       if ((obj instanceof Deleted_modelElement.Match)) {
           Deleted_modelElement.Match other = (Deleted_modelElement.Match) obj;
-          return Objects.equals(fInitial_modelElement, other.fInitial_modelElement);
+          return Objects.equals(fModelElement, other.fModelElement);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -165,29 +167,29 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Deleted_modelElement.Match newMutableMatch(final ModelElement pInitial_modelElement) {
-      return new Mutable(pInitial_modelElement);
+    public static Deleted_modelElement.Match newMutableMatch(final TraceLink pModelElement) {
+      return new Mutable(pModelElement);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static Deleted_modelElement.Match newMatch(final ModelElement pInitial_modelElement) {
-      return new Immutable(pInitial_modelElement);
+    public static Deleted_modelElement.Match newMatch(final TraceLink pModelElement) {
+      return new Immutable(pModelElement);
     }
     
     private static final class Mutable extends Deleted_modelElement.Match {
-      Mutable(final ModelElement pInitial_modelElement) {
-        super(pInitial_modelElement);
+      Mutable(final TraceLink pModelElement) {
+        super(pModelElement);
       }
       
       @Override
@@ -197,8 +199,8 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     }
     
     private static final class Immutable extends Deleted_modelElement.Match {
-      Immutable(final ModelElement pInitial_modelElement) {
-        super(pInitial_modelElement);
+      Immutable(final TraceLink pModelElement) {
+        super(pModelElement);
       }
       
       @Override
@@ -219,9 +221,10 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
    * 
    * <p>Original source:
    * <code><pre>
-   * // model element - deleted
-   * pattern deleted_modelElement (initial_modelElement : ModelElement) {
-   * 	find se.mdh.idt.benji.trace.api.deleted (initial_modelElement); 
+   * // model element - delete
+   * pattern deleted_modelElement (modelElement : TraceLink) {
+   * 	find initial_modelElement (modelElement, _initial_modelElement);
+   * 	neg find current_modelElement (modelElement, _current_modelElement);
    * }
    * </pre></code>
    * 
@@ -258,7 +261,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
       return new Matcher();
     }
     
-    private final static int POSITION_INITIAL_MODELELEMENT = 0;
+    private final static int POSITION_MODELELEMENT = 0;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(Deleted_modelElement.Matcher.class);
     
@@ -276,104 +279,104 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Deleted_modelElement.Match> getAllMatches(final ModelElement pInitial_modelElement) {
-      return rawGetAllMatches(new Object[]{pInitial_modelElement});
+    public Collection<Deleted_modelElement.Match> getAllMatches(final TraceLink pModelElement) {
+      return rawGetAllMatches(new Object[]{pModelElement});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Deleted_modelElement.Match getOneArbitraryMatch(final ModelElement pInitial_modelElement) {
-      return rawGetOneArbitraryMatch(new Object[]{pInitial_modelElement});
+    public Deleted_modelElement.Match getOneArbitraryMatch(final TraceLink pModelElement) {
+      return rawGetOneArbitraryMatch(new Object[]{pModelElement});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final ModelElement pInitial_modelElement) {
-      return rawHasMatch(new Object[]{pInitial_modelElement});
+    public boolean hasMatch(final TraceLink pModelElement) {
+      return rawHasMatch(new Object[]{pModelElement});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final ModelElement pInitial_modelElement) {
-      return rawCountMatches(new Object[]{pInitial_modelElement});
+    public int countMatches(final TraceLink pModelElement) {
+      return rawCountMatches(new Object[]{pModelElement});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final ModelElement pInitial_modelElement, final IMatchProcessor<? super Deleted_modelElement.Match> processor) {
-      rawForEachMatch(new Object[]{pInitial_modelElement}, processor);
+    public void forEachMatch(final TraceLink pModelElement, final IMatchProcessor<? super Deleted_modelElement.Match> processor) {
+      rawForEachMatch(new Object[]{pModelElement}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final ModelElement pInitial_modelElement, final IMatchProcessor<? super Deleted_modelElement.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pInitial_modelElement}, processor);
+    public boolean forOneArbitraryMatch(final TraceLink pModelElement, final IMatchProcessor<? super Deleted_modelElement.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pModelElement}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pInitial_modelElement the fixed value of pattern parameter initial_modelElement, or null if not bound.
+     * @param pModelElement the fixed value of pattern parameter modelElement, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public Deleted_modelElement.Match newMatch(final ModelElement pInitial_modelElement) {
-      return Deleted_modelElement.Match.newMatch(pInitial_modelElement);
+    public Deleted_modelElement.Match newMatch(final TraceLink pModelElement) {
+      return Deleted_modelElement.Match.newMatch(pModelElement);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for initial_modelElement.
+     * Retrieve the set of values that occur in matches for modelElement.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<ModelElement> rawAccumulateAllValuesOfinitial_modelElement(final Object[] parameters) {
-      Set<ModelElement> results = new HashSet<ModelElement>();
-      rawAccumulateAllValues(POSITION_INITIAL_MODELELEMENT, parameters, results);
+    protected Set<TraceLink> rawAccumulateAllValuesOfmodelElement(final Object[] parameters) {
+      Set<TraceLink> results = new HashSet<TraceLink>();
+      rawAccumulateAllValues(POSITION_MODELELEMENT, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for initial_modelElement.
+     * Retrieve the set of values that occur in matches for modelElement.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<ModelElement> getAllValuesOfinitial_modelElement() {
-      return rawAccumulateAllValuesOfinitial_modelElement(emptyArray());
+    public Set<TraceLink> getAllValuesOfmodelElement() {
+      return rawAccumulateAllValuesOfmodelElement(emptyArray());
     }
     
     @Override
     protected Deleted_modelElement.Match tupleToMatch(final Tuple t) {
       try {
-          return Deleted_modelElement.Match.newMatch((ModelElement) t.get(POSITION_INITIAL_MODELELEMENT));
+          return Deleted_modelElement.Match.newMatch((TraceLink) t.get(POSITION_MODELELEMENT));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -383,7 +386,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     @Override
     protected Deleted_modelElement.Match arrayToMatch(final Object[] match) {
       try {
-          return Deleted_modelElement.Match.newMatch((ModelElement) match[POSITION_INITIAL_MODELELEMENT]);
+          return Deleted_modelElement.Match.newMatch((TraceLink) match[POSITION_MODELELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -393,7 +396,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     @Override
     protected Deleted_modelElement.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Deleted_modelElement.Match.newMutableMatch((ModelElement) match[POSITION_INITIAL_MODELELEMENT]);
+          return Deleted_modelElement.Match.newMutableMatch((TraceLink) match[POSITION_MODELELEMENT]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -419,14 +422,14 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
   public static abstract class Processor implements IMatchProcessor<Deleted_modelElement.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param pInitial_modelElement the value of pattern parameter initial_modelElement in the currently processed match
+     * @param pModelElement the value of pattern parameter modelElement in the currently processed match
      * 
      */
-    public abstract void process(final ModelElement pInitial_modelElement);
+    public abstract void process(final TraceLink pModelElement);
     
     @Override
     public void process(final Deleted_modelElement.Match match) {
-      process(match.getInitial_modelElement());
+      process(match.getModelElement());
     }
   }
   
@@ -464,7 +467,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
   
   @Override
   public Deleted_modelElement.Match newMatch(final Object... parameters) {
-    return Deleted_modelElement.Match.newMatch((se.mdh.idt.benji.examples.refactorings.metamodel.ModelElement) parameters[0]);
+    return Deleted_modelElement.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0]);
   }
   
   /**
@@ -496,9 +499,9 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static Deleted_modelElement.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pInitial_modelElement = new PParameter("initial_modelElement", "se.mdh.idt.benji.examples.refactorings.metamodel.ModelElement", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/examples/refactorings/Metamodel", "ModelElement")), PParameterDirection.INOUT);
+    private final PParameter parameter_pModelElement = new PParameter("modelElement", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pInitial_modelElement);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pModelElement);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -511,7 +514,7 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("initial_modelElement");
+      return Arrays.asList("modelElement");
     }
     
     @Override
@@ -524,13 +527,17 @@ public final class Deleted_modelElement extends BaseGeneratedEMFQuerySpecificati
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_initial_modelElement = body.getOrCreateVariableByName("initial_modelElement");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_initial_modelElement), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/examples/refactorings/Metamodel", "ModelElement")));
+          PVariable var_modelElement = body.getOrCreateVariableByName("modelElement");
+          PVariable var__initial_modelElement = body.getOrCreateVariableByName("_initial_modelElement");
+          PVariable var__current_modelElement = body.getOrCreateVariableByName("_current_modelElement");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_modelElement), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_initial_modelElement, parameter_pInitial_modelElement)
+             new ExportedParameter(body, var_modelElement, parameter_pModelElement)
           ));
-          // 	find se.mdh.idt.benji.trace.api.deleted (initial_modelElement)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_initial_modelElement), Deleted.instance().getInternalQueryRepresentation());
+          // 	find initial_modelElement (modelElement, _initial_modelElement)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_modelElement, var__initial_modelElement), Initial_modelElement.instance().getInternalQueryRepresentation());
+          // 	neg find current_modelElement (modelElement, _current_modelElement)
+          new NegativePatternCall(body, Tuples.flatTupleOf(var_modelElement, var__current_modelElement), Current_modelElement.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

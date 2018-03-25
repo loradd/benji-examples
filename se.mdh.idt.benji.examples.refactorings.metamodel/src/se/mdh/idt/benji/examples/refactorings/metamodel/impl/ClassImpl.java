@@ -30,7 +30,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.StructuralFeature;
  * </p>
  * <ul>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.ClassImpl#getAbstract <em>Abstract</em>}</li>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.ClassImpl#getSuperClasses <em>Super Classes</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.ClassImpl#getSubClasses <em>Sub Classes</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.metamodel.impl.ClassImpl#getStructuralFeatures <em>Structural Features</em>}</li>
  * </ul>
@@ -59,14 +59,14 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 	protected Boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSuperClasses() <em>Super Classes</em>}' reference list.
+	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperClasses()
+	 * @see #getSuperClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<se.mdh.idt.benji.examples.refactorings.metamodel.Class> superClasses;
+	protected se.mdh.idt.benji.examples.refactorings.metamodel.Class superClass;
 
 	/**
 	 * The cached value of the '{@link #getSubClasses() <em>Sub Classes</em>}' reference list.
@@ -133,11 +133,59 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<se.mdh.idt.benji.examples.refactorings.metamodel.Class> getSuperClasses() {
-		if (superClasses == null) {
-			superClasses = new EObjectWithInverseResolvingEList.ManyInverse<se.mdh.idt.benji.examples.refactorings.metamodel.Class>(se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, this, MetamodelPackage.CLASS__SUPER_CLASSES, MetamodelPackage.CLASS__SUB_CLASSES);
+	public se.mdh.idt.benji.examples.refactorings.metamodel.Class getSuperClass() {
+		if (superClass != null && superClass.eIsProxy()) {
+			InternalEObject oldSuperClass = (InternalEObject)superClass;
+			superClass = (se.mdh.idt.benji.examples.refactorings.metamodel.Class)eResolveProxy(oldSuperClass);
+			if (superClass != oldSuperClass) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MetamodelPackage.CLASS__SUPER_CLASS, oldSuperClass, superClass));
+			}
 		}
-		return superClasses;
+		return superClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public se.mdh.idt.benji.examples.refactorings.metamodel.Class basicGetSuperClass() {
+		return superClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSuperClass(se.mdh.idt.benji.examples.refactorings.metamodel.Class newSuperClass, NotificationChain msgs) {
+		se.mdh.idt.benji.examples.refactorings.metamodel.Class oldSuperClass = superClass;
+		superClass = newSuperClass;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MetamodelPackage.CLASS__SUPER_CLASS, oldSuperClass, newSuperClass);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuperClass(se.mdh.idt.benji.examples.refactorings.metamodel.Class newSuperClass) {
+		if (newSuperClass != superClass) {
+			NotificationChain msgs = null;
+			if (superClass != null)
+				msgs = ((InternalEObject)superClass).eInverseRemove(this, MetamodelPackage.CLASS__SUB_CLASSES, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, msgs);
+			if (newSuperClass != null)
+				msgs = ((InternalEObject)newSuperClass).eInverseAdd(this, MetamodelPackage.CLASS__SUB_CLASSES, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, msgs);
+			msgs = basicSetSuperClass(newSuperClass, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetamodelPackage.CLASS__SUPER_CLASS, newSuperClass, newSuperClass));
 	}
 
 	/**
@@ -147,7 +195,7 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 	 */
 	public EList<se.mdh.idt.benji.examples.refactorings.metamodel.Class> getSubClasses() {
 		if (subClasses == null) {
-			subClasses = new EObjectWithInverseResolvingEList.ManyInverse<se.mdh.idt.benji.examples.refactorings.metamodel.Class>(se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, this, MetamodelPackage.CLASS__SUB_CLASSES, MetamodelPackage.CLASS__SUPER_CLASSES);
+			subClasses = new EObjectWithInverseResolvingEList<se.mdh.idt.benji.examples.refactorings.metamodel.Class>(se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, this, MetamodelPackage.CLASS__SUB_CLASSES, MetamodelPackage.CLASS__SUPER_CLASS);
 		}
 		return subClasses;
 	}
@@ -173,8 +221,10 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSuperClasses()).basicAdd(otherEnd, msgs);
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				if (superClass != null)
+					msgs = ((InternalEObject)superClass).eInverseRemove(this, MetamodelPackage.CLASS__SUB_CLASSES, se.mdh.idt.benji.examples.refactorings.metamodel.Class.class, msgs);
+				return basicSetSuperClass((se.mdh.idt.benji.examples.refactorings.metamodel.Class)otherEnd, msgs);
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubClasses()).basicAdd(otherEnd, msgs);
 			case MetamodelPackage.CLASS__STRUCTURAL_FEATURES:
@@ -191,8 +241,8 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				return ((InternalEList<?>)getSuperClasses()).basicRemove(otherEnd, msgs);
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				return basicSetSuperClass(null, msgs);
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				return ((InternalEList<?>)getSubClasses()).basicRemove(otherEnd, msgs);
 			case MetamodelPackage.CLASS__STRUCTURAL_FEATURES:
@@ -211,8 +261,9 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 		switch (featureID) {
 			case MetamodelPackage.CLASS__ABSTRACT:
 				return getAbstract();
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				return getSuperClasses();
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				if (resolve) return getSuperClass();
+				return basicGetSuperClass();
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				return getSubClasses();
 			case MetamodelPackage.CLASS__STRUCTURAL_FEATURES:
@@ -233,9 +284,8 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 			case MetamodelPackage.CLASS__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				getSuperClasses().clear();
-				getSuperClasses().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.metamodel.Class>)newValue);
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				setSuperClass((se.mdh.idt.benji.examples.refactorings.metamodel.Class)newValue);
 				return;
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				getSubClasses().clear();
@@ -260,8 +310,8 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 			case MetamodelPackage.CLASS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				getSuperClasses().clear();
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				setSuperClass((se.mdh.idt.benji.examples.refactorings.metamodel.Class)null);
 				return;
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				getSubClasses().clear();
@@ -283,8 +333,8 @@ public class ClassImpl extends ClassifierImpl implements se.mdh.idt.benji.exampl
 		switch (featureID) {
 			case MetamodelPackage.CLASS__ABSTRACT:
 				return ABSTRACT_EDEFAULT == null ? abstract_ != null : !ABSTRACT_EDEFAULT.equals(abstract_);
-			case MetamodelPackage.CLASS__SUPER_CLASSES:
-				return superClasses != null && !superClasses.isEmpty();
+			case MetamodelPackage.CLASS__SUPER_CLASS:
+				return superClass != null;
 			case MetamodelPackage.CLASS__SUB_CLASSES:
 				return subClasses != null && !subClasses.isEmpty();
 			case MetamodelPackage.CLASS__STRUCTURAL_FEATURES:

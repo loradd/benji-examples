@@ -6,15 +6,21 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_enumerationLiteral_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_enumerationLiteral_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_enumerationLiteral;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_enumerationLiteral;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_enumerationLiteral;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_enumerationLiteral_enumeration;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_enumerationLiteral_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_enumerationLiteral;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_enumerationLiteral;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_enumerationLiteral_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_enumerationLiteral_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_enumerationLiteral;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_enumerationLiteral;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_enumerationLiteral_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_enumerationLiteral_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_enumerationLiteral;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_enumerationLiteral_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_enumerationLiteral_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_enumerationLiteral_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_enumerationLiteral_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_enumerationLiteral_enumeration;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_enumerationLiteral_name;
 
 /**
  * A pattern group formed of all public patterns defined in EnumerationLiteral.vql.
@@ -24,22 +30,28 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_enumer
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_enumerationLiteral</li>
- * <li>created_enumerationLiteral</li>
- * <li>deleted_enumerationLiteral</li>
- * <li>enumerationLiteral_name</li>
- * <li>preserved_enumerationLiteral_name</li>
- * <li>changed_enumerationLiteral_name</li>
- * <li>enumerationLiteral_enumeration</li>
- * <li>preserved_enumerationLiteral_enumeration</li>
- * <li>changed_enumerationLiteral_enumeration</li>
+ * <li>get_enumerationLiteral</li>
+ * <li>create_enumerationLiteral</li>
+ * <li>delete_enumerationLiteral</li>
+ * <li>initial_enumerationLiteral</li>
+ * <li>current_enumerationLiteral</li>
+ * <li>get_enumerationLiteral_name</li>
+ * <li>set_enumerationLiteral_name</li>
+ * <li>unset_enumerationLiteral_name</li>
+ * <li>initial_enumerationLiteral_name</li>
+ * <li>current_enumerationLiteral_name</li>
+ * <li>get_enumerationLiteral_enumeration</li>
+ * <li>set_enumerationLiteral_enumeration</li>
+ * <li>unset_enumerationLiteral_enumeration</li>
+ * <li>initial_enumerationLiteral_enumeration</li>
+ * <li>current_enumerationLiteral_enumeration</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:33+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class EnumerationLiteral extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -58,86 +70,140 @@ public final class EnumerationLiteral extends BaseGeneratedPatternGroup {
   private static EnumerationLiteral INSTANCE;
   
   private EnumerationLiteral() {
-    querySpecifications.add(Preserved_enumerationLiteral.instance());
-    querySpecifications.add(Created_enumerationLiteral.instance());
-    querySpecifications.add(Deleted_enumerationLiteral.instance());
-    querySpecifications.add(EnumerationLiteral_name.instance());
-    querySpecifications.add(Preserved_enumerationLiteral_name.instance());
-    querySpecifications.add(Changed_enumerationLiteral_name.instance());
-    querySpecifications.add(EnumerationLiteral_enumeration.instance());
-    querySpecifications.add(Preserved_enumerationLiteral_enumeration.instance());
-    querySpecifications.add(Changed_enumerationLiteral_enumeration.instance());
+    querySpecifications.add(Get_enumerationLiteral.instance());
+    querySpecifications.add(Create_enumerationLiteral.instance());
+    querySpecifications.add(Delete_enumerationLiteral.instance());
+    querySpecifications.add(Initial_enumerationLiteral.instance());
+    querySpecifications.add(Current_enumerationLiteral.instance());
+    querySpecifications.add(Get_enumerationLiteral_name.instance());
+    querySpecifications.add(Set_enumerationLiteral_name.instance());
+    querySpecifications.add(Unset_enumerationLiteral_name.instance());
+    querySpecifications.add(Initial_enumerationLiteral_name.instance());
+    querySpecifications.add(Current_enumerationLiteral_name.instance());
+    querySpecifications.add(Get_enumerationLiteral_enumeration.instance());
+    querySpecifications.add(Set_enumerationLiteral_enumeration.instance());
+    querySpecifications.add(Unset_enumerationLiteral_enumeration.instance());
+    querySpecifications.add(Initial_enumerationLiteral_enumeration.instance());
+    querySpecifications.add(Current_enumerationLiteral_enumeration.instance());
   }
   
-  public Preserved_enumerationLiteral getPreserved_enumerationLiteral() {
-    return Preserved_enumerationLiteral.instance();
+  public Get_enumerationLiteral getGet_enumerationLiteral() {
+    return Get_enumerationLiteral.instance();
   }
   
-  public Preserved_enumerationLiteral.Matcher getPreserved_enumerationLiteral(final ViatraQueryEngine engine) {
-    return Preserved_enumerationLiteral.Matcher.on(engine);
+  public Get_enumerationLiteral.Matcher getGet_enumerationLiteral(final ViatraQueryEngine engine) {
+    return Get_enumerationLiteral.Matcher.on(engine);
   }
   
-  public Created_enumerationLiteral getCreated_enumerationLiteral() {
-    return Created_enumerationLiteral.instance();
+  public Create_enumerationLiteral getCreate_enumerationLiteral() {
+    return Create_enumerationLiteral.instance();
   }
   
-  public Created_enumerationLiteral.Matcher getCreated_enumerationLiteral(final ViatraQueryEngine engine) {
-    return Created_enumerationLiteral.Matcher.on(engine);
+  public Create_enumerationLiteral.Matcher getCreate_enumerationLiteral(final ViatraQueryEngine engine) {
+    return Create_enumerationLiteral.Matcher.on(engine);
   }
   
-  public Deleted_enumerationLiteral getDeleted_enumerationLiteral() {
-    return Deleted_enumerationLiteral.instance();
+  public Delete_enumerationLiteral getDelete_enumerationLiteral() {
+    return Delete_enumerationLiteral.instance();
   }
   
-  public Deleted_enumerationLiteral.Matcher getDeleted_enumerationLiteral(final ViatraQueryEngine engine) {
-    return Deleted_enumerationLiteral.Matcher.on(engine);
+  public Delete_enumerationLiteral.Matcher getDelete_enumerationLiteral(final ViatraQueryEngine engine) {
+    return Delete_enumerationLiteral.Matcher.on(engine);
   }
   
-  public EnumerationLiteral_name getEnumerationLiteral_name() {
-    return EnumerationLiteral_name.instance();
+  public Initial_enumerationLiteral getInitial_enumerationLiteral() {
+    return Initial_enumerationLiteral.instance();
   }
   
-  public EnumerationLiteral_name.Matcher getEnumerationLiteral_name(final ViatraQueryEngine engine) {
-    return EnumerationLiteral_name.Matcher.on(engine);
+  public Initial_enumerationLiteral.Matcher getInitial_enumerationLiteral(final ViatraQueryEngine engine) {
+    return Initial_enumerationLiteral.Matcher.on(engine);
   }
   
-  public Preserved_enumerationLiteral_name getPreserved_enumerationLiteral_name() {
-    return Preserved_enumerationLiteral_name.instance();
+  public Current_enumerationLiteral getCurrent_enumerationLiteral() {
+    return Current_enumerationLiteral.instance();
   }
   
-  public Preserved_enumerationLiteral_name.Matcher getPreserved_enumerationLiteral_name(final ViatraQueryEngine engine) {
-    return Preserved_enumerationLiteral_name.Matcher.on(engine);
+  public Current_enumerationLiteral.Matcher getCurrent_enumerationLiteral(final ViatraQueryEngine engine) {
+    return Current_enumerationLiteral.Matcher.on(engine);
   }
   
-  public Changed_enumerationLiteral_name getChanged_enumerationLiteral_name() {
-    return Changed_enumerationLiteral_name.instance();
+  public Get_enumerationLiteral_name getGet_enumerationLiteral_name() {
+    return Get_enumerationLiteral_name.instance();
   }
   
-  public Changed_enumerationLiteral_name.Matcher getChanged_enumerationLiteral_name(final ViatraQueryEngine engine) {
-    return Changed_enumerationLiteral_name.Matcher.on(engine);
+  public Get_enumerationLiteral_name.Matcher getGet_enumerationLiteral_name(final ViatraQueryEngine engine) {
+    return Get_enumerationLiteral_name.Matcher.on(engine);
   }
   
-  public EnumerationLiteral_enumeration getEnumerationLiteral_enumeration() {
-    return EnumerationLiteral_enumeration.instance();
+  public Set_enumerationLiteral_name getSet_enumerationLiteral_name() {
+    return Set_enumerationLiteral_name.instance();
   }
   
-  public EnumerationLiteral_enumeration.Matcher getEnumerationLiteral_enumeration(final ViatraQueryEngine engine) {
-    return EnumerationLiteral_enumeration.Matcher.on(engine);
+  public Set_enumerationLiteral_name.Matcher getSet_enumerationLiteral_name(final ViatraQueryEngine engine) {
+    return Set_enumerationLiteral_name.Matcher.on(engine);
   }
   
-  public Preserved_enumerationLiteral_enumeration getPreserved_enumerationLiteral_enumeration() {
-    return Preserved_enumerationLiteral_enumeration.instance();
+  public Unset_enumerationLiteral_name getUnset_enumerationLiteral_name() {
+    return Unset_enumerationLiteral_name.instance();
   }
   
-  public Preserved_enumerationLiteral_enumeration.Matcher getPreserved_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
-    return Preserved_enumerationLiteral_enumeration.Matcher.on(engine);
+  public Unset_enumerationLiteral_name.Matcher getUnset_enumerationLiteral_name(final ViatraQueryEngine engine) {
+    return Unset_enumerationLiteral_name.Matcher.on(engine);
   }
   
-  public Changed_enumerationLiteral_enumeration getChanged_enumerationLiteral_enumeration() {
-    return Changed_enumerationLiteral_enumeration.instance();
+  public Initial_enumerationLiteral_name getInitial_enumerationLiteral_name() {
+    return Initial_enumerationLiteral_name.instance();
   }
   
-  public Changed_enumerationLiteral_enumeration.Matcher getChanged_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
-    return Changed_enumerationLiteral_enumeration.Matcher.on(engine);
+  public Initial_enumerationLiteral_name.Matcher getInitial_enumerationLiteral_name(final ViatraQueryEngine engine) {
+    return Initial_enumerationLiteral_name.Matcher.on(engine);
+  }
+  
+  public Current_enumerationLiteral_name getCurrent_enumerationLiteral_name() {
+    return Current_enumerationLiteral_name.instance();
+  }
+  
+  public Current_enumerationLiteral_name.Matcher getCurrent_enumerationLiteral_name(final ViatraQueryEngine engine) {
+    return Current_enumerationLiteral_name.Matcher.on(engine);
+  }
+  
+  public Get_enumerationLiteral_enumeration getGet_enumerationLiteral_enumeration() {
+    return Get_enumerationLiteral_enumeration.instance();
+  }
+  
+  public Get_enumerationLiteral_enumeration.Matcher getGet_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
+    return Get_enumerationLiteral_enumeration.Matcher.on(engine);
+  }
+  
+  public Set_enumerationLiteral_enumeration getSet_enumerationLiteral_enumeration() {
+    return Set_enumerationLiteral_enumeration.instance();
+  }
+  
+  public Set_enumerationLiteral_enumeration.Matcher getSet_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
+    return Set_enumerationLiteral_enumeration.Matcher.on(engine);
+  }
+  
+  public Unset_enumerationLiteral_enumeration getUnset_enumerationLiteral_enumeration() {
+    return Unset_enumerationLiteral_enumeration.instance();
+  }
+  
+  public Unset_enumerationLiteral_enumeration.Matcher getUnset_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
+    return Unset_enumerationLiteral_enumeration.Matcher.on(engine);
+  }
+  
+  public Initial_enumerationLiteral_enumeration getInitial_enumerationLiteral_enumeration() {
+    return Initial_enumerationLiteral_enumeration.instance();
+  }
+  
+  public Initial_enumerationLiteral_enumeration.Matcher getInitial_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
+    return Initial_enumerationLiteral_enumeration.Matcher.on(engine);
+  }
+  
+  public Current_enumerationLiteral_enumeration getCurrent_enumerationLiteral_enumeration() {
+    return Current_enumerationLiteral_enumeration.instance();
+  }
+  
+  public Current_enumerationLiteral_enumeration.Matcher getCurrent_enumerationLiteral_enumeration(final ViatraQueryEngine engine) {
+    return Current_enumerationLiteral_enumeration.Matcher.on(engine);
   }
 }

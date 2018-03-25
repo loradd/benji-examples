@@ -1,288 +1,271 @@
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries
 
 import "http://www.mdh.se/examples/refactorings/Metamodel"
+import "http://www.mdh.se/idt/benji/trace/Trace"
 
-// class - preserved
-pattern preserved_class (initial_class : Class, current_class : Class) {
-	find preserved_classifier (initial_class, current_class); 
+// class - get
+pattern get_class (class : TraceLink) {
+	find initial_class (class, _initial_class);
+	find current_class (class, _current_class);
 }
 
-// class - created
-pattern created_class (current_class : Class) {
-	find created_classifier (current_class); 
+// class - create
+pattern create_class (class : TraceLink) {
+	neg find initial_class (class, _initial_class);
+	find current_class (class, _current_class);	
 }
 
-// class - deleted
-pattern deleted_class (initial_class : Class) {
-	find deleted_classifier (initial_class); 
+// class - delete
+pattern delete_class (class : TraceLink) {
+	find initial_class (class, _initial_class);
+	neg find current_class (class, _current_class);
 }
 
-// class - name
-pattern class_name (class : Class, name : java String) {
-	find classifier_name (class, name); 
+// class - initial
+pattern initial_class (class : TraceLink, initial_class : Class) {
+	find initial_classifier (class, initial_class);	
 }
 
-// class - name - preserved
-pattern preserved_class_name (initial_class : Class, current_class : Class, initial_name : java String, current_name : java String) {
-	find preserved_classifier_name (initial_class, current_class, initial_name, current_name); 
+// class - current
+pattern current_class (class : TraceLink, current_class : Class) {
+	find current_classifier (class, current_class);
 }
 
-// class - name - changed
-pattern changed_class_name (initial_class : Class, current_class : Class, initial_name : java String, current_name : java String) {
-	find changed_classifier_name (initial_class, current_class, initial_name, current_name); 	
+// class - name - get
+pattern get_class_name (class : TraceLink, name : java String) {
+	find initial_class_name (class, _initial_class, name);
+	find current_class_name (class, _current_class, name);
 }
 
-// class - package
-pattern class_package (class : Class, ^package : Package) {
-	find classifier_package (class, ^package); 
+// class - name - set
+pattern set_class_name (class : TraceLink, name : java String) {
+	neg find initial_class_name (class, _initial_class, name);
+	find current_class_name (class, _current_class, name);	
 }
 
-// class - package - preserved
-pattern preserved_class_package (initial_class : Class, current_class : Class, initial_package : Package, current_package : Package) {
-	find preserved_classifier_package (initial_class, current_class, initial_package, current_package); 	
+// class - name - unset
+pattern unset_class_name (class : TraceLink, name : java String) {
+	find initial_class_name (class, _initial_class, name);
+	neg find current_class_name (class, _current_class, name);
 }
 
-// class - package - changed
-pattern changed_class_package (initial_class : Class, current_class : Class, initial_package : Package, current_package : Package) {
-	find changed_classifier_package (initial_class, current_class, initial_package, current_package); 	
+// class - name - initial
+pattern initial_class_name (class : TraceLink, initial_class : Class, name : java String) {
+	find initial_classifier_name (class, initial_class, name);	
 }
 
-// class - abstract
-pattern class_abstract (class : Class, abstract : java Boolean) {
-	Class.abstract (class, abstract); 	
+// class - name - current
+pattern current_class_name (class : TraceLink, current_class : Class, name : java String) {
+	find current_classifier_name (class, current_class, name);	
 }
 
-// class - abstract - preserved
-pattern preserved_class_abstract (initial_class : Class, current_class : Class, initial_abstract : java Boolean, current_abstract : java Boolean) {
-	find preserved_class (initial_class, current_class); 
-	find class_abstract (initial_class, initial_abstract); 
-	find class_abstract (current_class, current_abstract); 
-	check (initial_abstract == current_abstract); 	
+// class - package - get
+pattern get_class_package (class : TraceLink, ^package : TraceLink) {
+	find initial_class_package (class, _initial_class, ^package, _initial_package);
+	find current_class_package (class, _current_class, ^package, _current_package);
 }
 
-// class - abstract - changed
-pattern changed_class_abstract (initial_class : Class, current_class : Class, initial_abstract : java Boolean, current_abstract : java Boolean) {
-	find preserved_class (initial_class, current_class); 
-	find class_abstract (initial_class, initial_abstract); 
-	find class_abstract (current_class, current_abstract); 
-	check (initial_abstract != current_abstract); 	
+// class - package - set
+pattern set_class_package (class : TraceLink, ^package : TraceLink) {
+	neg find initial_class_package (class, _initial_class, ^package, _initial_package);
+	find current_class_package (class, _current_class, ^package, _current_package);	
 }
 
-// class - superClasses
-pattern class_superClass (class : Class, superClass : Class) {
-	Class.superClasses (class, superClass); 
+// class - package - unset
+pattern unset_class_package (class : TraceLink, ^package : TraceLink) {
+	find initial_class_package (class, _initial_class, ^package, _initial_package);
+	neg find current_class_package (class, _current_class, ^package, _current_package);
 }
 
-// @TODO class - superClasses - common
-pattern common_class_superClass (left_class : Class, right_class : Class, super_class : Class) {
-	find class_superClass+(left_class, super_class); 
-	find class_superClass+(right_class, super_class); 
+// class - package - initial
+pattern initial_class_package (class : TraceLink, initial_class : Class, ^package : TraceLink, initial_package : Package) {
+	find initial_classifier_package (class, initial_class, ^package, initial_package);	
 }
 
-// class - superClasses - preserved
-pattern preserved_class_superClass (initial_class : Class, current_class : Class, initial_superClass : Class, current_superClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_superClass, current_superClass); 
-	find class_superClass (initial_class, initial_superClass); 
-	find class_superClass (current_class, current_superClass); 
+// class - package - current
+pattern current_class_package (class : TraceLink, current_class : Class, ^package : TraceLink, current_package : Package) {
+	find current_classifier_package (class, current_class, ^package, current_package);	
 }
 
-// class - superClasses - added
-pattern added_class_superClass (initial_class : Class, current_class : Class, current_superClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find created_class (current_superClass); 
-	find class_superClass (current_class, current_superClass); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_superClass, current_superClass); 
-	neg find class_superClass (initial_class, initial_superClass); 
-	find class_superClass (current_class, current_superClass); 
+// class - abstract - get
+pattern get_class_abstract (class : TraceLink, abstract : java Boolean) {
+	find initial_class_abstract (class, _initial_class, abstract);
+	find current_class_abstract (class, _current_class, abstract);
 }
 
-// class - superClasses - removed
-pattern removed_class_superClass (initial_class : Class, current_class : Class, initial_superClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find deleted_class (initial_superClass); 
-	find class_superClass (initial_class, initial_superClass); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_superClass, current_superClass); 
-	find class_superClass (initial_class, initial_superClass); 
-	neg find class_superClass (current_class, current_superClass); 
+// class - abstract - set
+pattern set_class_abstract (class : TraceLink, abstract : java Boolean) {
+	neg find initial_class_abstract (class, _initial_class, abstract);
+	find current_class_abstract (class, _current_class, abstract);	
 }
 
-// class - subClasses
-pattern class_subClass (class : Class, subClass : Class) {
-	Class.subClasses (class, subClass); 
+// class - abstract - unset
+pattern unset_class_abstract (class : TraceLink, abstract : java Boolean) {
+	find initial_class_abstract (class, _initial_class, abstract); 
+	neg find current_class_abstract (class, _current_class, abstract);
 }
 
-// class - subClasses - preserved
-pattern preserved_class_subClass (initial_class : Class, current_class : Class, initial_subClass : Class, current_subClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_subClass, current_subClass); 
-	find class_subClass (initial_class, initial_subClass); 
-	find class_subClass (current_class, current_subClass); 
+// class - abstract - initial
+pattern initial_class_abstract (class : TraceLink, initial_class : Class, abstract : java Boolean) {
+	find initial_class (class, initial_class);
+	Class.abstract (initial_class, abstract);	
 }
 
-// class - subClasses - added
-pattern added_class_subClass (initial_class : Class, current_class : Class, current_subClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find created_class (current_subClass); 
-	find class_subClass (current_class, current_subClass); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_subClass, current_subClass); 
-	neg find class_subClass (initial_class, initial_subClass); 
-	find class_subClass (current_class, current_subClass); 
+// class - abstract - current
+pattern current_class_abstract (class : TraceLink, current_class : Class, abstract : java Boolean) {
+	find current_class (class, current_class);
+	Class.abstract (current_class, abstract);	
 }
 
-// class - subClasses - removed
-pattern removed_class_subClass (initial_class : Class, current_class : Class, initial_subClass : Class) {
-	find preserved_class (initial_class, current_class); 
-	find deleted_class (initial_subClass); 
-	find class_subClass (initial_class, initial_subClass); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_class (initial_subClass, current_subClass); 
-	find class_subClass (initial_class, initial_subClass); 
-	neg find class_subClass (current_class, current_subClass); 
+// class - superClass - get
+pattern get_class_superClass (class : TraceLink, superClass : TraceLink) {
+	find initial_class_superClass (class, _initial_class, superClass, _initial_superClass);
+	find current_class_superClass (class, _current_class, superClass, _current_superClass);
 }
 
-// class - structuralFeatures
-pattern class_structuralFeature (class : Class, structuralFeature : StructuralFeature) {
-	Class.structuralFeatures (class, structuralFeature); 
+// class - superClass - set
+pattern set_class_superClass (class : TraceLink, superClass : TraceLink) {
+	neg find initial_class_superClass (class, _initial_class, superClass, _initial_superClass);
+	find current_class_superClass (class, _current_class, superClass, _current_superClass);	
 }
 
-// class - structuralFeature (attribute)
-pattern class_attribute (class : Class, attribute : Attribute) {
-	find class_structuralFeature (class, attribute); 
+// class - superClass - unset
+pattern unset_class_superClass (class : TraceLink, superClass : TraceLink) {
+	find initial_class_superClass (class, _initial_class, superClass, _initial_superClass);
+	neg find current_class_superClass (class, _current_class, superClass, _current_superClass);
 }
 
-// class - structuralFeature (reference)
-pattern class_reference (class : Class, reference : Reference) {
-	find class_structuralFeature (class, reference); 	
+// class - superClass - initial
+pattern initial_class_superClass (class : TraceLink, initial_class : Class, superClass : TraceLink, initial_superClass : Class) {
+	find initial_class (class, initial_class);
+	find initial_class (superClass, initial_superClass);
+	Class.superClass (initial_class, initial_superClass);	
 }
 
-// class - structuralFeature (reference) - typed
-pattern class_reference_typed (class : Class, reference : Reference, type : Class) {
-	find class_reference (class, reference); 
-	find reference_type (reference, type); 
+// class - superClass - current
+pattern current_class_superClass (class : TraceLink, current_class : Class, superClass : TraceLink, current_superClass : Class) {
+	find current_class (class, current_class);
+	find current_class (superClass, current_superClass);
+	Class.superClass (current_class, current_superClass);	
 }
 
-// class - structuralFeature (reference) - weak typed
-pattern class_reference_typed_weak (class : Class, reference : Reference, type : Class) {
-	find class_reference (class, reference); 
-	find reference_type_weak(reference, type);
+
+// class - subClass - get
+pattern get_class_subClass (class : TraceLink, subClass : TraceLink) {
+	find initial_class_subClass (class, _initial_class, subClass, _initial_subClass);
+	find current_class_subClass (class, _current_class, subClass, _current_subClass);
 }
 
-// class - structuralFeatures - preserved
-pattern preserved_class_structuralFeature (initial_class : Class, current_class : Class, initial_structuralFeature : StructuralFeature, current_structuralFeature : StructuralFeature) {
-	find preserved_class (initial_class, current_class); 
-	find preserved_modelElement (initial_structuralFeature, current_structuralFeature); // structuralFeature 
-	find class_structuralFeature (initial_class, initial_structuralFeature); 
-	find class_structuralFeature (current_class, current_structuralFeature); 
+// class - subClass - insert
+pattern insert_class_subClass (class : TraceLink, subClass : TraceLink) {
+	neg find initial_class_subClass (class, _initial_class, subClass, _initial_subClass);
+	find current_class_subClass (class, _current_class, subClass, _current_subClass);	
 }
 
-// class - structuralFeatures (attribute) - preserved
-pattern preserved_class_attribute (initial_class : Class, current_class : Class, initial_attribute : Attribute, current_attribute : Attribute) {
-	find preserved_class_structuralFeature (initial_class, current_class, initial_attribute, current_attribute); 	
+// class - subClass - remove
+pattern remove_class_subClass (class : TraceLink, subClass : TraceLink) {
+	find initial_class_subClass (class, _initial_class, subClass, _initial_subClass);
+	neg find current_class_subClass (class, _current_class, subClass, _current_subClass);	
 }
 
-// class - structuralFeatures (reference) - preserved
-pattern preserved_class_reference (initial_class : Class, current_class : Class, initial_reference : Reference, current_reference : Reference) {
-	find preserved_class_structuralFeature (initial_class, current_class, initial_reference, current_reference); 
+// class - subClass - initial
+pattern initial_class_subClass (class : TraceLink, initial_class : Class, subClass : TraceLink, initial_subClass : Class) {
+	find initial_class (class, initial_class);
+	find initial_class (subClass, initial_subClass);
+	Class.subClasses (initial_class, initial_subClass);
 }
 
-// class - structuralFeatures - added
-pattern added_class_structuralFeature (initial_class : Class, current_class : Class, current_structuralFeature : StructuralFeature) {
-	find preserved_class (initial_class, current_class); 
-	find created_structuralFeature (current_structuralFeature);
-	find class_structuralFeature (current_class, current_structuralFeature); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature);
-	neg find class_structuralFeature (initial_class, initial_structuralFeature); 
-	find class_structuralFeature (current_class, current_structuralFeature);  
+// class - subClass - current
+pattern current_class_subClass (class : TraceLink, current_class : Class, subClass : TraceLink, current_subClass : Class) {
+	find current_class (class, current_class);
+	find current_class (subClass, current_subClass);
+	Class.subClasses (current_class, current_subClass);	
 }
 
-// class - structuralFeatures (attribute) - added
-pattern added_class_attribute (initial_class : Class, current_class : Class, current_attribute : Attribute) {
-	find added_class_structuralFeature (initial_class, current_class, current_attribute); 
+// class - structuralFeature - get
+pattern get_class_structuralFeature (class : TraceLink, structuralFeature : TraceLink) {
+	find initial_class_structuralFeature (class, _initial_class, structuralFeature, _initial_structuralFeature);
+	find current_class_structuralFeature (class, _current_class, structuralFeature, _current_structuralFeature); 
 }
 
-// class - structuralFeatures (attribute) - added - typed
-pattern added_class_attribute_typed (initial_class : Class, current_class : Class, current_attribute : Attribute, current_type : DataType) {
-	find added_class_attribute (initial_class, current_class, current_attribute); 
-	find attribute_type (current_attribute, current_type);  
+// class - structuralFeature - insert
+pattern insert_class_structuralFeature (class : TraceLink, structuralFeature : TraceLink) {
+	neg find initial_class_structuralFeature (class, _initial_class, structuralFeature, _initial_structuralFeature);
+	find current_class_structuralFeature (class, _current_class, structuralFeature, _current_structuralFeature);	
 }
 
-// class - structuralFeatures (reference) - added
-pattern added_class_reference (initial_class : Class, current_class : Class, current_reference : Reference) {
-	find added_class_structuralFeature (initial_class, current_class, current_reference); 
+// class - structuralFeature - remove
+pattern remove_class_structuralFeature (class : TraceLink, structuralFeature : TraceLink) {
+	find initial_class_structuralFeature (class, _initial_class, structuralFeature, _initial_structuralFeature);
+	neg find current_class_structuralFeature (class, _current_class, structuralFeature, _current_structuralFeature); 	
 }
 
-// class - structuralFeatures (references) - added - typed
-pattern added_class_reference_typed (initial_class : Class, current_class : Class, current_reference : Reference, current_type : Class) {
-	find added_class_reference (initial_class, current_class, current_reference); 
-	find reference_type (current_reference, current_type); 
+// class - structuralFeature - initial
+pattern initial_class_structuralFeature (class : TraceLink, initial_class : Class, structuralFeature : TraceLink, initial_structuralFeature : StructuralFeature) {
+	find initial_class (class, initial_class);
+	find initial_structuralFeature (structuralFeature, initial_structuralFeature);
+	Class.structuralFeatures (initial_class, initial_structuralFeature);	
 }
 
-// class - structuralFeatures (references) - added - typed (weak)
-pattern added_class_reference_typed_weak (initial_class : Class, current_class : Class, current_reference : Reference, current_type : Class) {
-	find added_class_reference (initial_class, current_class, current_reference); 
-	find reference_type_weak (current_reference, current_type);
+// class - structuralFeature - current
+pattern current_class_structuralFeature (class : TraceLink, current_class : Class, structuralFeature : TraceLink, current_structuralFeature : StructuralFeature) {
+	find current_class (class, current_class);
+	find current_structuralFeature (structuralFeature, current_structuralFeature);
+	Class.structuralFeatures (current_class, current_structuralFeature);
 }
 
-// class - structuralFeatures - removed
-pattern removed_class_structuralFeature (initial_class : Class, current_class : Class, initial_structuralFeature : StructuralFeature) {
-	find preserved_class (initial_class, current_class); 
-	find deleted_structuralFeature (initial_structuralFeature);
-	find class_structuralFeature (initial_class, initial_structuralFeature); 
-} or {
-	find preserved_class (initial_class, current_class); 
-	find preserved_structuralFeature (initial_structuralFeature, current_structuralFeature);
-	find class_structuralFeature (initial_class, initial_structuralFeature); 
-	neg find class_structuralFeature (current_class, current_structuralFeature);  
+// class - attribute - get
+pattern get_class_attribute (class : TraceLink, attribute : TraceLink) {
+	find initial_class_attribute (class, _initial_class, attribute, _initial_attribute);
+	find current_class_attribute (class, _current_class, attribute, _current_attribute);
 }
 
-// class - structuralFeatures (attribute) - removed
-pattern removed_class_attribute (initial_class : Class, current_class : Class, initial_attribute : Attribute) {
-	find removed_class_structuralFeature (initial_class, current_class, initial_attribute); 
+// class - attribute - insert
+pattern insert_class_attribute (class : TraceLink, attribute : TraceLink) {
+	neg find initial_class_attribute (class, _initial_class, attribute, _initial_attribute);
+	find current_class_attribute (class, _current_class, attribute, _current_attribute);	
 }
 
-// class - structuralFeature (reference) - removed
-pattern removed_class_reference (initial_class : Class, current_class : Class, initial_reference : Reference) {
-	find removed_class_structuralFeature (initial_class, current_class, initial_reference); 
+// class - attribute - remove
+pattern remove_class_attribute (class : TraceLink, attribute : TraceLink) {
+	find initial_class_attribute (class, _initial_class, attribute, _initial_attribute);
+	neg find current_class_attribute (class, _current_class, attribute, _current_attribute);	
 }
 
-// class - structuralFeatures (reference) - removed - typed
-pattern removed_class_reference_typed (initial_class : Class, current_class : Class, initial_reference : Reference, initial_type : Class) {
-	find removed_class_reference (initial_class, current_class, initial_reference); 
-	find reference_type (initial_reference, initial_type); 
+// class - attribute - initial
+pattern initial_class_attribute (class : TraceLink, initial_class : Class, attribute : TraceLink, initial_attribute : Attribute) {
+	find initial_class_structuralFeature (class, initial_class, attribute, initial_attribute);
 }
 
-// class - structuralFeatures (reference) - removed - typed - weak
-pattern removed_class_reference_typed_weak (initial_class : Class, current_class : Class, initial_reference : Reference, initial_type : Class) {
-	find removed_class_reference (initial_class, current_class, initial_reference); 
-	find reference_type_weak (initial_reference, initial_type); 
+// class - attribute - current
+pattern current_class_attribute (class : TraceLink, current_class : Class, attribute : TraceLink, current_attribute : Attribute) {
+	find current_class_structuralFeature (class, current_class, attribute, current_attribute);	
 }
 
-// @TODO class - structuralFeatures (attribute) - equals
-pattern equals_class_attribute (left_class : Class, right_class : Class, left_attribute : Attribute, right_attribute : Attribute) {
-	find class_attribute (left_class, left_attribute);  
-	find class_attribute (right_class, right_attribute); 
-	find attribute_name (left_attribute, attribute_name); 
-	find attribute_name (right_attribute, attribute_name); 
-	find attribute_type (left_attribute, attribute_type); 
-	find attribute_type (right_attribute, attribute_type); 
+// class - reference - get
+pattern get_class_reference (class : TraceLink, reference : TraceLink) {
+	find initial_class_reference (class, _initial_class, reference, _initial_reference);
+	find current_class_reference (class, _current_class, reference, _current_reference);
 }
 
-// @TODO class - structuralFeature (reference) - equals 
-pattern equals_class_reference (left_class : Class, right_class : Class, left_reference : Reference, right_reference : Reference) {
-	find class_reference (left_class, left_reference); 
-	find class_reference (right_class, right_reference); 
-	find reference_name (left_reference, reference_name); 
-	find reference_name (right_reference, reference_name); 
-	find reference_type (left_reference, reference_type); 
-	find reference_type (right_reference, reference_type); 
+// class - reference - insert
+pattern insert_class_reference (class : TraceLink, reference : TraceLink) {
+	neg find initial_class_reference (class, _initial_class, reference, _initial_reference);
+	find current_class_reference (class, _current_class, reference, _current_reference); 	
+}
+
+// class - reference - remove
+pattern remove_class_reference (class : TraceLink, reference : TraceLink) {
+	find initial_class_reference (class, _initial_class, reference, _initial_reference); 
+	neg find current_class_reference (class, _current_class, reference, _current_reference);	
+}
+
+// class - reference - initial
+pattern initial_class_reference (class : TraceLink, initial_class : Class, reference : TraceLink, initial_reference : Reference) {
+	find initial_class_structuralFeature (class, initial_class, reference, initial_reference);	
+}
+
+// class - reference - current
+pattern current_class_reference (class : TraceLink, current_class : Class, reference : TraceLink, current_reference : Reference) {
+	find current_class_structuralFeature (class, current_class, reference, current_reference);
 }

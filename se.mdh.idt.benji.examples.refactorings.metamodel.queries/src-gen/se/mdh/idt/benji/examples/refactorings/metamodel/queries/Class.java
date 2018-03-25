@@ -6,48 +6,51 @@ package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_attribute_typed;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_reference_typed;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_reference_typed_weak;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_subClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Added_class_superClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_class_abstract;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_class_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Changed_class_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_abstract;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_reference_typed;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_reference_typed_weak;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_subClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class_superClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Common_class_superClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Created_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Deleted_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Equals_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Equals_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_abstract;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_subClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Preserved_class_superClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_reference_typed;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_reference_typed_weak;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_structuralFeature;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_subClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_abstract;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_reference;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_subClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Current_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_abstract;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_reference;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_subClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_abstract;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_reference;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_subClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Initial_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_class_reference;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_class_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_class_subClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_class_reference;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_class_structuralFeature;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_class_subClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_class_abstract;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_class_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_class_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_class_abstract;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_class_name;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_class_package;
+import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_class_superClass;
 
 /**
  * A pattern group formed of all public patterns defined in Class.vql.
@@ -57,55 +60,58 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Removed_class_su
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
- * <li>preserved_class</li>
- * <li>created_class</li>
- * <li>deleted_class</li>
- * <li>class_name</li>
- * <li>preserved_class_name</li>
- * <li>changed_class_name</li>
- * <li>class_package</li>
- * <li>preserved_class_package</li>
- * <li>changed_class_package</li>
- * <li>class_abstract</li>
- * <li>preserved_class_abstract</li>
- * <li>changed_class_abstract</li>
- * <li>class_superClass</li>
- * <li>common_class_superClass</li>
- * <li>preserved_class_superClass</li>
- * <li>added_class_superClass</li>
- * <li>removed_class_superClass</li>
- * <li>class_subClass</li>
- * <li>preserved_class_subClass</li>
- * <li>added_class_subClass</li>
- * <li>removed_class_subClass</li>
- * <li>class_structuralFeature</li>
- * <li>class_attribute</li>
- * <li>class_reference</li>
- * <li>class_reference_typed</li>
- * <li>class_reference_typed_weak</li>
- * <li>preserved_class_structuralFeature</li>
- * <li>preserved_class_attribute</li>
- * <li>preserved_class_reference</li>
- * <li>added_class_structuralFeature</li>
- * <li>added_class_attribute</li>
- * <li>added_class_attribute_typed</li>
- * <li>added_class_reference</li>
- * <li>added_class_reference_typed</li>
- * <li>added_class_reference_typed_weak</li>
- * <li>removed_class_structuralFeature</li>
- * <li>removed_class_attribute</li>
- * <li>removed_class_reference</li>
- * <li>removed_class_reference_typed</li>
- * <li>removed_class_reference_typed_weak</li>
- * <li>equals_class_attribute</li>
- * <li>equals_class_reference</li>
+ * <li>get_class</li>
+ * <li>create_class</li>
+ * <li>delete_class</li>
+ * <li>initial_class</li>
+ * <li>current_class</li>
+ * <li>get_class_name</li>
+ * <li>set_class_name</li>
+ * <li>unset_class_name</li>
+ * <li>initial_class_name</li>
+ * <li>current_class_name</li>
+ * <li>get_class_package</li>
+ * <li>set_class_package</li>
+ * <li>unset_class_package</li>
+ * <li>initial_class_package</li>
+ * <li>current_class_package</li>
+ * <li>get_class_abstract</li>
+ * <li>set_class_abstract</li>
+ * <li>unset_class_abstract</li>
+ * <li>initial_class_abstract</li>
+ * <li>current_class_abstract</li>
+ * <li>get_class_superClass</li>
+ * <li>set_class_superClass</li>
+ * <li>unset_class_superClass</li>
+ * <li>initial_class_superClass</li>
+ * <li>current_class_superClass</li>
+ * <li>get_class_subClass</li>
+ * <li>insert_class_subClass</li>
+ * <li>remove_class_subClass</li>
+ * <li>initial_class_subClass</li>
+ * <li>current_class_subClass</li>
+ * <li>get_class_structuralFeature</li>
+ * <li>insert_class_structuralFeature</li>
+ * <li>remove_class_structuralFeature</li>
+ * <li>initial_class_structuralFeature</li>
+ * <li>current_class_structuralFeature</li>
+ * <li>get_class_attribute</li>
+ * <li>insert_class_attribute</li>
+ * <li>remove_class_attribute</li>
+ * <li>initial_class_attribute</li>
+ * <li>current_class_attribute</li>
+ * <li>get_class_reference</li>
+ * <li>insert_class_reference</li>
+ * <li>remove_class_reference</li>
+ * <li>initial_class_reference</li>
+ * <li>current_class_reference</li>
  * </ul>
  * 
  * @see IPatternGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-09T17:34+0100")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
 public final class Class extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -124,383 +130,410 @@ public final class Class extends BaseGeneratedPatternGroup {
   private static Class INSTANCE;
   
   private Class() {
-    querySpecifications.add(Preserved_class.instance());
-    querySpecifications.add(Created_class.instance());
-    querySpecifications.add(Deleted_class.instance());
-    querySpecifications.add(Class_name.instance());
-    querySpecifications.add(Preserved_class_name.instance());
-    querySpecifications.add(Changed_class_name.instance());
-    querySpecifications.add(Class_package.instance());
-    querySpecifications.add(Preserved_class_package.instance());
-    querySpecifications.add(Changed_class_package.instance());
-    querySpecifications.add(Class_abstract.instance());
-    querySpecifications.add(Preserved_class_abstract.instance());
-    querySpecifications.add(Changed_class_abstract.instance());
-    querySpecifications.add(Class_superClass.instance());
-    querySpecifications.add(Common_class_superClass.instance());
-    querySpecifications.add(Preserved_class_superClass.instance());
-    querySpecifications.add(Added_class_superClass.instance());
-    querySpecifications.add(Removed_class_superClass.instance());
-    querySpecifications.add(Class_subClass.instance());
-    querySpecifications.add(Preserved_class_subClass.instance());
-    querySpecifications.add(Added_class_subClass.instance());
-    querySpecifications.add(Removed_class_subClass.instance());
-    querySpecifications.add(Class_structuralFeature.instance());
-    querySpecifications.add(Class_attribute.instance());
-    querySpecifications.add(Class_reference.instance());
-    querySpecifications.add(Class_reference_typed.instance());
-    querySpecifications.add(Class_reference_typed_weak.instance());
-    querySpecifications.add(Preserved_class_structuralFeature.instance());
-    querySpecifications.add(Preserved_class_attribute.instance());
-    querySpecifications.add(Preserved_class_reference.instance());
-    querySpecifications.add(Added_class_structuralFeature.instance());
-    querySpecifications.add(Added_class_attribute.instance());
-    querySpecifications.add(Added_class_attribute_typed.instance());
-    querySpecifications.add(Added_class_reference.instance());
-    querySpecifications.add(Added_class_reference_typed.instance());
-    querySpecifications.add(Added_class_reference_typed_weak.instance());
-    querySpecifications.add(Removed_class_structuralFeature.instance());
-    querySpecifications.add(Removed_class_attribute.instance());
-    querySpecifications.add(Removed_class_reference.instance());
-    querySpecifications.add(Removed_class_reference_typed.instance());
-    querySpecifications.add(Removed_class_reference_typed_weak.instance());
-    querySpecifications.add(Equals_class_attribute.instance());
-    querySpecifications.add(Equals_class_reference.instance());
+    querySpecifications.add(Get_class.instance());
+    querySpecifications.add(Create_class.instance());
+    querySpecifications.add(Delete_class.instance());
+    querySpecifications.add(Initial_class.instance());
+    querySpecifications.add(Current_class.instance());
+    querySpecifications.add(Get_class_name.instance());
+    querySpecifications.add(Set_class_name.instance());
+    querySpecifications.add(Unset_class_name.instance());
+    querySpecifications.add(Initial_class_name.instance());
+    querySpecifications.add(Current_class_name.instance());
+    querySpecifications.add(Get_class_package.instance());
+    querySpecifications.add(Set_class_package.instance());
+    querySpecifications.add(Unset_class_package.instance());
+    querySpecifications.add(Initial_class_package.instance());
+    querySpecifications.add(Current_class_package.instance());
+    querySpecifications.add(Get_class_abstract.instance());
+    querySpecifications.add(Set_class_abstract.instance());
+    querySpecifications.add(Unset_class_abstract.instance());
+    querySpecifications.add(Initial_class_abstract.instance());
+    querySpecifications.add(Current_class_abstract.instance());
+    querySpecifications.add(Get_class_superClass.instance());
+    querySpecifications.add(Set_class_superClass.instance());
+    querySpecifications.add(Unset_class_superClass.instance());
+    querySpecifications.add(Initial_class_superClass.instance());
+    querySpecifications.add(Current_class_superClass.instance());
+    querySpecifications.add(Get_class_subClass.instance());
+    querySpecifications.add(Insert_class_subClass.instance());
+    querySpecifications.add(Remove_class_subClass.instance());
+    querySpecifications.add(Initial_class_subClass.instance());
+    querySpecifications.add(Current_class_subClass.instance());
+    querySpecifications.add(Get_class_structuralFeature.instance());
+    querySpecifications.add(Insert_class_structuralFeature.instance());
+    querySpecifications.add(Remove_class_structuralFeature.instance());
+    querySpecifications.add(Initial_class_structuralFeature.instance());
+    querySpecifications.add(Current_class_structuralFeature.instance());
+    querySpecifications.add(Get_class_attribute.instance());
+    querySpecifications.add(Insert_class_attribute.instance());
+    querySpecifications.add(Remove_class_attribute.instance());
+    querySpecifications.add(Initial_class_attribute.instance());
+    querySpecifications.add(Current_class_attribute.instance());
+    querySpecifications.add(Get_class_reference.instance());
+    querySpecifications.add(Insert_class_reference.instance());
+    querySpecifications.add(Remove_class_reference.instance());
+    querySpecifications.add(Initial_class_reference.instance());
+    querySpecifications.add(Current_class_reference.instance());
   }
   
-  public Preserved_class getPreserved_class() {
-    return Preserved_class.instance();
+  public Get_class getGet_class() {
+    return Get_class.instance();
   }
   
-  public Preserved_class.Matcher getPreserved_class(final ViatraQueryEngine engine) {
-    return Preserved_class.Matcher.on(engine);
+  public Get_class.Matcher getGet_class(final ViatraQueryEngine engine) {
+    return Get_class.Matcher.on(engine);
   }
   
-  public Created_class getCreated_class() {
-    return Created_class.instance();
+  public Create_class getCreate_class() {
+    return Create_class.instance();
   }
   
-  public Created_class.Matcher getCreated_class(final ViatraQueryEngine engine) {
-    return Created_class.Matcher.on(engine);
+  public Create_class.Matcher getCreate_class(final ViatraQueryEngine engine) {
+    return Create_class.Matcher.on(engine);
   }
   
-  public Deleted_class getDeleted_class() {
-    return Deleted_class.instance();
+  public Delete_class getDelete_class() {
+    return Delete_class.instance();
   }
   
-  public Deleted_class.Matcher getDeleted_class(final ViatraQueryEngine engine) {
-    return Deleted_class.Matcher.on(engine);
+  public Delete_class.Matcher getDelete_class(final ViatraQueryEngine engine) {
+    return Delete_class.Matcher.on(engine);
   }
   
-  public Class_name getClass_name() {
-    return Class_name.instance();
+  public Initial_class getInitial_class() {
+    return Initial_class.instance();
   }
   
-  public Class_name.Matcher getClass_name(final ViatraQueryEngine engine) {
-    return Class_name.Matcher.on(engine);
+  public Initial_class.Matcher getInitial_class(final ViatraQueryEngine engine) {
+    return Initial_class.Matcher.on(engine);
   }
   
-  public Preserved_class_name getPreserved_class_name() {
-    return Preserved_class_name.instance();
+  public Current_class getCurrent_class() {
+    return Current_class.instance();
   }
   
-  public Preserved_class_name.Matcher getPreserved_class_name(final ViatraQueryEngine engine) {
-    return Preserved_class_name.Matcher.on(engine);
+  public Current_class.Matcher getCurrent_class(final ViatraQueryEngine engine) {
+    return Current_class.Matcher.on(engine);
   }
   
-  public Changed_class_name getChanged_class_name() {
-    return Changed_class_name.instance();
+  public Get_class_name getGet_class_name() {
+    return Get_class_name.instance();
   }
   
-  public Changed_class_name.Matcher getChanged_class_name(final ViatraQueryEngine engine) {
-    return Changed_class_name.Matcher.on(engine);
+  public Get_class_name.Matcher getGet_class_name(final ViatraQueryEngine engine) {
+    return Get_class_name.Matcher.on(engine);
   }
   
-  public Class_package getClass_package() {
-    return Class_package.instance();
+  public Set_class_name getSet_class_name() {
+    return Set_class_name.instance();
   }
   
-  public Class_package.Matcher getClass_package(final ViatraQueryEngine engine) {
-    return Class_package.Matcher.on(engine);
+  public Set_class_name.Matcher getSet_class_name(final ViatraQueryEngine engine) {
+    return Set_class_name.Matcher.on(engine);
   }
   
-  public Preserved_class_package getPreserved_class_package() {
-    return Preserved_class_package.instance();
+  public Unset_class_name getUnset_class_name() {
+    return Unset_class_name.instance();
   }
   
-  public Preserved_class_package.Matcher getPreserved_class_package(final ViatraQueryEngine engine) {
-    return Preserved_class_package.Matcher.on(engine);
+  public Unset_class_name.Matcher getUnset_class_name(final ViatraQueryEngine engine) {
+    return Unset_class_name.Matcher.on(engine);
   }
   
-  public Changed_class_package getChanged_class_package() {
-    return Changed_class_package.instance();
+  public Initial_class_name getInitial_class_name() {
+    return Initial_class_name.instance();
   }
   
-  public Changed_class_package.Matcher getChanged_class_package(final ViatraQueryEngine engine) {
-    return Changed_class_package.Matcher.on(engine);
+  public Initial_class_name.Matcher getInitial_class_name(final ViatraQueryEngine engine) {
+    return Initial_class_name.Matcher.on(engine);
   }
   
-  public Class_abstract getClass_abstract() {
-    return Class_abstract.instance();
+  public Current_class_name getCurrent_class_name() {
+    return Current_class_name.instance();
   }
   
-  public Class_abstract.Matcher getClass_abstract(final ViatraQueryEngine engine) {
-    return Class_abstract.Matcher.on(engine);
+  public Current_class_name.Matcher getCurrent_class_name(final ViatraQueryEngine engine) {
+    return Current_class_name.Matcher.on(engine);
   }
   
-  public Preserved_class_abstract getPreserved_class_abstract() {
-    return Preserved_class_abstract.instance();
+  public Get_class_package getGet_class_package() {
+    return Get_class_package.instance();
   }
   
-  public Preserved_class_abstract.Matcher getPreserved_class_abstract(final ViatraQueryEngine engine) {
-    return Preserved_class_abstract.Matcher.on(engine);
+  public Get_class_package.Matcher getGet_class_package(final ViatraQueryEngine engine) {
+    return Get_class_package.Matcher.on(engine);
   }
   
-  public Changed_class_abstract getChanged_class_abstract() {
-    return Changed_class_abstract.instance();
+  public Set_class_package getSet_class_package() {
+    return Set_class_package.instance();
   }
   
-  public Changed_class_abstract.Matcher getChanged_class_abstract(final ViatraQueryEngine engine) {
-    return Changed_class_abstract.Matcher.on(engine);
+  public Set_class_package.Matcher getSet_class_package(final ViatraQueryEngine engine) {
+    return Set_class_package.Matcher.on(engine);
   }
   
-  public Class_superClass getClass_superClass() {
-    return Class_superClass.instance();
+  public Unset_class_package getUnset_class_package() {
+    return Unset_class_package.instance();
   }
   
-  public Class_superClass.Matcher getClass_superClass(final ViatraQueryEngine engine) {
-    return Class_superClass.Matcher.on(engine);
+  public Unset_class_package.Matcher getUnset_class_package(final ViatraQueryEngine engine) {
+    return Unset_class_package.Matcher.on(engine);
   }
   
-  public Common_class_superClass getCommon_class_superClass() {
-    return Common_class_superClass.instance();
+  public Initial_class_package getInitial_class_package() {
+    return Initial_class_package.instance();
   }
   
-  public Common_class_superClass.Matcher getCommon_class_superClass(final ViatraQueryEngine engine) {
-    return Common_class_superClass.Matcher.on(engine);
+  public Initial_class_package.Matcher getInitial_class_package(final ViatraQueryEngine engine) {
+    return Initial_class_package.Matcher.on(engine);
   }
   
-  public Preserved_class_superClass getPreserved_class_superClass() {
-    return Preserved_class_superClass.instance();
+  public Current_class_package getCurrent_class_package() {
+    return Current_class_package.instance();
   }
   
-  public Preserved_class_superClass.Matcher getPreserved_class_superClass(final ViatraQueryEngine engine) {
-    return Preserved_class_superClass.Matcher.on(engine);
+  public Current_class_package.Matcher getCurrent_class_package(final ViatraQueryEngine engine) {
+    return Current_class_package.Matcher.on(engine);
   }
   
-  public Added_class_superClass getAdded_class_superClass() {
-    return Added_class_superClass.instance();
+  public Get_class_abstract getGet_class_abstract() {
+    return Get_class_abstract.instance();
   }
   
-  public Added_class_superClass.Matcher getAdded_class_superClass(final ViatraQueryEngine engine) {
-    return Added_class_superClass.Matcher.on(engine);
+  public Get_class_abstract.Matcher getGet_class_abstract(final ViatraQueryEngine engine) {
+    return Get_class_abstract.Matcher.on(engine);
   }
   
-  public Removed_class_superClass getRemoved_class_superClass() {
-    return Removed_class_superClass.instance();
+  public Set_class_abstract getSet_class_abstract() {
+    return Set_class_abstract.instance();
   }
   
-  public Removed_class_superClass.Matcher getRemoved_class_superClass(final ViatraQueryEngine engine) {
-    return Removed_class_superClass.Matcher.on(engine);
+  public Set_class_abstract.Matcher getSet_class_abstract(final ViatraQueryEngine engine) {
+    return Set_class_abstract.Matcher.on(engine);
   }
   
-  public Class_subClass getClass_subClass() {
-    return Class_subClass.instance();
+  public Unset_class_abstract getUnset_class_abstract() {
+    return Unset_class_abstract.instance();
   }
   
-  public Class_subClass.Matcher getClass_subClass(final ViatraQueryEngine engine) {
-    return Class_subClass.Matcher.on(engine);
+  public Unset_class_abstract.Matcher getUnset_class_abstract(final ViatraQueryEngine engine) {
+    return Unset_class_abstract.Matcher.on(engine);
   }
   
-  public Preserved_class_subClass getPreserved_class_subClass() {
-    return Preserved_class_subClass.instance();
+  public Initial_class_abstract getInitial_class_abstract() {
+    return Initial_class_abstract.instance();
   }
   
-  public Preserved_class_subClass.Matcher getPreserved_class_subClass(final ViatraQueryEngine engine) {
-    return Preserved_class_subClass.Matcher.on(engine);
+  public Initial_class_abstract.Matcher getInitial_class_abstract(final ViatraQueryEngine engine) {
+    return Initial_class_abstract.Matcher.on(engine);
   }
   
-  public Added_class_subClass getAdded_class_subClass() {
-    return Added_class_subClass.instance();
+  public Current_class_abstract getCurrent_class_abstract() {
+    return Current_class_abstract.instance();
   }
   
-  public Added_class_subClass.Matcher getAdded_class_subClass(final ViatraQueryEngine engine) {
-    return Added_class_subClass.Matcher.on(engine);
+  public Current_class_abstract.Matcher getCurrent_class_abstract(final ViatraQueryEngine engine) {
+    return Current_class_abstract.Matcher.on(engine);
   }
   
-  public Removed_class_subClass getRemoved_class_subClass() {
-    return Removed_class_subClass.instance();
+  public Get_class_superClass getGet_class_superClass() {
+    return Get_class_superClass.instance();
   }
   
-  public Removed_class_subClass.Matcher getRemoved_class_subClass(final ViatraQueryEngine engine) {
-    return Removed_class_subClass.Matcher.on(engine);
+  public Get_class_superClass.Matcher getGet_class_superClass(final ViatraQueryEngine engine) {
+    return Get_class_superClass.Matcher.on(engine);
   }
   
-  public Class_structuralFeature getClass_structuralFeature() {
-    return Class_structuralFeature.instance();
+  public Set_class_superClass getSet_class_superClass() {
+    return Set_class_superClass.instance();
   }
   
-  public Class_structuralFeature.Matcher getClass_structuralFeature(final ViatraQueryEngine engine) {
-    return Class_structuralFeature.Matcher.on(engine);
+  public Set_class_superClass.Matcher getSet_class_superClass(final ViatraQueryEngine engine) {
+    return Set_class_superClass.Matcher.on(engine);
   }
   
-  public Class_attribute getClass_attribute() {
-    return Class_attribute.instance();
+  public Unset_class_superClass getUnset_class_superClass() {
+    return Unset_class_superClass.instance();
   }
   
-  public Class_attribute.Matcher getClass_attribute(final ViatraQueryEngine engine) {
-    return Class_attribute.Matcher.on(engine);
+  public Unset_class_superClass.Matcher getUnset_class_superClass(final ViatraQueryEngine engine) {
+    return Unset_class_superClass.Matcher.on(engine);
   }
   
-  public Class_reference getClass_reference() {
-    return Class_reference.instance();
+  public Initial_class_superClass getInitial_class_superClass() {
+    return Initial_class_superClass.instance();
   }
   
-  public Class_reference.Matcher getClass_reference(final ViatraQueryEngine engine) {
-    return Class_reference.Matcher.on(engine);
+  public Initial_class_superClass.Matcher getInitial_class_superClass(final ViatraQueryEngine engine) {
+    return Initial_class_superClass.Matcher.on(engine);
   }
   
-  public Class_reference_typed getClass_reference_typed() {
-    return Class_reference_typed.instance();
+  public Current_class_superClass getCurrent_class_superClass() {
+    return Current_class_superClass.instance();
   }
   
-  public Class_reference_typed.Matcher getClass_reference_typed(final ViatraQueryEngine engine) {
-    return Class_reference_typed.Matcher.on(engine);
+  public Current_class_superClass.Matcher getCurrent_class_superClass(final ViatraQueryEngine engine) {
+    return Current_class_superClass.Matcher.on(engine);
   }
   
-  public Class_reference_typed_weak getClass_reference_typed_weak() {
-    return Class_reference_typed_weak.instance();
+  public Get_class_subClass getGet_class_subClass() {
+    return Get_class_subClass.instance();
   }
   
-  public Class_reference_typed_weak.Matcher getClass_reference_typed_weak(final ViatraQueryEngine engine) {
-    return Class_reference_typed_weak.Matcher.on(engine);
+  public Get_class_subClass.Matcher getGet_class_subClass(final ViatraQueryEngine engine) {
+    return Get_class_subClass.Matcher.on(engine);
   }
   
-  public Preserved_class_structuralFeature getPreserved_class_structuralFeature() {
-    return Preserved_class_structuralFeature.instance();
+  public Insert_class_subClass getInsert_class_subClass() {
+    return Insert_class_subClass.instance();
   }
   
-  public Preserved_class_structuralFeature.Matcher getPreserved_class_structuralFeature(final ViatraQueryEngine engine) {
-    return Preserved_class_structuralFeature.Matcher.on(engine);
+  public Insert_class_subClass.Matcher getInsert_class_subClass(final ViatraQueryEngine engine) {
+    return Insert_class_subClass.Matcher.on(engine);
   }
   
-  public Preserved_class_attribute getPreserved_class_attribute() {
-    return Preserved_class_attribute.instance();
+  public Remove_class_subClass getRemove_class_subClass() {
+    return Remove_class_subClass.instance();
   }
   
-  public Preserved_class_attribute.Matcher getPreserved_class_attribute(final ViatraQueryEngine engine) {
-    return Preserved_class_attribute.Matcher.on(engine);
+  public Remove_class_subClass.Matcher getRemove_class_subClass(final ViatraQueryEngine engine) {
+    return Remove_class_subClass.Matcher.on(engine);
   }
   
-  public Preserved_class_reference getPreserved_class_reference() {
-    return Preserved_class_reference.instance();
+  public Initial_class_subClass getInitial_class_subClass() {
+    return Initial_class_subClass.instance();
   }
   
-  public Preserved_class_reference.Matcher getPreserved_class_reference(final ViatraQueryEngine engine) {
-    return Preserved_class_reference.Matcher.on(engine);
+  public Initial_class_subClass.Matcher getInitial_class_subClass(final ViatraQueryEngine engine) {
+    return Initial_class_subClass.Matcher.on(engine);
   }
   
-  public Added_class_structuralFeature getAdded_class_structuralFeature() {
-    return Added_class_structuralFeature.instance();
+  public Current_class_subClass getCurrent_class_subClass() {
+    return Current_class_subClass.instance();
   }
   
-  public Added_class_structuralFeature.Matcher getAdded_class_structuralFeature(final ViatraQueryEngine engine) {
-    return Added_class_structuralFeature.Matcher.on(engine);
+  public Current_class_subClass.Matcher getCurrent_class_subClass(final ViatraQueryEngine engine) {
+    return Current_class_subClass.Matcher.on(engine);
   }
   
-  public Added_class_attribute getAdded_class_attribute() {
-    return Added_class_attribute.instance();
+  public Get_class_structuralFeature getGet_class_structuralFeature() {
+    return Get_class_structuralFeature.instance();
   }
   
-  public Added_class_attribute.Matcher getAdded_class_attribute(final ViatraQueryEngine engine) {
-    return Added_class_attribute.Matcher.on(engine);
+  public Get_class_structuralFeature.Matcher getGet_class_structuralFeature(final ViatraQueryEngine engine) {
+    return Get_class_structuralFeature.Matcher.on(engine);
   }
   
-  public Added_class_attribute_typed getAdded_class_attribute_typed() {
-    return Added_class_attribute_typed.instance();
+  public Insert_class_structuralFeature getInsert_class_structuralFeature() {
+    return Insert_class_structuralFeature.instance();
   }
   
-  public Added_class_attribute_typed.Matcher getAdded_class_attribute_typed(final ViatraQueryEngine engine) {
-    return Added_class_attribute_typed.Matcher.on(engine);
+  public Insert_class_structuralFeature.Matcher getInsert_class_structuralFeature(final ViatraQueryEngine engine) {
+    return Insert_class_structuralFeature.Matcher.on(engine);
   }
   
-  public Added_class_reference getAdded_class_reference() {
-    return Added_class_reference.instance();
+  public Remove_class_structuralFeature getRemove_class_structuralFeature() {
+    return Remove_class_structuralFeature.instance();
   }
   
-  public Added_class_reference.Matcher getAdded_class_reference(final ViatraQueryEngine engine) {
-    return Added_class_reference.Matcher.on(engine);
+  public Remove_class_structuralFeature.Matcher getRemove_class_structuralFeature(final ViatraQueryEngine engine) {
+    return Remove_class_structuralFeature.Matcher.on(engine);
   }
   
-  public Added_class_reference_typed getAdded_class_reference_typed() {
-    return Added_class_reference_typed.instance();
+  public Initial_class_structuralFeature getInitial_class_structuralFeature() {
+    return Initial_class_structuralFeature.instance();
   }
   
-  public Added_class_reference_typed.Matcher getAdded_class_reference_typed(final ViatraQueryEngine engine) {
-    return Added_class_reference_typed.Matcher.on(engine);
+  public Initial_class_structuralFeature.Matcher getInitial_class_structuralFeature(final ViatraQueryEngine engine) {
+    return Initial_class_structuralFeature.Matcher.on(engine);
   }
   
-  public Added_class_reference_typed_weak getAdded_class_reference_typed_weak() {
-    return Added_class_reference_typed_weak.instance();
+  public Current_class_structuralFeature getCurrent_class_structuralFeature() {
+    return Current_class_structuralFeature.instance();
   }
   
-  public Added_class_reference_typed_weak.Matcher getAdded_class_reference_typed_weak(final ViatraQueryEngine engine) {
-    return Added_class_reference_typed_weak.Matcher.on(engine);
+  public Current_class_structuralFeature.Matcher getCurrent_class_structuralFeature(final ViatraQueryEngine engine) {
+    return Current_class_structuralFeature.Matcher.on(engine);
   }
   
-  public Removed_class_structuralFeature getRemoved_class_structuralFeature() {
-    return Removed_class_structuralFeature.instance();
+  public Get_class_attribute getGet_class_attribute() {
+    return Get_class_attribute.instance();
   }
   
-  public Removed_class_structuralFeature.Matcher getRemoved_class_structuralFeature(final ViatraQueryEngine engine) {
-    return Removed_class_structuralFeature.Matcher.on(engine);
+  public Get_class_attribute.Matcher getGet_class_attribute(final ViatraQueryEngine engine) {
+    return Get_class_attribute.Matcher.on(engine);
   }
   
-  public Removed_class_attribute getRemoved_class_attribute() {
-    return Removed_class_attribute.instance();
+  public Insert_class_attribute getInsert_class_attribute() {
+    return Insert_class_attribute.instance();
   }
   
-  public Removed_class_attribute.Matcher getRemoved_class_attribute(final ViatraQueryEngine engine) {
-    return Removed_class_attribute.Matcher.on(engine);
+  public Insert_class_attribute.Matcher getInsert_class_attribute(final ViatraQueryEngine engine) {
+    return Insert_class_attribute.Matcher.on(engine);
   }
   
-  public Removed_class_reference getRemoved_class_reference() {
-    return Removed_class_reference.instance();
+  public Remove_class_attribute getRemove_class_attribute() {
+    return Remove_class_attribute.instance();
   }
   
-  public Removed_class_reference.Matcher getRemoved_class_reference(final ViatraQueryEngine engine) {
-    return Removed_class_reference.Matcher.on(engine);
+  public Remove_class_attribute.Matcher getRemove_class_attribute(final ViatraQueryEngine engine) {
+    return Remove_class_attribute.Matcher.on(engine);
   }
   
-  public Removed_class_reference_typed getRemoved_class_reference_typed() {
-    return Removed_class_reference_typed.instance();
+  public Initial_class_attribute getInitial_class_attribute() {
+    return Initial_class_attribute.instance();
   }
   
-  public Removed_class_reference_typed.Matcher getRemoved_class_reference_typed(final ViatraQueryEngine engine) {
-    return Removed_class_reference_typed.Matcher.on(engine);
+  public Initial_class_attribute.Matcher getInitial_class_attribute(final ViatraQueryEngine engine) {
+    return Initial_class_attribute.Matcher.on(engine);
   }
   
-  public Removed_class_reference_typed_weak getRemoved_class_reference_typed_weak() {
-    return Removed_class_reference_typed_weak.instance();
+  public Current_class_attribute getCurrent_class_attribute() {
+    return Current_class_attribute.instance();
   }
   
-  public Removed_class_reference_typed_weak.Matcher getRemoved_class_reference_typed_weak(final ViatraQueryEngine engine) {
-    return Removed_class_reference_typed_weak.Matcher.on(engine);
+  public Current_class_attribute.Matcher getCurrent_class_attribute(final ViatraQueryEngine engine) {
+    return Current_class_attribute.Matcher.on(engine);
   }
   
-  public Equals_class_attribute getEquals_class_attribute() {
-    return Equals_class_attribute.instance();
+  public Get_class_reference getGet_class_reference() {
+    return Get_class_reference.instance();
   }
   
-  public Equals_class_attribute.Matcher getEquals_class_attribute(final ViatraQueryEngine engine) {
-    return Equals_class_attribute.Matcher.on(engine);
+  public Get_class_reference.Matcher getGet_class_reference(final ViatraQueryEngine engine) {
+    return Get_class_reference.Matcher.on(engine);
   }
   
-  public Equals_class_reference getEquals_class_reference() {
-    return Equals_class_reference.instance();
+  public Insert_class_reference getInsert_class_reference() {
+    return Insert_class_reference.instance();
   }
   
-  public Equals_class_reference.Matcher getEquals_class_reference(final ViatraQueryEngine engine) {
-    return Equals_class_reference.Matcher.on(engine);
+  public Insert_class_reference.Matcher getInsert_class_reference(final ViatraQueryEngine engine) {
+    return Insert_class_reference.Matcher.on(engine);
+  }
+  
+  public Remove_class_reference getRemove_class_reference() {
+    return Remove_class_reference.instance();
+  }
+  
+  public Remove_class_reference.Matcher getRemove_class_reference(final ViatraQueryEngine engine) {
+    return Remove_class_reference.Matcher.on(engine);
+  }
+  
+  public Initial_class_reference getInitial_class_reference() {
+    return Initial_class_reference.instance();
+  }
+  
+  public Initial_class_reference.Matcher getInitial_class_reference(final ViatraQueryEngine engine) {
+    return Initial_class_reference.Matcher.on(engine);
+  }
+  
+  public Current_class_reference getCurrent_class_reference() {
+    return Current_class_reference.instance();
+  }
+  
+  public Current_class_reference.Matcher getCurrent_class_reference(final ViatraQueryEngine engine) {
+    return Current_class_reference.Matcher.on(engine);
   }
 }
