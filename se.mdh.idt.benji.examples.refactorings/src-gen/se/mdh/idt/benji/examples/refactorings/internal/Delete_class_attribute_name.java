@@ -34,7 +34,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:20+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
 public final class Delete_class_attribute_name extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Delete_class_attribute_name() {
     super(GeneratedPQuery.INSTANCE);

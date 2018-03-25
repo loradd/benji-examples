@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Attribute">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.AttributeQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.AttributeQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.AttributeQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_attribute"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_attribute"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_attribute"/>
@@ -33,8 +33,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_attribute_type"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Class">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_class"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_class"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_class"/>
@@ -82,8 +82,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_class_reference"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Classifier">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassifierQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassifierQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ClassifierQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_classifier"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_classifier"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_classifier"/>
@@ -101,8 +101,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_classifier_package"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataType">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataTypeQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataTypeQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.DataTypeQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_datatype"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_datatype"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_datatype"/>
@@ -120,8 +120,27 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_datatype_package"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Enumeration">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral_enumeration"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral_enumeration"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumeration"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_enumeration"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_enumeration"/>
@@ -144,27 +163,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumeration_enumerationLiteral"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.EnumerationLiteral">
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_enumerationLiteral"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_enumerationLiteral"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral_name"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_enumerationLiteral_name"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_enumerationLiteral_name"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral_name"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral_name"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_enumerationLiteral_enumeration"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.set_enumerationLiteral_enumeration"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_enumerationLiteral_enumeration"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_enumerationLiteral_enumeration"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral_enumeration"/>
-    </group>
-  </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Metamodel" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Metamodel" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Metamodel">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.MetamodelQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.MetamodelQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.MetamodelQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.$modelElement"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.$created_modelElement"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.$deleted_modelElement"/>
@@ -441,8 +441,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_modelElement_name"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Package">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.PackageQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.PackageQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.PackageQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_package"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_package"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_package"/>
@@ -490,8 +490,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_package_enumeration"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.Reference">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ReferenceQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.ReferenceQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.ReferenceQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_reference"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_reference"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_reference"/>
@@ -534,8 +534,8 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_reference_opposite"/>
     </group>
   </extension>
-  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeature">
+  <extension id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeatureQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeatureQueries" id="se.mdh.idt.benji.examples.refactorings.metamodel.queries.StructuralFeatureQueries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.get_structuralFeature"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.create_structuralFeature"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.metamodel.queries.delete_structuralFeature"/>

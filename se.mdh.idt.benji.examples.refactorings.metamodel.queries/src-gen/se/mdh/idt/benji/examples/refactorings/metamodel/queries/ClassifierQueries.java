@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Classifier.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/ClassifierQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -23,10 +23,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_classifier
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_classifier_package;
 
 /**
- * A pattern group formed of all public patterns defined in Classifier.vql.
+ * A pattern group formed of all public patterns defined in ClassifierQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Classifier.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file ClassifierQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -51,8 +51,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_classifier
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Classifier extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class ClassifierQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -60,16 +60,16 @@ public final class Classifier extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Classifier instance() {
+  public static ClassifierQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Classifier();
+        INSTANCE = new ClassifierQueries();
     }
     return INSTANCE;
   }
   
-  private static Classifier INSTANCE;
+  private static ClassifierQueries INSTANCE;
   
-  private Classifier() {
+  private ClassifierQueries() {
     querySpecifications.add(Get_classifier.instance());
     querySpecifications.add(Create_classifier.instance());
     querySpecifications.add(Delete_classifier.instance());

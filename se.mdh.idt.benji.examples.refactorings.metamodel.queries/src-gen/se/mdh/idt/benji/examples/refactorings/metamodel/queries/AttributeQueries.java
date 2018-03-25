@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Attribute.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/AttributeQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -38,10 +38,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_upper;
 
 /**
- * A pattern group formed of all public patterns defined in Attribute.vql.
+ * A pattern group formed of all public patterns defined in AttributeQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Attribute.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file AttributeQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -81,8 +81,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_attribute_
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Attribute extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class AttributeQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -90,16 +90,16 @@ public final class Attribute extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Attribute instance() {
+  public static AttributeQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Attribute();
+        INSTANCE = new AttributeQueries();
     }
     return INSTANCE;
   }
   
-  private static Attribute INSTANCE;
+  private static AttributeQueries INSTANCE;
   
-  private Attribute() {
+  private AttributeQueries() {
     querySpecifications.add(Get_attribute.instance());
     querySpecifications.add(Create_attribute.instance());
     querySpecifications.add(Delete_attribute.instance());

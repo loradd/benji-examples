@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Package.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/PackageQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -53,10 +53,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_su
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_uri;
 
 /**
- * A pattern group formed of all public patterns defined in Package.vql.
+ * A pattern group formed of all public patterns defined in PackageQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Package.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file PackageQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -111,8 +111,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_ur
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Package extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class PackageQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -120,16 +120,16 @@ public final class Package extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Package instance() {
+  public static PackageQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Package();
+        INSTANCE = new PackageQueries();
     }
     return INSTANCE;
   }
   
-  private static Package INSTANCE;
+  private static PackageQueries INSTANCE;
   
-  private Package() {
+  private PackageQueries() {
     querySpecifications.add(Get_package.instance());
     querySpecifications.add(Create_package.instance());
     querySpecifications.add(Delete_package.instance());

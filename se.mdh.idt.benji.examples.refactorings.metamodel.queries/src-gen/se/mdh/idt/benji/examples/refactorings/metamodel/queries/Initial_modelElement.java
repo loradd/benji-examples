@@ -45,7 +45,7 @@ import se.mdh.idt.benji.trace.api.Initial;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
 public final class Initial_modelElement extends BaseGeneratedEMFQuerySpecification<Initial_modelElement.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.metamodel.queries.initial_modelElement pattern,

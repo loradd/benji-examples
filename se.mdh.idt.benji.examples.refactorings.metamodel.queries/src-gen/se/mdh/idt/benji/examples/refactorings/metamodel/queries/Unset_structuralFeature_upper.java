@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/StructuralFeature.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/StructuralFeatureQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -48,7 +48,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
 public final class Unset_structuralFeature_upper extends BaseGeneratedEMFQuerySpecification<Unset_structuralFeature_upper.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_structuralFeature_upper pattern,

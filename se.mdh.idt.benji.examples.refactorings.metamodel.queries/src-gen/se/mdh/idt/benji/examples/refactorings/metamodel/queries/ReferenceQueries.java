@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Reference.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/ReferenceQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -48,10 +48,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_reference_
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_reference_upper;
 
 /**
- * A pattern group formed of all public patterns defined in Reference.vql.
+ * A pattern group formed of all public patterns defined in ReferenceQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Reference.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file ReferenceQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -101,8 +101,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_reference_
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Reference extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class ReferenceQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -110,16 +110,16 @@ public final class Reference extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Reference instance() {
+  public static ReferenceQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Reference();
+        INSTANCE = new ReferenceQueries();
     }
     return INSTANCE;
   }
   
-  private static Reference INSTANCE;
+  private static ReferenceQueries INSTANCE;
   
-  private Reference() {
+  private ReferenceQueries() {
     querySpecifications.add(Get_reference.instance());
     querySpecifications.add(Create_reference.instance());
     querySpecifications.add(Delete_reference.instance());

@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Enumeration.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/EnumerationQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -28,10 +28,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_enumeratio
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_enumeration_package;
 
 /**
- * A pattern group formed of all public patterns defined in Enumeration.vql.
+ * A pattern group formed of all public patterns defined in EnumerationQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Enumeration.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file EnumerationQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -61,8 +61,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_enumeratio
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Enumeration extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class EnumerationQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -70,16 +70,16 @@ public final class Enumeration extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Enumeration instance() {
+  public static EnumerationQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Enumeration();
+        INSTANCE = new EnumerationQueries();
     }
     return INSTANCE;
   }
   
-  private static Enumeration INSTANCE;
+  private static EnumerationQueries INSTANCE;
   
-  private Enumeration() {
+  private EnumerationQueries() {
     querySpecifications.add(Get_enumeration.instance());
     querySpecifications.add(Create_enumeration.instance());
     querySpecifications.add(Delete_enumeration.instance());

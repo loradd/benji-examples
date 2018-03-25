@@ -32,7 +32,7 @@ import se.mdh.idt.benji.examples.refactorings.internal.Merge_class_attribute;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:20+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
 public final class Merge_class_attribute_intersection extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Merge_class_attribute_intersection() {
     super(GeneratedPQuery.INSTANCE);

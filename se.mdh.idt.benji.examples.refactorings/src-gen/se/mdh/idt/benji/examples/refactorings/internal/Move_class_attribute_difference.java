@@ -32,7 +32,7 @@ import se.mdh.idt.benji.examples.refactorings.internal.Move_class_attribute;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:20+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
 public final class Move_class_attribute_difference extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Move_class_attribute_difference() {
     super(GeneratedPQuery.INSTANCE);

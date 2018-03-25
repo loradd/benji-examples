@@ -49,7 +49,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
 public final class Current_enumerationLiteral_enumeration extends BaseGeneratedEMFQuerySpecification<Current_enumerationLiteral_enumeration.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.metamodel.queries.current_enumerationLiteral_enumeration pattern,

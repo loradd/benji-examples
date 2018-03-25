@@ -32,7 +32,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Remove_class_ref
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:20+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
 public final class Delete_class_reference extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Delete_class_reference() {
     super(GeneratedPQuery.INSTANCE);

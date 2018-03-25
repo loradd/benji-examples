@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/Metamodel.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.metamodel.queries/src/se/mdh/idt/benji/examples/refactorings/metamodel/queries/MetamodelQueries.vql
  */
 package se.mdh.idt.benji.examples.refactorings.metamodel.queries;
 
@@ -268,10 +268,10 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.$unset_structura
 import se.mdh.idt.benji.examples.refactorings.metamodel.queries.$unset_structuralFeature_upper;
 
 /**
- * A pattern group formed of all public patterns defined in Metamodel.vql.
+ * A pattern group formed of all public patterns defined in MetamodelQueries.vql.
  * 
  * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
- * a VIATRA Query engine for matching all patterns originally defined in file Metamodel.vql,
+ * a VIATRA Query engine for matching all patterns originally defined in file MetamodelQueries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings.metamodel.queries, the group contains the definition of the following patterns: <ul>
@@ -541,8 +541,8 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.$unset_structura
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:19+0200")
-public final class Metamodel extends BaseGeneratedPatternGroup {
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+public final class MetamodelQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
    * 
@@ -550,16 +550,16 @@ public final class Metamodel extends BaseGeneratedPatternGroup {
    * @throws ViatraQueryRuntimeException if there was an error loading the generated code of pattern specifications
    * 
    */
-  public static Metamodel instance() {
+  public static MetamodelQueries instance() {
     if (INSTANCE == null) {
-        INSTANCE = new Metamodel();
+        INSTANCE = new MetamodelQueries();
     }
     return INSTANCE;
   }
   
-  private static Metamodel INSTANCE;
+  private static MetamodelQueries INSTANCE;
   
-  private Metamodel() {
+  private MetamodelQueries() {
     querySpecifications.add($modelElement.instance());
     querySpecifications.add($created_modelElement.instance());
     querySpecifications.add($deleted_modelElement.instance());
