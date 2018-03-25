@@ -32,7 +32,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_superC
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
 public final class Get_class_superClass_intersection extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Get_class_superClass_intersection() {
     super(GeneratedPQuery.INSTANCE);

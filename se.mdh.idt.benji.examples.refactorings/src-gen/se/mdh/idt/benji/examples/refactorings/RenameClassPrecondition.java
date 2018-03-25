@@ -50,7 +50,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
 public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecification<RenameClassPrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.RenameClassPrecondition pattern,

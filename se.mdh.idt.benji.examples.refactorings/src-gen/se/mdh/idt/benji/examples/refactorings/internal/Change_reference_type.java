@@ -32,7 +32,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_reference_
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:24+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
 public final class Change_reference_type extends BaseGeneratedEMFQuerySpecificationWithGenericMatcher {
   private Change_reference_type() {
     super(GeneratedPQuery.INSTANCE);

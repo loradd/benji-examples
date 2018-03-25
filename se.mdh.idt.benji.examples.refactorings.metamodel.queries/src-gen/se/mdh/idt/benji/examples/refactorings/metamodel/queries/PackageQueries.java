@@ -111,7 +111,7 @@ import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Unset_package_ur
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
 public final class PackageQueries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.

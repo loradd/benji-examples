@@ -48,7 +48,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:23+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
 public final class Unset_enumeration_name extends BaseGeneratedEMFQuerySpecification<Unset_enumeration_name.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.metamodel.queries.unset_enumeration_name pattern,
