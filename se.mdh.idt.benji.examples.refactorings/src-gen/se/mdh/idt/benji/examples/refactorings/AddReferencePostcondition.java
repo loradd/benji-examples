@@ -35,11 +35,10 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_reference_name;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_reference_type;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Created_class_reference;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_reference_name;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_reference_type;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -49,7 +48,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecification<AddReferencePostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.AddReferencePostcondition pattern,
@@ -65,88 +64,88 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$class;
+    private Trace fClass;
     
-    private TraceLink f$type;
+    private Trace fType;
     
-    private String f$name;
+    private String fName;
     
-    private TraceLink f$reference;
+    private Trace fReference;
     
-    private static List<String> parameterNames = makeImmutableList("$class", "$type", "$name", "$reference");
+    private static List<String> parameterNames = makeImmutableList("class", "type", "name", "reference");
     
-    private Match(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      this.f$class = p$class;
-      this.f$type = p$type;
-      this.f$name = p$name;
-      this.f$reference = p$reference;
+    private Match(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      this.fClass = pClass;
+      this.fType = pType;
+      this.fName = pName;
+      this.fReference = pReference;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$class".equals(parameterName)) return this.f$class;
-      if ("$type".equals(parameterName)) return this.f$type;
-      if ("$name".equals(parameterName)) return this.f$name;
-      if ("$reference".equals(parameterName)) return this.f$reference;
+      if ("class".equals(parameterName)) return this.fClass;
+      if ("type".equals(parameterName)) return this.fType;
+      if ("name".equals(parameterName)) return this.fName;
+      if ("reference".equals(parameterName)) return this.fReference;
       return null;
     }
     
-    public TraceLink get$class() {
-      return this.f$class;
+    public Trace getValueOfClass() {
+      return this.fClass;
     }
     
-    public TraceLink get$type() {
-      return this.f$type;
+    public Trace getType() {
+      return this.fType;
     }
     
-    public String get$name() {
-      return this.f$name;
+    public String getName() {
+      return this.fName;
     }
     
-    public TraceLink get$reference() {
-      return this.f$reference;
+    public Trace getReference() {
+      return this.fReference;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$class".equals(parameterName) ) {
-          this.f$class = (TraceLink) newValue;
+      if ("class".equals(parameterName) ) {
+          this.fClass = (Trace) newValue;
           return true;
       }
-      if ("$type".equals(parameterName) ) {
-          this.f$type = (TraceLink) newValue;
+      if ("type".equals(parameterName) ) {
+          this.fType = (Trace) newValue;
           return true;
       }
-      if ("$name".equals(parameterName) ) {
-          this.f$name = (String) newValue;
+      if ("name".equals(parameterName) ) {
+          this.fName = (String) newValue;
           return true;
       }
-      if ("$reference".equals(parameterName) ) {
-          this.f$reference = (TraceLink) newValue;
+      if ("reference".equals(parameterName) ) {
+          this.fReference = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$class(final TraceLink p$class) {
+    public void setClass(final Trace pClass) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$class = p$class;
+      this.fClass = pClass;
     }
     
-    public void set$type(final TraceLink p$type) {
+    public void setType(final Trace pType) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$type = p$type;
+      this.fType = pType;
     }
     
-    public void set$name(final String p$name) {
+    public void setName(final String pName) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$name = p$name;
+      this.fName = pName;
     }
     
-    public void set$reference(final TraceLink p$reference) {
+    public void setReference(final Trace pReference) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$reference = p$reference;
+      this.fReference = pReference;
     }
     
     @Override
@@ -161,27 +160,27 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$class, f$type, f$name, f$reference};
+      return new Object[]{fClass, fType, fName, fReference};
     }
     
     @Override
     public AddReferencePostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$class, f$type, f$name, f$reference) : this;
+      return isMutable() ? newMatch(fClass, fType, fName, fReference) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$class\"=" + prettyPrintValue(f$class) + ", ");
-      result.append("\"$type\"=" + prettyPrintValue(f$type) + ", ");
-      result.append("\"$name\"=" + prettyPrintValue(f$name) + ", ");
-      result.append("\"$reference\"=" + prettyPrintValue(f$reference));
+      result.append("\"class\"=" + prettyPrintValue(fClass) + ", ");
+      result.append("\"type\"=" + prettyPrintValue(fType) + ", ");
+      result.append("\"name\"=" + prettyPrintValue(fName) + ", ");
+      result.append("\"reference\"=" + prettyPrintValue(fReference));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$class, f$type, f$name, f$reference);
+      return Objects.hash (fClass, fType, fName, fReference);
     }
     
     @Override
@@ -193,7 +192,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
       }
       if ((obj instanceof AddReferencePostcondition.Match)) {
           AddReferencePostcondition.Match other = (AddReferencePostcondition.Match) obj;
-          return Objects.equals(f$class, other.f$class) && Objects.equals(f$type, other.f$type) && Objects.equals(f$name, other.f$name) && Objects.equals(f$reference, other.f$reference);
+          return Objects.equals(fClass, other.fClass) && Objects.equals(fType, other.fType) && Objects.equals(fName, other.fName) && Objects.equals(fReference, other.fReference);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -224,35 +223,35 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static AddReferencePostcondition.Match newMutableMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return new Mutable(p$class, p$type, p$name, p$reference);
+    public static AddReferencePostcondition.Match newMutableMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return new Mutable(pClass, pType, pName, pReference);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static AddReferencePostcondition.Match newMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return new Immutable(p$class, p$type, p$name, p$reference);
+    public static AddReferencePostcondition.Match newMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return new Immutable(pClass, pType, pName, pReference);
     }
     
     private static final class Mutable extends AddReferencePostcondition.Match {
-      Mutable(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-        super(p$class, p$type, p$name, p$reference);
+      Mutable(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+        super(pClass, pType, pName, pReference);
       }
       
       @Override
@@ -262,8 +261,8 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     }
     
     private static final class Immutable extends AddReferencePostcondition.Match {
-      Immutable(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-        super(p$class, p$type, p$name, p$reference);
+      Immutable(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+        super(pClass, pType, pName, pReference);
       }
       
       @Override
@@ -284,12 +283,11 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
    * 
    * <p>Original source:
    * <code><pre>
-   * // AACR13 - Add Reference - Precondition
-   * pattern AddReferencePostcondition ($class : TraceLink, $type : TraceLink, $name : java String, $reference : TraceLink) {
-   * 	find create_reference ($reference);
-   * 	find set_reference_name ($reference,  $name);
-   * 	find set_reference_type ($reference, $type);
-   * 	find insert_class_reference ($class, $reference);	
+   * // AACR13 - Add Reference - Postcondition
+   * pattern AddReferencePostcondition (class : Trace, type : Trace, name : java String, reference : Trace) {
+   * 	find created_class_reference (class, reference);
+   * 	find set_reference_name (reference, name);
+   * 	find set_reference_type (reference, type);
    * }
    * </pre></code>
    * 
@@ -326,13 +324,13 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
       return new Matcher();
     }
     
-    private final static int POSITION_$CLASS = 0;
+    private final static int POSITION_CLASS = 0;
     
-    private final static int POSITION_$TYPE = 1;
+    private final static int POSITION_TYPE = 1;
     
-    private final static int POSITION_$NAME = 2;
+    private final static int POSITION_NAME = 2;
     
-    private final static int POSITION_$REFERENCE = 3;
+    private final static int POSITION_REFERENCE = 3;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(AddReferencePostcondition.Matcher.class);
     
@@ -350,269 +348,269 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<AddReferencePostcondition.Match> getAllMatches(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return rawGetAllMatches(new Object[]{p$class, p$type, p$name, p$reference});
+    public Collection<AddReferencePostcondition.Match> getAllMatches(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return rawGetAllMatches(new Object[]{pClass, pType, pName, pReference});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public AddReferencePostcondition.Match getOneArbitraryMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return rawGetOneArbitraryMatch(new Object[]{p$class, p$type, p$name, p$reference});
+    public AddReferencePostcondition.Match getOneArbitraryMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return rawGetOneArbitraryMatch(new Object[]{pClass, pType, pName, pReference});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return rawHasMatch(new Object[]{p$class, p$type, p$name, p$reference});
+    public boolean hasMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return rawHasMatch(new Object[]{pClass, pType, pName, pReference});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return rawCountMatches(new Object[]{p$class, p$type, p$name, p$reference});
+    public int countMatches(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return rawCountMatches(new Object[]{pClass, pType, pName, pReference});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference, final IMatchProcessor<? super AddReferencePostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$class, p$type, p$name, p$reference}, processor);
+    public void forEachMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference, final IMatchProcessor<? super AddReferencePostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{pClass, pType, pName, pReference}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference, final IMatchProcessor<? super AddReferencePostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$class, p$type, p$name, p$reference}, processor);
+    public boolean forOneArbitraryMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference, final IMatchProcessor<? super AddReferencePostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pClass, pType, pName, pReference}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$type the fixed value of pattern parameter $type, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public AddReferencePostcondition.Match newMatch(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return AddReferencePostcondition.Match.newMatch(p$class, p$type, p$name, p$reference);
+    public AddReferencePostcondition.Match newMatch(final Trace pClass, final Trace pType, final String pName, final Trace pReference) {
+      return AddReferencePostcondition.Match.newMatch(pClass, pType, pName, pReference);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$class(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$CLASS, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfclass(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_CLASS, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class() {
-      return rawAccumulateAllValuesOf$class(emptyArray());
+    public Set<Trace> getAllValuesOfclass() {
+      return rawAccumulateAllValuesOfclass(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final AddReferencePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$class(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfclass(final AddReferencePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfclass(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final TraceLink p$type, final String p$name, final TraceLink p$reference) {
-      return rawAccumulateAllValuesOf$class(new Object[]{
+    public Set<Trace> getAllValuesOfclass(final Trace pType, final String pName, final Trace pReference) {
+      return rawAccumulateAllValuesOfclass(new Object[]{
       null, 
-      p$type, 
-      p$name, 
-      p$reference
+      pType, 
+      pName, 
+      pReference
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $type.
+     * Retrieve the set of values that occur in matches for type.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$type(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$TYPE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOftype(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_TYPE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $type.
+     * Retrieve the set of values that occur in matches for type.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$type() {
-      return rawAccumulateAllValuesOf$type(emptyArray());
+    public Set<Trace> getAllValuesOftype() {
+      return rawAccumulateAllValuesOftype(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $type.
+     * Retrieve the set of values that occur in matches for type.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$type(final AddReferencePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$type(partialMatch.toArray());
+    public Set<Trace> getAllValuesOftype(final AddReferencePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOftype(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $type.
+     * Retrieve the set of values that occur in matches for type.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$type(final TraceLink p$class, final String p$name, final TraceLink p$reference) {
-      return rawAccumulateAllValuesOf$type(new Object[]{
-      p$class, 
+    public Set<Trace> getAllValuesOftype(final Trace pClass, final String pName, final Trace pReference) {
+      return rawAccumulateAllValuesOftype(new Object[]{
+      pClass, 
       null, 
-      p$name, 
-      p$reference
+      pName, 
+      pReference
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOf$name(final Object[] parameters) {
+    protected Set<String> rawAccumulateAllValuesOfname(final Object[] parameters) {
       Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_$NAME, parameters, results);
+      rawAccumulateAllValues(POSITION_NAME, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name() {
-      return rawAccumulateAllValuesOf$name(emptyArray());
+    public Set<String> getAllValuesOfname() {
+      return rawAccumulateAllValuesOfname(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name(final AddReferencePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$name(partialMatch.toArray());
+    public Set<String> getAllValuesOfname(final AddReferencePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfname(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name(final TraceLink p$class, final TraceLink p$type, final TraceLink p$reference) {
-      return rawAccumulateAllValuesOf$name(new Object[]{
-      p$class, 
-      p$type, 
+    public Set<String> getAllValuesOfname(final Trace pClass, final Trace pType, final Trace pReference) {
+      return rawAccumulateAllValuesOfname(new Object[]{
+      pClass, 
+      pType, 
       null, 
-      p$reference
+      pReference
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$reference(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$REFERENCE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfreference(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_REFERENCE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference() {
-      return rawAccumulateAllValuesOf$reference(emptyArray());
+    public Set<Trace> getAllValuesOfreference() {
+      return rawAccumulateAllValuesOfreference(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference(final AddReferencePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$reference(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfreference(final AddReferencePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfreference(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference(final TraceLink p$class, final TraceLink p$type, final String p$name) {
-      return rawAccumulateAllValuesOf$reference(new Object[]{
-      p$class, 
-      p$type, 
-      p$name, 
+    public Set<Trace> getAllValuesOfreference(final Trace pClass, final Trace pType, final String pName) {
+      return rawAccumulateAllValuesOfreference(new Object[]{
+      pClass, 
+      pType, 
+      pName, 
       null
       });
     }
@@ -620,7 +618,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     @Override
     protected AddReferencePostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return AddReferencePostcondition.Match.newMatch((TraceLink) t.get(POSITION_$CLASS), (TraceLink) t.get(POSITION_$TYPE), (String) t.get(POSITION_$NAME), (TraceLink) t.get(POSITION_$REFERENCE));
+          return AddReferencePostcondition.Match.newMatch((Trace) t.get(POSITION_CLASS), (Trace) t.get(POSITION_TYPE), (String) t.get(POSITION_NAME), (Trace) t.get(POSITION_REFERENCE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -630,7 +628,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     @Override
     protected AddReferencePostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return AddReferencePostcondition.Match.newMatch((TraceLink) match[POSITION_$CLASS], (TraceLink) match[POSITION_$TYPE], (String) match[POSITION_$NAME], (TraceLink) match[POSITION_$REFERENCE]);
+          return AddReferencePostcondition.Match.newMatch((Trace) match[POSITION_CLASS], (Trace) match[POSITION_TYPE], (String) match[POSITION_NAME], (Trace) match[POSITION_REFERENCE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -640,7 +638,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     @Override
     protected AddReferencePostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return AddReferencePostcondition.Match.newMutableMatch((TraceLink) match[POSITION_$CLASS], (TraceLink) match[POSITION_$TYPE], (String) match[POSITION_$NAME], (TraceLink) match[POSITION_$REFERENCE]);
+          return AddReferencePostcondition.Match.newMutableMatch((Trace) match[POSITION_CLASS], (Trace) match[POSITION_TYPE], (String) match[POSITION_NAME], (Trace) match[POSITION_REFERENCE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -666,17 +664,17 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
   public static abstract class Processor implements IMatchProcessor<AddReferencePostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$class the value of pattern parameter $class in the currently processed match
-     * @param p$type the value of pattern parameter $type in the currently processed match
-     * @param p$name the value of pattern parameter $name in the currently processed match
-     * @param p$reference the value of pattern parameter $reference in the currently processed match
+     * @param pClass the value of pattern parameter class in the currently processed match
+     * @param pType the value of pattern parameter type in the currently processed match
+     * @param pName the value of pattern parameter name in the currently processed match
+     * @param pReference the value of pattern parameter reference in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$class, final TraceLink p$type, final String p$name, final TraceLink p$reference);
+    public abstract void process(final Trace pClass, final Trace pType, final String pName, final Trace pReference);
     
     @Override
     public void process(final AddReferencePostcondition.Match match) {
-      process(match.get$class(), match.get$type(), match.get$name(), match.get$reference());
+      process(match.getValueOfClass(), match.getType(), match.getName(), match.getReference());
     }
   }
   
@@ -714,7 +712,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
   
   @Override
   public AddReferencePostcondition.Match newMatch(final Object... parameters) {
-    return AddReferencePostcondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (se.mdh.idt.benji.trace.TraceLink) parameters[1], (java.lang.String) parameters[2], (se.mdh.idt.benji.trace.TraceLink) parameters[3]);
+    return AddReferencePostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (se.mdh.idt.benji.trace.Trace) parameters[1], (java.lang.String) parameters[2], (se.mdh.idt.benji.trace.Trace) parameters[3]);
   }
   
   /**
@@ -746,15 +744,15 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static AddReferencePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$class = new PParameter("$class", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pClass = new PParameter("class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$type = new PParameter("$type", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pType = new PParameter("type", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$name = new PParameter("$name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
+    private final PParameter parameter_pName = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$reference = new PParameter("$reference", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pReference = new PParameter("reference", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$class, parameter_p$type, parameter_p$name, parameter_p$reference);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pClass, parameter_pType, parameter_pName, parameter_pReference);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -767,7 +765,7 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$class","$type","$name","$reference");
+      return Arrays.asList("class","type","name","reference");
     }
     
     @Override
@@ -780,28 +778,26 @@ public final class AddReferencePostcondition extends BaseGeneratedEMFQuerySpecif
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$class = body.getOrCreateVariableByName("$class");
-          PVariable var_$type = body.getOrCreateVariableByName("$type");
-          PVariable var_$name = body.getOrCreateVariableByName("$name");
-          PVariable var_$reference = body.getOrCreateVariableByName("$reference");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_$name), new JavaTransitiveInstancesKey(java.lang.String.class));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_class = body.getOrCreateVariableByName("class");
+          PVariable var_type = body.getOrCreateVariableByName("type");
+          PVariable var_name = body.getOrCreateVariableByName("name");
+          PVariable var_reference = body.getOrCreateVariableByName("reference");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$class, parameter_p$class),
-             new ExportedParameter(body, var_$type, parameter_p$type),
-             new ExportedParameter(body, var_$name, parameter_p$name),
-             new ExportedParameter(body, var_$reference, parameter_p$reference)
+             new ExportedParameter(body, var_class, parameter_pClass),
+             new ExportedParameter(body, var_type, parameter_pType),
+             new ExportedParameter(body, var_name, parameter_pName),
+             new ExportedParameter(body, var_reference, parameter_pReference)
           ));
-          // 	find create_reference ($reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference), Create_reference.instance().getInternalQueryRepresentation());
-          // 	find set_reference_name ($reference,  $name)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference, var_$name), Set_reference_name.instance().getInternalQueryRepresentation());
-          // 	find set_reference_type ($reference, $type)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference, var_$type), Set_reference_type.instance().getInternalQueryRepresentation());
-          // 	find insert_class_reference ($class, $reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_$reference), Insert_class_reference.instance().getInternalQueryRepresentation());
+          // 	find created_class_reference (class, reference)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var_reference), Created_class_reference.instance().getInternalQueryRepresentation());
+          // 	find set_reference_name (reference, name)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_reference, var_name), Set_reference_name.instance().getInternalQueryRepresentation());
+          // 	find set_reference_type (reference, type)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_reference, var_type), Set_reference_type.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

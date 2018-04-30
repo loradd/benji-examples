@@ -68,6 +68,10 @@ public class WordnetAdapterFactory extends AdapterFactoryImpl {
 	protected WordnetSwitch<Adapter> modelSwitch =
 		new WordnetSwitch<Adapter>() {
 			@Override
+			public Adapter caseWordNet(WordNet object) {
+				return createWordNetAdapter();
+			}
+			@Override
 			public Adapter caseSynset(Synset object) {
 				return createSynsetAdapter();
 			}
@@ -94,6 +98,20 @@ public class WordnetAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link se.mdh.idt.benji.examples.refactorings.wordnet.WordNet <em>Word Net</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.WordNet
+	 * @generated
+	 */
+	public Adapter createWordNetAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Synset <em>Synset</em>}'.

@@ -22,9 +22,11 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -33,11 +35,11 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_reference;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_superClass;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_package_class;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.internal.Generate_class_superClass_name;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_class_attribute;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_class_superClass;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_package_class;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -47,7 +49,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySpecification<ExtractSuperclassPrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.ExtractSuperclassPrecondition pattern,
@@ -63,105 +65,105 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$package;
+    private Trace fPackage;
     
-    private TraceLink f$class;
+    private Trace fSuperClass;
     
-    private TraceLink f$attribute;
+    private Trace fSubClass;
     
-    private TraceLink f$reference;
+    private Trace fAttribute;
     
-    private TraceLink f$source_superClass;
+    private String fName;
     
-    private static List<String> parameterNames = makeImmutableList("$package", "$class", "$attribute", "$reference", "$source_superClass");
+    private static List<String> parameterNames = makeImmutableList("package", "superClass", "subClass", "attribute", "name");
     
-    private Match(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      this.f$package = p$package;
-      this.f$class = p$class;
-      this.f$attribute = p$attribute;
-      this.f$reference = p$reference;
-      this.f$source_superClass = p$source_superClass;
+    private Match(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      this.fPackage = pPackage;
+      this.fSuperClass = pSuperClass;
+      this.fSubClass = pSubClass;
+      this.fAttribute = pAttribute;
+      this.fName = pName;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$package".equals(parameterName)) return this.f$package;
-      if ("$class".equals(parameterName)) return this.f$class;
-      if ("$attribute".equals(parameterName)) return this.f$attribute;
-      if ("$reference".equals(parameterName)) return this.f$reference;
-      if ("$source_superClass".equals(parameterName)) return this.f$source_superClass;
+      if ("package".equals(parameterName)) return this.fPackage;
+      if ("superClass".equals(parameterName)) return this.fSuperClass;
+      if ("subClass".equals(parameterName)) return this.fSubClass;
+      if ("attribute".equals(parameterName)) return this.fAttribute;
+      if ("name".equals(parameterName)) return this.fName;
       return null;
     }
     
-    public TraceLink get$package() {
-      return this.f$package;
+    public Trace getPackage() {
+      return this.fPackage;
     }
     
-    public TraceLink get$class() {
-      return this.f$class;
+    public Trace getSuperClass() {
+      return this.fSuperClass;
     }
     
-    public TraceLink get$attribute() {
-      return this.f$attribute;
+    public Trace getSubClass() {
+      return this.fSubClass;
     }
     
-    public TraceLink get$reference() {
-      return this.f$reference;
+    public Trace getAttribute() {
+      return this.fAttribute;
     }
     
-    public TraceLink get$source_superClass() {
-      return this.f$source_superClass;
+    public String getName() {
+      return this.fName;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$package".equals(parameterName) ) {
-          this.f$package = (TraceLink) newValue;
+      if ("package".equals(parameterName) ) {
+          this.fPackage = (Trace) newValue;
           return true;
       }
-      if ("$class".equals(parameterName) ) {
-          this.f$class = (TraceLink) newValue;
+      if ("superClass".equals(parameterName) ) {
+          this.fSuperClass = (Trace) newValue;
           return true;
       }
-      if ("$attribute".equals(parameterName) ) {
-          this.f$attribute = (TraceLink) newValue;
+      if ("subClass".equals(parameterName) ) {
+          this.fSubClass = (Trace) newValue;
           return true;
       }
-      if ("$reference".equals(parameterName) ) {
-          this.f$reference = (TraceLink) newValue;
+      if ("attribute".equals(parameterName) ) {
+          this.fAttribute = (Trace) newValue;
           return true;
       }
-      if ("$source_superClass".equals(parameterName) ) {
-          this.f$source_superClass = (TraceLink) newValue;
+      if ("name".equals(parameterName) ) {
+          this.fName = (String) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$package(final TraceLink p$package) {
+    public void setPackage(final Trace pPackage) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$package = p$package;
+      this.fPackage = pPackage;
     }
     
-    public void set$class(final TraceLink p$class) {
+    public void setSuperClass(final Trace pSuperClass) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$class = p$class;
+      this.fSuperClass = pSuperClass;
     }
     
-    public void set$attribute(final TraceLink p$attribute) {
+    public void setSubClass(final Trace pSubClass) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$attribute = p$attribute;
+      this.fSubClass = pSubClass;
     }
     
-    public void set$reference(final TraceLink p$reference) {
+    public void setAttribute(final Trace pAttribute) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$reference = p$reference;
+      this.fAttribute = pAttribute;
     }
     
-    public void set$source_superClass(final TraceLink p$source_superClass) {
+    public void setName(final String pName) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$source_superClass = p$source_superClass;
+      this.fName = pName;
     }
     
     @Override
@@ -176,28 +178,28 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$package, f$class, f$attribute, f$reference, f$source_superClass};
+      return new Object[]{fPackage, fSuperClass, fSubClass, fAttribute, fName};
     }
     
     @Override
     public ExtractSuperclassPrecondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$package, f$class, f$attribute, f$reference, f$source_superClass) : this;
+      return isMutable() ? newMatch(fPackage, fSuperClass, fSubClass, fAttribute, fName) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$package\"=" + prettyPrintValue(f$package) + ", ");
-      result.append("\"$class\"=" + prettyPrintValue(f$class) + ", ");
-      result.append("\"$attribute\"=" + prettyPrintValue(f$attribute) + ", ");
-      result.append("\"$reference\"=" + prettyPrintValue(f$reference) + ", ");
-      result.append("\"$source_superClass\"=" + prettyPrintValue(f$source_superClass));
+      result.append("\"package\"=" + prettyPrintValue(fPackage) + ", ");
+      result.append("\"superClass\"=" + prettyPrintValue(fSuperClass) + ", ");
+      result.append("\"subClass\"=" + prettyPrintValue(fSubClass) + ", ");
+      result.append("\"attribute\"=" + prettyPrintValue(fAttribute) + ", ");
+      result.append("\"name\"=" + prettyPrintValue(fName));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$package, f$class, f$attribute, f$reference, f$source_superClass);
+      return Objects.hash (fPackage, fSuperClass, fSubClass, fAttribute, fName);
     }
     
     @Override
@@ -209,7 +211,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
       }
       if ((obj instanceof ExtractSuperclassPrecondition.Match)) {
           ExtractSuperclassPrecondition.Match other = (ExtractSuperclassPrecondition.Match) obj;
-          return Objects.equals(f$package, other.f$package) && Objects.equals(f$class, other.f$class) && Objects.equals(f$attribute, other.f$attribute) && Objects.equals(f$reference, other.f$reference) && Objects.equals(f$source_superClass, other.f$source_superClass);
+          return Objects.equals(fPackage, other.fPackage) && Objects.equals(fSuperClass, other.fSuperClass) && Objects.equals(fSubClass, other.fSubClass) && Objects.equals(fAttribute, other.fAttribute) && Objects.equals(fName, other.fName);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -240,37 +242,37 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ExtractSuperclassPrecondition.Match newMutableMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return new Mutable(p$package, p$class, p$attribute, p$reference, p$source_superClass);
+    public static ExtractSuperclassPrecondition.Match newMutableMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return new Mutable(pPackage, pSuperClass, pSubClass, pAttribute, pName);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ExtractSuperclassPrecondition.Match newMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return new Immutable(p$package, p$class, p$attribute, p$reference, p$source_superClass);
+    public static ExtractSuperclassPrecondition.Match newMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return new Immutable(pPackage, pSuperClass, pSubClass, pAttribute, pName);
     }
     
     private static final class Mutable extends ExtractSuperclassPrecondition.Match {
-      Mutable(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-        super(p$package, p$class, p$attribute, p$reference, p$source_superClass);
+      Mutable(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+        super(pPackage, pSuperClass, pSubClass, pAttribute, pName);
       }
       
       @Override
@@ -280,8 +282,8 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     }
     
     private static final class Immutable extends ExtractSuperclassPrecondition.Match {
-      Immutable(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-        super(p$package, p$class, p$attribute, p$reference, p$source_superClass);
+      Immutable(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+        super(pPackage, pSuperClass, pSubClass, pAttribute, pName);
       }
       
       @Override
@@ -303,11 +305,12 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
    * <p>Original source:
    * <code><pre>
    * // CADCAR18 - Extract Superclass - Precondition
-   * pattern ExtractSuperclassPrecondition ($package : TraceLink, $class : TraceLink, $attribute : TraceLink, $reference : TraceLink, $source_superClass : TraceLink) {
-   * 	find get_package_class ($package, $class);
-   * 	find get_class_attribute ($class, $attribute);
-   * 	find get_class_reference ($class, $reference);
-   * 	find get_class_superClass ($class, $source_superClass);
+   * pattern ExtractSuperclassPrecondition (^package : Trace, superClass : Trace, subClass : Trace, attribute : Trace, name : java String) {
+   * 	find preserved_package_class (^package, superClass);
+   * 	find preserved_package_class (^package, subClass);
+   * 	find preserved_class_attribute (subClass, attribute);
+   * 	find preserved_class_superClass (subClass, superClass);
+   * 	find generate_class_superClass_name (subClass, name); 
    * }
    * </pre></code>
    * 
@@ -344,15 +347,15 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
       return new Matcher();
     }
     
-    private final static int POSITION_$PACKAGE = 0;
+    private final static int POSITION_PACKAGE = 0;
     
-    private final static int POSITION_$CLASS = 1;
+    private final static int POSITION_SUPERCLASS = 1;
     
-    private final static int POSITION_$ATTRIBUTE = 2;
+    private final static int POSITION_SUBCLASS = 2;
     
-    private final static int POSITION_$REFERENCE = 3;
+    private final static int POSITION_ATTRIBUTE = 3;
     
-    private final static int POSITION_$SOURCE_SUPERCLASS = 4;
+    private final static int POSITION_NAME = 4;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ExtractSuperclassPrecondition.Matcher.class);
     
@@ -370,324 +373,324 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ExtractSuperclassPrecondition.Match> getAllMatches(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawGetAllMatches(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass});
+    public Collection<ExtractSuperclassPrecondition.Match> getAllMatches(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawGetAllMatches(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public ExtractSuperclassPrecondition.Match getOneArbitraryMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawGetOneArbitraryMatch(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass});
+    public ExtractSuperclassPrecondition.Match getOneArbitraryMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawGetOneArbitraryMatch(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawHasMatch(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass});
+    public boolean hasMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawHasMatch(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawCountMatches(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass});
+    public int countMatches(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawCountMatches(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass, final IMatchProcessor<? super ExtractSuperclassPrecondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass}, processor);
+    public void forEachMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName, final IMatchProcessor<? super ExtractSuperclassPrecondition.Match> processor) {
+      rawForEachMatch(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass, final IMatchProcessor<? super ExtractSuperclassPrecondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$package, p$class, p$attribute, p$reference, p$source_superClass}, processor);
+    public boolean forOneArbitraryMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName, final IMatchProcessor<? super ExtractSuperclassPrecondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pPackage, pSuperClass, pSubClass, pAttribute, pName}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
-     * @param p$source_superClass the fixed value of pattern parameter $source_superClass, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pSuperClass the fixed value of pattern parameter superClass, or null if not bound.
+     * @param pSubClass the fixed value of pattern parameter subClass, or null if not bound.
+     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ExtractSuperclassPrecondition.Match newMatch(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return ExtractSuperclassPrecondition.Match.newMatch(p$package, p$class, p$attribute, p$reference, p$source_superClass);
+    public ExtractSuperclassPrecondition.Match newMatch(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return ExtractSuperclassPrecondition.Match.newMatch(pPackage, pSuperClass, pSubClass, pAttribute, pName);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$package(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$PACKAGE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfpackage(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_PACKAGE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package() {
-      return rawAccumulateAllValuesOf$package(emptyArray());
+    public Set<Trace> getAllValuesOfpackage() {
+      return rawAccumulateAllValuesOfpackage(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final ExtractSuperclassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$package(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfpackage(final ExtractSuperclassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfpackage(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawAccumulateAllValuesOf$package(new Object[]{
+    public Set<Trace> getAllValuesOfpackage(final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawAccumulateAllValuesOfpackage(new Object[]{
       null, 
-      p$class, 
-      p$attribute, 
-      p$reference, 
-      p$source_superClass
+      pSuperClass, 
+      pSubClass, 
+      pAttribute, 
+      pName
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for superClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$class(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$CLASS, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfsuperClass(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_SUPERCLASS, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for superClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class() {
-      return rawAccumulateAllValuesOf$class(emptyArray());
+    public Set<Trace> getAllValuesOfsuperClass() {
+      return rawAccumulateAllValuesOfsuperClass(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for superClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final ExtractSuperclassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$class(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfsuperClass(final ExtractSuperclassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfsuperClass(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for superClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final TraceLink p$package, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawAccumulateAllValuesOf$class(new Object[]{
-      p$package, 
+    public Set<Trace> getAllValuesOfsuperClass(final Trace pPackage, final Trace pSubClass, final Trace pAttribute, final String pName) {
+      return rawAccumulateAllValuesOfsuperClass(new Object[]{
+      pPackage, 
       null, 
-      p$attribute, 
-      p$reference, 
-      p$source_superClass
+      pSubClass, 
+      pAttribute, 
+      pName
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $attribute.
+     * Retrieve the set of values that occur in matches for subClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$attribute(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$ATTRIBUTE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfsubClass(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_SUBCLASS, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $attribute.
+     * Retrieve the set of values that occur in matches for subClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$attribute() {
-      return rawAccumulateAllValuesOf$attribute(emptyArray());
+    public Set<Trace> getAllValuesOfsubClass() {
+      return rawAccumulateAllValuesOfsubClass(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $attribute.
+     * Retrieve the set of values that occur in matches for subClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$attribute(final ExtractSuperclassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$attribute(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfsubClass(final ExtractSuperclassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfsubClass(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $attribute.
+     * Retrieve the set of values that occur in matches for subClass.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$attribute(final TraceLink p$package, final TraceLink p$class, final TraceLink p$reference, final TraceLink p$source_superClass) {
-      return rawAccumulateAllValuesOf$attribute(new Object[]{
-      p$package, 
-      p$class, 
+    public Set<Trace> getAllValuesOfsubClass(final Trace pPackage, final Trace pSuperClass, final Trace pAttribute, final String pName) {
+      return rawAccumulateAllValuesOfsubClass(new Object[]{
+      pPackage, 
+      pSuperClass, 
       null, 
-      p$reference, 
-      p$source_superClass
+      pAttribute, 
+      pName
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$reference(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$REFERENCE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfattribute(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_ATTRIBUTE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference() {
-      return rawAccumulateAllValuesOf$reference(emptyArray());
+    public Set<Trace> getAllValuesOfattribute() {
+      return rawAccumulateAllValuesOfattribute(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference(final ExtractSuperclassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$reference(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfattribute(final ExtractSuperclassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfattribute(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$source_superClass) {
-      return rawAccumulateAllValuesOf$reference(new Object[]{
-      p$package, 
-      p$class, 
-      p$attribute, 
+    public Set<Trace> getAllValuesOfattribute(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final String pName) {
+      return rawAccumulateAllValuesOfattribute(new Object[]{
+      pPackage, 
+      pSuperClass, 
+      pSubClass, 
       null, 
-      p$source_superClass
+      pName
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $source_superClass.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$source_superClass(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$SOURCE_SUPERCLASS, parameters, results);
+    protected Set<String> rawAccumulateAllValuesOfname(final Object[] parameters) {
+      Set<String> results = new HashSet<String>();
+      rawAccumulateAllValues(POSITION_NAME, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $source_superClass.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$source_superClass() {
-      return rawAccumulateAllValuesOf$source_superClass(emptyArray());
+    public Set<String> getAllValuesOfname() {
+      return rawAccumulateAllValuesOfname(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $source_superClass.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$source_superClass(final ExtractSuperclassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$source_superClass(partialMatch.toArray());
+    public Set<String> getAllValuesOfname(final ExtractSuperclassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfname(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $source_superClass.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$source_superClass(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference) {
-      return rawAccumulateAllValuesOf$source_superClass(new Object[]{
-      p$package, 
-      p$class, 
-      p$attribute, 
-      p$reference, 
+    public Set<String> getAllValuesOfname(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute) {
+      return rawAccumulateAllValuesOfname(new Object[]{
+      pPackage, 
+      pSuperClass, 
+      pSubClass, 
+      pAttribute, 
       null
       });
     }
@@ -695,7 +698,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     @Override
     protected ExtractSuperclassPrecondition.Match tupleToMatch(final Tuple t) {
       try {
-          return ExtractSuperclassPrecondition.Match.newMatch((TraceLink) t.get(POSITION_$PACKAGE), (TraceLink) t.get(POSITION_$CLASS), (TraceLink) t.get(POSITION_$ATTRIBUTE), (TraceLink) t.get(POSITION_$REFERENCE), (TraceLink) t.get(POSITION_$SOURCE_SUPERCLASS));
+          return ExtractSuperclassPrecondition.Match.newMatch((Trace) t.get(POSITION_PACKAGE), (Trace) t.get(POSITION_SUPERCLASS), (Trace) t.get(POSITION_SUBCLASS), (Trace) t.get(POSITION_ATTRIBUTE), (String) t.get(POSITION_NAME));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -705,7 +708,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     @Override
     protected ExtractSuperclassPrecondition.Match arrayToMatch(final Object[] match) {
       try {
-          return ExtractSuperclassPrecondition.Match.newMatch((TraceLink) match[POSITION_$PACKAGE], (TraceLink) match[POSITION_$CLASS], (TraceLink) match[POSITION_$ATTRIBUTE], (TraceLink) match[POSITION_$REFERENCE], (TraceLink) match[POSITION_$SOURCE_SUPERCLASS]);
+          return ExtractSuperclassPrecondition.Match.newMatch((Trace) match[POSITION_PACKAGE], (Trace) match[POSITION_SUPERCLASS], (Trace) match[POSITION_SUBCLASS], (Trace) match[POSITION_ATTRIBUTE], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -715,7 +718,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     @Override
     protected ExtractSuperclassPrecondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ExtractSuperclassPrecondition.Match.newMutableMatch((TraceLink) match[POSITION_$PACKAGE], (TraceLink) match[POSITION_$CLASS], (TraceLink) match[POSITION_$ATTRIBUTE], (TraceLink) match[POSITION_$REFERENCE], (TraceLink) match[POSITION_$SOURCE_SUPERCLASS]);
+          return ExtractSuperclassPrecondition.Match.newMutableMatch((Trace) match[POSITION_PACKAGE], (Trace) match[POSITION_SUPERCLASS], (Trace) match[POSITION_SUBCLASS], (Trace) match[POSITION_ATTRIBUTE], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -741,18 +744,18 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
   public static abstract class Processor implements IMatchProcessor<ExtractSuperclassPrecondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$package the value of pattern parameter $package in the currently processed match
-     * @param p$class the value of pattern parameter $class in the currently processed match
-     * @param p$attribute the value of pattern parameter $attribute in the currently processed match
-     * @param p$reference the value of pattern parameter $reference in the currently processed match
-     * @param p$source_superClass the value of pattern parameter $source_superClass in the currently processed match
+     * @param pPackage the value of pattern parameter package in the currently processed match
+     * @param pSuperClass the value of pattern parameter superClass in the currently processed match
+     * @param pSubClass the value of pattern parameter subClass in the currently processed match
+     * @param pAttribute the value of pattern parameter attribute in the currently processed match
+     * @param pName the value of pattern parameter name in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$package, final TraceLink p$class, final TraceLink p$attribute, final TraceLink p$reference, final TraceLink p$source_superClass);
+    public abstract void process(final Trace pPackage, final Trace pSuperClass, final Trace pSubClass, final Trace pAttribute, final String pName);
     
     @Override
     public void process(final ExtractSuperclassPrecondition.Match match) {
-      process(match.get$package(), match.get$class(), match.get$attribute(), match.get$reference(), match.get$source_superClass());
+      process(match.getPackage(), match.getSuperClass(), match.getSubClass(), match.getAttribute(), match.getName());
     }
   }
   
@@ -790,7 +793,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
   
   @Override
   public ExtractSuperclassPrecondition.Match newMatch(final Object... parameters) {
-    return ExtractSuperclassPrecondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (se.mdh.idt.benji.trace.TraceLink) parameters[1], (se.mdh.idt.benji.trace.TraceLink) parameters[2], (se.mdh.idt.benji.trace.TraceLink) parameters[3], (se.mdh.idt.benji.trace.TraceLink) parameters[4]);
+    return ExtractSuperclassPrecondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (se.mdh.idt.benji.trace.Trace) parameters[1], (se.mdh.idt.benji.trace.Trace) parameters[2], (se.mdh.idt.benji.trace.Trace) parameters[3], (java.lang.String) parameters[4]);
   }
   
   /**
@@ -822,17 +825,17 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ExtractSuperclassPrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$package = new PParameter("$package", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pPackage = new PParameter("package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$class = new PParameter("$class", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pSuperClass = new PParameter("superClass", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$attribute = new PParameter("$attribute", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pSubClass = new PParameter("subClass", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$reference = new PParameter("$reference", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pAttribute = new PParameter("attribute", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$source_superClass = new PParameter("$source_superClass", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pName = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$package, parameter_p$class, parameter_p$attribute, parameter_p$reference, parameter_p$source_superClass);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pPackage, parameter_pSuperClass, parameter_pSubClass, parameter_pAttribute, parameter_pName);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -845,7 +848,7 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$package","$class","$attribute","$reference","$source_superClass");
+      return Arrays.asList("package","superClass","subClass","attribute","name");
     }
     
     @Override
@@ -858,31 +861,33 @@ public final class ExtractSuperclassPrecondition extends BaseGeneratedEMFQuerySp
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$package = body.getOrCreateVariableByName("$package");
-          PVariable var_$class = body.getOrCreateVariableByName("$class");
-          PVariable var_$attribute = body.getOrCreateVariableByName("$attribute");
-          PVariable var_$reference = body.getOrCreateVariableByName("$reference");
-          PVariable var_$source_superClass = body.getOrCreateVariableByName("$source_superClass");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$source_superClass), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_package = body.getOrCreateVariableByName("package");
+          PVariable var_superClass = body.getOrCreateVariableByName("superClass");
+          PVariable var_subClass = body.getOrCreateVariableByName("subClass");
+          PVariable var_attribute = body.getOrCreateVariableByName("attribute");
+          PVariable var_name = body.getOrCreateVariableByName("name");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_superClass), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_subClass), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$package, parameter_p$package),
-             new ExportedParameter(body, var_$class, parameter_p$class),
-             new ExportedParameter(body, var_$attribute, parameter_p$attribute),
-             new ExportedParameter(body, var_$reference, parameter_p$reference),
-             new ExportedParameter(body, var_$source_superClass, parameter_p$source_superClass)
+             new ExportedParameter(body, var_package, parameter_pPackage),
+             new ExportedParameter(body, var_superClass, parameter_pSuperClass),
+             new ExportedParameter(body, var_subClass, parameter_pSubClass),
+             new ExportedParameter(body, var_attribute, parameter_pAttribute),
+             new ExportedParameter(body, var_name, parameter_pName)
           ));
-          // 	find get_package_class ($package, $class)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package, var_$class), Get_package_class.instance().getInternalQueryRepresentation());
-          // 	find get_class_attribute ($class, $attribute)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_$attribute), Get_class_attribute.instance().getInternalQueryRepresentation());
-          // 	find get_class_reference ($class, $reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_$reference), Get_class_reference.instance().getInternalQueryRepresentation());
-          // 	find get_class_superClass ($class, $source_superClass)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_$source_superClass), Get_class_superClass.instance().getInternalQueryRepresentation());
+          // 	find preserved_package_class (^package, superClass)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_superClass), Preserved_package_class.instance().getInternalQueryRepresentation());
+          // 	find preserved_package_class (^package, subClass)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_subClass), Preserved_package_class.instance().getInternalQueryRepresentation());
+          // 	find preserved_class_attribute (subClass, attribute)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_subClass, var_attribute), Preserved_class_attribute.instance().getInternalQueryRepresentation());
+          // 	find preserved_class_superClass (subClass, superClass)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_subClass, var_superClass), Preserved_class_superClass.instance().getInternalQueryRepresentation());
+          // 	find generate_class_superClass_name (subClass, name)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_subClass, var_name), Generate_class_superClass_name.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

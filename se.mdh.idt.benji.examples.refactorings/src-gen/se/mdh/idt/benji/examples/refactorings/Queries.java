@@ -32,10 +32,6 @@ import se.mdh.idt.benji.examples.refactorings.ExtractClassPostcondition;
 import se.mdh.idt.benji.examples.refactorings.ExtractClassPrecondition;
 import se.mdh.idt.benji.examples.refactorings.ExtractSuperclassPostcondition;
 import se.mdh.idt.benji.examples.refactorings.ExtractSuperclassPrecondition;
-import se.mdh.idt.benji.examples.refactorings.MergeClassesPostcondition;
-import se.mdh.idt.benji.examples.refactorings.MergeClassesPrecondition;
-import se.mdh.idt.benji.examples.refactorings.MergeReferencesPostcondition;
-import se.mdh.idt.benji.examples.refactorings.MergeReferencesPrecondition;
 import se.mdh.idt.benji.examples.refactorings.PushDownAttributePostcondition;
 import se.mdh.idt.benji.examples.refactorings.PushDownAttributePrecondition;
 import se.mdh.idt.benji.examples.refactorings.RenameClassPostcondition;
@@ -44,8 +40,6 @@ import se.mdh.idt.benji.examples.refactorings.RenamePackagePostcondition;
 import se.mdh.idt.benji.examples.refactorings.RenamePackagePrecondition;
 import se.mdh.idt.benji.examples.refactorings.RenameURIPackagePostcondition;
 import se.mdh.idt.benji.examples.refactorings.RenameURIPackagePrecondition;
-import se.mdh.idt.benji.examples.refactorings.RestrictReferencePostcondition;
-import se.mdh.idt.benji.examples.refactorings.RestrictReferencePrecondition;
 
 /**
  * A pattern group formed of all public patterns defined in Queries.vql.
@@ -71,8 +65,6 @@ import se.mdh.idt.benji.examples.refactorings.RestrictReferencePrecondition;
  * <li>DeleteClassPostcondition</li>
  * <li>ExtractClassPrecondition</li>
  * <li>ExtractClassPostcondition</li>
- * <li>MergeClassesPrecondition</li>
- * <li>MergeClassesPostcondition</li>
  * <li>AddAttributePrecondition</li>
  * <li>AddAttributePostcondition</li>
  * <li>DeleteAttributePrecondition</li>
@@ -83,16 +75,12 @@ import se.mdh.idt.benji.examples.refactorings.RestrictReferencePrecondition;
  * <li>AddReferencePostcondition</li>
  * <li>DeleteReferencePrecondition</li>
  * <li>DeleteReferencePostcondition</li>
- * <li>MergeReferencesPrecondition</li>
- * <li>MergeReferencesPostcondition</li>
  * <li>ChangeReferenceTypePrecondition</li>
  * <li>ChangeReferenceTypePostcondition</li>
  * <li>ExtractSuperclassPrecondition</li>
  * <li>ExtractSuperclassPostcondition</li>
  * <li>ChangeClassAbstractPrecondition</li>
  * <li>ChangeClassAbstractPostcondition</li>
- * <li>RestrictReferencePrecondition</li>
- * <li>RestrictReferencePostcondition</li>
  * <li>PushDownAttributePrecondition</li>
  * <li>PushDownAttributePostcondition</li>
  * </ul>
@@ -101,7 +89,7 @@ import se.mdh.idt.benji.examples.refactorings.RestrictReferencePrecondition;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class Queries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -136,8 +124,6 @@ public final class Queries extends BaseGeneratedPatternGroup {
     querySpecifications.add(DeleteClassPostcondition.instance());
     querySpecifications.add(ExtractClassPrecondition.instance());
     querySpecifications.add(ExtractClassPostcondition.instance());
-    querySpecifications.add(MergeClassesPrecondition.instance());
-    querySpecifications.add(MergeClassesPostcondition.instance());
     querySpecifications.add(AddAttributePrecondition.instance());
     querySpecifications.add(AddAttributePostcondition.instance());
     querySpecifications.add(DeleteAttributePrecondition.instance());
@@ -148,16 +134,12 @@ public final class Queries extends BaseGeneratedPatternGroup {
     querySpecifications.add(AddReferencePostcondition.instance());
     querySpecifications.add(DeleteReferencePrecondition.instance());
     querySpecifications.add(DeleteReferencePostcondition.instance());
-    querySpecifications.add(MergeReferencesPrecondition.instance());
-    querySpecifications.add(MergeReferencesPostcondition.instance());
     querySpecifications.add(ChangeReferenceTypePrecondition.instance());
     querySpecifications.add(ChangeReferenceTypePostcondition.instance());
     querySpecifications.add(ExtractSuperclassPrecondition.instance());
     querySpecifications.add(ExtractSuperclassPostcondition.instance());
     querySpecifications.add(ChangeClassAbstractPrecondition.instance());
     querySpecifications.add(ChangeClassAbstractPostcondition.instance());
-    querySpecifications.add(RestrictReferencePrecondition.instance());
-    querySpecifications.add(RestrictReferencePostcondition.instance());
     querySpecifications.add(PushDownAttributePrecondition.instance());
     querySpecifications.add(PushDownAttributePostcondition.instance());
   }
@@ -290,22 +272,6 @@ public final class Queries extends BaseGeneratedPatternGroup {
     return ExtractClassPostcondition.Matcher.on(engine);
   }
   
-  public MergeClassesPrecondition getMergeClassesPrecondition() {
-    return MergeClassesPrecondition.instance();
-  }
-  
-  public MergeClassesPrecondition.Matcher getMergeClassesPrecondition(final ViatraQueryEngine engine) {
-    return MergeClassesPrecondition.Matcher.on(engine);
-  }
-  
-  public MergeClassesPostcondition getMergeClassesPostcondition() {
-    return MergeClassesPostcondition.instance();
-  }
-  
-  public MergeClassesPostcondition.Matcher getMergeClassesPostcondition(final ViatraQueryEngine engine) {
-    return MergeClassesPostcondition.Matcher.on(engine);
-  }
-  
   public AddAttributePrecondition getAddAttributePrecondition() {
     return AddAttributePrecondition.instance();
   }
@@ -386,22 +352,6 @@ public final class Queries extends BaseGeneratedPatternGroup {
     return DeleteReferencePostcondition.Matcher.on(engine);
   }
   
-  public MergeReferencesPrecondition getMergeReferencesPrecondition() {
-    return MergeReferencesPrecondition.instance();
-  }
-  
-  public MergeReferencesPrecondition.Matcher getMergeReferencesPrecondition(final ViatraQueryEngine engine) {
-    return MergeReferencesPrecondition.Matcher.on(engine);
-  }
-  
-  public MergeReferencesPostcondition getMergeReferencesPostcondition() {
-    return MergeReferencesPostcondition.instance();
-  }
-  
-  public MergeReferencesPostcondition.Matcher getMergeReferencesPostcondition(final ViatraQueryEngine engine) {
-    return MergeReferencesPostcondition.Matcher.on(engine);
-  }
-  
   public ChangeReferenceTypePrecondition getChangeReferenceTypePrecondition() {
     return ChangeReferenceTypePrecondition.instance();
   }
@@ -448,22 +398,6 @@ public final class Queries extends BaseGeneratedPatternGroup {
   
   public ChangeClassAbstractPostcondition.Matcher getChangeClassAbstractPostcondition(final ViatraQueryEngine engine) {
     return ChangeClassAbstractPostcondition.Matcher.on(engine);
-  }
-  
-  public RestrictReferencePrecondition getRestrictReferencePrecondition() {
-    return RestrictReferencePrecondition.instance();
-  }
-  
-  public RestrictReferencePrecondition.Matcher getRestrictReferencePrecondition(final ViatraQueryEngine engine) {
-    return RestrictReferencePrecondition.Matcher.on(engine);
-  }
-  
-  public RestrictReferencePostcondition getRestrictReferencePostcondition() {
-    return RestrictReferencePostcondition.instance();
-  }
-  
-  public RestrictReferencePostcondition.Matcher getRestrictReferencePostcondition(final ViatraQueryEngine engine) {
-    return RestrictReferencePostcondition.Matcher.on(engine);
   }
   
   public PushDownAttributePrecondition getPushDownAttributePrecondition() {

@@ -1,0 +1,38 @@
+@Ecore(name = "SimpleCore", nsURI = "http://www.mdh.se/examples/refactorings/SimpleCore")
+@GenModel(name = "SimpleCore", modelName = "SimpleCore", modelDirectory = "se.mdh.idt.benji.examples.refactorings.simplecore/src")
+package se.mdh.idt.benji.examples.refactorings.simplecore
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * Source: "Metamodeling Languages and Metaprogrammable Tools" *
+ * Authors : M.Emerson, S.Neema and J.Sztinpanovits            *
+ * Description : Simplified Ecore Metamodel                    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+abstract class NamedElement {
+	String name
+}
+
+class Package extends NamedElement {
+	String uri
+	contains Package[0..*] subPackages
+	contains Class[0..*] classes	
+	contains DataType[0..*] dataTypes
+}
+
+class Class extends NamedElement {
+	Boolean ^abstract
+	refers Class[0..*] superClasses
+	contains Attribute[0..*] attributes
+	contains Reference[0..*] references
+}
+
+class Attribute extends NamedElement {
+	refers DataType ^type
+}
+
+class Reference extends NamedElement {
+	refers Class ^type
+	refers Reference ^opposite
+}
+
+
+class DataType extends NamedElement {}

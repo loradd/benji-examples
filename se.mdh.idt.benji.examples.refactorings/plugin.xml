@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
+  <extension point="org.eclipse.viatra.query.patternlanguage.emf.purewhitelist">
+    <pure-element fully-qualified-name="java.util.UUID.randomUUID" type="method"/>
+  </extension>
   <extension id="se.mdh.idt.benji.examples.refactorings.Queries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.Queries" id="se.mdh.idt.benji.examples.refactorings.Queries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenamePackagePrecondition"/>
@@ -17,8 +20,6 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeleteClassPostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ExtractClassPrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ExtractClassPostcondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.MergeClassesPrecondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.MergeClassesPostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.AddAttributePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.AddAttributePostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeleteAttributePrecondition"/>
@@ -29,16 +30,12 @@
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.AddReferencePostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeleteReferencePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeleteReferencePostcondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.MergeReferencesPrecondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.MergeReferencesPostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ChangeReferenceTypePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ChangeReferenceTypePostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ExtractSuperclassPrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ExtractSuperclassPostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ChangeClassAbstractPrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.ChangeClassAbstractPostcondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RestrictReferencePrecondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RestrictReferencePostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.PushDownAttributePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.PushDownAttributePostcondition"/>
     </group>

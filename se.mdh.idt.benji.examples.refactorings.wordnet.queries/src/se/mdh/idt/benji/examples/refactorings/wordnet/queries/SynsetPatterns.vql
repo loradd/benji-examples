@@ -1,0 +1,230 @@
+package se.mdh.idt.benji.examples.refactorings.wordnet.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/examples/refactorings/WordNet"
+
+import se.mdh.idt.benji.trace.api.current
+import se.mdh.idt.benji.trace.api.initial
+
+// synset - initial
+pattern initial_synset (synset : Trace, initial_synset : Synset) {
+	find initial (synset, initial_synset); 
+	Synset (initial_synset); 
+}
+
+// synset - current
+pattern current_synset (synset : Trace, current_synset : Synset) {
+	find current (synset, current_synset); 
+	Synset (current_synset); 
+}
+
+// synset - preserved
+pattern preserved_synset (synset : Trace) {
+	find initial_synset (synset, _initial_synset); 
+	find current_synset (synset, _current_synset); 
+}
+
+// synset - created
+pattern created_synset (synset : Trace) {
+	neg find initial_synset (synset, _initial_synset); 
+	find current_synset (synset, _current_synset); 
+}
+
+// synset - deleted
+pattern deleted_synset (synset : Trace) {
+	find initial_synset (synset, _initial_synset); 
+	neg find current_synset (synset, _current_synset); 
+}
+
+// synset - gloss - initial
+pattern initial_synset_gloss (synset : Trace, initial_synset : Synset, gloss : java String) {
+	find initial_synset (synset, initial_synset); 
+	Synset.gloss (initial_synset, gloss); 
+}
+
+// synset - gloss - current
+pattern current_synset_gloss (synset : Trace, current_synset : Synset, gloss : java String) {
+	find current_synset (synset, current_synset); 
+	Synset.gloss (current_synset, gloss); 
+}
+
+// synset - gloss - preserved
+pattern preserved_synset_gloss (synset : Trace, gloss : java String) {
+	find initial_synset_gloss (synset, _initial_synset, gloss); 
+	find current_synset_gloss (synset, _current_synset, gloss); 
+}
+
+// synset - gloss - set
+pattern set_synset_gloss (synset : Trace, gloss : java String) {
+	neg find initial_synset_gloss (synset, _initial_synset, gloss); 
+	find current_synset_gloss (synset, _current_synset, gloss); 
+}
+
+// synset - gloss - unset
+pattern unset_synset_gloss (synset : Trace, gloss : java String) {
+	find initial_synset_gloss (synset, _initial_synset, gloss); 
+	neg find current_synset_gloss (synset, _current_synset, gloss); 
+}
+
+// synset - words - initial
+pattern initial_synset_words (synset : Trace, initial_synset : Synset, word : Trace, initial_word : Word) {
+	find initial_synset (synset, initial_synset); 
+	find initial_word (word, initial_word); 
+	Synset.words (initial_synset, initial_word); 
+}
+
+// synset - words - current
+pattern current_synset_words (synset : Trace, current_synset : Synset, word : Trace, current_word : Word) {
+	find current_synset (synset, current_synset); 
+	find current_word (word, current_word); 
+	Synset.words (current_synset, current_word); 
+}
+
+// synset - words - preserved
+pattern preserved_synset_words (synset : Trace, word : Trace) {
+	find initial_synset_words (synset, _initial_synset, word, _initial_word); 
+	find current_synset_words (synset, _current_synset, word, _current_word); 
+}
+
+// synset - words - inserted
+pattern inserted_synset_words (synset : Trace, word : Trace) {
+	neg find initial_synset_words (synset, _initial_synset, word, _initial_word); 
+	find current_synset_words (synset, _current_synset, word, _current_word); 
+}
+
+// synset - words - removed
+pattern removed_synset_words (synset : Trace, word : Trace) {
+	find initial_synset_words (synset, _initial_synset, word, _initial_word); 
+	neg find current_synset_words (synset, _current_synset, word, _current_word); 
+}
+
+// synset - hyponyms - initial
+pattern initial_synset_hyponyms (synset : Trace, initial_synset : Synset, hyponym : Trace, initial_hyponym : Synset) {
+	find initial_synset (synset, initial_synset); 
+	find initial_synset (hyponym, initial_hyponym); 
+	Synset.hyponyms (initial_synset, initial_hyponym); 
+}
+
+// synset - hyponyms - current
+pattern current_synset_hyponyms (synset : Trace, current_synset : Synset, hyponym : Trace, current_hyponym : Synset) {
+	find current_synset (synset, current_synset); 
+	find current_synset (hyponym, current_hyponym); 
+	Synset.hyponyms (current_synset, current_hyponym); 
+}
+
+// synset - hyponyms - preserved
+pattern preserved_synset_hyponyms (synset : Trace, hyponym : Trace) {
+	find initial_synset_hyponyms (synset, _initial_synset, hyponym, _initial_hyponym);
+	find current_synset_hyponyms (synset, _current_synset, hyponym, _current_hyponym);
+}
+
+// synset - hyponyms - inserted
+pattern inserted_synset_hyponyms (synset : Trace, hyponym : Trace) {
+	neg find initial_synset_hyponyms (synset, _initial_synset, hyponym, _initial_hyponym);
+	find current_synset_hyponyms (synset, _current_synset, hyponym, _current_hyponym);
+}
+
+// synset - hyponyms - removed
+pattern removed_synset_hyponyms (synset : Trace, hyponym : Trace) {
+	find initial_synset_hyponyms (synset, _initial_synset, hyponym, _initial_hyponym);
+	neg find current_synset_hyponyms (synset, _current_synset, hyponym, _current_hyponym);
+}
+
+// synset - hyperonyms - initial
+pattern initial_synset_hyperonyms (synset : Trace, initial_synset : Synset, hyperonym : Trace, initial_hyperonym : Synset) {
+	find initial_synset (synset, initial_synset); 
+	find initial_synset (hyperonym, initial_hyperonym); 
+	Synset.hyperonyms (initial_synset, initial_hyperonym); 
+}
+
+// synset - hyperonyms - current
+pattern current_synset_hyperonyms (synset : Trace, current_synset : Synset, hyperonym : Trace, current_hyperonym : Synset) {
+	find current_synset (synset, current_synset); 
+	find current_synset (hyperonym, current_hyperonym); 
+	Synset.hyperonyms (current_synset, current_hyperonym); 
+}
+
+
+// synset - hyperonyms - preserved
+pattern preserved_synset_hyperonyms (synset : Trace, hyperonym : Trace) {
+	find initial_synset_hyperonyms (synset, _initial_synset, hyperonym, _initial_hyperonym); 
+	find current_synset_hyperonyms (synset, _current_synset, hyperonym, _current_hyperonym); 
+}
+
+// synset - hyperonyms - inserted
+pattern inserted_synset_hyperonyms (synset : Trace, hyperonym : Trace) {
+	neg find initial_synset_hyperonyms (synset, _initial_synset, hyperonym, _initial_hyperonym); 
+	find current_synset_hyperonyms (synset, _current_synset, hyperonym, _current_hyperonym); 
+}
+
+
+// synset - hyperonyms - removed
+pattern removed_synset_hyperonyms (synset : Trace, hyperonym : Trace) {
+	find initial_synset_hyperonyms (synset, _initial_synset, hyperonym, _initial_hyperonym); 
+	neg find current_synset_hyperonyms (synset, _current_synset, hyperonym, _current_hyperonym); 
+}
+
+
+// synset - meronyms - initial
+pattern initial_synset_meronyms (synset : Trace, initial_synset : Synset, meronym : Trace, initial_meronym : Synset) {
+	find initial_synset (synset, initial_synset); 
+	find initial_synset (meronym, initial_meronym); 
+	Synset.meronyms (initial_synset, initial_meronym); 
+}
+
+// synset - meronyms - current
+pattern current_synset_meronyms (synset : Trace, current_synset : Synset, meronym : Trace, current_meronym : Synset) {
+	find current_synset (synset, current_synset); 
+	find current_synset (meronym, current_meronym); 
+	Synset.meronyms (current_synset, current_meronym); 
+}
+
+// synset - meronyms - preserved
+pattern preserved_synset_meronyms (synset : Trace, meronym : Trace) {
+	find initial_synset_meronyms (synset, _initial_synset, meronym, _initial_meronym); 
+	find current_synset_meronyms (synset, _current_synset, meronym, _current_meronym); 
+}
+
+ // synset - meronyms - inserted
+pattern inserted_synset_meronyms (synset : Trace, meronym : Trace) {
+	neg find initial_synset_meronyms (synset, _initial_synset, meronym, _initial_meronym); 
+	find current_synset_meronyms (synset, _current_synset, meronym, _current_meronym); 
+}
+
+// synset - meronyms - removed
+pattern removed_synset_meronyms (synset : Trace, meronym : Trace) {
+	find initial_synset_meronyms (synset, _initial_synset, meronym, _initial_meronym); 
+	neg find current_synset_meronyms (synset, _current_synset, meronym, _current_meronym); 
+}
+
+// synset - holonyms - initial
+pattern initial_synset_holonyms (synset : Trace, initial_synset : Synset, holonym : Trace, initial_holonym : Synset) {
+	find initial_synset (synset, initial_synset); 
+	find initial_synset (holonym, initial_holonym); 
+	Synset.holonyms (initial_synset, initial_holonym); 
+}
+
+// synset - holonyms - current
+pattern current_synset_holonyms (synset : Trace, current_synset : Synset, holonym : Trace, current_holonym : Synset) {
+	find current_synset (synset, current_synset); 
+	find current_synset (holonym, current_holonym);
+	Synset.holonyms (current_synset, current_holonym);  
+}
+
+// synset - holonyms - preserved
+pattern preserved_synset_holonyms (synset : Trace, holonym : Trace) {
+	find initial_synset_holonyms (synset, _initial_synset, holonym, _initial_holonym); 
+	find current_synset_holonyms (synset, _current_synset, holonym, _current_holonym); 
+}
+
+// synset - holonyms - inserted
+pattern inserted_synset_holonyms (synset : Trace, holonym : Trace) {
+	neg find initial_synset_holonyms (synset, _initial_synset, holonym, _initial_holonym); 
+	find current_synset_holonyms (synset, _current_synset, holonym, _current_holonym); 
+}
+
+// synset - holonyms - removed 
+pattern removed_synset_holonyms (synset : Trace, holonym : Trace) {
+	find initial_synset_holonyms (synset, _initial_synset, holonym, _initial_holonym); 
+	neg find current_synset_holonyms (synset, _current_synset, holonym, _current_holonym); 
+}

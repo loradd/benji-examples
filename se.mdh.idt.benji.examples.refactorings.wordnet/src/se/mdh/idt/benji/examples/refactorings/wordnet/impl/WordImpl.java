@@ -114,7 +114,7 @@ public class WordImpl extends MinimalEObjectImpl.Container implements Word {
 	 */
 	public EList<Synset> getSynsets() {
 		if (synsets == null) {
-			synsets = new EObjectWithInverseResolvingEList<Synset>(Synset.class, this, WordnetPackage.WORD__SYNSETS, WordnetPackage.SYNSET__WORDS);
+			synsets = new EObjectWithInverseResolvingEList.ManyInverse<Synset>(Synset.class, this, WordnetPackage.WORD__SYNSETS, WordnetPackage.SYNSET__WORDS);
 		}
 		return synsets;
 	}

@@ -56,11 +56,22 @@ public class WordnetFactoryImpl extends EFactoryImpl implements WordnetFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case WordnetPackage.WORD_NET: return createWordNet();
 			case WordnetPackage.SYNSET: return createSynset();
 			case WordnetPackage.WORD: return createWord();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public WordNet createWordNet() {
+		WordNetImpl wordNet = new WordNetImpl();
+		return wordNet;
 	}
 
 	/**

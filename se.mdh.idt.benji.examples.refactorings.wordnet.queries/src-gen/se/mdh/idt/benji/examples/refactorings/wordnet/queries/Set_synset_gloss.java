@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/SynsetQueries.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/SynsetPatterns.vql
  */
 package se.mdh.idt.benji.examples.refactorings.wordnet.queries;
 
@@ -38,7 +38,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 import se.mdh.idt.benji.examples.refactorings.wordnet.queries.Current_synset_gloss;
 import se.mdh.idt.benji.examples.refactorings.wordnet.queries.Initial_synset_gloss;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -48,7 +48,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T22:01+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-24T16:52+0200")
 public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<Set_synset_gloss.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.wordnet.queries.set_synset_gloss pattern,
@@ -64,13 +64,13 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink fSynset;
+    private Trace fSynset;
     
     private String fGloss;
     
     private static List<String> parameterNames = makeImmutableList("synset", "gloss");
     
-    private Match(final TraceLink pSynset, final String pGloss) {
+    private Match(final Trace pSynset, final String pGloss) {
       this.fSynset = pSynset;
       this.fGloss = pGloss;
     }
@@ -82,7 +82,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
       return null;
     }
     
-    public TraceLink getSynset() {
+    public Trace getSynset() {
       return this.fSynset;
     }
     
@@ -94,7 +94,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("synset".equals(parameterName) ) {
-          this.fSynset = (TraceLink) newValue;
+          this.fSynset = (Trace) newValue;
           return true;
       }
       if ("gloss".equals(parameterName) ) {
@@ -104,7 +104,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
       return false;
     }
     
-    public void setSynset(final TraceLink pSynset) {
+    public void setSynset(final Trace pSynset) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fSynset = pSynset;
     }
@@ -192,7 +192,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Set_synset_gloss.Match newMutableMatch(final TraceLink pSynset, final String pGloss) {
+    public static Set_synset_gloss.Match newMutableMatch(final Trace pSynset, final String pGloss) {
       return new Mutable(pSynset, pGloss);
     }
     
@@ -205,12 +205,12 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the (partial) match object.
      * 
      */
-    public static Set_synset_gloss.Match newMatch(final TraceLink pSynset, final String pGloss) {
+    public static Set_synset_gloss.Match newMatch(final Trace pSynset, final String pGloss) {
       return new Immutable(pSynset, pGloss);
     }
     
     private static final class Mutable extends Set_synset_gloss.Match {
-      Mutable(final TraceLink pSynset, final String pGloss) {
+      Mutable(final Trace pSynset, final String pGloss) {
         super(pSynset, pGloss);
       }
       
@@ -221,7 +221,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
     }
     
     private static final class Immutable extends Set_synset_gloss.Match {
-      Immutable(final TraceLink pSynset, final String pGloss) {
+      Immutable(final Trace pSynset, final String pGloss) {
         super(pSynset, pGloss);
       }
       
@@ -244,9 +244,9 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
    * <p>Original source:
    * <code><pre>
    * // synset - gloss - set
-   * pattern set_synset_gloss (synset : TraceLink, gloss : java String) {
-   * 	neg find initial_synset_gloss (synset, _initial_synset, gloss);
-   * 	find current_synset_gloss (synset, _current_synset, gloss);
+   * pattern set_synset_gloss (synset : Trace, gloss : java String) {
+   * 	neg find initial_synset_gloss (synset, _initial_synset, gloss); 
+   * 	find current_synset_gloss (synset, _current_synset, gloss); 
    * }
    * </pre></code>
    * 
@@ -308,7 +308,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Set_synset_gloss.Match> getAllMatches(final TraceLink pSynset, final String pGloss) {
+    public Collection<Set_synset_gloss.Match> getAllMatches(final Trace pSynset, final String pGloss) {
       return rawGetAllMatches(new Object[]{pSynset, pGloss});
     }
     
@@ -320,7 +320,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Set_synset_gloss.Match getOneArbitraryMatch(final TraceLink pSynset, final String pGloss) {
+    public Set_synset_gloss.Match getOneArbitraryMatch(final Trace pSynset, final String pGloss) {
       return rawGetOneArbitraryMatch(new Object[]{pSynset, pGloss});
     }
     
@@ -332,7 +332,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink pSynset, final String pGloss) {
+    public boolean hasMatch(final Trace pSynset, final String pGloss) {
       return rawHasMatch(new Object[]{pSynset, pGloss});
     }
     
@@ -343,7 +343,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink pSynset, final String pGloss) {
+    public int countMatches(final Trace pSynset, final String pGloss) {
       return rawCountMatches(new Object[]{pSynset, pGloss});
     }
     
@@ -354,7 +354,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink pSynset, final String pGloss, final IMatchProcessor<? super Set_synset_gloss.Match> processor) {
+    public void forEachMatch(final Trace pSynset, final String pGloss, final IMatchProcessor<? super Set_synset_gloss.Match> processor) {
       rawForEachMatch(new Object[]{pSynset, pGloss}, processor);
     }
     
@@ -367,7 +367,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink pSynset, final String pGloss, final IMatchProcessor<? super Set_synset_gloss.Match> processor) {
+    public boolean forOneArbitraryMatch(final Trace pSynset, final String pGloss, final IMatchProcessor<? super Set_synset_gloss.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pSynset, pGloss}, processor);
     }
     
@@ -380,7 +380,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the (partial) match object.
      * 
      */
-    public Set_synset_gloss.Match newMatch(final TraceLink pSynset, final String pGloss) {
+    public Set_synset_gloss.Match newMatch(final Trace pSynset, final String pGloss) {
       return Set_synset_gloss.Match.newMatch(pSynset, pGloss);
     }
     
@@ -389,8 +389,8 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOfsynset(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
+    protected Set<Trace> rawAccumulateAllValuesOfsynset(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
       rawAccumulateAllValues(POSITION_SYNSET, parameters, results);
       return results;
     }
@@ -400,7 +400,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset() {
+    public Set<Trace> getAllValuesOfsynset() {
       return rawAccumulateAllValuesOfsynset(emptyArray());
     }
     
@@ -409,7 +409,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset(final Set_synset_gloss.Match partialMatch) {
+    public Set<Trace> getAllValuesOfsynset(final Set_synset_gloss.Match partialMatch) {
       return rawAccumulateAllValuesOfsynset(partialMatch.toArray());
     }
     
@@ -418,7 +418,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset(final String pGloss) {
+    public Set<Trace> getAllValuesOfsynset(final String pGloss) {
       return rawAccumulateAllValuesOfsynset(new Object[]{
       null, 
       pGloss
@@ -459,7 +459,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfgloss(final TraceLink pSynset) {
+    public Set<String> getAllValuesOfgloss(final Trace pSynset) {
       return rawAccumulateAllValuesOfgloss(new Object[]{
       pSynset, 
       null
@@ -469,7 +469,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
     @Override
     protected Set_synset_gloss.Match tupleToMatch(final Tuple t) {
       try {
-          return Set_synset_gloss.Match.newMatch((TraceLink) t.get(POSITION_SYNSET), (String) t.get(POSITION_GLOSS));
+          return Set_synset_gloss.Match.newMatch((Trace) t.get(POSITION_SYNSET), (String) t.get(POSITION_GLOSS));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -479,7 +479,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
     @Override
     protected Set_synset_gloss.Match arrayToMatch(final Object[] match) {
       try {
-          return Set_synset_gloss.Match.newMatch((TraceLink) match[POSITION_SYNSET], (String) match[POSITION_GLOSS]);
+          return Set_synset_gloss.Match.newMatch((Trace) match[POSITION_SYNSET], (String) match[POSITION_GLOSS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -489,7 +489,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
     @Override
     protected Set_synset_gloss.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Set_synset_gloss.Match.newMutableMatch((TraceLink) match[POSITION_SYNSET], (String) match[POSITION_GLOSS]);
+          return Set_synset_gloss.Match.newMutableMatch((Trace) match[POSITION_SYNSET], (String) match[POSITION_GLOSS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -519,7 +519,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
      * @param pGloss the value of pattern parameter gloss in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink pSynset, final String pGloss);
+    public abstract void process(final Trace pSynset, final String pGloss);
     
     @Override
     public void process(final Set_synset_gloss.Match match) {
@@ -561,7 +561,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
   
   @Override
   public Set_synset_gloss.Match newMatch(final Object... parameters) {
-    return Set_synset_gloss.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (java.lang.String) parameters[1]);
+    return Set_synset_gloss.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (java.lang.String) parameters[1]);
   }
   
   /**
@@ -593,7 +593,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static Set_synset_gloss.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSynset = new PParameter("synset", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pSynset = new PParameter("synset", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
     private final PParameter parameter_pGloss = new PParameter("gloss", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
@@ -627,7 +627,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
           PVariable var_gloss = body.getOrCreateVariableByName("gloss");
           PVariable var__initial_synset = body.getOrCreateVariableByName("_initial_synset");
           PVariable var__current_synset = body.getOrCreateVariableByName("_current_synset");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_gloss), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_synset, parameter_pSynset),
@@ -635,7 +635,7 @@ public final class Set_synset_gloss extends BaseGeneratedEMFQuerySpecification<S
           ));
           // 	neg find initial_synset_gloss (synset, _initial_synset, gloss)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_synset, var__initial_synset, var_gloss), Initial_synset_gloss.instance().getInternalQueryRepresentation());
-          // 	find current_synset_gloss (synset, _current_synset, gloss)
+          //  	find current_synset_gloss (synset, _current_synset, gloss)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_synset, var__current_synset, var_gloss), Current_synset_gloss.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }

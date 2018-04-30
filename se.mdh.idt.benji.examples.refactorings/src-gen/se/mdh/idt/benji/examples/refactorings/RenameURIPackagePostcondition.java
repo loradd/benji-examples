@@ -3,6 +3,7 @@
  */
 package se.mdh.idt.benji.examples.refactorings;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,9 +24,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
@@ -35,8 +40,9 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_package_uri;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_package_uri;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Unset_package_uri;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -46,7 +52,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySpecification<RenameURIPackagePostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.RenameURIPackagePostcondition pattern,
@@ -62,54 +68,54 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$package;
+    private Trace fPackage;
     
-    private String f$uri;
+    private String fUri;
     
-    private static List<String> parameterNames = makeImmutableList("$package", "$uri");
+    private static List<String> parameterNames = makeImmutableList("package", "uri");
     
-    private Match(final TraceLink p$package, final String p$uri) {
-      this.f$package = p$package;
-      this.f$uri = p$uri;
+    private Match(final Trace pPackage, final String pUri) {
+      this.fPackage = pPackage;
+      this.fUri = pUri;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$package".equals(parameterName)) return this.f$package;
-      if ("$uri".equals(parameterName)) return this.f$uri;
+      if ("package".equals(parameterName)) return this.fPackage;
+      if ("uri".equals(parameterName)) return this.fUri;
       return null;
     }
     
-    public TraceLink get$package() {
-      return this.f$package;
+    public Trace getPackage() {
+      return this.fPackage;
     }
     
-    public String get$uri() {
-      return this.f$uri;
+    public String getUri() {
+      return this.fUri;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$package".equals(parameterName) ) {
-          this.f$package = (TraceLink) newValue;
+      if ("package".equals(parameterName) ) {
+          this.fPackage = (Trace) newValue;
           return true;
       }
-      if ("$uri".equals(parameterName) ) {
-          this.f$uri = (String) newValue;
+      if ("uri".equals(parameterName) ) {
+          this.fUri = (String) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$package(final TraceLink p$package) {
+    public void setPackage(final Trace pPackage) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$package = p$package;
+      this.fPackage = pPackage;
     }
     
-    public void set$uri(final String p$uri) {
+    public void setUri(final String pUri) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$uri = p$uri;
+      this.fUri = pUri;
     }
     
     @Override
@@ -124,25 +130,25 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$package, f$uri};
+      return new Object[]{fPackage, fUri};
     }
     
     @Override
     public RenameURIPackagePostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$package, f$uri) : this;
+      return isMutable() ? newMatch(fPackage, fUri) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$package\"=" + prettyPrintValue(f$package) + ", ");
-      result.append("\"$uri\"=" + prettyPrintValue(f$uri));
+      result.append("\"package\"=" + prettyPrintValue(fPackage) + ", ");
+      result.append("\"uri\"=" + prettyPrintValue(fUri));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$package, f$uri);
+      return Objects.hash (fPackage, fUri);
     }
     
     @Override
@@ -154,7 +160,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
       }
       if ((obj instanceof RenameURIPackagePostcondition.Match)) {
           RenameURIPackagePostcondition.Match other = (RenameURIPackagePostcondition.Match) obj;
-          return Objects.equals(f$package, other.f$package) && Objects.equals(f$uri, other.f$uri);
+          return Objects.equals(fPackage, other.fPackage) && Objects.equals(fUri, other.fUri);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -185,31 +191,31 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static RenameURIPackagePostcondition.Match newMutableMatch(final TraceLink p$package, final String p$uri) {
-      return new Mutable(p$package, p$uri);
+    public static RenameURIPackagePostcondition.Match newMutableMatch(final Trace pPackage, final String pUri) {
+      return new Mutable(pPackage, pUri);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static RenameURIPackagePostcondition.Match newMatch(final TraceLink p$package, final String p$uri) {
-      return new Immutable(p$package, p$uri);
+    public static RenameURIPackagePostcondition.Match newMatch(final Trace pPackage, final String pUri) {
+      return new Immutable(pPackage, pUri);
     }
     
     private static final class Mutable extends RenameURIPackagePostcondition.Match {
-      Mutable(final TraceLink p$package, final String p$uri) {
-        super(p$package, p$uri);
+      Mutable(final Trace pPackage, final String pUri) {
+        super(pPackage, pUri);
       }
       
       @Override
@@ -219,8 +225,8 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     }
     
     private static final class Immutable extends RenameURIPackagePostcondition.Match {
-      Immutable(final TraceLink p$package, final String p$uri) {
-        super(p$package, p$uri);
+      Immutable(final Trace pPackage, final String pUri) {
+        super(pPackage, pUri);
       }
       
       @Override
@@ -241,9 +247,11 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
    * 
    * <p>Original source:
    * <code><pre>
-   * // ACP2 - Rename URI Package - Postcondition
-   * pattern RenameURIPackagePostcondition ($package : TraceLink, $uri : java String) {
-   * 	find set_package_uri ($package, $uri); 
+   * // ACP2 - RenameURIPackage - Postcondition
+   * pattern RenameURIPackagePostcondition (^package : Trace, uri : java String) {
+   * 	find unset_package_uri (^package, initial_uri);
+   * 	find set_package_uri (^package, uri);  
+   * 	uri == eval(initial_uri + File.separator + 'Changed');
    * }
    * </pre></code>
    * 
@@ -280,9 +288,9 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
       return new Matcher();
     }
     
-    private final static int POSITION_$PACKAGE = 0;
+    private final static int POSITION_PACKAGE = 0;
     
-    private final static int POSITION_$URI = 1;
+    private final static int POSITION_URI = 1;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(RenameURIPackagePostcondition.Matcher.class);
     
@@ -300,165 +308,165 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<RenameURIPackagePostcondition.Match> getAllMatches(final TraceLink p$package, final String p$uri) {
-      return rawGetAllMatches(new Object[]{p$package, p$uri});
+    public Collection<RenameURIPackagePostcondition.Match> getAllMatches(final Trace pPackage, final String pUri) {
+      return rawGetAllMatches(new Object[]{pPackage, pUri});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public RenameURIPackagePostcondition.Match getOneArbitraryMatch(final TraceLink p$package, final String p$uri) {
-      return rawGetOneArbitraryMatch(new Object[]{p$package, p$uri});
+    public RenameURIPackagePostcondition.Match getOneArbitraryMatch(final Trace pPackage, final String pUri) {
+      return rawGetOneArbitraryMatch(new Object[]{pPackage, pUri});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$package, final String p$uri) {
-      return rawHasMatch(new Object[]{p$package, p$uri});
+    public boolean hasMatch(final Trace pPackage, final String pUri) {
+      return rawHasMatch(new Object[]{pPackage, pUri});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$package, final String p$uri) {
-      return rawCountMatches(new Object[]{p$package, p$uri});
+    public int countMatches(final Trace pPackage, final String pUri) {
+      return rawCountMatches(new Object[]{pPackage, pUri});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$package, final String p$uri, final IMatchProcessor<? super RenameURIPackagePostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$package, p$uri}, processor);
+    public void forEachMatch(final Trace pPackage, final String pUri, final IMatchProcessor<? super RenameURIPackagePostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{pPackage, pUri}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$package, final String p$uri, final IMatchProcessor<? super RenameURIPackagePostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$package, p$uri}, processor);
+    public boolean forOneArbitraryMatch(final Trace pPackage, final String pUri, final IMatchProcessor<? super RenameURIPackagePostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pPackage, pUri}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$uri the fixed value of pattern parameter $uri, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pUri the fixed value of pattern parameter uri, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public RenameURIPackagePostcondition.Match newMatch(final TraceLink p$package, final String p$uri) {
-      return RenameURIPackagePostcondition.Match.newMatch(p$package, p$uri);
+    public RenameURIPackagePostcondition.Match newMatch(final Trace pPackage, final String pUri) {
+      return RenameURIPackagePostcondition.Match.newMatch(pPackage, pUri);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$package(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$PACKAGE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfpackage(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_PACKAGE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package() {
-      return rawAccumulateAllValuesOf$package(emptyArray());
+    public Set<Trace> getAllValuesOfpackage() {
+      return rawAccumulateAllValuesOfpackage(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final RenameURIPackagePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$package(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfpackage(final RenameURIPackagePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfpackage(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final String p$uri) {
-      return rawAccumulateAllValuesOf$package(new Object[]{
+    public Set<Trace> getAllValuesOfpackage(final String pUri) {
+      return rawAccumulateAllValuesOfpackage(new Object[]{
       null, 
-      p$uri
+      pUri
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $uri.
+     * Retrieve the set of values that occur in matches for uri.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOf$uri(final Object[] parameters) {
+    protected Set<String> rawAccumulateAllValuesOfuri(final Object[] parameters) {
       Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_$URI, parameters, results);
+      rawAccumulateAllValues(POSITION_URI, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $uri.
+     * Retrieve the set of values that occur in matches for uri.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$uri() {
-      return rawAccumulateAllValuesOf$uri(emptyArray());
+    public Set<String> getAllValuesOfuri() {
+      return rawAccumulateAllValuesOfuri(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $uri.
+     * Retrieve the set of values that occur in matches for uri.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$uri(final RenameURIPackagePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$uri(partialMatch.toArray());
+    public Set<String> getAllValuesOfuri(final RenameURIPackagePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfuri(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $uri.
+     * Retrieve the set of values that occur in matches for uri.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$uri(final TraceLink p$package) {
-      return rawAccumulateAllValuesOf$uri(new Object[]{
-      p$package, 
+    public Set<String> getAllValuesOfuri(final Trace pPackage) {
+      return rawAccumulateAllValuesOfuri(new Object[]{
+      pPackage, 
       null
       });
     }
@@ -466,7 +474,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     @Override
     protected RenameURIPackagePostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return RenameURIPackagePostcondition.Match.newMatch((TraceLink) t.get(POSITION_$PACKAGE), (String) t.get(POSITION_$URI));
+          return RenameURIPackagePostcondition.Match.newMatch((Trace) t.get(POSITION_PACKAGE), (String) t.get(POSITION_URI));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -476,7 +484,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     @Override
     protected RenameURIPackagePostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return RenameURIPackagePostcondition.Match.newMatch((TraceLink) match[POSITION_$PACKAGE], (String) match[POSITION_$URI]);
+          return RenameURIPackagePostcondition.Match.newMatch((Trace) match[POSITION_PACKAGE], (String) match[POSITION_URI]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -486,7 +494,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     @Override
     protected RenameURIPackagePostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return RenameURIPackagePostcondition.Match.newMutableMatch((TraceLink) match[POSITION_$PACKAGE], (String) match[POSITION_$URI]);
+          return RenameURIPackagePostcondition.Match.newMutableMatch((Trace) match[POSITION_PACKAGE], (String) match[POSITION_URI]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -512,15 +520,15 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
   public static abstract class Processor implements IMatchProcessor<RenameURIPackagePostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$package the value of pattern parameter $package in the currently processed match
-     * @param p$uri the value of pattern parameter $uri in the currently processed match
+     * @param pPackage the value of pattern parameter package in the currently processed match
+     * @param pUri the value of pattern parameter uri in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$package, final String p$uri);
+    public abstract void process(final Trace pPackage, final String pUri);
     
     @Override
     public void process(final RenameURIPackagePostcondition.Match match) {
-      process(match.get$package(), match.get$uri());
+      process(match.getPackage(), match.getUri());
     }
   }
   
@@ -558,7 +566,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
   
   @Override
   public RenameURIPackagePostcondition.Match newMatch(final Object... parameters) {
-    return RenameURIPackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (java.lang.String) parameters[1]);
+    return RenameURIPackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (java.lang.String) parameters[1]);
   }
   
   /**
@@ -590,11 +598,11 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static RenameURIPackagePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$package = new PParameter("$package", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pPackage = new PParameter("package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$uri = new PParameter("$uri", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
+    private final PParameter parameter_pUri = new PParameter("uri", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$package, parameter_p$uri);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pPackage, parameter_pUri);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -607,7 +615,7 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$package","$uri");
+      return Arrays.asList("package","uri");
     }
     
     @Override
@@ -620,19 +628,46 @@ public final class RenameURIPackagePostcondition extends BaseGeneratedEMFQuerySp
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$package = body.getOrCreateVariableByName("$package");
-          PVariable var_$uri = body.getOrCreateVariableByName("$uri");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_$uri), new JavaTransitiveInstancesKey(java.lang.String.class));
+          PVariable var_package = body.getOrCreateVariableByName("package");
+          PVariable var_uri = body.getOrCreateVariableByName("uri");
+          PVariable var_initial_uri = body.getOrCreateVariableByName("initial_uri");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_uri), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$package, parameter_p$package),
-             new ExportedParameter(body, var_$uri, parameter_p$uri)
+             new ExportedParameter(body, var_package, parameter_pPackage),
+             new ExportedParameter(body, var_uri, parameter_pUri)
           ));
-          // 	find set_package_uri ($package, $uri)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package, var_$uri), Set_package_uri.instance().getInternalQueryRepresentation());
+          // 	find unset_package_uri (^package, initial_uri)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_initial_uri), Unset_package_uri.instance().getInternalQueryRepresentation());
+          // 	find set_package_uri (^package, uri)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_uri), Set_package_uri.instance().getInternalQueryRepresentation());
+          //   	uri == eval(initial_uri + File.separator + 'Changed')
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new ExpressionEvaluation(body, new IExpressionEvaluator() {
+          
+              @Override
+              public String getShortDescription() {
+                  return "Expression evaluation from pattern RenameURIPackagePostcondition";
+              }
+              
+              @Override
+              public Iterable<String> getInputParameterNames() {
+                  return Arrays.asList("initial_uri");}
+          
+              @Override
+              public Object evaluateExpression(IValueProvider provider) throws Exception {
+                  String initial_uri = (String) provider.getValue("initial_uri");
+                  return evaluateExpression_1_1(initial_uri);
+              }
+          },  var__virtual_0_ ); 
+          new Equality(body, var_uri, var__virtual_0_);
           bodies.add(body);
       }
       return bodies;
     }
+  }
+  
+  private static String evaluateExpression_1_1(final String initial_uri) {
+    return ((initial_uri + File.separator) + "Changed");
   }
 }

@@ -35,10 +35,9 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Create_package;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Insert_package_subPackage;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Set_package_name;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Created_package_subPackage;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_package_name;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -48,7 +47,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecification<AddPackagePostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.AddPackagePostcondition pattern,
@@ -64,71 +63,71 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$package;
+    private Trace fPackage;
     
-    private String f$subPackage_name;
+    private String fName;
     
-    private TraceLink f$subPackage;
+    private Trace fSubPackage;
     
-    private static List<String> parameterNames = makeImmutableList("$package", "$subPackage_name", "$subPackage");
+    private static List<String> parameterNames = makeImmutableList("package", "name", "subPackage");
     
-    private Match(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      this.f$package = p$package;
-      this.f$subPackage_name = p$subPackage_name;
-      this.f$subPackage = p$subPackage;
+    private Match(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      this.fPackage = pPackage;
+      this.fName = pName;
+      this.fSubPackage = pSubPackage;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$package".equals(parameterName)) return this.f$package;
-      if ("$subPackage_name".equals(parameterName)) return this.f$subPackage_name;
-      if ("$subPackage".equals(parameterName)) return this.f$subPackage;
+      if ("package".equals(parameterName)) return this.fPackage;
+      if ("name".equals(parameterName)) return this.fName;
+      if ("subPackage".equals(parameterName)) return this.fSubPackage;
       return null;
     }
     
-    public TraceLink get$package() {
-      return this.f$package;
+    public Trace getPackage() {
+      return this.fPackage;
     }
     
-    public String get$subPackage_name() {
-      return this.f$subPackage_name;
+    public String getName() {
+      return this.fName;
     }
     
-    public TraceLink get$subPackage() {
-      return this.f$subPackage;
+    public Trace getSubPackage() {
+      return this.fSubPackage;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$package".equals(parameterName) ) {
-          this.f$package = (TraceLink) newValue;
+      if ("package".equals(parameterName) ) {
+          this.fPackage = (Trace) newValue;
           return true;
       }
-      if ("$subPackage_name".equals(parameterName) ) {
-          this.f$subPackage_name = (String) newValue;
+      if ("name".equals(parameterName) ) {
+          this.fName = (String) newValue;
           return true;
       }
-      if ("$subPackage".equals(parameterName) ) {
-          this.f$subPackage = (TraceLink) newValue;
+      if ("subPackage".equals(parameterName) ) {
+          this.fSubPackage = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$package(final TraceLink p$package) {
+    public void setPackage(final Trace pPackage) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$package = p$package;
+      this.fPackage = pPackage;
     }
     
-    public void set$subPackage_name(final String p$subPackage_name) {
+    public void setName(final String pName) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$subPackage_name = p$subPackage_name;
+      this.fName = pName;
     }
     
-    public void set$subPackage(final TraceLink p$subPackage) {
+    public void setSubPackage(final Trace pSubPackage) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$subPackage = p$subPackage;
+      this.fSubPackage = pSubPackage;
     }
     
     @Override
@@ -143,26 +142,26 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$package, f$subPackage_name, f$subPackage};
+      return new Object[]{fPackage, fName, fSubPackage};
     }
     
     @Override
     public AddPackagePostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$package, f$subPackage_name, f$subPackage) : this;
+      return isMutable() ? newMatch(fPackage, fName, fSubPackage) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$package\"=" + prettyPrintValue(f$package) + ", ");
-      result.append("\"$subPackage_name\"=" + prettyPrintValue(f$subPackage_name) + ", ");
-      result.append("\"$subPackage\"=" + prettyPrintValue(f$subPackage));
+      result.append("\"package\"=" + prettyPrintValue(fPackage) + ", ");
+      result.append("\"name\"=" + prettyPrintValue(fName) + ", ");
+      result.append("\"subPackage\"=" + prettyPrintValue(fSubPackage));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$package, f$subPackage_name, f$subPackage);
+      return Objects.hash (fPackage, fName, fSubPackage);
     }
     
     @Override
@@ -174,7 +173,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
       }
       if ((obj instanceof AddPackagePostcondition.Match)) {
           AddPackagePostcondition.Match other = (AddPackagePostcondition.Match) obj;
-          return Objects.equals(f$package, other.f$package) && Objects.equals(f$subPackage_name, other.f$subPackage_name) && Objects.equals(f$subPackage, other.f$subPackage);
+          return Objects.equals(fPackage, other.fPackage) && Objects.equals(fName, other.fName) && Objects.equals(fSubPackage, other.fSubPackage);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -205,33 +204,33 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static AddPackagePostcondition.Match newMutableMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return new Mutable(p$package, p$subPackage_name, p$subPackage);
+    public static AddPackagePostcondition.Match newMutableMatch(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return new Mutable(pPackage, pName, pSubPackage);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static AddPackagePostcondition.Match newMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return new Immutable(p$package, p$subPackage_name, p$subPackage);
+    public static AddPackagePostcondition.Match newMatch(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return new Immutable(pPackage, pName, pSubPackage);
     }
     
     private static final class Mutable extends AddPackagePostcondition.Match {
-      Mutable(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-        super(p$package, p$subPackage_name, p$subPackage);
+      Mutable(final Trace pPackage, final String pName, final Trace pSubPackage) {
+        super(pPackage, pName, pSubPackage);
       }
       
       @Override
@@ -241,8 +240,8 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     }
     
     private static final class Immutable extends AddPackagePostcondition.Match {
-      Immutable(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-        super(p$package, p$subPackage_name, p$subPackage);
+      Immutable(final Trace pPackage, final String pName, final Trace pSubPackage) {
+        super(pPackage, pName, pSubPackage);
       }
       
       @Override
@@ -264,10 +263,9 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
    * <p>Original source:
    * <code><pre>
    * // AAP4 - Add Package - Postcondition
-   * pattern AddPackagePostcondition ($package : TraceLink, $subPackage_name : java String, $subPackage : TraceLink) {
-   * 	find create_package ($subPackage);
-   * 	find set_package_name ($subPackage, $subPackage_name);
-   * 	find insert_package_subPackage ($package, $subPackage);
+   * pattern AddPackagePostcondition (^package : Trace, name : java String, subPackage : Trace) {
+   * 	find created_package_subPackage (^package, subPackage);
+   * 	find set_package_name (subPackage, name);
    * }
    * </pre></code>
    * 
@@ -304,11 +302,11 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
       return new Matcher();
     }
     
-    private final static int POSITION_$PACKAGE = 0;
+    private final static int POSITION_PACKAGE = 0;
     
-    private final static int POSITION_$SUBPACKAGE_NAME = 1;
+    private final static int POSITION_NAME = 1;
     
-    private final static int POSITION_$SUBPACKAGE = 2;
+    private final static int POSITION_SUBPACKAGE = 2;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(AddPackagePostcondition.Matcher.class);
     
@@ -326,216 +324,216 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<AddPackagePostcondition.Match> getAllMatches(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return rawGetAllMatches(new Object[]{p$package, p$subPackage_name, p$subPackage});
+    public Collection<AddPackagePostcondition.Match> getAllMatches(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return rawGetAllMatches(new Object[]{pPackage, pName, pSubPackage});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public AddPackagePostcondition.Match getOneArbitraryMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return rawGetOneArbitraryMatch(new Object[]{p$package, p$subPackage_name, p$subPackage});
+    public AddPackagePostcondition.Match getOneArbitraryMatch(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return rawGetOneArbitraryMatch(new Object[]{pPackage, pName, pSubPackage});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return rawHasMatch(new Object[]{p$package, p$subPackage_name, p$subPackage});
+    public boolean hasMatch(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return rawHasMatch(new Object[]{pPackage, pName, pSubPackage});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return rawCountMatches(new Object[]{p$package, p$subPackage_name, p$subPackage});
+    public int countMatches(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return rawCountMatches(new Object[]{pPackage, pName, pSubPackage});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage, final IMatchProcessor<? super AddPackagePostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$package, p$subPackage_name, p$subPackage}, processor);
+    public void forEachMatch(final Trace pPackage, final String pName, final Trace pSubPackage, final IMatchProcessor<? super AddPackagePostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{pPackage, pName, pSubPackage}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage, final IMatchProcessor<? super AddPackagePostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$package, p$subPackage_name, p$subPackage}, processor);
+    public boolean forOneArbitraryMatch(final Trace pPackage, final String pName, final Trace pSubPackage, final IMatchProcessor<? super AddPackagePostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pPackage, pName, pSubPackage}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
-     * @param p$subPackage_name the fixed value of pattern parameter $subPackage_name, or null if not bound.
-     * @param p$subPackage the fixed value of pattern parameter $subPackage, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
+     * @param pSubPackage the fixed value of pattern parameter subPackage, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public AddPackagePostcondition.Match newMatch(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage) {
-      return AddPackagePostcondition.Match.newMatch(p$package, p$subPackage_name, p$subPackage);
+    public AddPackagePostcondition.Match newMatch(final Trace pPackage, final String pName, final Trace pSubPackage) {
+      return AddPackagePostcondition.Match.newMatch(pPackage, pName, pSubPackage);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$package(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$PACKAGE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfpackage(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_PACKAGE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package() {
-      return rawAccumulateAllValuesOf$package(emptyArray());
+    public Set<Trace> getAllValuesOfpackage() {
+      return rawAccumulateAllValuesOfpackage(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final AddPackagePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$package(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfpackage(final AddPackagePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfpackage(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package(final String p$subPackage_name, final TraceLink p$subPackage) {
-      return rawAccumulateAllValuesOf$package(new Object[]{
+    public Set<Trace> getAllValuesOfpackage(final String pName, final Trace pSubPackage) {
+      return rawAccumulateAllValuesOfpackage(new Object[]{
       null, 
-      p$subPackage_name, 
-      p$subPackage
+      pName, 
+      pSubPackage
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage_name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOf$subPackage_name(final Object[] parameters) {
+    protected Set<String> rawAccumulateAllValuesOfname(final Object[] parameters) {
       Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_$SUBPACKAGE_NAME, parameters, results);
+      rawAccumulateAllValues(POSITION_NAME, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage_name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$subPackage_name() {
-      return rawAccumulateAllValuesOf$subPackage_name(emptyArray());
+    public Set<String> getAllValuesOfname() {
+      return rawAccumulateAllValuesOfname(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage_name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$subPackage_name(final AddPackagePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$subPackage_name(partialMatch.toArray());
+    public Set<String> getAllValuesOfname(final AddPackagePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfname(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage_name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$subPackage_name(final TraceLink p$package, final TraceLink p$subPackage) {
-      return rawAccumulateAllValuesOf$subPackage_name(new Object[]{
-      p$package, 
+    public Set<String> getAllValuesOfname(final Trace pPackage, final Trace pSubPackage) {
+      return rawAccumulateAllValuesOfname(new Object[]{
+      pPackage, 
       null, 
-      p$subPackage
+      pSubPackage
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage.
+     * Retrieve the set of values that occur in matches for subPackage.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$subPackage(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$SUBPACKAGE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfsubPackage(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_SUBPACKAGE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage.
+     * Retrieve the set of values that occur in matches for subPackage.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$subPackage() {
-      return rawAccumulateAllValuesOf$subPackage(emptyArray());
+    public Set<Trace> getAllValuesOfsubPackage() {
+      return rawAccumulateAllValuesOfsubPackage(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage.
+     * Retrieve the set of values that occur in matches for subPackage.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$subPackage(final AddPackagePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$subPackage(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfsubPackage(final AddPackagePostcondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfsubPackage(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $subPackage.
+     * Retrieve the set of values that occur in matches for subPackage.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$subPackage(final TraceLink p$package, final String p$subPackage_name) {
-      return rawAccumulateAllValuesOf$subPackage(new Object[]{
-      p$package, 
-      p$subPackage_name, 
+    public Set<Trace> getAllValuesOfsubPackage(final Trace pPackage, final String pName) {
+      return rawAccumulateAllValuesOfsubPackage(new Object[]{
+      pPackage, 
+      pName, 
       null
       });
     }
@@ -543,7 +541,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected AddPackagePostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return AddPackagePostcondition.Match.newMatch((TraceLink) t.get(POSITION_$PACKAGE), (String) t.get(POSITION_$SUBPACKAGE_NAME), (TraceLink) t.get(POSITION_$SUBPACKAGE));
+          return AddPackagePostcondition.Match.newMatch((Trace) t.get(POSITION_PACKAGE), (String) t.get(POSITION_NAME), (Trace) t.get(POSITION_SUBPACKAGE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -553,7 +551,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected AddPackagePostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return AddPackagePostcondition.Match.newMatch((TraceLink) match[POSITION_$PACKAGE], (String) match[POSITION_$SUBPACKAGE_NAME], (TraceLink) match[POSITION_$SUBPACKAGE]);
+          return AddPackagePostcondition.Match.newMatch((Trace) match[POSITION_PACKAGE], (String) match[POSITION_NAME], (Trace) match[POSITION_SUBPACKAGE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -563,7 +561,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected AddPackagePostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return AddPackagePostcondition.Match.newMutableMatch((TraceLink) match[POSITION_$PACKAGE], (String) match[POSITION_$SUBPACKAGE_NAME], (TraceLink) match[POSITION_$SUBPACKAGE]);
+          return AddPackagePostcondition.Match.newMutableMatch((Trace) match[POSITION_PACKAGE], (String) match[POSITION_NAME], (Trace) match[POSITION_SUBPACKAGE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -589,16 +587,16 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
   public static abstract class Processor implements IMatchProcessor<AddPackagePostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$package the value of pattern parameter $package in the currently processed match
-     * @param p$subPackage_name the value of pattern parameter $subPackage_name in the currently processed match
-     * @param p$subPackage the value of pattern parameter $subPackage in the currently processed match
+     * @param pPackage the value of pattern parameter package in the currently processed match
+     * @param pName the value of pattern parameter name in the currently processed match
+     * @param pSubPackage the value of pattern parameter subPackage in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$package, final String p$subPackage_name, final TraceLink p$subPackage);
+    public abstract void process(final Trace pPackage, final String pName, final Trace pSubPackage);
     
     @Override
     public void process(final AddPackagePostcondition.Match match) {
-      process(match.get$package(), match.get$subPackage_name(), match.get$subPackage());
+      process(match.getPackage(), match.getName(), match.getSubPackage());
     }
   }
   
@@ -636,7 +634,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
   
   @Override
   public AddPackagePostcondition.Match newMatch(final Object... parameters) {
-    return AddPackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (java.lang.String) parameters[1], (se.mdh.idt.benji.trace.TraceLink) parameters[2]);
+    return AddPackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (java.lang.String) parameters[1], (se.mdh.idt.benji.trace.Trace) parameters[2]);
   }
   
   /**
@@ -668,13 +666,13 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static AddPackagePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$package = new PParameter("$package", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pPackage = new PParameter("package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$subPackage_name = new PParameter("$subPackage_name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
+    private final PParameter parameter_pName = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$subPackage = new PParameter("$subPackage", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pSubPackage = new PParameter("subPackage", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$package, parameter_p$subPackage_name, parameter_p$subPackage);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pPackage, parameter_pName, parameter_pSubPackage);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -687,7 +685,7 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$package","$subPackage_name","$subPackage");
+      return Arrays.asList("package","name","subPackage");
     }
     
     @Override
@@ -700,23 +698,21 @@ public final class AddPackagePostcondition extends BaseGeneratedEMFQuerySpecific
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$package = body.getOrCreateVariableByName("$package");
-          PVariable var_$subPackage_name = body.getOrCreateVariableByName("$subPackage_name");
-          PVariable var_$subPackage = body.getOrCreateVariableByName("$subPackage");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_$subPackage_name), new JavaTransitiveInstancesKey(java.lang.String.class));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$subPackage), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_package = body.getOrCreateVariableByName("package");
+          PVariable var_name = body.getOrCreateVariableByName("name");
+          PVariable var_subPackage = body.getOrCreateVariableByName("subPackage");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_subPackage), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$package, parameter_p$package),
-             new ExportedParameter(body, var_$subPackage_name, parameter_p$subPackage_name),
-             new ExportedParameter(body, var_$subPackage, parameter_p$subPackage)
+             new ExportedParameter(body, var_package, parameter_pPackage),
+             new ExportedParameter(body, var_name, parameter_pName),
+             new ExportedParameter(body, var_subPackage, parameter_pSubPackage)
           ));
-          // 	find create_package ($subPackage)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$subPackage), Create_package.instance().getInternalQueryRepresentation());
-          // 	find set_package_name ($subPackage, $subPackage_name)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$subPackage, var_$subPackage_name), Set_package_name.instance().getInternalQueryRepresentation());
-          // 	find insert_package_subPackage ($package, $subPackage)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package, var_$subPackage), Insert_package_subPackage.instance().getInternalQueryRepresentation());
+          // 	find created_package_subPackage (^package, subPackage)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_subPackage), Created_package_subPackage.instance().getInternalQueryRepresentation());
+          // 	find set_package_name (subPackage, name)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_subPackage, var_name), Set_package_name.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

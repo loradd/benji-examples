@@ -33,8 +33,8 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_reference;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_reference;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -44,7 +44,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpecification<DeleteReferencePrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.DeleteReferencePrecondition pattern,
@@ -60,37 +60,37 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$reference;
+    private Trace fReference;
     
-    private static List<String> parameterNames = makeImmutableList("$reference");
+    private static List<String> parameterNames = makeImmutableList("reference");
     
-    private Match(final TraceLink p$reference) {
-      this.f$reference = p$reference;
+    private Match(final Trace pReference) {
+      this.fReference = pReference;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$reference".equals(parameterName)) return this.f$reference;
+      if ("reference".equals(parameterName)) return this.fReference;
       return null;
     }
     
-    public TraceLink get$reference() {
-      return this.f$reference;
+    public Trace getReference() {
+      return this.fReference;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$reference".equals(parameterName) ) {
-          this.f$reference = (TraceLink) newValue;
+      if ("reference".equals(parameterName) ) {
+          this.fReference = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$reference(final TraceLink p$reference) {
+    public void setReference(final Trace pReference) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$reference = p$reference;
+      this.fReference = pReference;
     }
     
     @Override
@@ -105,24 +105,24 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$reference};
+      return new Object[]{fReference};
     }
     
     @Override
     public DeleteReferencePrecondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$reference) : this;
+      return isMutable() ? newMatch(fReference) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$reference\"=" + prettyPrintValue(f$reference));
+      result.append("\"reference\"=" + prettyPrintValue(fReference));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$reference);
+      return Objects.hash (fReference);
     }
     
     @Override
@@ -134,7 +134,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
       }
       if ((obj instanceof DeleteReferencePrecondition.Match)) {
           DeleteReferencePrecondition.Match other = (DeleteReferencePrecondition.Match) obj;
-          return Objects.equals(f$reference, other.f$reference);
+          return Objects.equals(fReference, other.fReference);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -165,29 +165,29 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static DeleteReferencePrecondition.Match newMutableMatch(final TraceLink p$reference) {
-      return new Mutable(p$reference);
+    public static DeleteReferencePrecondition.Match newMutableMatch(final Trace pReference) {
+      return new Mutable(pReference);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static DeleteReferencePrecondition.Match newMatch(final TraceLink p$reference) {
-      return new Immutable(p$reference);
+    public static DeleteReferencePrecondition.Match newMatch(final Trace pReference) {
+      return new Immutable(pReference);
     }
     
     private static final class Mutable extends DeleteReferencePrecondition.Match {
-      Mutable(final TraceLink p$reference) {
-        super(p$reference);
+      Mutable(final Trace pReference) {
+        super(pReference);
       }
       
       @Override
@@ -197,8 +197,8 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     }
     
     private static final class Immutable extends DeleteReferencePrecondition.Match {
-      Immutable(final TraceLink p$reference) {
-        super(p$reference);
+      Immutable(final Trace pReference) {
+        super(pReference);
       }
       
       @Override
@@ -220,8 +220,8 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
    * <p>Original source:
    * <code><pre>
    * // ADCR14 - Delete Reference - Precondition
-   * pattern DeleteReferencePrecondition ($reference : TraceLink) {
-   * 	find get_reference ($reference);	
+   * pattern DeleteReferencePrecondition (reference : Trace) {
+   * 	find preserved_reference (reference);	
    * }
    * </pre></code>
    * 
@@ -258,7 +258,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
       return new Matcher();
     }
     
-    private final static int POSITION_$REFERENCE = 0;
+    private final static int POSITION_REFERENCE = 0;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(DeleteReferencePrecondition.Matcher.class);
     
@@ -276,104 +276,104 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<DeleteReferencePrecondition.Match> getAllMatches(final TraceLink p$reference) {
-      return rawGetAllMatches(new Object[]{p$reference});
+    public Collection<DeleteReferencePrecondition.Match> getAllMatches(final Trace pReference) {
+      return rawGetAllMatches(new Object[]{pReference});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public DeleteReferencePrecondition.Match getOneArbitraryMatch(final TraceLink p$reference) {
-      return rawGetOneArbitraryMatch(new Object[]{p$reference});
+    public DeleteReferencePrecondition.Match getOneArbitraryMatch(final Trace pReference) {
+      return rawGetOneArbitraryMatch(new Object[]{pReference});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$reference) {
-      return rawHasMatch(new Object[]{p$reference});
+    public boolean hasMatch(final Trace pReference) {
+      return rawHasMatch(new Object[]{pReference});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$reference) {
-      return rawCountMatches(new Object[]{p$reference});
+    public int countMatches(final Trace pReference) {
+      return rawCountMatches(new Object[]{pReference});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$reference, final IMatchProcessor<? super DeleteReferencePrecondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$reference}, processor);
+    public void forEachMatch(final Trace pReference, final IMatchProcessor<? super DeleteReferencePrecondition.Match> processor) {
+      rawForEachMatch(new Object[]{pReference}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$reference, final IMatchProcessor<? super DeleteReferencePrecondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$reference}, processor);
+    public boolean forOneArbitraryMatch(final Trace pReference, final IMatchProcessor<? super DeleteReferencePrecondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pReference}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public DeleteReferencePrecondition.Match newMatch(final TraceLink p$reference) {
-      return DeleteReferencePrecondition.Match.newMatch(p$reference);
+    public DeleteReferencePrecondition.Match newMatch(final Trace pReference) {
+      return DeleteReferencePrecondition.Match.newMatch(pReference);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$reference(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$REFERENCE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfreference(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_REFERENCE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $reference.
+     * Retrieve the set of values that occur in matches for reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$reference() {
-      return rawAccumulateAllValuesOf$reference(emptyArray());
+    public Set<Trace> getAllValuesOfreference() {
+      return rawAccumulateAllValuesOfreference(emptyArray());
     }
     
     @Override
     protected DeleteReferencePrecondition.Match tupleToMatch(final Tuple t) {
       try {
-          return DeleteReferencePrecondition.Match.newMatch((TraceLink) t.get(POSITION_$REFERENCE));
+          return DeleteReferencePrecondition.Match.newMatch((Trace) t.get(POSITION_REFERENCE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -383,7 +383,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     @Override
     protected DeleteReferencePrecondition.Match arrayToMatch(final Object[] match) {
       try {
-          return DeleteReferencePrecondition.Match.newMatch((TraceLink) match[POSITION_$REFERENCE]);
+          return DeleteReferencePrecondition.Match.newMatch((Trace) match[POSITION_REFERENCE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -393,7 +393,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     @Override
     protected DeleteReferencePrecondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return DeleteReferencePrecondition.Match.newMutableMatch((TraceLink) match[POSITION_$REFERENCE]);
+          return DeleteReferencePrecondition.Match.newMutableMatch((Trace) match[POSITION_REFERENCE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -419,14 +419,14 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
   public static abstract class Processor implements IMatchProcessor<DeleteReferencePrecondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$reference the value of pattern parameter $reference in the currently processed match
+     * @param pReference the value of pattern parameter reference in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$reference);
+    public abstract void process(final Trace pReference);
     
     @Override
     public void process(final DeleteReferencePrecondition.Match match) {
-      process(match.get$reference());
+      process(match.getReference());
     }
   }
   
@@ -464,7 +464,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
   
   @Override
   public DeleteReferencePrecondition.Match newMatch(final Object... parameters) {
-    return DeleteReferencePrecondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0]);
+    return DeleteReferencePrecondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0]);
   }
   
   /**
@@ -496,9 +496,9 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static DeleteReferencePrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$reference = new PParameter("$reference", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pReference = new PParameter("reference", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$reference);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pReference);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -511,7 +511,7 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$reference");
+      return Arrays.asList("reference");
     }
     
     @Override
@@ -524,13 +524,13 @@ public final class DeleteReferencePrecondition extends BaseGeneratedEMFQuerySpec
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$reference = body.getOrCreateVariableByName("$reference");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_reference = body.getOrCreateVariableByName("reference");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$reference, parameter_p$reference)
+             new ExportedParameter(body, var_reference, parameter_pReference)
           ));
-          // 	find get_reference ($reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference), Get_reference.instance().getInternalQueryRepresentation());
+          // 	find preserved_reference (reference)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_reference), Preserved_reference.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

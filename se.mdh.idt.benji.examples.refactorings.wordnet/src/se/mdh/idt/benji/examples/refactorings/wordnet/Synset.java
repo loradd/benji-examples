@@ -55,7 +55,8 @@ public interface Synset extends EObject {
 	void setGloss(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Words</b></em>' reference.
+	 * Returns the value of the '<em><b>Words</b></em>' reference list.
+	 * The list contents are of type {@link se.mdh.idt.benji.examples.refactorings.wordnet.Word}.
 	 * It is bidirectional and its opposite is '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Word#getSynsets <em>Synsets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -63,24 +64,13 @@ public interface Synset extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Words</em>' reference.
-	 * @see #setWords(Word)
+	 * @return the value of the '<em>Words</em>' reference list.
 	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.WordnetPackage#getSynset_Words()
 	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.Word#getSynsets
-	 * @model opposite="synsets" required="true"
+	 * @model opposite="synsets"
 	 * @generated
 	 */
-	Word getWords();
-
-	/**
-	 * Sets the value of the '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Synset#getWords <em>Words</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Words</em>' reference.
-	 * @see #getWords()
-	 * @generated
-	 */
-	void setWords(Word value);
+	EList<Word> getWords();
 
 	/**
 	 * Returns the value of the '<em><b>Hyponyms</b></em>' reference list.

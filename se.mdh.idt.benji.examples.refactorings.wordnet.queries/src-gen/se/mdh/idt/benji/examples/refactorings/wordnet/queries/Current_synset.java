@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/SynsetQueries.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/SynsetPatterns.vql
  */
 package se.mdh.idt.benji.examples.refactorings.wordnet.queries;
 
@@ -34,7 +34,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 import se.mdh.idt.benji.examples.refactorings.wordnet.Synset;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.trace.Trace;
 import se.mdh.idt.benji.trace.api.Current;
 
 /**
@@ -45,7 +45,7 @@ import se.mdh.idt.benji.trace.api.Current;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T22:01+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-24T16:52+0200")
 public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Current_synset.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.wordnet.queries.current_synset pattern,
@@ -61,13 +61,13 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink fSynset;
+    private Trace fSynset;
     
     private Synset fCurrent_synset;
     
     private static List<String> parameterNames = makeImmutableList("synset", "current_synset");
     
-    private Match(final TraceLink pSynset, final Synset pCurrent_synset) {
+    private Match(final Trace pSynset, final Synset pCurrent_synset) {
       this.fSynset = pSynset;
       this.fCurrent_synset = pCurrent_synset;
     }
@@ -79,7 +79,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
       return null;
     }
     
-    public TraceLink getSynset() {
+    public Trace getSynset() {
       return this.fSynset;
     }
     
@@ -91,7 +91,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("synset".equals(parameterName) ) {
-          this.fSynset = (TraceLink) newValue;
+          this.fSynset = (Trace) newValue;
           return true;
       }
       if ("current_synset".equals(parameterName) ) {
@@ -101,7 +101,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
       return false;
     }
     
-    public void setSynset(final TraceLink pSynset) {
+    public void setSynset(final Trace pSynset) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fSynset = pSynset;
     }
@@ -189,7 +189,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Current_synset.Match newMutableMatch(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public static Current_synset.Match newMutableMatch(final Trace pSynset, final Synset pCurrent_synset) {
       return new Mutable(pSynset, pCurrent_synset);
     }
     
@@ -202,12 +202,12 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the (partial) match object.
      * 
      */
-    public static Current_synset.Match newMatch(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public static Current_synset.Match newMatch(final Trace pSynset, final Synset pCurrent_synset) {
       return new Immutable(pSynset, pCurrent_synset);
     }
     
     private static final class Mutable extends Current_synset.Match {
-      Mutable(final TraceLink pSynset, final Synset pCurrent_synset) {
+      Mutable(final Trace pSynset, final Synset pCurrent_synset) {
         super(pSynset, pCurrent_synset);
       }
       
@@ -218,7 +218,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
     }
     
     private static final class Immutable extends Current_synset.Match {
-      Immutable(final TraceLink pSynset, final Synset pCurrent_synset) {
+      Immutable(final Trace pSynset, final Synset pCurrent_synset) {
         super(pSynset, pCurrent_synset);
       }
       
@@ -241,8 +241,9 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
    * <p>Original source:
    * <code><pre>
    * // synset - current
-   * pattern current_synset (synset : TraceLink, current_synset : Synset) {
-   * 	find current (synset, current_synset);
+   * pattern current_synset (synset : Trace, current_synset : Synset) {
+   * 	find current (synset, current_synset); 
+   * 	Synset (current_synset); 
    * }
    * </pre></code>
    * 
@@ -304,7 +305,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Current_synset.Match> getAllMatches(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public Collection<Current_synset.Match> getAllMatches(final Trace pSynset, final Synset pCurrent_synset) {
       return rawGetAllMatches(new Object[]{pSynset, pCurrent_synset});
     }
     
@@ -316,7 +317,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Current_synset.Match getOneArbitraryMatch(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public Current_synset.Match getOneArbitraryMatch(final Trace pSynset, final Synset pCurrent_synset) {
       return rawGetOneArbitraryMatch(new Object[]{pSynset, pCurrent_synset});
     }
     
@@ -328,7 +329,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public boolean hasMatch(final Trace pSynset, final Synset pCurrent_synset) {
       return rawHasMatch(new Object[]{pSynset, pCurrent_synset});
     }
     
@@ -339,7 +340,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public int countMatches(final Trace pSynset, final Synset pCurrent_synset) {
       return rawCountMatches(new Object[]{pSynset, pCurrent_synset});
     }
     
@@ -350,7 +351,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink pSynset, final Synset pCurrent_synset, final IMatchProcessor<? super Current_synset.Match> processor) {
+    public void forEachMatch(final Trace pSynset, final Synset pCurrent_synset, final IMatchProcessor<? super Current_synset.Match> processor) {
       rawForEachMatch(new Object[]{pSynset, pCurrent_synset}, processor);
     }
     
@@ -363,7 +364,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink pSynset, final Synset pCurrent_synset, final IMatchProcessor<? super Current_synset.Match> processor) {
+    public boolean forOneArbitraryMatch(final Trace pSynset, final Synset pCurrent_synset, final IMatchProcessor<? super Current_synset.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pSynset, pCurrent_synset}, processor);
     }
     
@@ -376,7 +377,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the (partial) match object.
      * 
      */
-    public Current_synset.Match newMatch(final TraceLink pSynset, final Synset pCurrent_synset) {
+    public Current_synset.Match newMatch(final Trace pSynset, final Synset pCurrent_synset) {
       return Current_synset.Match.newMatch(pSynset, pCurrent_synset);
     }
     
@@ -385,8 +386,8 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOfsynset(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
+    protected Set<Trace> rawAccumulateAllValuesOfsynset(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
       rawAccumulateAllValues(POSITION_SYNSET, parameters, results);
       return results;
     }
@@ -396,7 +397,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset() {
+    public Set<Trace> getAllValuesOfsynset() {
       return rawAccumulateAllValuesOfsynset(emptyArray());
     }
     
@@ -405,7 +406,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset(final Current_synset.Match partialMatch) {
+    public Set<Trace> getAllValuesOfsynset(final Current_synset.Match partialMatch) {
       return rawAccumulateAllValuesOfsynset(partialMatch.toArray());
     }
     
@@ -414,7 +415,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfsynset(final Synset pCurrent_synset) {
+    public Set<Trace> getAllValuesOfsynset(final Synset pCurrent_synset) {
       return rawAccumulateAllValuesOfsynset(new Object[]{
       null, 
       pCurrent_synset
@@ -455,7 +456,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Synset> getAllValuesOfcurrent_synset(final TraceLink pSynset) {
+    public Set<Synset> getAllValuesOfcurrent_synset(final Trace pSynset) {
       return rawAccumulateAllValuesOfcurrent_synset(new Object[]{
       pSynset, 
       null
@@ -465,7 +466,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
     @Override
     protected Current_synset.Match tupleToMatch(final Tuple t) {
       try {
-          return Current_synset.Match.newMatch((TraceLink) t.get(POSITION_SYNSET), (Synset) t.get(POSITION_CURRENT_SYNSET));
+          return Current_synset.Match.newMatch((Trace) t.get(POSITION_SYNSET), (Synset) t.get(POSITION_CURRENT_SYNSET));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -475,7 +476,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
     @Override
     protected Current_synset.Match arrayToMatch(final Object[] match) {
       try {
-          return Current_synset.Match.newMatch((TraceLink) match[POSITION_SYNSET], (Synset) match[POSITION_CURRENT_SYNSET]);
+          return Current_synset.Match.newMatch((Trace) match[POSITION_SYNSET], (Synset) match[POSITION_CURRENT_SYNSET]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -485,7 +486,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
     @Override
     protected Current_synset.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Current_synset.Match.newMutableMatch((TraceLink) match[POSITION_SYNSET], (Synset) match[POSITION_CURRENT_SYNSET]);
+          return Current_synset.Match.newMutableMatch((Trace) match[POSITION_SYNSET], (Synset) match[POSITION_CURRENT_SYNSET]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -515,7 +516,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
      * @param pCurrent_synset the value of pattern parameter current_synset in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink pSynset, final Synset pCurrent_synset);
+    public abstract void process(final Trace pSynset, final Synset pCurrent_synset);
     
     @Override
     public void process(final Current_synset.Match match) {
@@ -557,7 +558,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
   
   @Override
   public Current_synset.Match newMatch(final Object... parameters) {
-    return Current_synset.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (se.mdh.idt.benji.examples.refactorings.wordnet.Synset) parameters[1]);
+    return Current_synset.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (se.mdh.idt.benji.examples.refactorings.wordnet.Synset) parameters[1]);
   }
   
   /**
@@ -589,7 +590,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static Current_synset.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pSynset = new PParameter("synset", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pSynset = new PParameter("synset", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
     private final PParameter parameter_pCurrent_synset = new PParameter("current_synset", "se.mdh.idt.benji.examples.refactorings.wordnet.Synset", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/examples/refactorings/WordNet", "Synset")), PParameterDirection.INOUT);
     
@@ -621,7 +622,7 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
           PBody body = new PBody(this);
           PVariable var_synset = body.getOrCreateVariableByName("synset");
           PVariable var_current_synset = body.getOrCreateVariableByName("current_synset");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_current_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/examples/refactorings/WordNet", "Synset")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_synset, parameter_pSynset),
@@ -629,6 +630,8 @@ public final class Current_synset extends BaseGeneratedEMFQuerySpecification<Cur
           ));
           // 	find current (synset, current_synset)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_synset, var_current_synset), Current.instance().getInternalQueryRepresentation());
+          //  	Synset (current_synset)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_current_synset), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/examples/refactorings/WordNet", "Synset")));
           bodies.add(body);
       }
       return bodies;

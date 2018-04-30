@@ -58,6 +58,52 @@ public interface WordnetPackage extends EPackage {
 	WordnetPackage eINSTANCE = se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordNetImpl <em>Word Net</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordNetImpl
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetPackageImpl#getWordNet()
+	 * @generated
+	 */
+	int WORD_NET = 0;
+
+	/**
+	 * The feature id for the '<em><b>Synsets</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORD_NET__SYNSETS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Words</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORD_NET__WORDS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Word Net</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORD_NET_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Word Net</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORD_NET_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link se.mdh.idt.benji.examples.refactorings.wordnet.impl.SynsetImpl <em>Synset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,7 +111,7 @@ public interface WordnetPackage extends EPackage {
 	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetPackageImpl#getSynset()
 	 * @generated
 	 */
-	int SYNSET = 0;
+	int SYNSET = 1;
 
 	/**
 	 * The feature id for the '<em><b>Gloss</b></em>' attribute.
@@ -77,7 +123,7 @@ public interface WordnetPackage extends EPackage {
 	int SYNSET__GLOSS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Words</b></em>' reference.
+	 * The feature id for the '<em><b>Words</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -147,7 +193,7 @@ public interface WordnetPackage extends EPackage {
 	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetPackageImpl#getWord()
 	 * @generated
 	 */
-	int WORD = 1;
+	int WORD = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -187,6 +233,38 @@ public interface WordnetPackage extends EPackage {
 
 
 	/**
+	 * Returns the meta object for class '{@link se.mdh.idt.benji.examples.refactorings.wordnet.WordNet <em>Word Net</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Word Net</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.WordNet
+	 * @generated
+	 */
+	EClass getWordNet();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.wordnet.WordNet#getSynsets <em>Synsets</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Synsets</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.WordNet#getSynsets()
+	 * @see #getWordNet()
+	 * @generated
+	 */
+	EReference getWordNet_Synsets();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.wordnet.WordNet#getWords <em>Words</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Words</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.WordNet#getWords()
+	 * @see #getWordNet()
+	 * @generated
+	 */
+	EReference getWordNet_Words();
+
+	/**
 	 * Returns the meta object for class '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Synset <em>Synset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,10 +286,10 @@ public interface WordnetPackage extends EPackage {
 	EAttribute getSynset_Gloss();
 
 	/**
-	 * Returns the meta object for the reference '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Synset#getWords <em>Words</em>}'.
+	 * Returns the meta object for the reference list '{@link se.mdh.idt.benji.examples.refactorings.wordnet.Synset#getWords <em>Words</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Words</em>'.
+	 * @return the meta object for the reference list '<em>Words</em>'.
 	 * @see se.mdh.idt.benji.examples.refactorings.wordnet.Synset#getWords()
 	 * @see #getSynset()
 	 * @generated
@@ -318,6 +396,32 @@ public interface WordnetPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
+		 * The meta object literal for the '{@link se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordNetImpl <em>Word Net</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordNetImpl
+		 * @see se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetPackageImpl#getWordNet()
+		 * @generated
+		 */
+		EClass WORD_NET = eINSTANCE.getWordNet();
+
+		/**
+		 * The meta object literal for the '<em><b>Synsets</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WORD_NET__SYNSETS = eINSTANCE.getWordNet_Synsets();
+
+		/**
+		 * The meta object literal for the '<em><b>Words</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference WORD_NET__WORDS = eINSTANCE.getWordNet_Words();
+
+		/**
 		 * The meta object literal for the '{@link se.mdh.idt.benji.examples.refactorings.wordnet.impl.SynsetImpl <em>Synset</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -336,7 +440,7 @@ public interface WordnetPackage extends EPackage {
 		EAttribute SYNSET__GLOSS = eINSTANCE.getSynset_Gloss();
 
 		/**
-		 * The meta object literal for the '<em><b>Words</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Words</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

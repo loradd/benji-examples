@@ -33,8 +33,8 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Delete_package;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Deleted_package;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -44,7 +44,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpecification<DeletePackagePostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.DeletePackagePostcondition pattern,
@@ -60,37 +60,37 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$package;
+    private Trace fPackage;
     
-    private static List<String> parameterNames = makeImmutableList("$package");
+    private static List<String> parameterNames = makeImmutableList("package");
     
-    private Match(final TraceLink p$package) {
-      this.f$package = p$package;
+    private Match(final Trace pPackage) {
+      this.fPackage = pPackage;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$package".equals(parameterName)) return this.f$package;
+      if ("package".equals(parameterName)) return this.fPackage;
       return null;
     }
     
-    public TraceLink get$package() {
-      return this.f$package;
+    public Trace getPackage() {
+      return this.fPackage;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$package".equals(parameterName) ) {
-          this.f$package = (TraceLink) newValue;
+      if ("package".equals(parameterName) ) {
+          this.fPackage = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$package(final TraceLink p$package) {
+    public void setPackage(final Trace pPackage) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$package = p$package;
+      this.fPackage = pPackage;
     }
     
     @Override
@@ -105,24 +105,24 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$package};
+      return new Object[]{fPackage};
     }
     
     @Override
     public DeletePackagePostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$package) : this;
+      return isMutable() ? newMatch(fPackage) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$package\"=" + prettyPrintValue(f$package));
+      result.append("\"package\"=" + prettyPrintValue(fPackage));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$package);
+      return Objects.hash (fPackage);
     }
     
     @Override
@@ -134,7 +134,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
       }
       if ((obj instanceof DeletePackagePostcondition.Match)) {
           DeletePackagePostcondition.Match other = (DeletePackagePostcondition.Match) obj;
-          return Objects.equals(f$package, other.f$package);
+          return Objects.equals(fPackage, other.fPackage);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -165,29 +165,29 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static DeletePackagePostcondition.Match newMutableMatch(final TraceLink p$package) {
-      return new Mutable(p$package);
+    public static DeletePackagePostcondition.Match newMutableMatch(final Trace pPackage) {
+      return new Mutable(pPackage);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static DeletePackagePostcondition.Match newMatch(final TraceLink p$package) {
-      return new Immutable(p$package);
+    public static DeletePackagePostcondition.Match newMatch(final Trace pPackage) {
+      return new Immutable(pPackage);
     }
     
     private static final class Mutable extends DeletePackagePostcondition.Match {
-      Mutable(final TraceLink p$package) {
-        super(p$package);
+      Mutable(final Trace pPackage) {
+        super(pPackage);
       }
       
       @Override
@@ -197,8 +197,8 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     }
     
     private static final class Immutable extends DeletePackagePostcondition.Match {
-      Immutable(final TraceLink p$package) {
-        super(p$package);
+      Immutable(final Trace pPackage) {
+        super(pPackage);
       }
       
       @Override
@@ -220,8 +220,8 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
    * <p>Original source:
    * <code><pre>
    * // CDPR3 - Delete Package - Postcondition
-   * pattern DeletePackagePostcondition ($package : TraceLink) {
-   * 	find delete_package ($package);
+   * pattern DeletePackagePostcondition (^package : Trace) {
+   * 	find deleted_package (^package);
    * }
    * </pre></code>
    * 
@@ -258,7 +258,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
       return new Matcher();
     }
     
-    private final static int POSITION_$PACKAGE = 0;
+    private final static int POSITION_PACKAGE = 0;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(DeletePackagePostcondition.Matcher.class);
     
@@ -276,104 +276,104 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<DeletePackagePostcondition.Match> getAllMatches(final TraceLink p$package) {
-      return rawGetAllMatches(new Object[]{p$package});
+    public Collection<DeletePackagePostcondition.Match> getAllMatches(final Trace pPackage) {
+      return rawGetAllMatches(new Object[]{pPackage});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public DeletePackagePostcondition.Match getOneArbitraryMatch(final TraceLink p$package) {
-      return rawGetOneArbitraryMatch(new Object[]{p$package});
+    public DeletePackagePostcondition.Match getOneArbitraryMatch(final Trace pPackage) {
+      return rawGetOneArbitraryMatch(new Object[]{pPackage});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$package) {
-      return rawHasMatch(new Object[]{p$package});
+    public boolean hasMatch(final Trace pPackage) {
+      return rawHasMatch(new Object[]{pPackage});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$package) {
-      return rawCountMatches(new Object[]{p$package});
+    public int countMatches(final Trace pPackage) {
+      return rawCountMatches(new Object[]{pPackage});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$package, final IMatchProcessor<? super DeletePackagePostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$package}, processor);
+    public void forEachMatch(final Trace pPackage, final IMatchProcessor<? super DeletePackagePostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{pPackage}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$package, final IMatchProcessor<? super DeletePackagePostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$package}, processor);
+    public boolean forOneArbitraryMatch(final Trace pPackage, final IMatchProcessor<? super DeletePackagePostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pPackage}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public DeletePackagePostcondition.Match newMatch(final TraceLink p$package) {
-      return DeletePackagePostcondition.Match.newMatch(p$package);
+    public DeletePackagePostcondition.Match newMatch(final Trace pPackage) {
+      return DeletePackagePostcondition.Match.newMatch(pPackage);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$package(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$PACKAGE, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfpackage(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_PACKAGE, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $package.
+     * Retrieve the set of values that occur in matches for package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$package() {
-      return rawAccumulateAllValuesOf$package(emptyArray());
+    public Set<Trace> getAllValuesOfpackage() {
+      return rawAccumulateAllValuesOfpackage(emptyArray());
     }
     
     @Override
     protected DeletePackagePostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return DeletePackagePostcondition.Match.newMatch((TraceLink) t.get(POSITION_$PACKAGE));
+          return DeletePackagePostcondition.Match.newMatch((Trace) t.get(POSITION_PACKAGE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -383,7 +383,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     @Override
     protected DeletePackagePostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return DeletePackagePostcondition.Match.newMatch((TraceLink) match[POSITION_$PACKAGE]);
+          return DeletePackagePostcondition.Match.newMatch((Trace) match[POSITION_PACKAGE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -393,7 +393,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     @Override
     protected DeletePackagePostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return DeletePackagePostcondition.Match.newMutableMatch((TraceLink) match[POSITION_$PACKAGE]);
+          return DeletePackagePostcondition.Match.newMutableMatch((Trace) match[POSITION_PACKAGE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -419,14 +419,14 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
   public static abstract class Processor implements IMatchProcessor<DeletePackagePostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$package the value of pattern parameter $package in the currently processed match
+     * @param pPackage the value of pattern parameter package in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$package);
+    public abstract void process(final Trace pPackage);
     
     @Override
     public void process(final DeletePackagePostcondition.Match match) {
-      process(match.get$package());
+      process(match.getPackage());
     }
   }
   
@@ -464,7 +464,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
   
   @Override
   public DeletePackagePostcondition.Match newMatch(final Object... parameters) {
-    return DeletePackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0]);
+    return DeletePackagePostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0]);
   }
   
   /**
@@ -496,9 +496,9 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static DeletePackagePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$package = new PParameter("$package", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pPackage = new PParameter("package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$package);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pPackage);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -511,7 +511,7 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$package");
+      return Arrays.asList("package");
     }
     
     @Override
@@ -524,13 +524,13 @@ public final class DeletePackagePostcondition extends BaseGeneratedEMFQuerySpeci
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$package = body.getOrCreateVariableByName("$package");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_package = body.getOrCreateVariableByName("package");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$package, parameter_p$package)
+             new ExportedParameter(body, var_package, parameter_pPackage)
           ));
-          // 	find delete_package ($package)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package), Delete_package.instance().getInternalQueryRepresentation());
+          // 	find deleted_package (^package)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_package), Deleted_package.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

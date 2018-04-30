@@ -22,6 +22,15 @@ public interface WordnetFactory extends EFactory {
 	WordnetFactory eINSTANCE = se.mdh.idt.benji.examples.refactorings.wordnet.impl.WordnetFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Word Net</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Word Net</em>'.
+	 * @generated
+	 */
+	WordNet createWordNet();
+
+	/**
 	 * Returns a new object of class '<em>Synset</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -1,5 +1,5 @@
 /**
- * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/WordQueries.vql
+ * Generated from platform:/resource/se.mdh.idt.benji.examples.refactorings.wordnet.queries/src/se/mdh/idt/benji/examples/refactorings/wordnet/queries/WordPatterns.vql
  */
 package se.mdh.idt.benji.examples.refactorings.wordnet.queries;
 
@@ -38,7 +38,7 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 import se.mdh.idt.benji.examples.refactorings.wordnet.queries.Current_word_name;
 import se.mdh.idt.benji.examples.refactorings.wordnet.queries.Initial_word_name;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -48,7 +48,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T22:01+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-24T16:52+0200")
 public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Unset_word_name.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.wordnet.queries.unset_word_name pattern,
@@ -64,13 +64,13 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink fWord;
+    private Trace fWord;
     
     private String fName;
     
     private static List<String> parameterNames = makeImmutableList("word", "name");
     
-    private Match(final TraceLink pWord, final String pName) {
+    private Match(final Trace pWord, final String pName) {
       this.fWord = pWord;
       this.fName = pName;
     }
@@ -82,7 +82,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
       return null;
     }
     
-    public TraceLink getWord() {
+    public Trace getWord() {
       return this.fWord;
     }
     
@@ -94,7 +94,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("word".equals(parameterName) ) {
-          this.fWord = (TraceLink) newValue;
+          this.fWord = (Trace) newValue;
           return true;
       }
       if ("name".equals(parameterName) ) {
@@ -104,7 +104,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
       return false;
     }
     
-    public void setWord(final TraceLink pWord) {
+    public void setWord(final Trace pWord) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fWord = pWord;
     }
@@ -192,7 +192,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Unset_word_name.Match newMutableMatch(final TraceLink pWord, final String pName) {
+    public static Unset_word_name.Match newMutableMatch(final Trace pWord, final String pName) {
       return new Mutable(pWord, pName);
     }
     
@@ -205,12 +205,12 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the (partial) match object.
      * 
      */
-    public static Unset_word_name.Match newMatch(final TraceLink pWord, final String pName) {
+    public static Unset_word_name.Match newMatch(final Trace pWord, final String pName) {
       return new Immutable(pWord, pName);
     }
     
     private static final class Mutable extends Unset_word_name.Match {
-      Mutable(final TraceLink pWord, final String pName) {
+      Mutable(final Trace pWord, final String pName) {
         super(pWord, pName);
       }
       
@@ -221,7 +221,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
     }
     
     private static final class Immutable extends Unset_word_name.Match {
-      Immutable(final TraceLink pWord, final String pName) {
+      Immutable(final Trace pWord, final String pName) {
         super(pWord, pName);
       }
       
@@ -244,9 +244,9 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
    * <p>Original source:
    * <code><pre>
    * // word - name - unset
-   * pattern unset_word_name (word : TraceLink, name : java String) {
-   * 	find initial_word_name (word, _initial_word, name);
-   * 	neg find current_word_name (word, _current_word, name);
+   * pattern unset_word_name (word : Trace, name : java String) {
+   * 	find initial_word_name (word, _initial_word, name); 
+   * 	neg find current_word_name (word, _current_word, name); 
    * }
    * </pre></code>
    * 
@@ -308,7 +308,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Unset_word_name.Match> getAllMatches(final TraceLink pWord, final String pName) {
+    public Collection<Unset_word_name.Match> getAllMatches(final Trace pWord, final String pName) {
       return rawGetAllMatches(new Object[]{pWord, pName});
     }
     
@@ -320,7 +320,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Unset_word_name.Match getOneArbitraryMatch(final TraceLink pWord, final String pName) {
+    public Unset_word_name.Match getOneArbitraryMatch(final Trace pWord, final String pName) {
       return rawGetOneArbitraryMatch(new Object[]{pWord, pName});
     }
     
@@ -332,7 +332,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink pWord, final String pName) {
+    public boolean hasMatch(final Trace pWord, final String pName) {
       return rawHasMatch(new Object[]{pWord, pName});
     }
     
@@ -343,7 +343,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink pWord, final String pName) {
+    public int countMatches(final Trace pWord, final String pName) {
       return rawCountMatches(new Object[]{pWord, pName});
     }
     
@@ -354,7 +354,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink pWord, final String pName, final IMatchProcessor<? super Unset_word_name.Match> processor) {
+    public void forEachMatch(final Trace pWord, final String pName, final IMatchProcessor<? super Unset_word_name.Match> processor) {
       rawForEachMatch(new Object[]{pWord, pName}, processor);
     }
     
@@ -367,7 +367,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink pWord, final String pName, final IMatchProcessor<? super Unset_word_name.Match> processor) {
+    public boolean forOneArbitraryMatch(final Trace pWord, final String pName, final IMatchProcessor<? super Unset_word_name.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pWord, pName}, processor);
     }
     
@@ -380,7 +380,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the (partial) match object.
      * 
      */
-    public Unset_word_name.Match newMatch(final TraceLink pWord, final String pName) {
+    public Unset_word_name.Match newMatch(final Trace pWord, final String pName) {
       return Unset_word_name.Match.newMatch(pWord, pName);
     }
     
@@ -389,8 +389,8 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOfword(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
+    protected Set<Trace> rawAccumulateAllValuesOfword(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
       rawAccumulateAllValues(POSITION_WORD, parameters, results);
       return results;
     }
@@ -400,7 +400,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfword() {
+    public Set<Trace> getAllValuesOfword() {
       return rawAccumulateAllValuesOfword(emptyArray());
     }
     
@@ -409,7 +409,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfword(final Unset_word_name.Match partialMatch) {
+    public Set<Trace> getAllValuesOfword(final Unset_word_name.Match partialMatch) {
       return rawAccumulateAllValuesOfword(partialMatch.toArray());
     }
     
@@ -418,7 +418,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOfword(final String pName) {
+    public Set<Trace> getAllValuesOfword(final String pName) {
       return rawAccumulateAllValuesOfword(new Object[]{
       null, 
       pName
@@ -459,7 +459,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfname(final TraceLink pWord) {
+    public Set<String> getAllValuesOfname(final Trace pWord) {
       return rawAccumulateAllValuesOfname(new Object[]{
       pWord, 
       null
@@ -469,7 +469,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
     @Override
     protected Unset_word_name.Match tupleToMatch(final Tuple t) {
       try {
-          return Unset_word_name.Match.newMatch((TraceLink) t.get(POSITION_WORD), (String) t.get(POSITION_NAME));
+          return Unset_word_name.Match.newMatch((Trace) t.get(POSITION_WORD), (String) t.get(POSITION_NAME));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -479,7 +479,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
     @Override
     protected Unset_word_name.Match arrayToMatch(final Object[] match) {
       try {
-          return Unset_word_name.Match.newMatch((TraceLink) match[POSITION_WORD], (String) match[POSITION_NAME]);
+          return Unset_word_name.Match.newMatch((Trace) match[POSITION_WORD], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -489,7 +489,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
     @Override
     protected Unset_word_name.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Unset_word_name.Match.newMutableMatch((TraceLink) match[POSITION_WORD], (String) match[POSITION_NAME]);
+          return Unset_word_name.Match.newMutableMatch((Trace) match[POSITION_WORD], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -519,7 +519,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
      * @param pName the value of pattern parameter name in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink pWord, final String pName);
+    public abstract void process(final Trace pWord, final String pName);
     
     @Override
     public void process(final Unset_word_name.Match match) {
@@ -561,7 +561,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
   
   @Override
   public Unset_word_name.Match newMatch(final Object... parameters) {
-    return Unset_word_name.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (java.lang.String) parameters[1]);
+    return Unset_word_name.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (java.lang.String) parameters[1]);
   }
   
   /**
@@ -593,7 +593,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static Unset_word_name.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pWord = new PParameter("word", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pWord = new PParameter("word", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
     private final PParameter parameter_pName = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
@@ -627,7 +627,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
           PVariable var_name = body.getOrCreateVariableByName("name");
           PVariable var__initial_word = body.getOrCreateVariableByName("_initial_word");
           PVariable var__current_word = body.getOrCreateVariableByName("_current_word");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_word), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_word), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_word, parameter_pWord),
@@ -635,7 +635,7 @@ public final class Unset_word_name extends BaseGeneratedEMFQuerySpecification<Un
           ));
           // 	find initial_word_name (word, _initial_word, name)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_word, var__initial_word, var_name), Initial_word_name.instance().getInternalQueryRepresentation());
-          // 	neg find current_word_name (word, _current_word, name)
+          //  	neg find current_word_name (word, _current_word, name)
           new NegativePatternCall(body, Tuples.flatTupleOf(var_word, var__current_word, var_name), Current_word_name.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }

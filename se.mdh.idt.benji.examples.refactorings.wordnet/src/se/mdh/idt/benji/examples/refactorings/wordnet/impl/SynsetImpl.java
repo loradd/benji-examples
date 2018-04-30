@@ -62,14 +62,14 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 	protected String gloss = GLOSS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getWords() <em>Words</em>}' reference.
+	 * The cached value of the '{@link #getWords() <em>Words</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getWords()
 	 * @generated
 	 * @ordered
 	 */
-	protected Word words;
+	protected EList<Word> words;
 
 	/**
 	 * The cached value of the '{@link #getHyponyms() <em>Hyponyms</em>}' reference list.
@@ -156,59 +156,11 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Word getWords() {
-		if (words != null && words.eIsProxy()) {
-			InternalEObject oldWords = (InternalEObject)words;
-			words = (Word)eResolveProxy(oldWords);
-			if (words != oldWords) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WordnetPackage.SYNSET__WORDS, oldWords, words));
-			}
+	public EList<Word> getWords() {
+		if (words == null) {
+			words = new EObjectWithInverseResolvingEList.ManyInverse<Word>(Word.class, this, WordnetPackage.SYNSET__WORDS, WordnetPackage.WORD__SYNSETS);
 		}
 		return words;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Word basicGetWords() {
-		return words;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetWords(Word newWords, NotificationChain msgs) {
-		Word oldWords = words;
-		words = newWords;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WordnetPackage.SYNSET__WORDS, oldWords, newWords);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWords(Word newWords) {
-		if (newWords != words) {
-			NotificationChain msgs = null;
-			if (words != null)
-				msgs = ((InternalEObject)words).eInverseRemove(this, WordnetPackage.WORD__SYNSETS, Word.class, msgs);
-			if (newWords != null)
-				msgs = ((InternalEObject)newWords).eInverseAdd(this, WordnetPackage.WORD__SYNSETS, Word.class, msgs);
-			msgs = basicSetWords(newWords, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WordnetPackage.SYNSET__WORDS, newWords, newWords));
 	}
 
 	/**
@@ -269,9 +221,7 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WordnetPackage.SYNSET__WORDS:
-				if (words != null)
-					msgs = ((InternalEObject)words).eInverseRemove(this, WordnetPackage.WORD__SYNSETS, Word.class, msgs);
-				return basicSetWords((Word)otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getWords()).basicAdd(otherEnd, msgs);
 			case WordnetPackage.SYNSET__HYPONYMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getHyponyms()).basicAdd(otherEnd, msgs);
 			case WordnetPackage.SYNSET__HYPERONYMS:
@@ -293,7 +243,7 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WordnetPackage.SYNSET__WORDS:
-				return basicSetWords(null, msgs);
+				return ((InternalEList<?>)getWords()).basicRemove(otherEnd, msgs);
 			case WordnetPackage.SYNSET__HYPONYMS:
 				return ((InternalEList<?>)getHyponyms()).basicRemove(otherEnd, msgs);
 			case WordnetPackage.SYNSET__HYPERONYMS:
@@ -317,8 +267,7 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 			case WordnetPackage.SYNSET__GLOSS:
 				return getGloss();
 			case WordnetPackage.SYNSET__WORDS:
-				if (resolve) return getWords();
-				return basicGetWords();
+				return getWords();
 			case WordnetPackage.SYNSET__HYPONYMS:
 				return getHyponyms();
 			case WordnetPackage.SYNSET__HYPERONYMS:
@@ -344,7 +293,8 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 				setGloss((String)newValue);
 				return;
 			case WordnetPackage.SYNSET__WORDS:
-				setWords((Word)newValue);
+				getWords().clear();
+				getWords().addAll((Collection<? extends Word>)newValue);
 				return;
 			case WordnetPackage.SYNSET__HYPONYMS:
 				getHyponyms().clear();
@@ -378,7 +328,7 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 				setGloss(GLOSS_EDEFAULT);
 				return;
 			case WordnetPackage.SYNSET__WORDS:
-				setWords((Word)null);
+				getWords().clear();
 				return;
 			case WordnetPackage.SYNSET__HYPONYMS:
 				getHyponyms().clear();
@@ -407,7 +357,7 @@ public class SynsetImpl extends MinimalEObjectImpl.Container implements Synset {
 			case WordnetPackage.SYNSET__GLOSS:
 				return GLOSS_EDEFAULT == null ? gloss != null : !GLOSS_EDEFAULT.equals(gloss);
 			case WordnetPackage.SYNSET__WORDS:
-				return words != null;
+				return words != null && !words.isEmpty();
 			case WordnetPackage.SYNSET__HYPONYMS:
 				return hyponyms != null && !hyponyms.isEmpty();
 			case WordnetPackage.SYNSET__HYPERONYMS:

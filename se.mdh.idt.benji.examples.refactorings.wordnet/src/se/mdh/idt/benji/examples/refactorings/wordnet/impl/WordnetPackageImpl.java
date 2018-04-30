@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import se.mdh.idt.benji.examples.refactorings.wordnet.Synset;
 import se.mdh.idt.benji.examples.refactorings.wordnet.Word;
+import se.mdh.idt.benji.examples.refactorings.wordnet.WordNet;
 import se.mdh.idt.benji.examples.refactorings.wordnet.WordnetFactory;
 import se.mdh.idt.benji.examples.refactorings.wordnet.WordnetPackage;
 
@@ -22,6 +23,13 @@ import se.mdh.idt.benji.examples.refactorings.wordnet.WordnetPackage;
  * @generated
  */
 public class WordnetPackageImpl extends EPackageImpl implements WordnetPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass wordNetEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,6 +106,33 @@ public class WordnetPackageImpl extends EPackageImpl implements WordnetPackage {
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(WordnetPackage.eNS_URI, theWordnetPackage);
 		return theWordnetPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWordNet() {
+		return wordNetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWordNet_Synsets() {
+		return (EReference)wordNetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getWordNet_Words() {
+		return (EReference)wordNetEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -218,6 +253,10 @@ public class WordnetPackageImpl extends EPackageImpl implements WordnetPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		wordNetEClass = createEClass(WORD_NET);
+		createEReference(wordNetEClass, WORD_NET__SYNSETS);
+		createEReference(wordNetEClass, WORD_NET__WORDS);
+
 		synsetEClass = createEClass(SYNSET);
 		createEAttribute(synsetEClass, SYNSET__GLOSS);
 		createEReference(synsetEClass, SYNSET__WORDS);
@@ -264,9 +303,13 @@ public class WordnetPackageImpl extends EPackageImpl implements WordnetPackage {
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(wordNetEClass, WordNet.class, "WordNet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWordNet_Synsets(), this.getSynset(), null, "synsets", null, 0, -1, WordNet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWordNet_Words(), this.getWord(), null, "words", null, 0, -1, WordNet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(synsetEClass, Synset.class, "Synset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSynset_Gloss(), theEcorePackage.getEString(), "gloss", null, 1, 1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSynset_Words(), this.getWord(), this.getWord_Synsets(), "words", null, 1, 1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSynset_Words(), this.getWord(), this.getWord_Synsets(), "words", null, 0, -1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSynset_Hyponyms(), this.getSynset(), this.getSynset_Hyperonyms(), "hyponyms", null, 0, -1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSynset_Hyperonyms(), this.getSynset(), this.getSynset_Hyponyms(), "hyperonyms", null, 0, -1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSynset_Meronyms(), this.getSynset(), this.getSynset_Holonyms(), "meronyms", null, 0, -1, Synset.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

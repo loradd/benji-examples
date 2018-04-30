@@ -9,9 +9,11 @@ Require-Bundle: org.eclipse.emf.ecore,
   org.eclipse.xtext.xbase.lib,
   org.eclipse.emf.edit;bundle-version="2.12.0",
   org.eclipse.collections;bundle-version="9.0.0",
-  se.mdh.idt.benji.examples.refactorings.metamodel,
-  se.mdh.idt.benji.examples.refactorings.metamodel.queries,
   se.mdh.idt.benji,
-  se.mdh.idt.benji.examples.refactorings.metamodel.actions;bundle-version="1.0.0"
+  se.mdh.idt.benji.examples.refactorings.wordnet;bundle-version="0.1.0",
+  se.mdh.idt.benji.examples.refactorings.wordnet.actions;bundle-version="1.0.0",
+  se.mdh.idt.benji.examples.refactorings.wordnet.queries;bundle-version="0.0.1",
+  se.mdh.idt.benji.examples.refactorings.simplecore;bundle-version="0.1.0",
+  se.mdh.idt.benji.examples.refactorings.simplecore.patterns;bundle-version="0.0.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j

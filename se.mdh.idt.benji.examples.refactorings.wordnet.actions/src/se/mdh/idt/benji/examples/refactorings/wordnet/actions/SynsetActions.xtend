@@ -1,130 +1,67 @@
 package se.mdh.idt.benji.examples.refactorings.wordnet.actions
 
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EObject
 import se.mdh.idt.benji.examples.refactorings.wordnet.Synset
 import se.mdh.idt.benji.examples.refactorings.wordnet.Word
-import se.mdh.idt.benji.trace.TraceLink
+import se.mdh.idt.benji.trace.Trace
 
 class SynsetActions {
 	
-	// synset - create
-	def static Synset create_synset () {}
-	// synset - delete (simple)
-	def static void delete_synset (Synset synset) {}
-	// synset - delete (wrapped)
-	def static void delete_synset (TraceLink synset) {}
+	// synset - gloss - get
+	def static String getGloss (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.gloss
+			Synset : synset.gloss
+		}
+	}
 	
-	// synset - gloss - get (simple)
-	def static String get_synset_gloss (Synset synset) {}
-	// synset - gloss - get (wrapped)
-	def static String get_synset_gloss (TraceLink synset) {}
-	// synset - gloss - set (simple)
-	def static void set_synset_gloss (Synset synset, String gloss) {}
-	// synset - gloss - set (wrapped)
-	def static void set_synset_gloss (TraceLink synset, String gloss) {}
+	// synset - gloss - set
+	def static void setGloss (EObject synset, String gloss) {
+		switch synset {
+			Trace : synset.<Synset>current.gloss = gloss
+			Synset : synset.gloss = gloss
+		}
+	}
 	
-	// synset - words - get (simple)
-	def static Iterable<Word> get_synset_words (Synset synset) {}
-	// synset - words - get (wrapped)
-	def static Iterable<Word> get_synset_words (TraceLink synset) {}
-	// synset - words - insert (simple)
-	def static void insert_synset_word (Synset synset, Word word) {}
-	// synset - words - insert (mixed)
-	def static void insert_synset_word (Synset synset, TraceLink word) {}
-	// synset - words - insert (mixed)
-	def static void insert_synset_word (TraceLink synset, Word word) {}
-	// synset - words - insert (wrapped)
-	def static void insert_synset_word (TraceLink synset, TraceLink word) {}
-	// synset - words - remove (simple)
-	def static void remove_synset_word (Synset synset, Word word) {}
-	// synset - words - remove (mixed)
-	def static void remove_synset_word (Synset synset, TraceLink word) {}
-	// synset - words - remove (mixed)
-	def static void remove_synset_word (TraceLink synset, Word word) {}
-	// synset - words - remove (wrapped)	
-	def static void remove_synset_word (TraceLink synset, TraceLink word) {}
-
-	// synset - hyponyms - get (simple)
-	def static Iterable<Synset> get_synset_hyponyms (Synset synset) {}
-	// synset - hyponyms - get (wrapped)
-	def static Iterable<Synset> get_synset_hyponyms (TraceLink synset) {}
-	// synset - hyponyms - insert (simple)
-	def static void insert_synset_hyponym (Synset synset, Synset hyponym) {}
-	// synset - hyponyms - insert (mixed)
-	def static void insert_synset_hyponym (Synset synset, TraceLink hyponym) {}
-	// synset - hyponyms - insert (mixed)
-	def static void insert_synset_hyponym (TraceLink synset, Synset hyponym) {}
-	// synset - hyponyms - insert (wrapped)
-	def static void insert_synset_hyponym (TraceLink synset, TraceLink hyponym) {}
-	// synset - hyponyms - remove (simple)
-	def static void remove_synset_hyponym (Synset synset, Synset hyponym) {}
-	// synset - hyponyms - remove (mixed)
-	def static void remove_synset_hyponym (Synset synset, TraceLink hyponym) {}
-	// synset - hyponyms - remove (mixed)
-	def static void remove_synset_hyponym (TraceLink synset, Synset hyponym) {}
-	// synset - hyponyms - remove (wrapped)	
-	def static void remove_synset_hyponym (TraceLink synset, TraceLink hyponym) {}
+	// synset - words - get
+	def static EList<Word> getWords (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.words
+			Synset : synset.words
+		}	
+	}
 	
-	// synset - hyperonyms - get (simple)
-	def static Iterable<Synset> get_synset_hyperonyms (Synset synset) {}
-	// synset - hyperonyms - get (wrapped)
-	def static Iterable<Synset> get_synset_hyperonyms (TraceLink synset) {}
-	// synset - hyperonyms - insert (simple)
-	def static void insert_synset_hyperonym (Synset synset, Synset hyperonym) {}
-	// synset - hyperonyms - insert (mixed)
-	def static void insert_synset_hyperonym (Synset synset, TraceLink hyperonym) {}
-	// synset - hyperonyms - insert (mixed)
-	def static void insert_synset_hyperonym (TraceLink synset, Synset hyperonym) {}
-	// synset - hyperonyms - insert (wrapped)
-	def static void insert_synset_hyperonym (TraceLink synset, TraceLink hyperonym) {}	
-	// synset - hyperonyms - remove (simple)
-	def static void remove_synset_hyperonym (Synset synset, Synset hyperonym) {}
-	// synset - hyperonyms - remove (mixed)
-	def static void remove_synset_hyperonym (Synset synset, TraceLink hyperonym) {}	
-	// synset - hyperonyms - remove (mixed)
-	def static void remove_synset_hyperonym (TraceLink synset, Synset hyperonym) {}	
-	// synset - hyperonyms - remove (wrapped)	
-	def static void remove_synset_hyperonym (TraceLink synset, TraceLink hyperonym) {}
-
-	// synset - meronyms - get (simple)
-	def static Iterable<Synset> get_synset_meronyms (Synset synset) {}
-	// synset - meronyms - get (wrapped)
-	def static Iterable<Synset> get_synset_meronyms (TraceLink synset) {}
-	// synset - meronyms - insert (simple)
-	def static void insert_synset_meronym (Synset synset, Synset meronym) {}
-	// synset - meronyms - insert (mixed)
-	def static void insert_synset_meronym (Synset synset, TraceLink meronym) {}
-	// synset - meronyms - insert (mixed)
-	def static void insert_synset_meronym (TraceLink synset, Synset meronym) {}
-	// synset - meronyms - insert (wrapped)
-	def static void insert_synset_meronym (TraceLink synset, TraceLink meronym) {}
-	// synset - meronyms - remove (simple)
-	def static void remove_synset_meronym (Synset synset, Synset meronym) {}
-	// synset - meronyms - remove (mixed)
-	def static void remove_synset_meronym (Synset synset, TraceLink meronym) {}
-	// synset - meronyms - remove (mixed)
-	def static void remove_synset_meronym (TraceLink synset, Synset meronym) {}
-	// synset - meronyms - remove (wrapped)	
-	def static void remove_synset_meronym (TraceLink synset, TraceLink meronym) {}
-
-	// synset - holonyms - get (simple)
-	def static Iterable<Synset> get_synset_holonyms (Synset synset) {}
-	// synset - holonyms - get (wrapped)
-	def static Iterable<Synset> get_synset_holonyms (TraceLink synset) {}
-	// synset - holonyms - insert (simple)
-	def static void insert_synset_holonym (Synset synset, Synset holonym) {}
-	// synset - holonyms - insert (mixed)
-	def static void insert_synset_holonym (Synset synset, TraceLink holonym) {}
-	// synset - holonyms - insert (mixed)
-	def static void insert_synset_holonym (TraceLink synset, Synset holonym) {}
-	// synset - holonyms - insert (wrapped)
-	def static void insert_synset_holonym (TraceLink synset, TraceLink holonym) {}
-	// synset - holonyms - remove (simple)
-	def static void remove_synset_holonym (Synset synset, Synset holonym) {}
-	// synset - holonyms - remove (mixed)
-	def static void remove_synset_holonym (Synset synset, TraceLink holonym) {}
-	// synset - holonyms - remove (mixed)
-	def static void remove_synset_holonym (TraceLink synset, Synset holonym) {}
-	// synset - holonyms - remove (wrapped)	
-	def static void remove_synset_holonym (TraceLink synset, TraceLink holonym) {}
-
+	// synset - hyponyms - get
+	def static EList<Synset> getHyponyms (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.hyponyms
+			Synset : synset.hyponyms
+		}
+	}
+	
+	// synset - hyperonyms - get
+	def static EList<Synset> getHyperonyms (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.hyperonyms
+			Synset : synset.hyperonyms
+		}		
+	}
+	
+	// synset - meronyms - get
+	def static EList<Synset> getMeronyms (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.meronyms
+			Synset : synset.meronyms
+		}
+	}
+	
+	// synset - holonyms - get
+	def static EList<Synset> getHolonyms (EObject synset) {
+		switch synset {
+			Trace : synset.<Synset>current.holonyms
+			Synset : synset.holonyms
+		}
+	}
+	
 }

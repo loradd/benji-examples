@@ -39,8 +39,8 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_name;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_class_name;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -50,7 +50,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecification<RenameClassPrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.RenameClassPrecondition pattern,
@@ -66,54 +66,54 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$class;
+    private Trace fClass;
     
-    private String f$name;
+    private String fName;
     
-    private static List<String> parameterNames = makeImmutableList("$class", "$name");
+    private static List<String> parameterNames = makeImmutableList("class", "name");
     
-    private Match(final TraceLink p$class, final String p$name) {
-      this.f$class = p$class;
-      this.f$name = p$name;
+    private Match(final Trace pClass, final String pName) {
+      this.fClass = pClass;
+      this.fName = pName;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$class".equals(parameterName)) return this.f$class;
-      if ("$name".equals(parameterName)) return this.f$name;
+      if ("class".equals(parameterName)) return this.fClass;
+      if ("name".equals(parameterName)) return this.fName;
       return null;
     }
     
-    public TraceLink get$class() {
-      return this.f$class;
+    public Trace getValueOfClass() {
+      return this.fClass;
     }
     
-    public String get$name() {
-      return this.f$name;
+    public String getName() {
+      return this.fName;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$class".equals(parameterName) ) {
-          this.f$class = (TraceLink) newValue;
+      if ("class".equals(parameterName) ) {
+          this.fClass = (Trace) newValue;
           return true;
       }
-      if ("$name".equals(parameterName) ) {
-          this.f$name = (String) newValue;
+      if ("name".equals(parameterName) ) {
+          this.fName = (String) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$class(final TraceLink p$class) {
+    public void setClass(final Trace pClass) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$class = p$class;
+      this.fClass = pClass;
     }
     
-    public void set$name(final String p$name) {
+    public void setName(final String pName) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$name = p$name;
+      this.fName = pName;
     }
     
     @Override
@@ -128,25 +128,25 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$class, f$name};
+      return new Object[]{fClass, fName};
     }
     
     @Override
     public RenameClassPrecondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$class, f$name) : this;
+      return isMutable() ? newMatch(fClass, fName) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$class\"=" + prettyPrintValue(f$class) + ", ");
-      result.append("\"$name\"=" + prettyPrintValue(f$name));
+      result.append("\"class\"=" + prettyPrintValue(fClass) + ", ");
+      result.append("\"name\"=" + prettyPrintValue(fName));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$class, f$name);
+      return Objects.hash (fClass, fName);
     }
     
     @Override
@@ -158,7 +158,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
       }
       if ((obj instanceof RenameClassPrecondition.Match)) {
           RenameClassPrecondition.Match other = (RenameClassPrecondition.Match) obj;
-          return Objects.equals(f$class, other.f$class) && Objects.equals(f$name, other.f$name);
+          return Objects.equals(fClass, other.fClass) && Objects.equals(fName, other.fName);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -189,31 +189,31 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static RenameClassPrecondition.Match newMutableMatch(final TraceLink p$class, final String p$name) {
-      return new Mutable(p$class, p$name);
+    public static RenameClassPrecondition.Match newMutableMatch(final Trace pClass, final String pName) {
+      return new Mutable(pClass, pName);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static RenameClassPrecondition.Match newMatch(final TraceLink p$class, final String p$name) {
-      return new Immutable(p$class, p$name);
+    public static RenameClassPrecondition.Match newMatch(final Trace pClass, final String pName) {
+      return new Immutable(pClass, pName);
     }
     
     private static final class Mutable extends RenameClassPrecondition.Match {
-      Mutable(final TraceLink p$class, final String p$name) {
-        super(p$class, p$name);
+      Mutable(final Trace pClass, final String pName) {
+        super(pClass, pName);
       }
       
       @Override
@@ -223,8 +223,8 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     }
     
     private static final class Immutable extends RenameClassPrecondition.Match {
-      Immutable(final TraceLink p$class, final String p$name) {
-        super(p$class, p$name);
+      Immutable(final Trace pClass, final String pName) {
+        super(pClass, pName);
       }
       
       @Override
@@ -246,9 +246,9 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
    * <p>Original source:
    * <code><pre>
    * // ACC6 - Rename Class - Precondition
-   * pattern RenameClassPrecondition ($class : TraceLink, $name : java String) {
-   * 	find get_class_name ($class, $class_name);
-   * 	$name == eval ("renamed_" + $class_name); 	
+   * pattern RenameClassPrecondition (class : Trace, name : java String) {
+   * 	find preserved_class_name (class, initial_name);
+   * 	name == eval('Changed' + initial_name);
    * }
    * </pre></code>
    * 
@@ -285,9 +285,9 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
       return new Matcher();
     }
     
-    private final static int POSITION_$CLASS = 0;
+    private final static int POSITION_CLASS = 0;
     
-    private final static int POSITION_$NAME = 1;
+    private final static int POSITION_NAME = 1;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(RenameClassPrecondition.Matcher.class);
     
@@ -305,165 +305,165 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<RenameClassPrecondition.Match> getAllMatches(final TraceLink p$class, final String p$name) {
-      return rawGetAllMatches(new Object[]{p$class, p$name});
+    public Collection<RenameClassPrecondition.Match> getAllMatches(final Trace pClass, final String pName) {
+      return rawGetAllMatches(new Object[]{pClass, pName});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public RenameClassPrecondition.Match getOneArbitraryMatch(final TraceLink p$class, final String p$name) {
-      return rawGetOneArbitraryMatch(new Object[]{p$class, p$name});
+    public RenameClassPrecondition.Match getOneArbitraryMatch(final Trace pClass, final String pName) {
+      return rawGetOneArbitraryMatch(new Object[]{pClass, pName});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$class, final String p$name) {
-      return rawHasMatch(new Object[]{p$class, p$name});
+    public boolean hasMatch(final Trace pClass, final String pName) {
+      return rawHasMatch(new Object[]{pClass, pName});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$class, final String p$name) {
-      return rawCountMatches(new Object[]{p$class, p$name});
+    public int countMatches(final Trace pClass, final String pName) {
+      return rawCountMatches(new Object[]{pClass, pName});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$class, final String p$name, final IMatchProcessor<? super RenameClassPrecondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$class, p$name}, processor);
+    public void forEachMatch(final Trace pClass, final String pName, final IMatchProcessor<? super RenameClassPrecondition.Match> processor) {
+      rawForEachMatch(new Object[]{pClass, pName}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$class, final String p$name, final IMatchProcessor<? super RenameClassPrecondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$class, p$name}, processor);
+    public boolean forOneArbitraryMatch(final Trace pClass, final String pName, final IMatchProcessor<? super RenameClassPrecondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pClass, pName}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
-     * @param p$name the fixed value of pattern parameter $name, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
+     * @param pName the fixed value of pattern parameter name, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public RenameClassPrecondition.Match newMatch(final TraceLink p$class, final String p$name) {
-      return RenameClassPrecondition.Match.newMatch(p$class, p$name);
+    public RenameClassPrecondition.Match newMatch(final Trace pClass, final String pName) {
+      return RenameClassPrecondition.Match.newMatch(pClass, pName);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$class(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$CLASS, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfclass(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_CLASS, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class() {
-      return rawAccumulateAllValuesOf$class(emptyArray());
+    public Set<Trace> getAllValuesOfclass() {
+      return rawAccumulateAllValuesOfclass(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final RenameClassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$class(partialMatch.toArray());
+    public Set<Trace> getAllValuesOfclass(final RenameClassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfclass(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class(final String p$name) {
-      return rawAccumulateAllValuesOf$class(new Object[]{
+    public Set<Trace> getAllValuesOfclass(final String pName) {
+      return rawAccumulateAllValuesOfclass(new Object[]{
       null, 
-      p$name
+      pName
       });
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOf$name(final Object[] parameters) {
+    protected Set<String> rawAccumulateAllValuesOfname(final Object[] parameters) {
       Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_$NAME, parameters, results);
+      rawAccumulateAllValues(POSITION_NAME, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name() {
-      return rawAccumulateAllValuesOf$name(emptyArray());
+    public Set<String> getAllValuesOfname() {
+      return rawAccumulateAllValuesOfname(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name(final RenameClassPrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOf$name(partialMatch.toArray());
+    public Set<String> getAllValuesOfname(final RenameClassPrecondition.Match partialMatch) {
+      return rawAccumulateAllValuesOfname(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $name.
+     * Retrieve the set of values that occur in matches for name.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOf$name(final TraceLink p$class) {
-      return rawAccumulateAllValuesOf$name(new Object[]{
-      p$class, 
+    public Set<String> getAllValuesOfname(final Trace pClass) {
+      return rawAccumulateAllValuesOfname(new Object[]{
+      pClass, 
       null
       });
     }
@@ -471,7 +471,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected RenameClassPrecondition.Match tupleToMatch(final Tuple t) {
       try {
-          return RenameClassPrecondition.Match.newMatch((TraceLink) t.get(POSITION_$CLASS), (String) t.get(POSITION_$NAME));
+          return RenameClassPrecondition.Match.newMatch((Trace) t.get(POSITION_CLASS), (String) t.get(POSITION_NAME));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -481,7 +481,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected RenameClassPrecondition.Match arrayToMatch(final Object[] match) {
       try {
-          return RenameClassPrecondition.Match.newMatch((TraceLink) match[POSITION_$CLASS], (String) match[POSITION_$NAME]);
+          return RenameClassPrecondition.Match.newMatch((Trace) match[POSITION_CLASS], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -491,7 +491,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     @Override
     protected RenameClassPrecondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return RenameClassPrecondition.Match.newMutableMatch((TraceLink) match[POSITION_$CLASS], (String) match[POSITION_$NAME]);
+          return RenameClassPrecondition.Match.newMutableMatch((Trace) match[POSITION_CLASS], (String) match[POSITION_NAME]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -517,15 +517,15 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
   public static abstract class Processor implements IMatchProcessor<RenameClassPrecondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$class the value of pattern parameter $class in the currently processed match
-     * @param p$name the value of pattern parameter $name in the currently processed match
+     * @param pClass the value of pattern parameter class in the currently processed match
+     * @param pName the value of pattern parameter name in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$class, final String p$name);
+    public abstract void process(final Trace pClass, final String pName);
     
     @Override
     public void process(final RenameClassPrecondition.Match match) {
-      process(match.get$class(), match.get$name());
+      process(match.getValueOfClass(), match.getName());
     }
   }
   
@@ -563,7 +563,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
   
   @Override
   public RenameClassPrecondition.Match newMatch(final Object... parameters) {
-    return RenameClassPrecondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0], (java.lang.String) parameters[1]);
+    return RenameClassPrecondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (java.lang.String) parameters[1]);
   }
   
   /**
@@ -595,11 +595,11 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static RenameClassPrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$class = new PParameter("$class", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pClass = new PParameter("class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_p$name = new PParameter("$name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
+    private final PParameter parameter_pName = new PParameter("name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$class, parameter_p$name);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pClass, parameter_pName);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -612,7 +612,7 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$class","$name");
+      return Arrays.asList("class","name");
     }
     
     @Override
@@ -625,18 +625,18 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$class = body.getOrCreateVariableByName("$class");
-          PVariable var_$name = body.getOrCreateVariableByName("$name");
-          PVariable var_$class_name = body.getOrCreateVariableByName("$class_name");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_$name), new JavaTransitiveInstancesKey(java.lang.String.class));
+          PVariable var_class = body.getOrCreateVariableByName("class");
+          PVariable var_name = body.getOrCreateVariableByName("name");
+          PVariable var_initial_name = body.getOrCreateVariableByName("initial_name");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_name), new JavaTransitiveInstancesKey(java.lang.String.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$class, parameter_p$class),
-             new ExportedParameter(body, var_$name, parameter_p$name)
+             new ExportedParameter(body, var_class, parameter_pClass),
+             new ExportedParameter(body, var_name, parameter_pName)
           ));
-          // 	find get_class_name ($class, $class_name)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_$class_name), Get_class_name.instance().getInternalQueryRepresentation());
-          // 	$name == eval ("renamed_" + $class_name)
+          // 	find preserved_class_name (class, initial_name)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var_initial_name), Preserved_class_name.instance().getInternalQueryRepresentation());
+          // 	name == eval('Changed' + initial_name)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
           new ExpressionEvaluation(body, new IExpressionEvaluator() {
           
@@ -647,22 +647,22 @@ public final class RenameClassPrecondition extends BaseGeneratedEMFQuerySpecific
               
               @Override
               public Iterable<String> getInputParameterNames() {
-                  return Arrays.asList("$class_name");}
+                  return Arrays.asList("initial_name");}
           
               @Override
               public Object evaluateExpression(IValueProvider provider) throws Exception {
-                  String $class_name = (String) provider.getValue("$class_name");
-                  return evaluateExpression_1_1($class_name);
+                  String initial_name = (String) provider.getValue("initial_name");
+                  return evaluateExpression_1_1(initial_name);
               }
           },  var__virtual_0_ ); 
-          new Equality(body, var_$name, var__virtual_0_);
+          new Equality(body, var_name, var__virtual_0_);
           bodies.add(body);
       }
       return bodies;
     }
   }
   
-  private static String evaluateExpression_1_1(final String $class_name) {
-    return ("renamed_" + $class_name);
+  private static String evaluateExpression_1_1(final String initial_name) {
+    return ("Changed" + initial_name);
   }
 }

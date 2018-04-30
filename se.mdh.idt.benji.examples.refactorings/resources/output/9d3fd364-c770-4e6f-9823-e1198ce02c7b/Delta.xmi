@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:change="http://www.eclipse.org/emf/2003/Change">
+  <objectChanges>
+    <key href="file:/Users/lorenzoaddazi/git/loradd/se.mdh.idt.benji.examples/se.mdh.idt.benji.examples.refactorings/resources/input/Input.xmi#//@subPackages.0/@classes.0"/>
+    <value featureName="name" dataValue="ChangedClass1"/>
+  </objectChanges>
+  <objectChanges>
+    <key href="file:/Users/lorenzoaddazi/git/loradd/se.mdh.idt.benji.examples/se.mdh.idt.benji.examples.refactorings/resources/input/Input.xmi#//@subPackages.0"/>
+    <value featureName="name" dataValue="ChangedSubPackage1"/>
+  </objectChanges>
+</change:ChangeDescription>

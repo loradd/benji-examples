@@ -25,6 +25,7 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -33,8 +34,8 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.metamodel.queries.Get_class_abstract;
-import se.mdh.idt.benji.trace.TraceLink;
+import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_class_abstract;
+import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -44,7 +45,7 @@ import se.mdh.idt.benji.trace.TraceLink;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-03-25T16:29+0200")
+@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuerySpecification<ChangeClassAbstractPrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.ChangeClassAbstractPrecondition pattern,
@@ -60,37 +61,37 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private TraceLink f$class;
+    private Trace fClass;
     
-    private static List<String> parameterNames = makeImmutableList("$class");
+    private static List<String> parameterNames = makeImmutableList("class");
     
-    private Match(final TraceLink p$class) {
-      this.f$class = p$class;
+    private Match(final Trace pClass) {
+      this.fClass = pClass;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("$class".equals(parameterName)) return this.f$class;
+      if ("class".equals(parameterName)) return this.fClass;
       return null;
     }
     
-    public TraceLink get$class() {
-      return this.f$class;
+    public Trace getValueOfClass() {
+      return this.fClass;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("$class".equals(parameterName) ) {
-          this.f$class = (TraceLink) newValue;
+      if ("class".equals(parameterName) ) {
+          this.fClass = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void set$class(final TraceLink p$class) {
+    public void setClass(final Trace pClass) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.f$class = p$class;
+      this.fClass = pClass;
     }
     
     @Override
@@ -105,24 +106,24 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     
     @Override
     public Object[] toArray() {
-      return new Object[]{f$class};
+      return new Object[]{fClass};
     }
     
     @Override
     public ChangeClassAbstractPrecondition.Match toImmutable() {
-      return isMutable() ? newMatch(f$class) : this;
+      return isMutable() ? newMatch(fClass) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"$class\"=" + prettyPrintValue(f$class));
+      result.append("\"class\"=" + prettyPrintValue(fClass));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (f$class);
+      return Objects.hash (fClass);
     }
     
     @Override
@@ -134,7 +135,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
       }
       if ((obj instanceof ChangeClassAbstractPrecondition.Match)) {
           ChangeClassAbstractPrecondition.Match other = (ChangeClassAbstractPrecondition.Match) obj;
-          return Objects.equals(f$class, other.f$class);
+          return Objects.equals(fClass, other.fClass);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -165,29 +166,29 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ChangeClassAbstractPrecondition.Match newMutableMatch(final TraceLink p$class) {
-      return new Mutable(p$class);
+    public static ChangeClassAbstractPrecondition.Match newMutableMatch(final Trace pClass) {
+      return new Mutable(pClass);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ChangeClassAbstractPrecondition.Match newMatch(final TraceLink p$class) {
-      return new Immutable(p$class);
+    public static ChangeClassAbstractPrecondition.Match newMatch(final Trace pClass) {
+      return new Immutable(pClass);
     }
     
     private static final class Mutable extends ChangeClassAbstractPrecondition.Match {
-      Mutable(final TraceLink p$class) {
-        super(p$class);
+      Mutable(final Trace pClass) {
+        super(pClass);
       }
       
       @Override
@@ -197,8 +198,8 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     }
     
     private static final class Immutable extends ChangeClassAbstractPrecondition.Match {
-      Immutable(final TraceLink p$class) {
-        super(p$class);
+      Immutable(final Trace pClass) {
+        super(pClass);
       }
       
       @Override
@@ -220,8 +221,8 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
    * <p>Original source:
    * <code><pre>
    * // ACC19 - Change Class Abstract - Precondition
-   * pattern ChangeClassAbstractPrecondition ($class : TraceLink) {
-   * 	find get_class_abstract ($class, _$abstract);	
+   * pattern ChangeClassAbstractPrecondition (class : Trace) {
+   * 	find preserved_class_abstract (class, false);
    * }
    * </pre></code>
    * 
@@ -258,7 +259,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
       return new Matcher();
     }
     
-    private final static int POSITION_$CLASS = 0;
+    private final static int POSITION_CLASS = 0;
     
     private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ChangeClassAbstractPrecondition.Matcher.class);
     
@@ -276,104 +277,104 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ChangeClassAbstractPrecondition.Match> getAllMatches(final TraceLink p$class) {
-      return rawGetAllMatches(new Object[]{p$class});
+    public Collection<ChangeClassAbstractPrecondition.Match> getAllMatches(final Trace pClass) {
+      return rawGetAllMatches(new Object[]{pClass});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public ChangeClassAbstractPrecondition.Match getOneArbitraryMatch(final TraceLink p$class) {
-      return rawGetOneArbitraryMatch(new Object[]{p$class});
+    public ChangeClassAbstractPrecondition.Match getOneArbitraryMatch(final Trace pClass) {
+      return rawGetOneArbitraryMatch(new Object[]{pClass});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final TraceLink p$class) {
-      return rawHasMatch(new Object[]{p$class});
+    public boolean hasMatch(final Trace pClass) {
+      return rawHasMatch(new Object[]{pClass});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final TraceLink p$class) {
-      return rawCountMatches(new Object[]{p$class});
+    public int countMatches(final Trace pClass) {
+      return rawCountMatches(new Object[]{pClass});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final TraceLink p$class, final IMatchProcessor<? super ChangeClassAbstractPrecondition.Match> processor) {
-      rawForEachMatch(new Object[]{p$class}, processor);
+    public void forEachMatch(final Trace pClass, final IMatchProcessor<? super ChangeClassAbstractPrecondition.Match> processor) {
+      rawForEachMatch(new Object[]{pClass}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final TraceLink p$class, final IMatchProcessor<? super ChangeClassAbstractPrecondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{p$class}, processor);
+    public boolean forOneArbitraryMatch(final Trace pClass, final IMatchProcessor<? super ChangeClassAbstractPrecondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pClass}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param pClass the fixed value of pattern parameter class, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ChangeClassAbstractPrecondition.Match newMatch(final TraceLink p$class) {
-      return ChangeClassAbstractPrecondition.Match.newMatch(p$class);
+    public ChangeClassAbstractPrecondition.Match newMatch(final Trace pClass) {
+      return ChangeClassAbstractPrecondition.Match.newMatch(pClass);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<TraceLink> rawAccumulateAllValuesOf$class(final Object[] parameters) {
-      Set<TraceLink> results = new HashSet<TraceLink>();
-      rawAccumulateAllValues(POSITION_$CLASS, parameters, results);
+    protected Set<Trace> rawAccumulateAllValuesOfclass(final Object[] parameters) {
+      Set<Trace> results = new HashSet<Trace>();
+      rawAccumulateAllValues(POSITION_CLASS, parameters, results);
       return results;
     }
     
     /**
-     * Retrieve the set of values that occur in matches for $class.
+     * Retrieve the set of values that occur in matches for class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<TraceLink> getAllValuesOf$class() {
-      return rawAccumulateAllValuesOf$class(emptyArray());
+    public Set<Trace> getAllValuesOfclass() {
+      return rawAccumulateAllValuesOfclass(emptyArray());
     }
     
     @Override
     protected ChangeClassAbstractPrecondition.Match tupleToMatch(final Tuple t) {
       try {
-          return ChangeClassAbstractPrecondition.Match.newMatch((TraceLink) t.get(POSITION_$CLASS));
+          return ChangeClassAbstractPrecondition.Match.newMatch((Trace) t.get(POSITION_CLASS));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -383,7 +384,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     @Override
     protected ChangeClassAbstractPrecondition.Match arrayToMatch(final Object[] match) {
       try {
-          return ChangeClassAbstractPrecondition.Match.newMatch((TraceLink) match[POSITION_$CLASS]);
+          return ChangeClassAbstractPrecondition.Match.newMatch((Trace) match[POSITION_CLASS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -393,7 +394,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     @Override
     protected ChangeClassAbstractPrecondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ChangeClassAbstractPrecondition.Match.newMutableMatch((TraceLink) match[POSITION_$CLASS]);
+          return ChangeClassAbstractPrecondition.Match.newMutableMatch((Trace) match[POSITION_CLASS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -419,14 +420,14 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
   public static abstract class Processor implements IMatchProcessor<ChangeClassAbstractPrecondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param p$class the value of pattern parameter $class in the currently processed match
+     * @param pClass the value of pattern parameter class in the currently processed match
      * 
      */
-    public abstract void process(final TraceLink p$class);
+    public abstract void process(final Trace pClass);
     
     @Override
     public void process(final ChangeClassAbstractPrecondition.Match match) {
-      process(match.get$class());
+      process(match.getValueOfClass());
     }
   }
   
@@ -464,7 +465,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
   
   @Override
   public ChangeClassAbstractPrecondition.Match newMatch(final Object... parameters) {
-    return ChangeClassAbstractPrecondition.Match.newMatch((se.mdh.idt.benji.trace.TraceLink) parameters[0]);
+    return ChangeClassAbstractPrecondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0]);
   }
   
   /**
@@ -496,9 +497,9 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private final static ChangeClassAbstractPrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_p$class = new PParameter("$class", "se.mdh.idt.benji.trace.TraceLink", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")), PParameterDirection.INOUT);
+    private final PParameter parameter_pClass = new PParameter("class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_p$class);
+    private final List<PParameter> parameters = Arrays.asList(parameter_pClass);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -511,7 +512,7 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("$class");
+      return Arrays.asList("class");
     }
     
     @Override
@@ -524,17 +525,22 @@ public final class ChangeClassAbstractPrecondition extends BaseGeneratedEMFQuery
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_$class = body.getOrCreateVariableByName("$class");
-          PVariable var__$abstract = body.getOrCreateVariableByName("_$abstract");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "TraceLink")));
+          PVariable var_class = body.getOrCreateVariableByName("class");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_$class, parameter_p$class)
+             new ExportedParameter(body, var_class, parameter_pClass)
           ));
-          // 	find get_class_abstract ($class, _$abstract)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var__$abstract), Get_class_abstract.instance().getInternalQueryRepresentation());
+          // 	find preserved_class_abstract (class, false)
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new ConstantValue(body, var__virtual_0_, false);
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var__virtual_0_), Preserved_class_abstract.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;
     }
+  }
+  
+  private static boolean evaluateExpression_1_1() {
+    return false;
   }
 }

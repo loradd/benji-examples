@@ -1,79 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metamodel:Package
+<simplecore:Package
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:metamodel="http://www.mdh.se/examples/refactorings/Metamodel"
-    xsi:schemaLocation="http://www.mdh.se/examples/refactorings/Metamodel ../../../se.mdh.idt.benji.examples.refactorings.metamodel/model/Metamodel.xcore#/EPackage"
-    name="Package_0"
-    uri="Package_0">
-  <classifiers
-      xsi:type="metamodel:Package"
-      name="Package_1"
-      uri="Package_1">
-    <classifiers
-        xsi:type="metamodel:DataType"
-        name="DataType_0"/>
-    <classifiers
-        xsi:type="metamodel:Class"
-        name="Class_0">
-      <structuralFeatures
-          xsi:type="metamodel:Attribute"
-          name="Attribute_0"
-          upper="10"
-          type="//@classifiers.0/@classifiers.0"/>
-      <structuralFeatures
-          xsi:type="metamodel:Reference"
-          name="Lorenzo"
-          type="//@classifiers.2"/>
-    </classifiers>
-    <classifiers
-        xsi:type="metamodel:DataType"
-        name="DataType_1"/>
-    <classifiers
-        xsi:type="metamodel:Class"
-        name="Class_2"
-        subClasses="//@classifiers.0/@classifiers.4">
-      <structuralFeatures
-          xsi:type="metamodel:Attribute"
-          name="Attribute_0"
-          upper="10"
-          type="//@classifiers.0/@classifiers.0"/>
-      <structuralFeatures
-          xsi:type="metamodel:Attribute"
-          name="Attribute_18"
-          upper="10"
-          type="//@classifiers.0/@classifiers.0"/>
-      <structuralFeatures
-          xsi:type="metamodel:Reference"
-          name="Lorenzo"
-          type="//@classifiers.2"/>
-    </classifiers>
-    <classifiers
-        xsi:type="metamodel:Class"
-        name="Class_3"
-        superClass="//@classifiers.0/@classifiers.3">
-      <structuralFeatures
-          xsi:type="metamodel:Attribute"
-          name="Attribute_1"
-          upper="10"
-          type="//@classifiers.0/@classifiers.0"/>
-    </classifiers>
-  </classifiers>
-  <classifiers
-      xsi:type="metamodel:Package"
-      name="Package_2"
-      uri="Package_2"/>
-  <classifiers
-      xsi:type="metamodel:Class"
-      name="Class_1">
-    <structuralFeatures
-        xsi:type="metamodel:Attribute"
-        name="Attribute_0"
-        type="//@classifiers.0/@classifiers.0"/>
-    <structuralFeatures
-        xsi:type="metamodel:Reference"
-        name="Lorenzo"
-        type="//@classifiers.0/@classifiers.3"/>
-  </classifiers>
-</metamodel:Package>
+    xmlns:simplecore="http://www.mdh.se/examples/refactorings/SimpleCore"
+    xsi:schemaLocation="http://www.mdh.se/examples/refactorings/SimpleCore ../../../se.mdh.idt.benji.examples.refactorings.simplecore/model/SimpleCore.xcore#/EPackage"
+    name="Package1"
+    uri="http://www.example.org/package1">
+  <subPackages
+      name="SubPackage1"
+      uri="http://www.example.org/package1/subpackage1">
+    <classes
+        name="Class1"
+        abstract="false"/>
+  </subPackages>
+</simplecore:Package>
