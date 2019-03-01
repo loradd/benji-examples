@@ -28,9 +28,9 @@ import se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage;
  * </p>
  * <ul>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getUri <em>Uri</em>}</li>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getSubPackages <em>Sub Packages</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getSubpackages <em>Subpackages</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getClasses <em>Classes</em>}</li>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getDataTypes <em>Data Types</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.PackageImpl#getDatatypes <em>Datatypes</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,14 +57,14 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	protected String uri = URI_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSubPackages() <em>Sub Packages</em>}' containment reference list.
+	 * The cached value of the '{@link #getSubpackages() <em>Subpackages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubPackages()
+	 * @see #getSubpackages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<se.mdh.idt.benji.examples.refactorings.simplecore.Package> subPackages;
+	protected EList<se.mdh.idt.benji.examples.refactorings.simplecore.Package> subpackages;
 
 	/**
 	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
@@ -77,14 +77,14 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	protected EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> classes;
 
 	/**
-	 * The cached value of the '{@link #getDataTypes() <em>Data Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getDatatypes() <em>Datatypes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDataTypes()
+	 * @see #getDatatypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DataType> dataTypes;
+	protected EList<DataType> datatypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,6 +110,7 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -119,6 +120,7 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUri(String newUri) {
 		String oldUri = uri;
 		uri = newUri;
@@ -131,11 +133,12 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<se.mdh.idt.benji.examples.refactorings.simplecore.Package> getSubPackages() {
-		if (subPackages == null) {
-			subPackages = new EObjectContainmentEList<se.mdh.idt.benji.examples.refactorings.simplecore.Package>(se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, this, SimplecorePackage.PACKAGE__SUB_PACKAGES);
+	@Override
+	public EList<se.mdh.idt.benji.examples.refactorings.simplecore.Package> getSubpackages() {
+		if (subpackages == null) {
+			subpackages = new EObjectContainmentEList<se.mdh.idt.benji.examples.refactorings.simplecore.Package>(se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, this, SimplecorePackage.PACKAGE__SUBPACKAGES);
 		}
-		return subPackages;
+		return subpackages;
 	}
 
 	/**
@@ -143,6 +146,7 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> getClasses() {
 		if (classes == null) {
 			classes = new EObjectContainmentEList<se.mdh.idt.benji.examples.refactorings.simplecore.Class>(se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, this, SimplecorePackage.PACKAGE__CLASSES);
@@ -155,11 +159,12 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DataType> getDataTypes() {
-		if (dataTypes == null) {
-			dataTypes = new EObjectContainmentEList<DataType>(DataType.class, this, SimplecorePackage.PACKAGE__DATA_TYPES);
+	@Override
+	public EList<DataType> getDatatypes() {
+		if (datatypes == null) {
+			datatypes = new EObjectContainmentEList<DataType>(DataType.class, this, SimplecorePackage.PACKAGE__DATATYPES);
 		}
-		return dataTypes;
+		return datatypes;
 	}
 
 	/**
@@ -170,12 +175,12 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SimplecorePackage.PACKAGE__SUB_PACKAGES:
-				return ((InternalEList<?>)getSubPackages()).basicRemove(otherEnd, msgs);
+			case SimplecorePackage.PACKAGE__SUBPACKAGES:
+				return ((InternalEList<?>)getSubpackages()).basicRemove(otherEnd, msgs);
 			case SimplecorePackage.PACKAGE__CLASSES:
 				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
-			case SimplecorePackage.PACKAGE__DATA_TYPES:
-				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
+			case SimplecorePackage.PACKAGE__DATATYPES:
+				return ((InternalEList<?>)getDatatypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -190,12 +195,12 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 		switch (featureID) {
 			case SimplecorePackage.PACKAGE__URI:
 				return getUri();
-			case SimplecorePackage.PACKAGE__SUB_PACKAGES:
-				return getSubPackages();
+			case SimplecorePackage.PACKAGE__SUBPACKAGES:
+				return getSubpackages();
 			case SimplecorePackage.PACKAGE__CLASSES:
 				return getClasses();
-			case SimplecorePackage.PACKAGE__DATA_TYPES:
-				return getDataTypes();
+			case SimplecorePackage.PACKAGE__DATATYPES:
+				return getDatatypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -212,17 +217,17 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 			case SimplecorePackage.PACKAGE__URI:
 				setUri((String)newValue);
 				return;
-			case SimplecorePackage.PACKAGE__SUB_PACKAGES:
-				getSubPackages().clear();
-				getSubPackages().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.simplecore.Package>)newValue);
+			case SimplecorePackage.PACKAGE__SUBPACKAGES:
+				getSubpackages().clear();
+				getSubpackages().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.simplecore.Package>)newValue);
 				return;
 			case SimplecorePackage.PACKAGE__CLASSES:
 				getClasses().clear();
 				getClasses().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.simplecore.Class>)newValue);
 				return;
-			case SimplecorePackage.PACKAGE__DATA_TYPES:
-				getDataTypes().clear();
-				getDataTypes().addAll((Collection<? extends DataType>)newValue);
+			case SimplecorePackage.PACKAGE__DATATYPES:
+				getDatatypes().clear();
+				getDatatypes().addAll((Collection<? extends DataType>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -239,14 +244,14 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 			case SimplecorePackage.PACKAGE__URI:
 				setUri(URI_EDEFAULT);
 				return;
-			case SimplecorePackage.PACKAGE__SUB_PACKAGES:
-				getSubPackages().clear();
+			case SimplecorePackage.PACKAGE__SUBPACKAGES:
+				getSubpackages().clear();
 				return;
 			case SimplecorePackage.PACKAGE__CLASSES:
 				getClasses().clear();
 				return;
-			case SimplecorePackage.PACKAGE__DATA_TYPES:
-				getDataTypes().clear();
+			case SimplecorePackage.PACKAGE__DATATYPES:
+				getDatatypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -262,12 +267,12 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 		switch (featureID) {
 			case SimplecorePackage.PACKAGE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case SimplecorePackage.PACKAGE__SUB_PACKAGES:
-				return subPackages != null && !subPackages.isEmpty();
+			case SimplecorePackage.PACKAGE__SUBPACKAGES:
+				return subpackages != null && !subpackages.isEmpty();
 			case SimplecorePackage.PACKAGE__CLASSES:
 				return classes != null && !classes.isEmpty();
-			case SimplecorePackage.PACKAGE__DATA_TYPES:
-				return dataTypes != null && !dataTypes.isEmpty();
+			case SimplecorePackage.PACKAGE__DATATYPES:
+				return datatypes != null && !datatypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -281,7 +286,7 @@ public class PackageImpl extends NamedElementImpl implements se.mdh.idt.benji.ex
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (uri: ");
 		result.append(uri);
 		result.append(')');

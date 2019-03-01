@@ -1,17 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.0"?>
-
-<!--
--->
-
-<plugin>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated SimpleCore -->
-      <package
-            uri="http://www.mdh.se/examples/refactorings/SimpleCore"
-            class="se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage"
-            genModel="model/SimpleCore.xcore"/>
-   </extension>
-
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated SimpleCore -->
+    <package class="se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage" genModel="model/SimpleCore.xcore" uri="http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"/>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.AttributeQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.AttributeQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.AttributeQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_attribute_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_attribute_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_attribute_type"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.ClassQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.ClassQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.ClassQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_class_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_class_abstract"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class_super"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class_super"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_super"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_super"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_super"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_attribute"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_reference"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.DataTypeQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.DataTypeQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.DataTypeQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_datatype_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_datatype_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_datatype_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_datatype_name"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.NamedElementQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.NamedElementQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.NamedElementQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_namedElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_namedElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_namedElement"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_namedElement_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_namedElement_name"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.PackageQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.PackageQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.PackageQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_package"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_package_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_package_uri"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package_subpackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package_subpackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_subpackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_package_subpackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_package_subpackage"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_package_class"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_package_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_package_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_package_datatype"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_package_datatype"/>
+    </group>
+  </extension>
+  <extension id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.ReferenceQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.simplecore.queries.ReferenceQueries" id="se.mdh.idt.benji.examples.refactorings.simplecore.queries.ReferenceQueries">
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_reference"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_reference_name"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_reference_type"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.initial_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.current_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_reference_opposite"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_reference_opposite"/>
+    </group>
+  </extension>
 </plugin>

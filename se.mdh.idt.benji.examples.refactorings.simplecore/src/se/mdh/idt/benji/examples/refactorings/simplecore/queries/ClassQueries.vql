@@ -1,0 +1,159 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// class - initial
+pattern initial_class (class : Trace, initial_class : Class) {
+	Trace.initial (class, initial_class);
+}
+// class - current
+pattern current_class (class : Trace, current_class : Class) {
+	Trace.current (class, current_class);
+}
+// class - preserved
+pattern preserved_class (class : Trace) {
+	find initial_class (class, _initial_class);
+	find current_class (class, _current_class);
+}
+// class - created
+pattern created_class (class : Trace) {
+	neg find initial_class (class, _initial_class);
+	find current_class (class, _current_class);
+}
+// class - deleted
+pattern deleted_class (class : Trace) {
+	find initial_class (class, _initial_class);
+	neg find current_class (class, _current_class);
+}
+// class - name - initial
+pattern initial_class_name (class : Trace, name : java String) {
+	find initial_class (class, initial_class);
+	Class.name (initial_class, name);
+}
+// class - name - current
+pattern current_class_name (class : Trace, name : java String) {
+	find current_class (class, current_class);
+	Class.name (current_class, name);
+}
+// class - name - preserved
+pattern preserved_class_name (class : Trace, name : java String) {
+	find initial_class_name (class, name);
+	find current_class_name (class, name);
+}
+// class - name - set
+pattern set_class_name (class : Trace, name : java String) {
+	neg find initial_class_name (class, name);
+	find current_class_name (class, name);
+}
+// class - name - unset
+pattern unset_class_name (class : Trace, name : java String) {
+	find initial_class_name (class, name);
+	neg find current_class_name (class, name);
+}
+// class - abstract - initial
+pattern initial_class_abstract (class : Trace, abstract : java Boolean) {
+	find initial_class (class, initial_class);
+	Class.abstract (initial_class, abstract);
+}
+// class - abstract - current
+pattern current_class_abstract (class : Trace, abstract : java Boolean) {
+	find current_class (class, current_class);
+	Class.abstract (current_class, abstract);
+}
+// class - abstract - preserved
+pattern preserved_class_abstract (class : Trace, abstract : java Boolean) {
+	find initial_class_abstract (class, abstract);
+	find current_class_abstract (class, abstract);
+}
+// class - abstract - set
+pattern set_class_abstract (class : Trace, abstract : java Boolean) {
+	neg find initial_class_abstract (class, abstract);
+	find current_class_abstract (class, abstract);
+}
+// class - abstract - unset
+pattern unset_class_abstract (class : Trace, abstract : java Boolean) {
+	find initial_class_abstract (class, abstract);
+	neg find current_class_abstract (class, abstract);
+}
+// class - super - initial
+pattern initial_class_super (class : Trace, ^super : Trace) {
+	find initial_class (class, initial_class);
+	find initial_class (^super, initial_super);
+	Class.^super (initial_class, initial_super);
+}
+// class - super - current
+pattern current_class_super (class : Trace, ^super : Trace) {
+	find current_class (class, current_class);
+	find current_class (^super, current_super);
+	Class.^super (current_class, current_super);
+}
+// class - super - preserved
+pattern preserved_class_super (class : Trace, ^super : Trace) {
+	find initial_class_super (class, ^super);
+	find current_class_super (class, ^super);
+}
+// class - super - added
+pattern added_class_super (class : Trace, ^super : Trace) {
+	neg find initial_class_super (class, ^super);
+	find current_class_super (class, ^super);
+}
+// class - super - removed
+pattern removed_class_super (class : Trace, ^super : Trace) {
+	find initial_class_super (class, ^super);
+	neg find current_class_super (class, ^super);
+}
+// class - attributes - initial
+pattern initial_class_attribute (class : Trace, attribute : Trace) {
+	find initial_class (class, initial_class);
+	find initial_attribute (attribute, initial_attribute);
+	Class.attributes (initial_class, initial_attribute);
+}
+// class - attributes - current
+pattern current_class_attribute (class : Trace, attribute : Trace) {
+	find current_class (class, current_class);
+	find current_attribute (attribute, current_attribute);
+	Class.attributes (current_class, current_attribute);
+}
+// class - attributes - preserved
+pattern preserved_class_attribute (class : Trace, attribute : Trace) {
+	find initial_class_attribute (class, attribute);
+	find current_class_attribute (class, attribute);
+}
+// class - attributes - added
+pattern added_class_attribute (class : Trace, attribute : Trace) {
+	neg find initial_class_attribute (class, attribute);
+	find current_class_attribute (class, attribute);
+}
+// class - attributes - removed
+pattern removed_class_attribute (class : Trace, attribute : Trace) {
+	find initial_class_attribute (class, attribute);
+	neg find current_class_attribute (class, attribute);
+}
+// class - reference - initial
+pattern initial_class_reference (class : Trace, reference : Trace) {
+	find initial_class (class, initial_class);
+	find initial_reference (reference, initial_reference);
+	Class.references (initial_class, initial_reference);
+}
+// class - reference - current
+pattern current_class_reference (class : Trace, reference : Trace) {
+	find current_class (class, current_class);
+	find current_reference (reference, current_reference);
+	Class.references (current_class, current_reference);
+}
+// class - reference - preserved
+pattern preserved_class_reference (class : Trace, reference : Trace) {
+	find initial_class_reference (class, reference);
+	find current_class_reference (class, reference);
+}
+// class - reference - added
+pattern added_class_reference (class : Trace, reference : Trace) {
+	neg find initial_class_reference (class, reference);
+	find current_class_reference (class, reference);
+}
+// class - reference - removed
+pattern removed_class_reference (class : Trace, reference : Trace) {
+	find initial_class_reference (class, reference);
+	neg find current_class_reference (class, reference);
+}

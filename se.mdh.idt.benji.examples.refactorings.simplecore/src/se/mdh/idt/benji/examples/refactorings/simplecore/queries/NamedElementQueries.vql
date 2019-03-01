@@ -1,0 +1,49 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// named element - initial
+private pattern initial_namedElement (namedElement : Trace, initial_namedElement : NamedElement) {
+	Trace.initial (namedElement, initial_namedElement);
+} 
+// named element - current
+private pattern current_namedElement (namedElement : Trace, current_namedElement : NamedElement) {
+	Trace.current (namedElement, current_namedElement);
+}
+// named element - preserved
+pattern preserved_namedElement (namedElement : Trace) {
+	find initial_namedElement (namedElement, _initial_namedElement);
+	find current_namedElement (namedElement, _current_namedElement);
+}
+// named element - created
+pattern created_namedElement (namedElement : Trace) {
+	neg find initial_namedElement (namedElement, _initial_namedElement);
+	find current_namedElement (namedElement, _current_namedElement);
+}
+// named element - deleted
+pattern deleted_namedElement (namedElement : Trace) {
+	find initial_namedElement (namedElement, _initial_namedElement);
+	neg find current_namedElement (namedElement, _current_namedElement);
+}
+// named element - name - initial
+private pattern initial_namedElement_name (namedElement : Trace, name : java String) {
+	find initial_namedElement (namedElement, initial_namedElement);
+	NamedElement.name (initial_namedElement, name);
+}
+// named element - name - current
+private pattern current_namedElement_name (namedElement : Trace, name : java String) {
+	find current_namedElement (namedElement, current_namedElement);
+	NamedElement.name (current_namedElement, name);
+}
+// named element - name - set
+pattern set_namedElement_name (namedElement : Trace, name : java String) {
+	neg find initial_namedElement_name (namedElement, name);
+	find current_namedElement_name (namedElement, name);
+}
+// named element - name - unset
+pattern unset_namedElement_name (namedElement : Trace, name : java String) {
+	find initial_namedElement_name (namedElement, name);
+	neg find current_namedElement_name (namedElement, name);
+}
+

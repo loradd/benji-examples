@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<simplecore:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simplecore="http://www.mdh.se/examples/refactorings/SimpleCore" name="Package1" uri="http://www.example.org/package1">
-  <subPackages name="SubPackage1" uri="http://www.example.org/package1/subpackage1">
-    <classes name="Class1" abstract="false"/>
-  </subPackages>
-  <classes name="NewClass0"/>
-</simplecore:Package>

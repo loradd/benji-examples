@@ -1,0 +1,48 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// datatype - initial
+pattern initial_datatype (datatype : Trace, initial_datatype : DataType) {
+	Trace.initial (datatype, initial_datatype);
+}
+// datatype - current
+pattern current_datatype (datatype : Trace, current_datatype : DataType) {
+	Trace.current (datatype, current_datatype);
+}
+// datatype - preserved
+pattern preserved_datatype (datatype : Trace) {
+	find initial_datatype (datatype, _initial_datatype);
+	find current_datatype (datatype, _current_datatype);
+}
+// datatype - created
+pattern created_datatype (datatype : Trace) {
+	neg find initial_datatype (datatype, _initial_datatype);
+	find current_datatype (datatype, _current_datatype);
+}
+// datatype - deleted
+pattern deleted_datatype (datatype : Trace) {
+	find initial_datatype (datatype, _initial_datatype);
+	neg find current_datatype (datatype, _current_datatype);
+}
+// datatype - name - initial
+pattern initial_datatype_name (datatype : Trace, name : java String) {
+	find initial_datatype (datatype, initial_datatype);
+	DataType.name (initial_datatype, name);
+}
+// datatype - name - current
+pattern current_datatype_name (datatype : Trace, name : java String) {
+	find current_datatype (datatype, current_datatype);
+	DataType.name (current_datatype, name);
+}
+// datatype - name - set
+pattern set_datatype_name (datatype : Trace, name : java String) {
+	neg find initial_datatype_name (datatype, name);
+	find current_datatype_name (datatype, name);
+}
+// datatype - name - unset
+pattern unset_datatype_name (datatype : Trace, name : java String) {
+	find initial_datatype_name (datatype, name);
+	neg find current_datatype_name (datatype, name);
+}

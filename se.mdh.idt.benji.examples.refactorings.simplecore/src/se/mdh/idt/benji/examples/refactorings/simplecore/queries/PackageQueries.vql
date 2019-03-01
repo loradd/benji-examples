@@ -1,0 +1,159 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// package - initial
+pattern initial_package (^package : Trace, initial_package : Package) {
+	Trace.initial (^package, initial_package);
+}
+// package - current
+pattern current_package (^package : Trace, current_package : Package) {
+	Trace.current (^package, current_package);
+}
+// package - preserved
+pattern preserved_package (^package : Trace) {
+	find initial_package (^package, _initial_package);
+	find current_package (^package, _current_package);
+}
+// package - created
+pattern created_package (^package : Trace) {
+	neg find initial_package (^package, _initial_package);
+	find current_package (^package, _current_package);
+}
+// package - deleted
+pattern deleted_package (^package : Trace) {
+	find initial_package (^package, _initial_package);
+	neg find current_package (^package, _current_package);
+}
+// package - name - initial
+pattern initial_package_name (^package : Trace, name : java String) {
+	find initial_package (^package, initial_package);
+	Package.name (initial_package, name);
+}
+// package - name - current
+pattern current_package_name (^package : Trace, name : java String) {
+	find current_package (^package, current_package);
+	Package.name (current_package, name);
+}
+// package - name - preserved
+pattern preserved_package_name (^package : Trace, name : java String) {
+	find initial_package_name (^package, name);
+	find current_package_name (^package, name);
+}
+// package - name - set
+pattern set_package_name (^package : Trace, name : java String) {
+	neg find initial_package_name (^package, name);
+	find current_package_name (^package, name);
+}
+// package - name - unset
+pattern unset_package_name (^package : Trace, name : java String) {
+	find initial_package_name (^package, name);
+	neg find current_package_name (^package, name);
+}
+// package - uri - initial
+pattern initial_package_uri (^package : Trace, uri : java String) {
+	find initial_package (^package, initial_package);
+	Package.uri (initial_package, uri);
+}
+// package - uri - current
+pattern current_package_uri (^package : Trace, uri : java String) {
+	find current_package (^package, current_package);
+	Package.uri (current_package, uri);
+}
+// package - uri - preserved
+pattern preserved_package_uri (^package : Trace, uri : java String) {
+	find initial_package_uri (^package, uri);
+	find current_package_uri (^package, uri);
+}
+// package - uri - set
+pattern set_package_uri (^package : Trace, uri : java String) {
+	neg find initial_package_uri (^package, uri);
+	find current_package_uri (^package, uri);
+}
+// package - uri - unset
+pattern unset_package_uri (^package : Trace, uri : java String) {
+	find initial_package_uri (^package, uri);
+	neg find current_package_uri (^package, uri);
+}
+// package - subpackage - initial
+pattern initial_package_subpackage (^package : Trace, subpackage : Trace) {
+	find initial_package (^package, initial_package);
+	find initial_package (subpackage, initial_subpackage);
+	Package.subpackages (initial_package, initial_subpackage);
+}
+// package - subpackage - current
+pattern current_package_subpackage (^package : Trace, subpackage : Trace) {
+	find current_package (^package, current_package);
+	find current_package (subpackage, current_subpackage);
+	Package.subpackages (current_package, current_subpackage);
+}
+// package - subpackage - preserved
+pattern preserved_package_subpackage (^package : Trace, subpackage : Trace) {
+	find initial_package_subpackage (^package, subpackage);
+	find current_package_subpackage (^package, subpackage);
+}
+// package - subpackage - added
+pattern added_package_subpackage (^package : Trace, subpackage : Trace) {
+	neg find initial_package_subpackage (^package, subpackage);
+	find current_package_subpackage (^package, subpackage);
+}
+// package - subpackage - removed
+pattern removed_package_subpackage (^package : Trace, subpackage : Trace) {
+	find initial_package_subpackage (^package, subpackage);
+	neg find current_package_subpackage (^package, subpackage);
+}
+// package - class - initial
+pattern initial_package_class (^package : Trace, class : Trace) {
+	find initial_package (^package, initial_package);
+	find initial_class (class, initial_class);
+	Package.classes (initial_package, initial_class);
+}
+// package - class - current
+pattern current_package_class (^package : Trace, class : Trace) {
+	find current_package (^package, current_package);
+	find current_class (class, current_class);
+	Package.classes (current_package, current_class);
+}
+// package - class - preserved
+pattern preserved_package_class (^package : Trace, class : Trace) {
+	find initial_package_class (^package, class);
+	find current_package_class (^package, class);
+}
+// package - class - added
+pattern added_package_class (^package : Trace, class : Trace) {
+	neg find initial_package_class (^package, class);
+	find current_package_class (^package, class);
+}
+// package - class - removed
+pattern removed_package_class (^package : Trace, class : Trace) {
+	find initial_package_class (^package, class);
+	neg find current_package_class (^package, class);
+}
+// package - dataType - initial
+pattern initial_package_datatype (^package : Trace, datatype : Trace) {
+	find initial_package (^package, initial_package);
+	find initial_datatype (datatype, initial_datatype);
+	Package.datatypes (initial_package, initial_datatype);
+}
+// package - dataType - current
+pattern current_package_datatype (^package : Trace, datatype : Trace) {
+	find current_package (^package, current_package);
+	find current_datatype (datatype, current_datatype);
+	Package.datatypes (current_package, current_datatype);
+}
+// package - dataType - preserved
+pattern preserved_package_datatype (^package: Trace, datatype : Trace) {
+	find initial_package_datatype (^package, datatype);
+	find current_package_datatype (^package, datatype);
+}
+// package - dataType - added
+pattern added_package_datatype (^package : Trace, datatype : Trace) {
+	neg find initial_package_datatype (^package, datatype);
+	find current_package_datatype (^package, datatype);
+}
+// package - dataType - removed
+pattern removed_package_datatype (^package : Trace, datatype : Trace) {
+	find initial_package_datatype (^package, datatype);
+	neg find current_package_datatype (^package, datatype);
+}

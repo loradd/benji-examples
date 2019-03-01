@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:change="http://www.eclipse.org/emf/2003/Change">
-  <objectChanges>
-    <key href="file:/Users/lorenzoaddazi/git/loradd/se.mdh.idt.benji.examples/se.mdh.idt.benji.examples.refactorings/resources/input/Input.xmi#//@subPackages.0"/>
-    <value featureName="uri" dataValue="http://www.example.org/package1/subpackage1/Changed"/>
-    <value featureName="name" dataValue="ChangedSubPackage1"/>
-    <value featureName="classes" set="false"/>
-  </objectChanges>
-</change:ChangeDescription>

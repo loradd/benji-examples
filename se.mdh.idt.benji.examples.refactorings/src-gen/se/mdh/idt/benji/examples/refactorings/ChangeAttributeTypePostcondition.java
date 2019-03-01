@@ -5,15 +5,16 @@ package se.mdh.idt.benji.examples.refactorings;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
-import javax.annotation.Generated;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -22,6 +23,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
@@ -33,18 +35,29 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_attribute_type;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_attribute;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_datatype;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Set_attribute_type;
 import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
+ * 
+ * <p>Original source:
+ *         <code><pre>
+ *         // ACA12 - Change Attribute Type - Postcondition
+ *         pattern ChangeAttributeTypePostcondition ($attribute : Trace, $datatype : Trace) {
+ *         	find preserved_attribute ($attribute);
+ *         	find preserved_datatype ($datatype);
+ *         	find set_attribute_type($attribute, $datatype);
+ *         }
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuerySpecification<ChangeAttributeTypePostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.ChangeAttributeTypePostcondition pattern,
@@ -60,54 +73,54 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Trace fAttribute;
+    private Trace f$attribute;
     
-    private Trace fType;
+    private Trace f$datatype;
     
-    private static List<String> parameterNames = makeImmutableList("attribute", "type");
+    private static List<String> parameterNames = makeImmutableList("$attribute", "$datatype");
     
-    private Match(final Trace pAttribute, final Trace pType) {
-      this.fAttribute = pAttribute;
-      this.fType = pType;
+    private Match(final Trace p$attribute, final Trace p$datatype) {
+      this.f$attribute = p$attribute;
+      this.f$datatype = p$datatype;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("attribute".equals(parameterName)) return this.fAttribute;
-      if ("type".equals(parameterName)) return this.fType;
+      if ("$attribute".equals(parameterName)) return this.f$attribute;
+      if ("$datatype".equals(parameterName)) return this.f$datatype;
       return null;
     }
     
-    public Trace getAttribute() {
-      return this.fAttribute;
+    public Trace get$attribute() {
+      return this.f$attribute;
     }
     
-    public Trace getType() {
-      return this.fType;
+    public Trace get$datatype() {
+      return this.f$datatype;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("attribute".equals(parameterName) ) {
-          this.fAttribute = (Trace) newValue;
+      if ("$attribute".equals(parameterName) ) {
+          this.f$attribute = (Trace) newValue;
           return true;
       }
-      if ("type".equals(parameterName) ) {
-          this.fType = (Trace) newValue;
+      if ("$datatype".equals(parameterName) ) {
+          this.f$datatype = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void setAttribute(final Trace pAttribute) {
+    public void set$attribute(final Trace p$attribute) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute = pAttribute;
+      this.f$attribute = p$attribute;
     }
     
-    public void setType(final Trace pType) {
+    public void set$datatype(final Trace p$datatype) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fType = pType;
+      this.f$datatype = p$datatype;
     }
     
     @Override
@@ -122,25 +135,25 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fAttribute, fType};
+      return new Object[]{f$attribute, f$datatype};
     }
     
     @Override
     public ChangeAttributeTypePostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(fAttribute, fType) : this;
+      return isMutable() ? newMatch(f$attribute, f$datatype) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"attribute\"=" + prettyPrintValue(fAttribute) + ", ");
-      result.append("\"type\"=" + prettyPrintValue(fType));
+      result.append("\"$attribute\"=" + prettyPrintValue(f$attribute) + ", ");
+      result.append("\"$datatype\"=" + prettyPrintValue(f$datatype));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (fAttribute, fType);
+      return Objects.hash(f$attribute, f$datatype);
     }
     
     @Override
@@ -152,7 +165,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
       }
       if ((obj instanceof ChangeAttributeTypePostcondition.Match)) {
           ChangeAttributeTypePostcondition.Match other = (ChangeAttributeTypePostcondition.Match) obj;
-          return Objects.equals(fAttribute, other.fAttribute) && Objects.equals(fType, other.fType);
+          return Objects.equals(f$attribute, other.f$attribute) && Objects.equals(f$datatype, other.f$datatype);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -183,31 +196,31 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ChangeAttributeTypePostcondition.Match newMutableMatch(final Trace pAttribute, final Trace pType) {
-      return new Mutable(pAttribute, pType);
+    public static ChangeAttributeTypePostcondition.Match newMutableMatch(final Trace p$attribute, final Trace p$datatype) {
+      return new Mutable(p$attribute, p$datatype);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ChangeAttributeTypePostcondition.Match newMatch(final Trace pAttribute, final Trace pType) {
-      return new Immutable(pAttribute, pType);
+    public static ChangeAttributeTypePostcondition.Match newMatch(final Trace p$attribute, final Trace p$datatype) {
+      return new Immutable(p$attribute, p$datatype);
     }
     
     private static final class Mutable extends ChangeAttributeTypePostcondition.Match {
-      Mutable(final Trace pAttribute, final Trace pType) {
-        super(pAttribute, pType);
+      Mutable(final Trace p$attribute, final Trace p$datatype) {
+        super(p$attribute, p$datatype);
       }
       
       @Override
@@ -217,8 +230,8 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     }
     
     private static final class Immutable extends ChangeAttributeTypePostcondition.Match {
-      Immutable(final Trace pAttribute, final Trace pType) {
-        super(pAttribute, pType);
+      Immutable(final Trace p$attribute, final Trace p$datatype) {
+        super(p$attribute, p$datatype);
       }
       
       @Override
@@ -233,15 +246,17 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
-   * e.g. in conjunction with {@link ViatraQueryEngine#on(Notifier)}.
+   * e.g. in conjunction with {@link ViatraQueryEngine#on(QueryScope)}.
    * 
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
    * <code><pre>
    * // ACA12 - Change Attribute Type - Postcondition
-   * pattern ChangeAttributeTypePostcondition (attribute : Trace, type : Trace) {
-   * 	find set_attribute_type (attribute, type);	
+   * pattern ChangeAttributeTypePostcondition ($attribute : Trace, $datatype : Trace) {
+   * 	find preserved_attribute ($attribute);
+   * 	find preserved_datatype ($datatype);
+   * 	find set_attribute_type($attribute, $datatype);
    * }
    * </pre></code>
    * 
@@ -254,7 +269,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -278,16 +293,16 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
       return new Matcher();
     }
     
-    private final static int POSITION_ATTRIBUTE = 0;
+    private static final int POSITION_$ATTRIBUTE = 0;
     
-    private final static int POSITION_TYPE = 1;
+    private static final int POSITION_$DATATYPE = 1;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ChangeAttributeTypePostcondition.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ChangeAttributeTypePostcondition.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -298,173 +313,252 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ChangeAttributeTypePostcondition.Match> getAllMatches(final Trace pAttribute, final Trace pType) {
-      return rawGetAllMatches(new Object[]{pAttribute, pType});
+    public Collection<ChangeAttributeTypePostcondition.Match> getAllMatches(final Trace p$attribute, final Trace p$datatype) {
+      return rawStreamAllMatches(new Object[]{p$attribute, p$datatype}).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
+     * @return a stream of matches represented as a Match object.
+     * 
+     */
+    public Stream<ChangeAttributeTypePostcondition.Match> streamAllMatches(final Trace p$attribute, final Trace p$datatype) {
+      return rawStreamAllMatches(new Object[]{p$attribute, p$datatype});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public ChangeAttributeTypePostcondition.Match getOneArbitraryMatch(final Trace pAttribute, final Trace pType) {
-      return rawGetOneArbitraryMatch(new Object[]{pAttribute, pType});
+    public Optional<ChangeAttributeTypePostcondition.Match> getOneArbitraryMatch(final Trace p$attribute, final Trace p$datatype) {
+      return rawGetOneArbitraryMatch(new Object[]{p$attribute, p$datatype});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Trace pAttribute, final Trace pType) {
-      return rawHasMatch(new Object[]{pAttribute, pType});
+    public boolean hasMatch(final Trace p$attribute, final Trace p$datatype) {
+      return rawHasMatch(new Object[]{p$attribute, p$datatype});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Trace pAttribute, final Trace pType) {
-      return rawCountMatches(new Object[]{pAttribute, pType});
+    public int countMatches(final Trace p$attribute, final Trace p$datatype) {
+      return rawCountMatches(new Object[]{p$attribute, p$datatype});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final Trace pAttribute, final Trace pType, final IMatchProcessor<? super ChangeAttributeTypePostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{pAttribute, pType}, processor);
+    public void forEachMatch(final Trace p$attribute, final Trace p$datatype, final Consumer<? super ChangeAttributeTypePostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{p$attribute, p$datatype}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Trace pAttribute, final Trace pType, final IMatchProcessor<? super ChangeAttributeTypePostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pAttribute, pType}, processor);
+    public boolean forOneArbitraryMatch(final Trace p$attribute, final Trace p$datatype, final Consumer<? super ChangeAttributeTypePostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{p$attribute, p$datatype}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @param p$datatype the fixed value of pattern parameter $datatype, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ChangeAttributeTypePostcondition.Match newMatch(final Trace pAttribute, final Trace pType) {
-      return ChangeAttributeTypePostcondition.Match.newMatch(pAttribute, pType);
+    public ChangeAttributeTypePostcondition.Match newMatch(final Trace p$attribute, final Trace p$datatype) {
+      return ChangeAttributeTypePostcondition.Match.newMatch(p$attribute, p$datatype);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfattribute(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE, parameters, results);
-      return results;
+    protected Stream<Trace> rawStreamAllValuesOf$attribute(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$ATTRIBUTE, parameters).map(Trace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute() {
-      return rawAccumulateAllValuesOfattribute(emptyArray());
+    public Set<Trace> getAllValuesOf$attribute() {
+      return rawStreamAllValuesOf$attribute(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute(final ChangeAttributeTypePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute(partialMatch.toArray());
+    public Stream<Trace> streamAllValuesOf$attribute() {
+      return rawStreamAllValuesOf$attribute(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $attribute.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute(final Trace pType) {
-      return rawAccumulateAllValuesOfattribute(new Object[]{
-      null, 
-      pType
-      });
+    public Stream<Trace> streamAllValuesOf$attribute(final ChangeAttributeTypePostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$attribute(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $attribute.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOftype(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_TYPE, parameters, results);
-      return results;
+    public Stream<Trace> streamAllValuesOf$attribute(final Trace p$datatype) {
+      return rawStreamAllValuesOf$attribute(new Object[]{null, p$datatype});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype() {
-      return rawAccumulateAllValuesOftype(emptyArray());
+    public Set<Trace> getAllValuesOf$attribute(final ChangeAttributeTypePostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$attribute(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype(final ChangeAttributeTypePostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOftype(partialMatch.toArray());
+    public Set<Trace> getAllValuesOf$attribute(final Trace p$datatype) {
+      return rawStreamAllValuesOf$attribute(new Object[]{null, p$datatype}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $datatype.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype(final Trace pAttribute) {
-      return rawAccumulateAllValuesOftype(new Object[]{
-      pAttribute, 
-      null
-      });
+    protected Stream<Trace> rawStreamAllValuesOf$datatype(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$DATATYPE, parameters).map(Trace.class::cast);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$datatype() {
+      return rawStreamAllValuesOf$datatype(emptyArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$datatype() {
+      return rawStreamAllValuesOf$datatype(emptyArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$datatype(final ChangeAttributeTypePostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$datatype(partialMatch.toArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$datatype(final Trace p$attribute) {
+      return rawStreamAllValuesOf$datatype(new Object[]{p$attribute, null});
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$datatype(final ChangeAttributeTypePostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$datatype(partialMatch.toArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $datatype.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$datatype(final Trace p$attribute) {
+      return rawStreamAllValuesOf$datatype(new Object[]{p$attribute, null}).collect(Collectors.toSet());
     }
     
     @Override
     protected ChangeAttributeTypePostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return ChangeAttributeTypePostcondition.Match.newMatch((Trace) t.get(POSITION_ATTRIBUTE), (Trace) t.get(POSITION_TYPE));
+          return ChangeAttributeTypePostcondition.Match.newMatch((Trace) t.get(POSITION_$ATTRIBUTE), (Trace) t.get(POSITION_$DATATYPE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -474,7 +568,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     @Override
     protected ChangeAttributeTypePostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return ChangeAttributeTypePostcondition.Match.newMatch((Trace) match[POSITION_ATTRIBUTE], (Trace) match[POSITION_TYPE]);
+          return ChangeAttributeTypePostcondition.Match.newMatch((Trace) match[POSITION_$ATTRIBUTE], (Trace) match[POSITION_$DATATYPE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -484,7 +578,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     @Override
     protected ChangeAttributeTypePostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ChangeAttributeTypePostcondition.Match.newMutableMatch((Trace) match[POSITION_ATTRIBUTE], (Trace) match[POSITION_TYPE]);
+          return ChangeAttributeTypePostcondition.Match.newMutableMatch((Trace) match[POSITION_$ATTRIBUTE], (Trace) match[POSITION_$DATATYPE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -507,18 +601,18 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
    * Clients should derive an (anonymous) class that implements the abstract process().
    * 
    */
-  public static abstract class Processor implements IMatchProcessor<ChangeAttributeTypePostcondition.Match> {
+  public static abstract class Processor implements Consumer<ChangeAttributeTypePostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param pAttribute the value of pattern parameter attribute in the currently processed match
-     * @param pType the value of pattern parameter type in the currently processed match
+     * @param p$attribute the value of pattern parameter $attribute in the currently processed match
+     * @param p$datatype the value of pattern parameter $datatype in the currently processed match
      * 
      */
-    public abstract void process(final Trace pAttribute, final Trace pType);
+    public abstract void accept(final Trace p$attribute, final Trace p$datatype);
     
     @Override
-    public void process(final ChangeAttributeTypePostcondition.Match match) {
-      process(match.getAttribute(), match.getType());
+    public void accept(final ChangeAttributeTypePostcondition.Match match) {
+      accept(match.get$attribute(), match.get$datatype());
     }
   }
   
@@ -568,7 +662,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
    * 
    */
   private static class LazyHolder {
-    private final static ChangeAttributeTypePostcondition INSTANCE = new ChangeAttributeTypePostcondition();
+    private static final ChangeAttributeTypePostcondition INSTANCE = new ChangeAttributeTypePostcondition();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -577,7 +671,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -586,13 +680,13 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static ChangeAttributeTypePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final ChangeAttributeTypePostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pAttribute = new PParameter("attribute", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$attribute = new PParameter("$attribute", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pType = new PParameter("type", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$datatype = new PParameter("$datatype", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pAttribute, parameter_pType);
+    private final List<PParameter> parameters = Arrays.asList(parameter_$attribute, parameter_$datatype);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -605,7 +699,7 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("attribute","type");
+      return Arrays.asList("$attribute","$datatype");
     }
     
     @Override
@@ -615,19 +709,24 @@ public final class ChangeAttributeTypePostcondition extends BaseGeneratedEMFQuer
     
     @Override
     public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_attribute = body.getOrCreateVariableByName("attribute");
-          PVariable var_type = body.getOrCreateVariableByName("type");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          PVariable var_$attribute = body.getOrCreateVariableByName("$attribute");
+          PVariable var_$datatype = body.getOrCreateVariableByName("$datatype");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$datatype), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_attribute, parameter_pAttribute),
-             new ExportedParameter(body, var_type, parameter_pType)
+             new ExportedParameter(body, var_$attribute, parameter_$attribute),
+             new ExportedParameter(body, var_$datatype, parameter_$datatype)
           ));
-          // 	find set_attribute_type (attribute, type)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute, var_type), Set_attribute_type.instance().getInternalQueryRepresentation());
+          // 	find preserved_attribute ($attribute)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$attribute), Preserved_attribute.instance().getInternalQueryRepresentation());
+          // 	find preserved_datatype ($datatype)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$datatype), Preserved_datatype.instance().getInternalQueryRepresentation());
+          // 	find set_attribute_type($attribute, $datatype)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$attribute, var_$datatype), Set_attribute_type.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;

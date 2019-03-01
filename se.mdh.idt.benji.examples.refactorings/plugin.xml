@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><plugin>
-  <extension point="org.eclipse.viatra.query.patternlanguage.emf.purewhitelist">
-    <pure-element fully-qualified-name="java.util.UUID.randomUUID" type="method"/>
-  </extension>
   <extension id="se.mdh.idt.benji.examples.refactorings.Queries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:se.mdh.idt.benji.examples.refactorings.Queries" id="se.mdh.idt.benji.examples.refactorings.Queries">
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenamePackagePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenamePackagePostcondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenameURIPackagePrecondition"/>
-      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenameURIPackagePostcondition"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenamePackageUriPrecondition"/>
+      <query-specification fqn="se.mdh.idt.benji.examples.refactorings.RenamePackageUriPostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeletePackagePrecondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.DeletePackagePostcondition"/>
       <query-specification fqn="se.mdh.idt.benji.examples.refactorings.AddPackagePrecondition"/>

@@ -1,0 +1,107 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// reference - initial
+pattern initial_reference (reference : Trace, initial_reference : Reference) {
+	Trace.initial (reference, initial_reference);
+}
+// reference - current
+pattern current_reference (reference : Trace, current_reference : Reference) {
+	Trace.current (reference, current_reference);
+}
+// reference - preserved
+pattern preserved_reference (reference : Trace) {
+	find initial_reference (reference, _initial_reference);
+	find current_reference (reference, _current_reference);
+}
+// reference - created
+pattern created_reference (reference : Trace) {
+	neg find initial_reference (reference, _initial_reference);
+	find current_reference (reference, _current_reference);
+}
+// reference - deleted
+pattern deleted_reference (reference : Trace) {
+	find initial_reference (reference, _initial_reference);
+	neg find current_reference (reference, _current_reference);
+}
+// reference - name - initial
+pattern initial_reference_name (reference : Trace, name : java String) {
+	find initial_reference (reference, initial_reference);
+	Reference.name (initial_reference, name);
+}
+// reference - name - current
+pattern current_reference_name (reference : Trace, name : java String) {
+	find current_reference (reference, current_reference);
+	Reference.name (current_reference, name);
+}
+// reference - name - preserved
+pattern preserved_reference_name (reference : Trace, name : java String) {
+	find initial_reference_name (reference, name);
+	find current_reference_name (reference, name);
+}
+// reference - name - set
+pattern set_reference_name (reference : Trace, name : java String) {
+	neg find initial_reference_name (reference, name);
+	find current_reference_name (reference, name);
+}
+// reference - name - unset
+pattern unset_reference_name (reference : Trace, name : java String) {
+	find initial_reference_name (reference, name);
+	neg find current_reference_name (reference, name);
+}
+// reference - type - initial
+pattern initial_reference_type (reference : Trace, type : Trace) {
+	find initial_reference (reference, initial_reference);
+	find initial_class (type, initial_type);
+	Reference.type (initial_reference, initial_type);
+}
+// reference - type - current
+pattern current_reference_type (reference : Trace, type : Trace) {
+	find current_reference (reference, current_reference);
+	find current_class (type, current_type);
+	Reference.type (current_reference, current_type);
+}
+// reference - type - preserved
+pattern preserved_reference_type (reference : Trace, type : Trace) {
+	find initial_reference_type (reference, type);
+	find current_reference_type (reference, type);
+}
+// reference - type - set
+pattern set_reference_type (reference : Trace, type : Trace) {
+	neg find initial_reference_type (reference, type);
+	find current_reference_type (reference, type);
+}
+// reference - type - unset
+pattern unset_reference_type (reference : Trace, type : Trace) {
+	find initial_reference_type (reference, type);
+	neg find current_reference_type (reference, type);
+}
+// reference - opposite - initial
+pattern initial_reference_opposite (reference : Trace, opposite : Trace) {
+	find initial_reference (reference, initial_reference);
+	find initial_reference (opposite, initial_opposite);
+	Reference.opposite (initial_reference, initial_opposite);
+}
+// reference - opposite - current
+pattern current_reference_opposite (reference : Trace, opposite : Trace) {
+	find current_reference (reference, current_reference);
+	find current_reference (opposite, current_opposite);
+	Reference.opposite (current_reference, current_opposite);
+}
+// reference - opposite - preserved
+pattern preserved_reference_opposite (reference : Trace, opposite : Trace) {
+	find initial_reference_opposite (reference, opposite);
+	find current_reference_opposite (reference, opposite);
+}
+// reference - opposite - set
+pattern set_reference_opposite (reference : Trace, opposite : Trace) {
+	neg find initial_reference_opposite (reference, opposite);
+	find current_reference_opposite (reference, opposite);
+}
+// reference - opposite - unset
+pattern unset_reference_opposite (reference : Trace, opposite : Trace) {
+	find initial_reference_opposite (reference, opposite);
+	neg find current_reference_opposite (reference, opposite);
+}

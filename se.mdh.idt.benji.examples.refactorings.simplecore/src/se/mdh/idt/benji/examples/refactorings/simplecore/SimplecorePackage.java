@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see se.mdh.idt.benji.examples.refactorings.simplecore.SimplecoreFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/emf/2002/GenModel name='SimpleCore' modelName='SimpleCore' modelDirectory='se.mdh.idt.benji.examples.refactorings.simplecore/src' basePackage='se.mdh.idt.benji.examples.refactorings'"
+ *        annotation="http://www.eclipse.org/emf/2002/GenModel modelName='SimpleCore' modelDirectory='se.mdh.idt.benji.examples.refactorings.simplecore/src' basePackage='se.mdh.idt.benji.examples.refactorings'"
  * @generated
  */
 public interface SimplecorePackage extends EPackage {
@@ -39,7 +39,7 @@ public interface SimplecorePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.mdh.se/examples/refactorings/SimpleCore";
+	String eNS_URI = "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore";
 
 	/**
 	 * The package namespace name.
@@ -123,13 +123,13 @@ public interface SimplecorePackage extends EPackage {
 	int PACKAGE__URI = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Sub Packages</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Subpackages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__SUB_PACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE__SUBPACKAGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
@@ -141,13 +141,13 @@ public interface SimplecorePackage extends EPackage {
 	int PACKAGE__CLASSES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Data Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Datatypes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__DATA_TYPES = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PACKAGE__DATATYPES = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -196,13 +196,13 @@ public interface SimplecorePackage extends EPackage {
 	int CLASS__ABSTRACT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Super</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS__SUPER_CLASSES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS__SUPER = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -422,15 +422,15 @@ public interface SimplecorePackage extends EPackage {
 	EAttribute getPackage_Uri();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Package#getSubPackages <em>Sub Packages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Package#getSubpackages <em>Subpackages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub Packages</em>'.
-	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Package#getSubPackages()
+	 * @return the meta object for the containment reference list '<em>Subpackages</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Package#getSubpackages()
 	 * @see #getPackage()
 	 * @generated
 	 */
-	EReference getPackage_SubPackages();
+	EReference getPackage_Subpackages();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Package#getClasses <em>Classes</em>}'.
@@ -444,15 +444,15 @@ public interface SimplecorePackage extends EPackage {
 	EReference getPackage_Classes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Package#getDataTypes <em>Data Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Package#getDatatypes <em>Datatypes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Data Types</em>'.
-	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Package#getDataTypes()
+	 * @return the meta object for the containment reference list '<em>Datatypes</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Package#getDatatypes()
 	 * @see #getPackage()
 	 * @generated
 	 */
-	EReference getPackage_DataTypes();
+	EReference getPackage_Datatypes();
 
 	/**
 	 * Returns the meta object for class '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class <em>Class</em>}'.
@@ -476,15 +476,15 @@ public interface SimplecorePackage extends EPackage {
 	EAttribute getClass_Abstract();
 
 	/**
-	 * Returns the meta object for the reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuperClasses <em>Super Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuper <em>Super</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Classes</em>'.
-	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuperClasses()
+	 * @return the meta object for the reference list '<em>Super</em>'.
+	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuper()
 	 * @see #getClass_()
 	 * @generated
 	 */
-	EReference getClass_SuperClasses();
+	EReference getClass_Super();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getAttributes <em>Attributes</em>}'.
@@ -631,12 +631,12 @@ public interface SimplecorePackage extends EPackage {
 		EAttribute PACKAGE__URI = eINSTANCE.getPackage_Uri();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Packages</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Subpackages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE__SUB_PACKAGES = eINSTANCE.getPackage_SubPackages();
+		EReference PACKAGE__SUBPACKAGES = eINSTANCE.getPackage_Subpackages();
 
 		/**
 		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
@@ -647,12 +647,12 @@ public interface SimplecorePackage extends EPackage {
 		EReference PACKAGE__CLASSES = eINSTANCE.getPackage_Classes();
 
 		/**
-		 * The meta object literal for the '<em><b>Data Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Datatypes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE__DATA_TYPES = eINSTANCE.getPackage_DataTypes();
+		EReference PACKAGE__DATATYPES = eINSTANCE.getPackage_Datatypes();
 
 		/**
 		 * The meta object literal for the '{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl <em>Class</em>}' class.
@@ -673,12 +673,12 @@ public interface SimplecorePackage extends EPackage {
 		EAttribute CLASS__ABSTRACT = eINSTANCE.getClass_Abstract();
 
 		/**
-		 * The meta object literal for the '<em><b>Super Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Super</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS__SUPER_CLASSES = eINSTANCE.getClass_SuperClasses();
+		EReference CLASS__SUPER = eINSTANCE.getClass_Super();
 
 		/**
 		 * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.

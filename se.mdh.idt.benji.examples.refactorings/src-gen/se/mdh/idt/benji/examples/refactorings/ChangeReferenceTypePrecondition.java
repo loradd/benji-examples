@@ -5,15 +5,16 @@ package se.mdh.idt.benji.examples.refactorings;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
-import javax.annotation.Generated;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -22,6 +23,7 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
@@ -34,20 +36,30 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_class_reference;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_package_class;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Preserved_reference_type;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_class;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_reference;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_reference_type;
 import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
+ * 
+ * <p>Original source:
+ *         <code><pre>
+ *         // ACCR17 - Change Reference Type - Precondition
+ *         pattern ChangeReferenceTypePrecondition ($reference : Trace, $class : Trace) {
+ *         	find preserved_reference($reference);
+ *         	find preserved_class($class);
+ *         	find preserved_reference_type($reference, type);
+ *         	type != $class;
+ *         }
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuerySpecification<ChangeReferenceTypePrecondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.ChangeReferenceTypePrecondition pattern,
@@ -63,54 +75,54 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Trace fReference;
+    private Trace f$reference;
     
-    private Trace fType;
+    private Trace f$class;
     
-    private static List<String> parameterNames = makeImmutableList("reference", "type");
+    private static List<String> parameterNames = makeImmutableList("$reference", "$class");
     
-    private Match(final Trace pReference, final Trace pType) {
-      this.fReference = pReference;
-      this.fType = pType;
+    private Match(final Trace p$reference, final Trace p$class) {
+      this.f$reference = p$reference;
+      this.f$class = p$class;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("reference".equals(parameterName)) return this.fReference;
-      if ("type".equals(parameterName)) return this.fType;
+      if ("$reference".equals(parameterName)) return this.f$reference;
+      if ("$class".equals(parameterName)) return this.f$class;
       return null;
     }
     
-    public Trace getReference() {
-      return this.fReference;
+    public Trace get$reference() {
+      return this.f$reference;
     }
     
-    public Trace getType() {
-      return this.fType;
+    public Trace get$class() {
+      return this.f$class;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("reference".equals(parameterName) ) {
-          this.fReference = (Trace) newValue;
+      if ("$reference".equals(parameterName) ) {
+          this.f$reference = (Trace) newValue;
           return true;
       }
-      if ("type".equals(parameterName) ) {
-          this.fType = (Trace) newValue;
+      if ("$class".equals(parameterName) ) {
+          this.f$class = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void setReference(final Trace pReference) {
+    public void set$reference(final Trace p$reference) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fReference = pReference;
+      this.f$reference = p$reference;
     }
     
-    public void setType(final Trace pType) {
+    public void set$class(final Trace p$class) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fType = pType;
+      this.f$class = p$class;
     }
     
     @Override
@@ -125,25 +137,25 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fReference, fType};
+      return new Object[]{f$reference, f$class};
     }
     
     @Override
     public ChangeReferenceTypePrecondition.Match toImmutable() {
-      return isMutable() ? newMatch(fReference, fType) : this;
+      return isMutable() ? newMatch(f$reference, f$class) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"reference\"=" + prettyPrintValue(fReference) + ", ");
-      result.append("\"type\"=" + prettyPrintValue(fType));
+      result.append("\"$reference\"=" + prettyPrintValue(f$reference) + ", ");
+      result.append("\"$class\"=" + prettyPrintValue(f$class));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (fReference, fType);
+      return Objects.hash(f$reference, f$class);
     }
     
     @Override
@@ -155,7 +167,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
       }
       if ((obj instanceof ChangeReferenceTypePrecondition.Match)) {
           ChangeReferenceTypePrecondition.Match other = (ChangeReferenceTypePrecondition.Match) obj;
-          return Objects.equals(fReference, other.fReference) && Objects.equals(fType, other.fType);
+          return Objects.equals(f$reference, other.f$reference) && Objects.equals(f$class, other.f$class);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -186,31 +198,31 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ChangeReferenceTypePrecondition.Match newMutableMatch(final Trace pReference, final Trace pType) {
-      return new Mutable(pReference, pType);
+    public static ChangeReferenceTypePrecondition.Match newMutableMatch(final Trace p$reference, final Trace p$class) {
+      return new Mutable(p$reference, p$class);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ChangeReferenceTypePrecondition.Match newMatch(final Trace pReference, final Trace pType) {
-      return new Immutable(pReference, pType);
+    public static ChangeReferenceTypePrecondition.Match newMatch(final Trace p$reference, final Trace p$class) {
+      return new Immutable(p$reference, p$class);
     }
     
     private static final class Mutable extends ChangeReferenceTypePrecondition.Match {
-      Mutable(final Trace pReference, final Trace pType) {
-        super(pReference, pType);
+      Mutable(final Trace p$reference, final Trace p$class) {
+        super(p$reference, p$class);
       }
       
       @Override
@@ -220,8 +232,8 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     }
     
     private static final class Immutable extends ChangeReferenceTypePrecondition.Match {
-      Immutable(final Trace pReference, final Trace pType) {
-        super(pReference, pType);
+      Immutable(final Trace p$reference, final Trace p$class) {
+        super(p$reference, p$class);
       }
       
       @Override
@@ -236,19 +248,18 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
-   * e.g. in conjunction with {@link ViatraQueryEngine#on(Notifier)}.
+   * e.g. in conjunction with {@link ViatraQueryEngine#on(QueryScope)}.
    * 
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
    * <code><pre>
    * // ACCR17 - Change Reference Type - Precondition
-   * pattern ChangeReferenceTypePrecondition (reference : Trace, type : Trace) {
-   * 	find preserved_package_class (^package, class);
-   * 	find preserved_class_reference (class, reference);
-   * 	find preserved_reference_type (reference, initial_type);
-   * 	find preserved_package_class (^package, type);
-   * 	type != initial_type;	
+   * pattern ChangeReferenceTypePrecondition ($reference : Trace, $class : Trace) {
+   * 	find preserved_reference($reference);
+   * 	find preserved_class($class);
+   * 	find preserved_reference_type($reference, type);
+   * 	type != $class;
    * }
    * </pre></code>
    * 
@@ -261,7 +272,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -285,16 +296,16 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
       return new Matcher();
     }
     
-    private final static int POSITION_REFERENCE = 0;
+    private static final int POSITION_$REFERENCE = 0;
     
-    private final static int POSITION_TYPE = 1;
+    private static final int POSITION_$CLASS = 1;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ChangeReferenceTypePrecondition.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ChangeReferenceTypePrecondition.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -305,173 +316,252 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ChangeReferenceTypePrecondition.Match> getAllMatches(final Trace pReference, final Trace pType) {
-      return rawGetAllMatches(new Object[]{pReference, pType});
+    public Collection<ChangeReferenceTypePrecondition.Match> getAllMatches(final Trace p$reference, final Trace p$class) {
+      return rawStreamAllMatches(new Object[]{p$reference, p$class}).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @return a stream of matches represented as a Match object.
+     * 
+     */
+    public Stream<ChangeReferenceTypePrecondition.Match> streamAllMatches(final Trace p$reference, final Trace p$class) {
+      return rawStreamAllMatches(new Object[]{p$reference, p$class});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public ChangeReferenceTypePrecondition.Match getOneArbitraryMatch(final Trace pReference, final Trace pType) {
-      return rawGetOneArbitraryMatch(new Object[]{pReference, pType});
+    public Optional<ChangeReferenceTypePrecondition.Match> getOneArbitraryMatch(final Trace p$reference, final Trace p$class) {
+      return rawGetOneArbitraryMatch(new Object[]{p$reference, p$class});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Trace pReference, final Trace pType) {
-      return rawHasMatch(new Object[]{pReference, pType});
+    public boolean hasMatch(final Trace p$reference, final Trace p$class) {
+      return rawHasMatch(new Object[]{p$reference, p$class});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Trace pReference, final Trace pType) {
-      return rawCountMatches(new Object[]{pReference, pType});
+    public int countMatches(final Trace p$reference, final Trace p$class) {
+      return rawCountMatches(new Object[]{p$reference, p$class});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final Trace pReference, final Trace pType, final IMatchProcessor<? super ChangeReferenceTypePrecondition.Match> processor) {
-      rawForEachMatch(new Object[]{pReference, pType}, processor);
+    public void forEachMatch(final Trace p$reference, final Trace p$class, final Consumer<? super ChangeReferenceTypePrecondition.Match> processor) {
+      rawForEachMatch(new Object[]{p$reference, p$class}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Trace pReference, final Trace pType, final IMatchProcessor<? super ChangeReferenceTypePrecondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pReference, pType}, processor);
+    public boolean forOneArbitraryMatch(final Trace p$reference, final Trace p$class, final Consumer<? super ChangeReferenceTypePrecondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{p$reference, p$class}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pReference the fixed value of pattern parameter reference, or null if not bound.
-     * @param pType the fixed value of pattern parameter type, or null if not bound.
+     * @param p$reference the fixed value of pattern parameter $reference, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ChangeReferenceTypePrecondition.Match newMatch(final Trace pReference, final Trace pType) {
-      return ChangeReferenceTypePrecondition.Match.newMatch(pReference, pType);
+    public ChangeReferenceTypePrecondition.Match newMatch(final Trace p$reference, final Trace p$class) {
+      return ChangeReferenceTypePrecondition.Match.newMatch(p$reference, p$class);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for reference.
+     * Retrieve the set of values that occur in matches for $reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfreference(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_REFERENCE, parameters, results);
-      return results;
+    protected Stream<Trace> rawStreamAllValuesOf$reference(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$REFERENCE, parameters).map(Trace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for reference.
+     * Retrieve the set of values that occur in matches for $reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfreference() {
-      return rawAccumulateAllValuesOfreference(emptyArray());
+    public Set<Trace> getAllValuesOf$reference() {
+      return rawStreamAllValuesOf$reference(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for reference.
+     * Retrieve the set of values that occur in matches for $reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfreference(final ChangeReferenceTypePrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfreference(partialMatch.toArray());
+    public Stream<Trace> streamAllValuesOf$reference() {
+      return rawStreamAllValuesOf$reference(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for reference.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $reference.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfreference(final Trace pType) {
-      return rawAccumulateAllValuesOfreference(new Object[]{
-      null, 
-      pType
-      });
+    public Stream<Trace> streamAllValuesOf$reference(final ChangeReferenceTypePrecondition.Match partialMatch) {
+      return rawStreamAllValuesOf$reference(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $reference.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOftype(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_TYPE, parameters, results);
-      return results;
+    public Stream<Trace> streamAllValuesOf$reference(final Trace p$class) {
+      return rawStreamAllValuesOf$reference(new Object[]{null, p$class});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype() {
-      return rawAccumulateAllValuesOftype(emptyArray());
+    public Set<Trace> getAllValuesOf$reference(final ChangeReferenceTypePrecondition.Match partialMatch) {
+      return rawStreamAllValuesOf$reference(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $reference.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype(final ChangeReferenceTypePrecondition.Match partialMatch) {
-      return rawAccumulateAllValuesOftype(partialMatch.toArray());
+    public Set<Trace> getAllValuesOf$reference(final Trace p$class) {
+      return rawStreamAllValuesOf$reference(new Object[]{null, p$class}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for type.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOftype(final Trace pReference) {
-      return rawAccumulateAllValuesOftype(new Object[]{
-      pReference, 
-      null
-      });
+    protected Stream<Trace> rawStreamAllValuesOf$class(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$CLASS, parameters).map(Trace.class::cast);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$class() {
+      return rawStreamAllValuesOf$class(emptyArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$class() {
+      return rawStreamAllValuesOf$class(emptyArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$class(final ChangeReferenceTypePrecondition.Match partialMatch) {
+      return rawStreamAllValuesOf$class(partialMatch.toArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<Trace> streamAllValuesOf$class(final Trace p$reference) {
+      return rawStreamAllValuesOf$class(new Object[]{p$reference, null});
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$class(final ChangeReferenceTypePrecondition.Match partialMatch) {
+      return rawStreamAllValuesOf$class(partialMatch.toArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for $class.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<Trace> getAllValuesOf$class(final Trace p$reference) {
+      return rawStreamAllValuesOf$class(new Object[]{p$reference, null}).collect(Collectors.toSet());
     }
     
     @Override
     protected ChangeReferenceTypePrecondition.Match tupleToMatch(final Tuple t) {
       try {
-          return ChangeReferenceTypePrecondition.Match.newMatch((Trace) t.get(POSITION_REFERENCE), (Trace) t.get(POSITION_TYPE));
+          return ChangeReferenceTypePrecondition.Match.newMatch((Trace) t.get(POSITION_$REFERENCE), (Trace) t.get(POSITION_$CLASS));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -481,7 +571,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     @Override
     protected ChangeReferenceTypePrecondition.Match arrayToMatch(final Object[] match) {
       try {
-          return ChangeReferenceTypePrecondition.Match.newMatch((Trace) match[POSITION_REFERENCE], (Trace) match[POSITION_TYPE]);
+          return ChangeReferenceTypePrecondition.Match.newMatch((Trace) match[POSITION_$REFERENCE], (Trace) match[POSITION_$CLASS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -491,7 +581,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     @Override
     protected ChangeReferenceTypePrecondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ChangeReferenceTypePrecondition.Match.newMutableMatch((Trace) match[POSITION_REFERENCE], (Trace) match[POSITION_TYPE]);
+          return ChangeReferenceTypePrecondition.Match.newMutableMatch((Trace) match[POSITION_$REFERENCE], (Trace) match[POSITION_$CLASS]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -514,18 +604,18 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
    * Clients should derive an (anonymous) class that implements the abstract process().
    * 
    */
-  public static abstract class Processor implements IMatchProcessor<ChangeReferenceTypePrecondition.Match> {
+  public static abstract class Processor implements Consumer<ChangeReferenceTypePrecondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param pReference the value of pattern parameter reference in the currently processed match
-     * @param pType the value of pattern parameter type in the currently processed match
+     * @param p$reference the value of pattern parameter $reference in the currently processed match
+     * @param p$class the value of pattern parameter $class in the currently processed match
      * 
      */
-    public abstract void process(final Trace pReference, final Trace pType);
+    public abstract void accept(final Trace p$reference, final Trace p$class);
     
     @Override
-    public void process(final ChangeReferenceTypePrecondition.Match match) {
-      process(match.getReference(), match.getType());
+    public void accept(final ChangeReferenceTypePrecondition.Match match) {
+      accept(match.get$reference(), match.get$class());
     }
   }
   
@@ -575,7 +665,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
    * 
    */
   private static class LazyHolder {
-    private final static ChangeReferenceTypePrecondition INSTANCE = new ChangeReferenceTypePrecondition();
+    private static final ChangeReferenceTypePrecondition INSTANCE = new ChangeReferenceTypePrecondition();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -584,7 +674,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -593,13 +683,13 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static ChangeReferenceTypePrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final ChangeReferenceTypePrecondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pReference = new PParameter("reference", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$reference = new PParameter("$reference", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pType = new PParameter("type", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$class = new PParameter("$class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_pReference, parameter_pType);
+    private final List<PParameter> parameters = Arrays.asList(parameter_$reference, parameter_$class);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -612,7 +702,7 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("reference","type");
+      return Arrays.asList("$reference","$class");
     }
     
     @Override
@@ -622,30 +712,27 @@ public final class ChangeReferenceTypePrecondition extends BaseGeneratedEMFQuery
     
     @Override
     public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_reference = body.getOrCreateVariableByName("reference");
+          PVariable var_$reference = body.getOrCreateVariableByName("$reference");
+          PVariable var_$class = body.getOrCreateVariableByName("$class");
           PVariable var_type = body.getOrCreateVariableByName("type");
-          PVariable var_package = body.getOrCreateVariableByName("package");
-          PVariable var_class = body.getOrCreateVariableByName("class");
-          PVariable var_initial_type = body.getOrCreateVariableByName("initial_type");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_type), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_reference, parameter_pReference),
-             new ExportedParameter(body, var_type, parameter_pType)
+             new ExportedParameter(body, var_$reference, parameter_$reference),
+             new ExportedParameter(body, var_$class, parameter_$class)
           ));
-          // 	find preserved_package_class (^package, class)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_class), Preserved_package_class.instance().getInternalQueryRepresentation());
-          // 	find preserved_class_reference (class, reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var_reference), Preserved_class_reference.instance().getInternalQueryRepresentation());
-          // 	find preserved_reference_type (reference, initial_type)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_reference, var_initial_type), Preserved_reference_type.instance().getInternalQueryRepresentation());
-          // 	find preserved_package_class (^package, type)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_type), Preserved_package_class.instance().getInternalQueryRepresentation());
-          // 	type != initial_type
-          new Inequality(body, var_type, var_initial_type);
+          // 	find preserved_reference($reference)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference), Preserved_reference.instance().getInternalQueryRepresentation());
+          // 	find preserved_class($class)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class), Preserved_class.instance().getInternalQueryRepresentation());
+          // 	find preserved_reference_type($reference, type)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$reference, var_type), Preserved_reference_type.instance().getInternalQueryRepresentation());
+          // 	type != $class
+          new Inequality(body, var_type, var_$class);
           bodies.add(body);
       }
       return bodies;

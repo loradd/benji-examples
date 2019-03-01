@@ -1,315 +1,272 @@
 package se.mdh.idt.benji.examples.refactorings
 
 import "http://www.mdh.se/idt/benji/trace/Trace"
-import "http://www.mdh.se/examples/refactorings/SimpleCore"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
 
-import java ^java.io.File
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_name
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_package_name
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_uri
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_package_uri
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_package
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_package
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_package_subpackage
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_class
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_package_class
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_name
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_class_name
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_class
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_package_class
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.unset_attribute_name
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_reference_type
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.created_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_datatype
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_attribute_type
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_attribute_type
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.deleted_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_reference_type
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_super
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_super
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.added_class_super
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_attribute
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.removed_class_reference
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.preserved_class_abstract
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.set_class_abstract
 
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_package_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_package_uri
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_package
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.deleted_package
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_package_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_class_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.deleted_class
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_package_class
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_reference_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_reference_type
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_package_dataType
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_attribute_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_attribute_type
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.deleted_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_attribute_type
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_reference
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.deleted_reference
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_reference_type
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class_reference
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class_superClass
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.removed_class_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.inserted_class_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.removed_class_superClass
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.inserted_class_superClass
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_class_abstract
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_class_abstract
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.unset_package_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.unset_package_uri
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.set_package_uri
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.unset_class_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.preserved_attribute_name
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.created_package_subPackage
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.created_package_class
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.created_class_reference
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.deleted_class_attribute
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.created_class_attribute
 
-// ACP1 - RenamePackage - Precondition
-pattern RenamePackagePrecondition (^package : Trace, name : java String) {
-	find preserved_package_name (^package, initial_name); 
-	name == eval('Changed' + initial_name);  
+// ACP1 - Rename Package - Precondition
+pattern RenamePackagePrecondition ($package : Trace) {
+	find preserved_package_name($package, _name);
+}
+// ACP1 - Rename Package - Postcondition
+pattern RenamePackagePostcondition ($package : Trace) {
+	find set_package_name($package, _name);
 }
 
-// ACP1 - RenamePackage - Postcondition
-pattern RenamePackagePostcondition (^package : Trace, name : java String) {
-	find unset_package_name (^package, initial_name);
-	find set_package_name (^package, name);
-	name == eval('Changed' + initial_name);
+// ACP2 - Rename Package Uri - Precondition
+pattern RenamePackageUriPrecondition ($package : Trace) {
+	find preserved_package_uri($package, _uri);
 }
-
-// ACP2 - RenameURIPackage - Precondition
-pattern RenameURIPackagePrecondition (^package : Trace, uri : java String) {
-	find preserved_package_uri (^package, initial_uri);
-	uri == eval(initial_uri + File.separator + 'Changed'); 
-}
-
-// ACP2 - RenameURIPackage - Postcondition
-pattern RenameURIPackagePostcondition (^package : Trace, uri : java String) {
-	find unset_package_uri (^package, initial_uri);
-	find set_package_uri (^package, uri);  
-	uri == eval(initial_uri + File.separator + 'Changed');
+// ACP2 - Rename Package Uri - Postcondition
+pattern RenamePackageUriPostcondition ($package : Trace) {
+	find set_package_uri($package, _uri);
 }
 
 // CDPR3 - Delete Package - Precondition
-pattern DeletePackagePrecondition (^package : Trace) {
-	find preserved_package (^package);
+pattern DeletePackagePrecondition ($package : Trace) {
+	find preserved_package($package);
 }
-
 // CDPR3 - Delete Package - Postcondition
-pattern DeletePackagePostcondition (^package : Trace) {
-	find deleted_package (^package);
+pattern DeletePackagePostcondition ($package : Trace) {
+	find deleted_package($package);
 }
 
 // AAP4 - Add Package - Precondition
-pattern AddPackagePrecondition (^package : Trace, name : java String) {
-	find preserved_package (^package);
-	find generate_package_subPackage_name (^package, name);
+pattern AddPackagePrecondition ($container : Trace) {
+	find preserved_package ($container);
 }
-
 // AAP4 - Add Package - Postcondition
-pattern AddPackagePostcondition (^package : Trace, name : java String, subPackage : Trace) {
-	find created_package_subPackage (^package, subPackage);
-	find set_package_name (subPackage, name);
+pattern AddPackagePostcondition ($container : Trace) {
+	find preserved_package ($container);
+	find created_package ($package);
+	find added_package_subpackage($container, $package);
 }
 
 // AAC5 - Add Class - Precondition
-pattern AddClassPrecondition (^package : Trace, name : java String) {
-	find preserved_package (^package);
-	find generate_package_class_name (^package, name);
+pattern AddClassPrecondition ($container : Trace) {
+	find preserved_package ($container);
 }
-
 // AAC5 - Add Class - Postcondition
-pattern AddClassPostcondition (^package : Trace, name : java String, class : Trace) {
-	find created_package_class (^package, class);
-	find set_class_name (class, name);
+pattern AddClassPostcondition ($container : Trace) {
+	find preserved_package ($container);
+	find created_class($class);
+	find added_package_class($container, $class);
 }
 
 // ACC6 - Rename Class - Precondition
-pattern RenameClassPrecondition (class : Trace, name : java String) {
-	find preserved_class_name (class, initial_name);
-	name == eval('Changed' + initial_name);
+pattern RenameClassPrecondition ($class : Trace) {
+	find preserved_class_name($class, _name);
 }
-
 // ACC6 - Rename Class - Postcondition
-pattern RenameClassPostcondition (class : Trace, name : java String) {
-	find unset_class_name (class, initial_name);
-	find set_class_name (class, name); 
-	name == eval('Changed' + initial_name);	
+pattern RenameClassPostcondition ($class : Trace) {
+	find set_class_name($class, _name);
 }
 
 // CDCR7 - Delete Class - Precondition
-pattern DeleteClassPrecondition (class : Trace) {
-	find preserved_class (class);
+pattern DeleteClassPrecondition ($class : Trace) {
+	find preserved_class($class);
 }
-
 // CDCR7 - Delete Class - Postcondition
-pattern DeleteClassPostcondition (class : Trace) {
-	find deleted_class (class);	
+pattern DeleteClassPostcondition ($class : Trace) {
+	find deleted_class($class);
 }
 
 // CCAC8 - Extract Class - Precondition
-pattern ExtractClassPrecondition (^package : Trace, class : Trace, attribute : Trace, 
-	attribute_class_name : java String, attribute_reference_name : java String
-) {
-	find preserved_package_class (^package, class);
-	find preserved_class_attribute (class, attribute);
-	find generate_attribute_class_name (attribute, attribute_class_name);
-	find generate_attribute_reference_name (attribute, attribute_reference_name);
+pattern ExtractClassPrecondition($package : Trace, $class : Trace, $attribute : Trace) {
+	find preserved_package($package);
+	find preserved_class($class);
+	find preserved_attribute($attribute);
+	find preserved_package_class($package, $class);
+	find preserved_class_attribute($class, $attribute);
 }
-
 // CCAC8 - Extract Class - Postcondition
-pattern ExtractClassPostcondition (^package : Trace, class : Trace, attribute : Trace,
-	attribute_class_name : java String, attribute_reference_name : java String, 
-	attribute_class : Trace, attribute_reference : Trace
-) {
-	find created_package_class (^package, attribute_class);
-	find set_class_name (attribute_class, attribute_class_name);
-	find created_class_reference (class, attribute_reference);
-	find set_reference_name (attribute_reference, attribute_reference_name);
-	find set_reference_type (attribute_reference, attribute_class);
-	find deleted_class_attribute (class, attribute);	
+pattern ExtractClassPostcondition($package : Trace, $class : Trace, $attribute : Trace) {
+	// package
+	find preserved_package ($package);
+	// class
+	find preserved_class ($class);
+	find preserved_package_class ($package, $class);
+	// attribute
+	find deleted_attribute($attribute);
+	find unset_attribute_name($attribute, attribute_name);
+	// attribute class
+	find created_class (attribute_class);
+	find added_package_class($package, attribute_class);
+	find set_class_name(attribute_class, attribute_class_name);
+	attribute_class_name == eval(attribute_name.toFirstUpper);
+	// attribute reference
+	find created_reference(attribute_reference);
+	find set_reference_type(attribute_reference, attribute_class);
+	find added_class_reference($class, attribute_reference);
 }
 
 // AAA10 - Add Attribute - Precondition
-pattern AddAttributePrecondition (class : Trace, type : Trace, name : java String) {
-	find preserved_package_class (^package, class); 
-	find preserved_package_dataType (^package, type); 
-	find generate_class_attribute_name (class, name);
+pattern AddAttributePrecondition ($class : Trace) {
+	find preserved_class ($class);
 }
-
 // AAA10 - Add Attribute - Postcondition
-pattern AddAttributePostcondition (class : Trace, type : Trace, name : java String, attribute : Trace) {
-	find created_class_attribute (class, attribute);
-	find set_attribute_name (attribute, name);
-	find set_attribute_type (attribute, type);	
+pattern AddAttributePostcondition ($class : Trace) {
+	find preserved_class ($class);
+	find created_attribute(attribute);
+	find added_class_attribute($class, attribute);
 }
 
 // ADA11 - Delete Attribute - Precondition
-pattern DeleteAttributePrecondition (attribute : Trace) {
-	find preserved_attribute (attribute);
+pattern DeleteAttributePrecondition ($attribute : Trace) {
+	find preserved_attribute ($attribute);
 }
-
 // ADA11 - Delete Attribute - Postcondition
-pattern DeleteAttributePostcondition (attribute : Trace) {
-	find deleted_attribute (attribute);
+pattern DeleteAttributePostcondition ($attribute : Trace) {
+	find deleted_attribute ($attribute);
 }
 
 // ACA12 - Change Attribute Type - Precondition
-pattern ChangeAttributeTypePrecondition (attribute : Trace, type : Trace) {
-	find preserved_package_class (^package, class);
-	find preserved_class_attribute (class, attribute);
-	find preserved_attribute_type (attribute, initial_type);
-	find preserved_package_dataType (^package, type);
-	type != initial_type;		
+pattern ChangeAttributeTypePrecondition ($attribute : Trace, $datatype : Trace) {
+	find preserved_attribute ($attribute);
+	find preserved_datatype ($datatype);
+	find preserved_attribute_type($attribute, type);
+	type != $datatype;
 }
-
 // ACA12 - Change Attribute Type - Postcondition
-pattern ChangeAttributeTypePostcondition (attribute : Trace, type : Trace) {
-	find set_attribute_type (attribute, type);	
+pattern ChangeAttributeTypePostcondition ($attribute : Trace, $datatype : Trace) {
+	find preserved_attribute ($attribute);
+	find preserved_datatype ($datatype);
+	find set_attribute_type($attribute, $datatype);
 }
 
 // AACR13 - Add Reference - Precondition
-pattern AddReferencePrecondition (class : Trace, type : Trace, name : java String) {
-	find preserved_package_class (^package, class); 
-	find preserved_package_class (^package, type);
-	find generate_class_reference_name (class, name);	
+pattern AddReferencePrecondition($class : Trace) {
+	find preserved_class ($class);
 }
-
 // AACR13 - Add Reference - Postcondition
-pattern AddReferencePostcondition (class : Trace, type : Trace, name : java String, reference : Trace) {
-	find created_class_reference (class, reference);
-	find set_reference_name (reference, name);
-	find set_reference_type (reference, type);
+pattern AddReferencePostcondition($class : Trace) {
+	find preserved_class ($class);
+	find created_reference(reference);
+	find added_class_reference($class, reference);
 }
 
 // ADCR14 - Delete Reference - Precondition
-pattern DeleteReferencePrecondition (reference : Trace) {
-	find preserved_reference (reference);	
+pattern DeleteReferencePrecondition ($reference : Trace) {
+	find preserved_reference ($reference);
 }
-
 // ADCR14 - Delete Reference - Postcondition
-pattern DeleteReferencePostcondition (reference : Trace) {
-	find deleted_reference (reference);
+pattern DeleteReferencePostcondition ($reference : Trace) {
+	find deleted_reference($reference);
 }
 
 // ACCR17 - Change Reference Type - Precondition
-pattern ChangeReferenceTypePrecondition (reference : Trace, type : Trace) {
-	find preserved_package_class (^package, class);
-	find preserved_class_reference (class, reference);
-	find preserved_reference_type (reference, initial_type);
-	find preserved_package_class (^package, type);
-	type != initial_type;	
+pattern ChangeReferenceTypePrecondition ($reference : Trace, $class : Trace) {
+	find preserved_reference($reference);
+	find preserved_class($class);
+	find preserved_reference_type($reference, type);
+	type != $class;
 }
-
 // ACCR17 - Change Reference Type - Postcondition
-pattern ChangeReferenceTypePostcondition (reference : Trace, type : Trace) {
-	find set_reference_type (reference, type); 	
+pattern ChangeReferenceTypePostcondition ($reference : Trace, $class : Trace) {
+	find preserved_reference ($reference);
+	find preserved_class ($class);
+	find set_reference_type($reference, $class);
 }
 
 // CADCAR18 - Extract Superclass - Precondition
-pattern ExtractSuperclassPrecondition (^package : Trace, superClass : Trace, subClass : Trace, attribute : Trace, name : java String) {
-	find preserved_package_class (^package, superClass);
-	find preserved_package_class (^package, subClass);
-	find preserved_class_attribute (subClass, attribute);
-	find preserved_class_superClass (subClass, superClass);
-	find generate_class_superClass_name (subClass, name); 
+pattern ExtractSuperclassPrecondition($package : Trace, $class : Trace, $super : Trace, $attribute : Trace, $reference : Trace) {
+	find preserved_package ($package);
+	find preserved_class ($class);
+	find preserved_package_class ($package, $class);
+	find preserved_class ($super);
+	find preserved_package_class ($package, $super);
+	find preserved_class_name ($class, _class_name);
+	find preserved_class_super($class, $super);
+	find preserved_attribute ($attribute);
+	find preserved_class_attribute ($class, $attribute);
+	find preserved_reference ($reference);
+	find preserved_class_reference ($class, $reference);
 }
 
 // CADCAR18 - Extract Superclass - Postcondition
-pattern ExtractSuperclassPostcondition (^package : Trace, superClass : Trace, subClass : Trace, attribute : Trace, name : java String, class : Trace) {
-	find created_package_class (^package, class);
-	find set_class_name (class, name);
-	find removed_class_attribute (subClass, attribute);	
-	find inserted_class_attribute (class, attribute);
-	find removed_class_superClass (subClass, superClass);
-	find inserted_class_superClass (subClass, class);
-	find inserted_class_superClass (class, superClass);
+pattern ExtractSuperclassPostcondition($package : Trace, $class : Trace, $super : Trace, $attribute : Trace, $reference : Trace) {
+	find preserved_class ($class);
+	find preserved_package_class($package, $class);
+	find preserved_class_name ($class, class_name);
+	find preserved_class ($super);
+	find preserved_package_class ($package, $super);
+	find removed_class_super($class, $super);
+	find created_class(extracted);
+	find added_package_class ($package, extracted);
+	find set_class_name (extracted, extracted_name);
+	extracted_name == eval("Super" + class_name);
+	find added_class_super (extracted, $super);
+	find preserved_attribute ($attribute);
+	find removed_class_attribute($class, $attribute);
+	find added_class_attribute(extracted, $attribute);
+	find preserved_reference ($reference);
+	find removed_class_reference($class, $reference);
+	find added_class_reference(extracted, $reference);
+	find added_class_super($class, extracted);
 }
 
 // ACC19 - Change Class Abstract - Precondition
-pattern ChangeClassAbstractPrecondition (class : Trace) {
-	find preserved_class_abstract (class, false);
+pattern ChangeClassAbstractPrecondition ($class : Trace) {
+	find preserved_class_abstract($class, _abstract);
 }
-
 // ACC19 - Change Class Abstract - Postcondition
-pattern ChangeClassAbstractPostcondition (class : Trace) {
-	find set_class_abstract (class, true);
+pattern ChangeClassAbstractPostcondition ($class : Trace) {
+	find set_class_abstract($class, _abstract);
 }
 
 // CDACA22 - Push Down Attribute - Precondition
-pattern PushDownAttributePrecondition (superClass : Trace, class : Trace, attribute : Trace) {
-	find preserved_class_attribute (superClass, attribute);
-	find preserved_class_superClass (class, superClass); 
+pattern PushDownAttributePrecondition ($class : Trace, $super : Trace, $attribute : Trace) {
+	find preserved_class ($class);
+	find preserved_class ($super);
+	find preserved_attribute ($attribute);
+	find preserved_class_super ($class, $super);
+	find preserved_class_attribute ($super, $attribute);
 }
-
-// CDACA22 - Push Down Feature - Postcondition
-pattern PushDownAttributePostcondition (superClass : Trace, class : Trace, attribute : Trace) {
-	find removed_class_attribute (superClass, attribute); 
-	find inserted_class_attribute (class, attribute);	
-}
-
-/********************************************************************************************************/
-
-// [UTIL] Generate new package.subPackage name
-private pattern generate_package_subPackage_name (^package : Trace, name : java String) {
-	index == count find created_package_subPackage (^package, _subPackage);
-	name == eval('NewPackage' + index);
-}
-
-// [UTIL] Generate new package.class name
-private pattern generate_package_class_name (^package : Trace, name : java String) {
-	index == count find created_package_class (^package, _class);
-	name == eval ('NewClass' + index);
-}
-
-// [UTIL] Generate new class.attribute name
-private pattern generate_class_attribute_name (class : Trace, name : java String) {
-	index == count find created_class_attribute (class, _attribute);
-	name == eval ('newAttribute' + index); 
-}
-
-// [UTIL] Generate new class.reference name
-private pattern generate_class_reference_name (class : Trace, name : java String) {
-	index == count find created_class_reference (class, _reference);
-	name == eval ('newReference' + index); 
-}
-
-// [UTIL] Generate new attributeReference name (ExtractClass)
-private pattern generate_attribute_reference_name (attribute : Trace, name : java String) {
-	find preserved_attribute_name (attribute, attribute_name);
-	name == eval (attribute_name + "Reference");
-}
-
-// [UTIL] Generate new attributeClass name (ExtractClass)
-private pattern generate_attribute_class_name (attribute : Trace, name : java String) {
-	find preserved_attribute_name (attribute, attribute_name);
-	name == eval (attribute_name.toFirstUpper + "Class"); 	
-}
-
-// [UTIL] Generate new superClass name (ExtractSuperclass)
-private pattern generate_class_superClass_name (class : Trace, name : java String) {
-	find preserved_class_name (class, class_name);
-	name == eval ('Super' + class_name);
+// CDACA22 - Push Down Attribute - Postcondition
+pattern PushDownAttributePostcondition ($class : Trace, $super : Trace, $attribute : Trace) {
+	find preserved_class ($class);
+	find preserved_class ($super);
+	find preserved_attribute ($attribute);
+	find preserved_class_super ($class, $super);
+	find removed_class_attribute($super, $attribute);
+	find added_class_attribute($class, $attribute);
 }

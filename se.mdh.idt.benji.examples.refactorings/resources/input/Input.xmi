@@ -3,15 +3,21 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:simplecore="http://www.mdh.se/examples/refactorings/SimpleCore"
-    xsi:schemaLocation="http://www.mdh.se/examples/refactorings/SimpleCore ../../../se.mdh.idt.benji.examples.refactorings.simplecore/model/SimpleCore.xcore#/EPackage"
-    name="Package1"
-    uri="http://www.example.org/package1">
-  <subPackages
-      name="SubPackage1"
-      uri="http://www.example.org/package1/subpackage1">
-    <classes
-        name="Class1"
-        abstract="false"/>
-  </subPackages>
+    xmlns:simplecore="http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+    xsi:schemaLocation="http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore ../../../se.mdh.idt.benji.examples.refactorings.simplecore/model/SimpleCore.xcore#/EPackage"
+    name="examplePackage"
+    uri="http://www.eclipse.org/example">
+  <classes name="exampleClass"
+      abstract="false"
+      super="//@classes.1"/>
+  <classes name="exampleSuperclass"
+      abstract="false">
+    <attributes
+        name="exampleAttribute"
+        type="//@datatypes.0"/>
+  </classes>
+  <datatypes
+      name="exampleDatatype"/>
+  <datatypes
+      name="exampleDataType2"/>
 </simplecore:Package>

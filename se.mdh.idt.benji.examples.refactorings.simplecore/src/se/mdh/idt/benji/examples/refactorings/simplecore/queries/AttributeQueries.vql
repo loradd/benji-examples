@@ -1,0 +1,75 @@
+package se.mdh.idt.benji.examples.refactorings.simplecore.queries
+
+import "http://www.mdh.se/idt/benji/trace/Trace"
+import "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore"
+
+// attribute - initial
+pattern initial_attribute (attribute : Trace, initial_attribute : Attribute) {
+	Trace.initial (attribute, initial_attribute);
+}
+// attribute - current
+pattern current_attribute (attribute : Trace, current_attribute : Attribute) {
+	Trace.current (attribute, current_attribute);
+}
+// attribute - preserved
+pattern preserved_attribute (attribute : Trace) {
+	find initial_attribute (attribute, _initial_attribute);
+	find current_attribute (attribute, _current_attribute);
+}
+// attribute - created
+pattern created_attribute (attribute : Trace) {
+	neg find initial_attribute (attribute, _initial_attribute);
+	find current_attribute (attribute, _current_attribute);
+}
+// attribute - deleted
+pattern deleted_attribute (attribute : Trace) {
+	find initial_attribute (attribute, _initial_attribute);
+	neg find current_attribute (attribute, _current_attribute);
+}
+// attribute - name - initial
+pattern initial_attribute_name (attribute : Trace, name : java String) {
+	find initial_attribute (attribute, initial_attribute);
+	Attribute.name (initial_attribute, name);
+}
+// attribute - name - current
+pattern current_attribute_name (attribute : Trace, name : java String) {
+	find current_attribute (attribute, current_attribute);
+	Attribute.name (current_attribute, name);
+}
+// attribute - name - set
+pattern set_attribute_name (attribute : Trace, name : java String) {
+	neg find initial_attribute_name (attribute, name);
+	find current_attribute_name (attribute, name);
+}
+// attribute - name - unset
+pattern unset_attribute_name (attribute : Trace, name : java String) {
+	find initial_attribute_name (attribute, name);
+	neg find current_attribute_name (attribute, name);	
+}
+// attribute - type - initial
+pattern initial_attribute_type (attribute : Trace, dataType : Trace) {
+	find initial_attribute (attribute, initial_attribute);
+	find initial_datatype (dataType, initial_dataType);
+	Attribute.type (initial_attribute, initial_dataType);	
+}
+// attribute - type - current
+pattern current_attribute_type (attribute : Trace, dataType : Trace) {
+	find current_attribute (attribute, current_attribute);
+	find current_datatype (dataType, current_dataType);
+	Attribute.type (current_attribute, current_dataType);
+}
+// attribute - type - preserved
+pattern preserved_attribute_type (attribute : Trace, type : Trace) {
+	find initial_attribute_type (attribute, type);
+	find current_attribute_type (attribute, type);
+}
+// attribute - type - set
+pattern set_attribute_type (attribute : Trace, type : Trace) {
+	neg find initial_attribute_type (attribute, type);
+	find current_attribute_type (attribute, type);
+}
+// attribute - type - unset
+pattern unset_attribute_type (attribute : Trace, type : Trace) {
+	find initial_attribute_type (attribute, type);
+	neg find current_attribute_type (attribute, type);
+}

@@ -69,6 +69,7 @@ public class ReferenceImpl extends NamedElementImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public se.mdh.idt.benji.examples.refactorings.simplecore.Class getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
@@ -95,6 +96,7 @@ public class ReferenceImpl extends NamedElementImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setType(se.mdh.idt.benji.examples.refactorings.simplecore.Class newType) {
 		se.mdh.idt.benji.examples.refactorings.simplecore.Class oldType = type;
 		type = newType;
@@ -107,6 +109,7 @@ public class ReferenceImpl extends NamedElementImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Reference getOpposite() {
 		if (opposite != null && opposite.eIsProxy()) {
 			InternalEObject oldOpposite = (InternalEObject)opposite;
@@ -133,6 +136,7 @@ public class ReferenceImpl extends NamedElementImpl implements Reference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOpposite(Reference newOpposite) {
 		Reference oldOpposite = opposite;
 		opposite = newOpposite;

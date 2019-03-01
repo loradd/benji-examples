@@ -1,5 +1,5 @@
-@Ecore(name = "SimpleCore", nsURI = "http://www.mdh.se/examples/refactorings/SimpleCore")
-@GenModel(name = "SimpleCore", modelName = "SimpleCore", modelDirectory = "se.mdh.idt.benji.examples.refactorings.simplecore/src")
+@Ecore(name = "SimpleCore", nsURI = "http://www.mdh.se/idt/benji/examples/refactorings/SimpleCore")
+@GenModel(modelName = "SimpleCore", modelDirectory = "se.mdh.idt.benji.examples.refactorings.simplecore/src")
 package se.mdh.idt.benji.examples.refactorings.simplecore
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -13,14 +13,14 @@ abstract class NamedElement {
 
 class Package extends NamedElement {
 	String uri
-	contains Package[0..*] subPackages
+	contains Package[0..*] subpackages
 	contains Class[0..*] classes	
-	contains DataType[0..*] dataTypes
+	contains DataType[0..*] datatypes
 }
 
 class Class extends NamedElement {
 	Boolean ^abstract
-	refers Class[0..*] superClasses
+	refers Class[0..*] ^super
 	contains Attribute[0..*] attributes
 	contains Reference[0..*] references
 }

@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getAbstract <em>Abstract</em>}</li>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuperClasses <em>Super Classes</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getSuper <em>Super</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.Class#getReferences <em>References</em>}</li>
  * </ul>
@@ -51,20 +51,20 @@ public interface Class extends NamedElement {
 	void setAbstract(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Super Classes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Super</b></em>' reference list.
 	 * The list contents are of type {@link se.mdh.idt.benji.examples.refactorings.simplecore.Class}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Super Classes</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Super Classes</em>' reference list.
-	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage#getClass_SuperClasses()
+	 * @return the value of the '<em>Super</em>' reference list.
+	 * @see se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage#getClass_Super()
 	 * @model
 	 * @generated
 	 */
-	EList<Class> getSuperClasses();
+	EList<Class> getSuper();
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

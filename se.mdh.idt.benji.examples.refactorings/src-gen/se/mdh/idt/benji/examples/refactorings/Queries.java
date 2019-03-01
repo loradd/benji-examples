@@ -3,7 +3,6 @@
  */
 package se.mdh.idt.benji.examples.refactorings;
 
-import javax.annotation.Generated;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
 import se.mdh.idt.benji.examples.refactorings.AddAttributePostcondition;
@@ -38,21 +37,21 @@ import se.mdh.idt.benji.examples.refactorings.RenameClassPostcondition;
 import se.mdh.idt.benji.examples.refactorings.RenameClassPrecondition;
 import se.mdh.idt.benji.examples.refactorings.RenamePackagePostcondition;
 import se.mdh.idt.benji.examples.refactorings.RenamePackagePrecondition;
-import se.mdh.idt.benji.examples.refactorings.RenameURIPackagePostcondition;
-import se.mdh.idt.benji.examples.refactorings.RenameURIPackagePrecondition;
+import se.mdh.idt.benji.examples.refactorings.RenamePackageUriPostcondition;
+import se.mdh.idt.benji.examples.refactorings.RenamePackageUriPrecondition;
 
 /**
  * A pattern group formed of all public patterns defined in Queries.vql.
  * 
- * <p>Use the static instance as any {@link org.eclipse.viatra.query.runtime.api.IPatternGroup}, to conveniently prepare
+ * <p>Use the static instance as any {@link interface org.eclipse.viatra.query.runtime.api.IQueryGroup}, to conveniently prepare
  * a VIATRA Query engine for matching all patterns originally defined in file Queries.vql,
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package se.mdh.idt.benji.examples.refactorings, the group contains the definition of the following patterns: <ul>
  * <li>RenamePackagePrecondition</li>
  * <li>RenamePackagePostcondition</li>
- * <li>RenameURIPackagePrecondition</li>
- * <li>RenameURIPackagePostcondition</li>
+ * <li>RenamePackageUriPrecondition</li>
+ * <li>RenamePackageUriPostcondition</li>
  * <li>DeletePackagePrecondition</li>
  * <li>DeletePackagePostcondition</li>
  * <li>AddPackagePrecondition</li>
@@ -85,11 +84,10 @@ import se.mdh.idt.benji.examples.refactorings.RenameURIPackagePrecondition;
  * <li>PushDownAttributePostcondition</li>
  * </ul>
  * 
- * @see IPatternGroup
+ * @see IQueryGroup
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class Queries extends BaseGeneratedPatternGroup {
   /**
    * Access the pattern group.
@@ -110,8 +108,8 @@ public final class Queries extends BaseGeneratedPatternGroup {
   private Queries() {
     querySpecifications.add(RenamePackagePrecondition.instance());
     querySpecifications.add(RenamePackagePostcondition.instance());
-    querySpecifications.add(RenameURIPackagePrecondition.instance());
-    querySpecifications.add(RenameURIPackagePostcondition.instance());
+    querySpecifications.add(RenamePackageUriPrecondition.instance());
+    querySpecifications.add(RenamePackageUriPostcondition.instance());
     querySpecifications.add(DeletePackagePrecondition.instance());
     querySpecifications.add(DeletePackagePostcondition.instance());
     querySpecifications.add(AddPackagePrecondition.instance());
@@ -160,20 +158,20 @@ public final class Queries extends BaseGeneratedPatternGroup {
     return RenamePackagePostcondition.Matcher.on(engine);
   }
   
-  public RenameURIPackagePrecondition getRenameURIPackagePrecondition() {
-    return RenameURIPackagePrecondition.instance();
+  public RenamePackageUriPrecondition getRenamePackageUriPrecondition() {
+    return RenamePackageUriPrecondition.instance();
   }
   
-  public RenameURIPackagePrecondition.Matcher getRenameURIPackagePrecondition(final ViatraQueryEngine engine) {
-    return RenameURIPackagePrecondition.Matcher.on(engine);
+  public RenamePackageUriPrecondition.Matcher getRenamePackageUriPrecondition(final ViatraQueryEngine engine) {
+    return RenamePackageUriPrecondition.Matcher.on(engine);
   }
   
-  public RenameURIPackagePostcondition getRenameURIPackagePostcondition() {
-    return RenameURIPackagePostcondition.instance();
+  public RenamePackageUriPostcondition getRenamePackageUriPostcondition() {
+    return RenamePackageUriPostcondition.instance();
   }
   
-  public RenameURIPackagePostcondition.Matcher getRenameURIPackagePostcondition(final ViatraQueryEngine engine) {
-    return RenameURIPackagePostcondition.Matcher.on(engine);
+  public RenamePackageUriPostcondition.Matcher getRenamePackageUriPostcondition(final ViatraQueryEngine engine) {
+    return RenamePackageUriPostcondition.Matcher.on(engine);
   }
   
   public DeletePackagePrecondition getDeletePackagePrecondition() {

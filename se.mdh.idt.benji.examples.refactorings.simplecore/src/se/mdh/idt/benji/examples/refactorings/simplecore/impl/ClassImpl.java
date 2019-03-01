@@ -30,7 +30,7 @@ import se.mdh.idt.benji.examples.refactorings.simplecore.SimplecorePackage;
  * </p>
  * <ul>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl#getAbstract <em>Abstract</em>}</li>
- *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl#getSuperClasses <em>Super Classes</em>}</li>
+ *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl#getSuper <em>Super</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link se.mdh.idt.benji.examples.refactorings.simplecore.impl.ClassImpl#getReferences <em>References</em>}</li>
  * </ul>
@@ -59,14 +59,14 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	protected Boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSuperClasses() <em>Super Classes</em>}' reference list.
+	 * The cached value of the '{@link #getSuper() <em>Super</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperClasses()
+	 * @see #getSuper()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> superClasses;
+	protected EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> super_;
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -112,6 +112,7 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getAbstract() {
 		return abstract_;
 	}
@@ -121,6 +122,7 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAbstract(Boolean newAbstract) {
 		Boolean oldAbstract = abstract_;
 		abstract_ = newAbstract;
@@ -133,11 +135,12 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> getSuperClasses() {
-		if (superClasses == null) {
-			superClasses = new EObjectResolvingEList<se.mdh.idt.benji.examples.refactorings.simplecore.Class>(se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, this, SimplecorePackage.CLASS__SUPER_CLASSES);
+	@Override
+	public EList<se.mdh.idt.benji.examples.refactorings.simplecore.Class> getSuper() {
+		if (super_ == null) {
+			super_ = new EObjectResolvingEList<se.mdh.idt.benji.examples.refactorings.simplecore.Class>(se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, this, SimplecorePackage.CLASS__SUPER);
 		}
-		return superClasses;
+		return super_;
 	}
 
 	/**
@@ -145,6 +148,7 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Attribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, SimplecorePackage.CLASS__ATTRIBUTES);
@@ -157,6 +161,7 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Reference> getReferences() {
 		if (references == null) {
 			references = new EObjectContainmentEList<Reference>(Reference.class, this, SimplecorePackage.CLASS__REFERENCES);
@@ -190,8 +195,8 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 		switch (featureID) {
 			case SimplecorePackage.CLASS__ABSTRACT:
 				return getAbstract();
-			case SimplecorePackage.CLASS__SUPER_CLASSES:
-				return getSuperClasses();
+			case SimplecorePackage.CLASS__SUPER:
+				return getSuper();
 			case SimplecorePackage.CLASS__ATTRIBUTES:
 				return getAttributes();
 			case SimplecorePackage.CLASS__REFERENCES:
@@ -212,9 +217,9 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 			case SimplecorePackage.CLASS__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
-			case SimplecorePackage.CLASS__SUPER_CLASSES:
-				getSuperClasses().clear();
-				getSuperClasses().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.simplecore.Class>)newValue);
+			case SimplecorePackage.CLASS__SUPER:
+				getSuper().clear();
+				getSuper().addAll((Collection<? extends se.mdh.idt.benji.examples.refactorings.simplecore.Class>)newValue);
 				return;
 			case SimplecorePackage.CLASS__ATTRIBUTES:
 				getAttributes().clear();
@@ -239,8 +244,8 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 			case SimplecorePackage.CLASS__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
-			case SimplecorePackage.CLASS__SUPER_CLASSES:
-				getSuperClasses().clear();
+			case SimplecorePackage.CLASS__SUPER:
+				getSuper().clear();
 				return;
 			case SimplecorePackage.CLASS__ATTRIBUTES:
 				getAttributes().clear();
@@ -262,8 +267,8 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 		switch (featureID) {
 			case SimplecorePackage.CLASS__ABSTRACT:
 				return ABSTRACT_EDEFAULT == null ? abstract_ != null : !ABSTRACT_EDEFAULT.equals(abstract_);
-			case SimplecorePackage.CLASS__SUPER_CLASSES:
-				return superClasses != null && !superClasses.isEmpty();
+			case SimplecorePackage.CLASS__SUPER:
+				return super_ != null && !super_.isEmpty();
 			case SimplecorePackage.CLASS__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case SimplecorePackage.CLASS__REFERENCES:
@@ -281,7 +286,7 @@ public class ClassImpl extends NamedElementImpl implements se.mdh.idt.benji.exam
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (abstract: ");
 		result.append(abstract_);
 		result.append(')');

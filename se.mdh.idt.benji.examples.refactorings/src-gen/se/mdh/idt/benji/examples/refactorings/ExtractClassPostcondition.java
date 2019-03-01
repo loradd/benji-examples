@@ -5,15 +5,16 @@ package se.mdh.idt.benji.examples.refactorings;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
-import javax.annotation.Generated;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.viatra.query.runtime.api.IMatchProcessor;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -22,11 +23,14 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
+import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
+import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -35,23 +39,52 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Created_class_reference;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Created_package_class;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Deleted_class_attribute;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_class_name;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_reference_name;
-import se.mdh.idt.benji.examples.refactorings.simplecore.patterns.Set_reference_type;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Added_class_reference;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Added_package_class;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Created_class;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Created_reference;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Deleted_attribute;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_class;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_package;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Preserved_package_class;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Set_class_name;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Set_reference_type;
+import se.mdh.idt.benji.examples.refactorings.simplecore.queries.Unset_attribute_name;
 import se.mdh.idt.benji.trace.Trace;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
+ * 
+ * <p>Original source:
+ *         <code><pre>
+ *         // CCAC8 - Extract Class - Postcondition
+ *         pattern ExtractClassPostcondition($package : Trace, $class : Trace, $attribute : Trace) {
+ *         	// package
+ *         	find preserved_package ($package);
+ *         	// class
+ *         	find preserved_class ($class);
+ *         	find preserved_package_class ($package, $class);
+ *         	// attribute
+ *         	find deleted_attribute($attribute);
+ *         	find unset_attribute_name($attribute, attribute_name);
+ *         	// attribute class
+ *         	find created_class (attribute_class);
+ *         	find added_package_class($package, attribute_class);
+ *         	find set_class_name(attribute_class, attribute_class_name);
+ *         	attribute_class_name == eval(attribute_name.toFirstUpper);
+ *         	// attribute reference
+ *         	find created_reference(attribute_reference);
+ *         	find set_reference_type(attribute_reference, attribute_class);
+ *         	find added_class_reference($class, attribute_reference);
+ *         }
+ * </pre></code>
  * 
  * @see Matcher
  * @see Match
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "org.eclipse.xtext.xbase.compiler.JvmModelGenerator", date = "2018-04-25T00:59+0200")
 public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecification<ExtractClassPostcondition.Matcher> {
   /**
    * Pattern-specific match representation of the se.mdh.idt.benji.examples.refactorings.ExtractClassPostcondition pattern,
@@ -67,139 +100,71 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Trace fPackage;
+    private Trace f$package;
     
-    private Trace fClass;
+    private Trace f$class;
     
-    private Trace fAttribute;
+    private Trace f$attribute;
     
-    private String fAttribute_class_name;
+    private static List<String> parameterNames = makeImmutableList("$package", "$class", "$attribute");
     
-    private String fAttribute_reference_name;
-    
-    private Trace fAttribute_class;
-    
-    private Trace fAttribute_reference;
-    
-    private static List<String> parameterNames = makeImmutableList("package", "class", "attribute", "attribute_class_name", "attribute_reference_name", "attribute_class", "attribute_reference");
-    
-    private Match(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      this.fPackage = pPackage;
-      this.fClass = pClass;
-      this.fAttribute = pAttribute;
-      this.fAttribute_class_name = pAttribute_class_name;
-      this.fAttribute_reference_name = pAttribute_reference_name;
-      this.fAttribute_class = pAttribute_class;
-      this.fAttribute_reference = pAttribute_reference;
+    private Match(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      this.f$package = p$package;
+      this.f$class = p$class;
+      this.f$attribute = p$attribute;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("package".equals(parameterName)) return this.fPackage;
-      if ("class".equals(parameterName)) return this.fClass;
-      if ("attribute".equals(parameterName)) return this.fAttribute;
-      if ("attribute_class_name".equals(parameterName)) return this.fAttribute_class_name;
-      if ("attribute_reference_name".equals(parameterName)) return this.fAttribute_reference_name;
-      if ("attribute_class".equals(parameterName)) return this.fAttribute_class;
-      if ("attribute_reference".equals(parameterName)) return this.fAttribute_reference;
+      if ("$package".equals(parameterName)) return this.f$package;
+      if ("$class".equals(parameterName)) return this.f$class;
+      if ("$attribute".equals(parameterName)) return this.f$attribute;
       return null;
     }
     
-    public Trace getPackage() {
-      return this.fPackage;
+    public Trace get$package() {
+      return this.f$package;
     }
     
-    public Trace getValueOfClass() {
-      return this.fClass;
+    public Trace get$class() {
+      return this.f$class;
     }
     
-    public Trace getAttribute() {
-      return this.fAttribute;
-    }
-    
-    public String getAttribute_class_name() {
-      return this.fAttribute_class_name;
-    }
-    
-    public String getAttribute_reference_name() {
-      return this.fAttribute_reference_name;
-    }
-    
-    public Trace getAttribute_class() {
-      return this.fAttribute_class;
-    }
-    
-    public Trace getAttribute_reference() {
-      return this.fAttribute_reference;
+    public Trace get$attribute() {
+      return this.f$attribute;
     }
     
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("package".equals(parameterName) ) {
-          this.fPackage = (Trace) newValue;
+      if ("$package".equals(parameterName) ) {
+          this.f$package = (Trace) newValue;
           return true;
       }
-      if ("class".equals(parameterName) ) {
-          this.fClass = (Trace) newValue;
+      if ("$class".equals(parameterName) ) {
+          this.f$class = (Trace) newValue;
           return true;
       }
-      if ("attribute".equals(parameterName) ) {
-          this.fAttribute = (Trace) newValue;
-          return true;
-      }
-      if ("attribute_class_name".equals(parameterName) ) {
-          this.fAttribute_class_name = (String) newValue;
-          return true;
-      }
-      if ("attribute_reference_name".equals(parameterName) ) {
-          this.fAttribute_reference_name = (String) newValue;
-          return true;
-      }
-      if ("attribute_class".equals(parameterName) ) {
-          this.fAttribute_class = (Trace) newValue;
-          return true;
-      }
-      if ("attribute_reference".equals(parameterName) ) {
-          this.fAttribute_reference = (Trace) newValue;
+      if ("$attribute".equals(parameterName) ) {
+          this.f$attribute = (Trace) newValue;
           return true;
       }
       return false;
     }
     
-    public void setPackage(final Trace pPackage) {
+    public void set$package(final Trace p$package) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fPackage = pPackage;
+      this.f$package = p$package;
     }
     
-    public void setClass(final Trace pClass) {
+    public void set$class(final Trace p$class) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fClass = pClass;
+      this.f$class = p$class;
     }
     
-    public void setAttribute(final Trace pAttribute) {
+    public void set$attribute(final Trace p$attribute) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute = pAttribute;
-    }
-    
-    public void setAttribute_class_name(final String pAttribute_class_name) {
-      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute_class_name = pAttribute_class_name;
-    }
-    
-    public void setAttribute_reference_name(final String pAttribute_reference_name) {
-      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute_reference_name = pAttribute_reference_name;
-    }
-    
-    public void setAttribute_class(final Trace pAttribute_class) {
-      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute_class = pAttribute_class;
-    }
-    
-    public void setAttribute_reference(final Trace pAttribute_reference) {
-      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fAttribute_reference = pAttribute_reference;
+      this.f$attribute = p$attribute;
     }
     
     @Override
@@ -214,30 +179,26 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fPackage, fClass, fAttribute, fAttribute_class_name, fAttribute_reference_name, fAttribute_class, fAttribute_reference};
+      return new Object[]{f$package, f$class, f$attribute};
     }
     
     @Override
     public ExtractClassPostcondition.Match toImmutable() {
-      return isMutable() ? newMatch(fPackage, fClass, fAttribute, fAttribute_class_name, fAttribute_reference_name, fAttribute_class, fAttribute_reference) : this;
+      return isMutable() ? newMatch(f$package, f$class, f$attribute) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"package\"=" + prettyPrintValue(fPackage) + ", ");
-      result.append("\"class\"=" + prettyPrintValue(fClass) + ", ");
-      result.append("\"attribute\"=" + prettyPrintValue(fAttribute) + ", ");
-      result.append("\"attribute_class_name\"=" + prettyPrintValue(fAttribute_class_name) + ", ");
-      result.append("\"attribute_reference_name\"=" + prettyPrintValue(fAttribute_reference_name) + ", ");
-      result.append("\"attribute_class\"=" + prettyPrintValue(fAttribute_class) + ", ");
-      result.append("\"attribute_reference\"=" + prettyPrintValue(fAttribute_reference));
+      result.append("\"$package\"=" + prettyPrintValue(f$package) + ", ");
+      result.append("\"$class\"=" + prettyPrintValue(f$class) + ", ");
+      result.append("\"$attribute\"=" + prettyPrintValue(f$attribute));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash (fPackage, fClass, fAttribute, fAttribute_class_name, fAttribute_reference_name, fAttribute_class, fAttribute_reference);
+      return Objects.hash(f$package, f$class, f$attribute);
     }
     
     @Override
@@ -249,7 +210,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
       }
       if ((obj instanceof ExtractClassPostcondition.Match)) {
           ExtractClassPostcondition.Match other = (ExtractClassPostcondition.Match) obj;
-          return Objects.equals(fPackage, other.fPackage) && Objects.equals(fClass, other.fClass) && Objects.equals(fAttribute, other.fAttribute) && Objects.equals(fAttribute_class_name, other.fAttribute_class_name) && Objects.equals(fAttribute_reference_name, other.fAttribute_reference_name) && Objects.equals(fAttribute_class, other.fAttribute_class) && Objects.equals(fAttribute_reference, other.fAttribute_reference);
+          return Objects.equals(f$package, other.f$package) && Objects.equals(f$class, other.f$class) && Objects.equals(f$attribute, other.f$attribute);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -273,48 +234,40 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
      * 
      */
     public static ExtractClassPostcondition.Match newEmptyMatch() {
-      return new Mutable(null, null, null, null, null, null, null);
+      return new Mutable(null, null, null);
     }
     
     /**
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ExtractClassPostcondition.Match newMutableMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return new Mutable(pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference);
+    public static ExtractClassPostcondition.Match newMutableMatch(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return new Mutable(p$package, p$class, p$attribute);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ExtractClassPostcondition.Match newMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return new Immutable(pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference);
+    public static ExtractClassPostcondition.Match newMatch(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return new Immutable(p$package, p$class, p$attribute);
     }
     
     private static final class Mutable extends ExtractClassPostcondition.Match {
-      Mutable(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-        super(pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference);
+      Mutable(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+        super(p$package, p$class, p$attribute);
       }
       
       @Override
@@ -324,8 +277,8 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     }
     
     private static final class Immutable extends ExtractClassPostcondition.Match {
-      Immutable(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-        super(pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference);
+      Immutable(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+        super(p$package, p$class, p$attribute);
       }
       
       @Override
@@ -340,23 +293,31 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
-   * e.g. in conjunction with {@link ViatraQueryEngine#on(Notifier)}.
+   * e.g. in conjunction with {@link ViatraQueryEngine#on(QueryScope)}.
    * 
    * <p>Matches of the pattern will be represented as {@link Match}.
    * 
    * <p>Original source:
    * <code><pre>
    * // CCAC8 - Extract Class - Postcondition
-   * pattern ExtractClassPostcondition (^package : Trace, class : Trace, attribute : Trace,
-   * 	attribute_class_name : java String, attribute_reference_name : java String, 
-   * 	attribute_class : Trace, attribute_reference : Trace
-   * ) {
-   * 	find created_package_class (^package, attribute_class);
-   * 	find set_class_name (attribute_class, attribute_class_name);
-   * 	find created_class_reference (class, attribute_reference);
-   * 	find set_reference_name (attribute_reference, attribute_reference_name);
-   * 	find set_reference_type (attribute_reference, attribute_class);
-   * 	find deleted_class_attribute (class, attribute);	
+   * pattern ExtractClassPostcondition($package : Trace, $class : Trace, $attribute : Trace) {
+   * 	// package
+   * 	find preserved_package ($package);
+   * 	// class
+   * 	find preserved_class ($class);
+   * 	find preserved_package_class ($package, $class);
+   * 	// attribute
+   * 	find deleted_attribute($attribute);
+   * 	find unset_attribute_name($attribute, attribute_name);
+   * 	// attribute class
+   * 	find created_class (attribute_class);
+   * 	find added_package_class($package, attribute_class);
+   * 	find set_class_name(attribute_class, attribute_class_name);
+   * 	attribute_class_name == eval(attribute_name.toFirstUpper);
+   * 	// attribute reference
+   * 	find created_reference(attribute_reference);
+   * 	find set_reference_type(attribute_reference, attribute_class);
+   * 	find added_class_reference($class, attribute_reference);
    * }
    * </pre></code>
    * 
@@ -369,7 +330,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -393,26 +354,18 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
       return new Matcher();
     }
     
-    private final static int POSITION_PACKAGE = 0;
+    private static final int POSITION_$PACKAGE = 0;
     
-    private final static int POSITION_CLASS = 1;
+    private static final int POSITION_$CLASS = 1;
     
-    private final static int POSITION_ATTRIBUTE = 2;
+    private static final int POSITION_$ATTRIBUTE = 2;
     
-    private final static int POSITION_ATTRIBUTE_CLASS_NAME = 3;
-    
-    private final static int POSITION_ATTRIBUTE_REFERENCE_NAME = 4;
-    
-    private final static int POSITION_ATTRIBUTE_CLASS = 5;
-    
-    private final static int POSITION_ATTRIBUTE_REFERENCE = 6;
-    
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ExtractClassPostcondition.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ExtractClassPostcondition.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
-     * The match set will be incrementally refreshed upon updates.
+     * 
      * @param engine the existing VIATRA Query engine in which this matcher will be created.
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
@@ -423,448 +376,333 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ExtractClassPostcondition.Match> getAllMatches(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawGetAllMatches(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference});
+    public Collection<ExtractClassPostcondition.Match> getAllMatches(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return rawStreamAllMatches(new Object[]{p$package, p$class, p$attribute}).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Returns a stream of all matches of the pattern that conform to the given fixed values of some parameters.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
+     * @return a stream of matches represented as a Match object.
+     * 
+     */
+    public Stream<ExtractClassPostcondition.Match> streamAllMatches(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return rawStreamAllMatches(new Object[]{p$package, p$class, p$attribute});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public ExtractClassPostcondition.Match getOneArbitraryMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawGetOneArbitraryMatch(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference});
+    public Optional<ExtractClassPostcondition.Match> getOneArbitraryMatch(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return rawGetOneArbitraryMatch(new Object[]{p$package, p$class, p$attribute});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawHasMatch(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference});
+    public boolean hasMatch(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return rawHasMatch(new Object[]{p$package, p$class, p$attribute});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawCountMatches(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference});
+    public int countMatches(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return rawCountMatches(new Object[]{p$package, p$class, p$attribute});
     }
     
     /**
      * Executes the given processor on each match of the pattern that conforms to the given fixed values of some parameters.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @param processor the action that will process each pattern match.
      * 
      */
-    public void forEachMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference, final IMatchProcessor<? super ExtractClassPostcondition.Match> processor) {
-      rawForEachMatch(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference}, processor);
+    public void forEachMatch(final Trace p$package, final Trace p$class, final Trace p$attribute, final Consumer<? super ExtractClassPostcondition.Match> processor) {
+      rawForEachMatch(new Object[]{p$package, p$class, p$attribute}, processor);
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference, final IMatchProcessor<? super ExtractClassPostcondition.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference}, processor);
+    public boolean forOneArbitraryMatch(final Trace p$package, final Trace p$class, final Trace p$attribute, final Consumer<? super ExtractClassPostcondition.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{p$package, p$class, p$attribute}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pPackage the fixed value of pattern parameter package, or null if not bound.
-     * @param pClass the fixed value of pattern parameter class, or null if not bound.
-     * @param pAttribute the fixed value of pattern parameter attribute, or null if not bound.
-     * @param pAttribute_class_name the fixed value of pattern parameter attribute_class_name, or null if not bound.
-     * @param pAttribute_reference_name the fixed value of pattern parameter attribute_reference_name, or null if not bound.
-     * @param pAttribute_class the fixed value of pattern parameter attribute_class, or null if not bound.
-     * @param pAttribute_reference the fixed value of pattern parameter attribute_reference, or null if not bound.
+     * @param p$package the fixed value of pattern parameter $package, or null if not bound.
+     * @param p$class the fixed value of pattern parameter $class, or null if not bound.
+     * @param p$attribute the fixed value of pattern parameter $attribute, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ExtractClassPostcondition.Match newMatch(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return ExtractClassPostcondition.Match.newMatch(pPackage, pClass, pAttribute, pAttribute_class_name, pAttribute_reference_name, pAttribute_class, pAttribute_reference);
+    public ExtractClassPostcondition.Match newMatch(final Trace p$package, final Trace p$class, final Trace p$attribute) {
+      return ExtractClassPostcondition.Match.newMatch(p$package, p$class, p$attribute);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for package.
+     * Retrieve the set of values that occur in matches for $package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfpackage(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_PACKAGE, parameters, results);
-      return results;
+    protected Stream<Trace> rawStreamAllValuesOf$package(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$PACKAGE, parameters).map(Trace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for package.
+     * Retrieve the set of values that occur in matches for $package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfpackage() {
-      return rawAccumulateAllValuesOfpackage(emptyArray());
+    public Set<Trace> getAllValuesOf$package() {
+      return rawStreamAllValuesOf$package(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for package.
+     * Retrieve the set of values that occur in matches for $package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfpackage(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfpackage(partialMatch.toArray());
+    public Stream<Trace> streamAllValuesOf$package() {
+      return rawStreamAllValuesOf$package(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for package.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $package.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfpackage(final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfpackage(new Object[]{
-      null, 
-      pClass, 
-      pAttribute, 
-      pAttribute_class_name, 
-      pAttribute_reference_name, 
-      pAttribute_class, 
-      pAttribute_reference
-      });
+    public Stream<Trace> streamAllValuesOf$package(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$package(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for class.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $package.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfclass(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_CLASS, parameters, results);
-      return results;
+    public Stream<Trace> streamAllValuesOf$package(final Trace p$class, final Trace p$attribute) {
+      return rawStreamAllValuesOf$package(new Object[]{null, p$class, p$attribute});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for class.
+     * Retrieve the set of values that occur in matches for $package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfclass() {
-      return rawAccumulateAllValuesOfclass(emptyArray());
+    public Set<Trace> getAllValuesOf$package(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$package(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for class.
+     * Retrieve the set of values that occur in matches for $package.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfclass(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfclass(partialMatch.toArray());
+    public Set<Trace> getAllValuesOf$package(final Trace p$class, final Trace p$attribute) {
+      return rawStreamAllValuesOf$package(new Object[]{null, p$class, p$attribute}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for class.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfclass(final Trace pPackage, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfclass(new Object[]{
-      pPackage, 
-      null, 
-      pAttribute, 
-      pAttribute_class_name, 
-      pAttribute_reference_name, 
-      pAttribute_class, 
-      pAttribute_reference
-      });
+    protected Stream<Trace> rawStreamAllValuesOf$class(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$CLASS, parameters).map(Trace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfattribute(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE, parameters, results);
-      return results;
+    public Set<Trace> getAllValuesOf$class() {
+      return rawStreamAllValuesOf$class(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute() {
-      return rawAccumulateAllValuesOfattribute(emptyArray());
+    public Stream<Trace> streamAllValuesOf$class() {
+      return rawStreamAllValuesOf$class(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $class.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute(partialMatch.toArray());
+    public Stream<Trace> streamAllValuesOf$class(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$class(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $class.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<Trace> getAllValuesOfattribute(final Trace pPackage, final Trace pClass, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfattribute(new Object[]{
-      pPackage, 
-      pClass, 
-      null, 
-      pAttribute_class_name, 
-      pAttribute_reference_name, 
-      pAttribute_class, 
-      pAttribute_reference
-      });
+    public Stream<Trace> streamAllValuesOf$class(final Trace p$package, final Trace p$attribute) {
+      return rawStreamAllValuesOf$class(new Object[]{p$package, null, p$attribute});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_class_name.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOfattribute_class_name(final Object[] parameters) {
-      Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE_CLASS_NAME, parameters, results);
-      return results;
+    public Set<Trace> getAllValuesOf$class(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$class(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_class_name.
+     * Retrieve the set of values that occur in matches for $class.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_class_name() {
-      return rawAccumulateAllValuesOfattribute_class_name(emptyArray());
+    public Set<Trace> getAllValuesOf$class(final Trace p$package, final Trace p$attribute) {
+      return rawStreamAllValuesOf$class(new Object[]{p$package, null, p$attribute}).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_class_name.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_class_name(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute_class_name(partialMatch.toArray());
+    protected Stream<Trace> rawStreamAllValuesOf$attribute(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_$ATTRIBUTE, parameters).map(Trace.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_class_name.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_class_name(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfattribute_class_name(new Object[]{
-      pPackage, 
-      pClass, 
-      pAttribute, 
-      null, 
-      pAttribute_reference_name, 
-      pAttribute_class, 
-      pAttribute_reference
-      });
+    public Set<Trace> getAllValuesOf$attribute() {
+      return rawStreamAllValuesOf$attribute(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_reference_name.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<String> rawAccumulateAllValuesOfattribute_reference_name(final Object[] parameters) {
-      Set<String> results = new HashSet<String>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE_REFERENCE_NAME, parameters, results);
-      return results;
+    public Stream<Trace> streamAllValuesOf$attribute() {
+      return rawStreamAllValuesOf$attribute(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_reference_name.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $attribute.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_reference_name() {
-      return rawAccumulateAllValuesOfattribute_reference_name(emptyArray());
+    public Stream<Trace> streamAllValuesOf$attribute(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$attribute(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_reference_name.
-     * @return the Set of all values or empty set if there are no matches
+     * Retrieve the set of values that occur in matches for $attribute.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_reference_name(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute_reference_name(partialMatch.toArray());
+    public Stream<Trace> streamAllValuesOf$attribute(final Trace p$package, final Trace p$class) {
+      return rawStreamAllValuesOf$attribute(new Object[]{p$package, p$class, null});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_reference_name.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<String> getAllValuesOfattribute_reference_name(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final Trace pAttribute_class, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfattribute_reference_name(new Object[]{
-      pPackage, 
-      pClass, 
-      pAttribute, 
-      pAttribute_class_name, 
-      null, 
-      pAttribute_class, 
-      pAttribute_reference
-      });
+    public Set<Trace> getAllValuesOf$attribute(final ExtractClassPostcondition.Match partialMatch) {
+      return rawStreamAllValuesOf$attribute(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for attribute_class.
+     * Retrieve the set of values that occur in matches for $attribute.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Set<Trace> rawAccumulateAllValuesOfattribute_class(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE_CLASS, parameters, results);
-      return results;
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_class.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_class() {
-      return rawAccumulateAllValuesOfattribute_class(emptyArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_class.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_class(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute_class(partialMatch.toArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_class.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_class(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_reference) {
-      return rawAccumulateAllValuesOfattribute_class(new Object[]{
-      pPackage, 
-      pClass, 
-      pAttribute, 
-      pAttribute_class_name, 
-      pAttribute_reference_name, 
-      null, 
-      pAttribute_reference
-      });
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_reference.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    protected Set<Trace> rawAccumulateAllValuesOfattribute_reference(final Object[] parameters) {
-      Set<Trace> results = new HashSet<Trace>();
-      rawAccumulateAllValues(POSITION_ATTRIBUTE_REFERENCE, parameters, results);
-      return results;
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_reference.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_reference() {
-      return rawAccumulateAllValuesOfattribute_reference(emptyArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_reference.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_reference(final ExtractClassPostcondition.Match partialMatch) {
-      return rawAccumulateAllValuesOfattribute_reference(partialMatch.toArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for attribute_reference.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Trace> getAllValuesOfattribute_reference(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class) {
-      return rawAccumulateAllValuesOfattribute_reference(new Object[]{
-      pPackage, 
-      pClass, 
-      pAttribute, 
-      pAttribute_class_name, 
-      pAttribute_reference_name, 
-      pAttribute_class, 
-      null
-      });
+    public Set<Trace> getAllValuesOf$attribute(final Trace p$package, final Trace p$class) {
+      return rawStreamAllValuesOf$attribute(new Object[]{p$package, p$class, null}).collect(Collectors.toSet());
     }
     
     @Override
     protected ExtractClassPostcondition.Match tupleToMatch(final Tuple t) {
       try {
-          return ExtractClassPostcondition.Match.newMatch((Trace) t.get(POSITION_PACKAGE), (Trace) t.get(POSITION_CLASS), (Trace) t.get(POSITION_ATTRIBUTE), (String) t.get(POSITION_ATTRIBUTE_CLASS_NAME), (String) t.get(POSITION_ATTRIBUTE_REFERENCE_NAME), (Trace) t.get(POSITION_ATTRIBUTE_CLASS), (Trace) t.get(POSITION_ATTRIBUTE_REFERENCE));
+          return ExtractClassPostcondition.Match.newMatch((Trace) t.get(POSITION_$PACKAGE), (Trace) t.get(POSITION_$CLASS), (Trace) t.get(POSITION_$ATTRIBUTE));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -874,7 +712,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     @Override
     protected ExtractClassPostcondition.Match arrayToMatch(final Object[] match) {
       try {
-          return ExtractClassPostcondition.Match.newMatch((Trace) match[POSITION_PACKAGE], (Trace) match[POSITION_CLASS], (Trace) match[POSITION_ATTRIBUTE], (String) match[POSITION_ATTRIBUTE_CLASS_NAME], (String) match[POSITION_ATTRIBUTE_REFERENCE_NAME], (Trace) match[POSITION_ATTRIBUTE_CLASS], (Trace) match[POSITION_ATTRIBUTE_REFERENCE]);
+          return ExtractClassPostcondition.Match.newMatch((Trace) match[POSITION_$PACKAGE], (Trace) match[POSITION_$CLASS], (Trace) match[POSITION_$ATTRIBUTE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -884,7 +722,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     @Override
     protected ExtractClassPostcondition.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ExtractClassPostcondition.Match.newMutableMatch((Trace) match[POSITION_PACKAGE], (Trace) match[POSITION_CLASS], (Trace) match[POSITION_ATTRIBUTE], (String) match[POSITION_ATTRIBUTE_CLASS_NAME], (String) match[POSITION_ATTRIBUTE_REFERENCE_NAME], (Trace) match[POSITION_ATTRIBUTE_CLASS], (Trace) match[POSITION_ATTRIBUTE_REFERENCE]);
+          return ExtractClassPostcondition.Match.newMutableMatch((Trace) match[POSITION_$PACKAGE], (Trace) match[POSITION_$CLASS], (Trace) match[POSITION_$ATTRIBUTE]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -907,23 +745,19 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
    * Clients should derive an (anonymous) class that implements the abstract process().
    * 
    */
-  public static abstract class Processor implements IMatchProcessor<ExtractClassPostcondition.Match> {
+  public static abstract class Processor implements Consumer<ExtractClassPostcondition.Match> {
     /**
      * Defines the action that is to be executed on each match.
-     * @param pPackage the value of pattern parameter package in the currently processed match
-     * @param pClass the value of pattern parameter class in the currently processed match
-     * @param pAttribute the value of pattern parameter attribute in the currently processed match
-     * @param pAttribute_class_name the value of pattern parameter attribute_class_name in the currently processed match
-     * @param pAttribute_reference_name the value of pattern parameter attribute_reference_name in the currently processed match
-     * @param pAttribute_class the value of pattern parameter attribute_class in the currently processed match
-     * @param pAttribute_reference the value of pattern parameter attribute_reference in the currently processed match
+     * @param p$package the value of pattern parameter $package in the currently processed match
+     * @param p$class the value of pattern parameter $class in the currently processed match
+     * @param p$attribute the value of pattern parameter $attribute in the currently processed match
      * 
      */
-    public abstract void process(final Trace pPackage, final Trace pClass, final Trace pAttribute, final String pAttribute_class_name, final String pAttribute_reference_name, final Trace pAttribute_class, final Trace pAttribute_reference);
+    public abstract void accept(final Trace p$package, final Trace p$class, final Trace p$attribute);
     
     @Override
-    public void process(final ExtractClassPostcondition.Match match) {
-      process(match.getPackage(), match.getValueOfClass(), match.getAttribute(), match.getAttribute_class_name(), match.getAttribute_reference_name(), match.getAttribute_class(), match.getAttribute_reference());
+    public void accept(final ExtractClassPostcondition.Match match) {
+      accept(match.get$package(), match.get$class(), match.get$attribute());
     }
   }
   
@@ -961,7 +795,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
   
   @Override
   public ExtractClassPostcondition.Match newMatch(final Object... parameters) {
-    return ExtractClassPostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (se.mdh.idt.benji.trace.Trace) parameters[1], (se.mdh.idt.benji.trace.Trace) parameters[2], (java.lang.String) parameters[3], (java.lang.String) parameters[4], (se.mdh.idt.benji.trace.Trace) parameters[5], (se.mdh.idt.benji.trace.Trace) parameters[6]);
+    return ExtractClassPostcondition.Match.newMatch((se.mdh.idt.benji.trace.Trace) parameters[0], (se.mdh.idt.benji.trace.Trace) parameters[1], (se.mdh.idt.benji.trace.Trace) parameters[2]);
   }
   
   /**
@@ -973,7 +807,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
    * 
    */
   private static class LazyHolder {
-    private final static ExtractClassPostcondition INSTANCE = new ExtractClassPostcondition();
+    private static final ExtractClassPostcondition INSTANCE = new ExtractClassPostcondition();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -982,7 +816,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -991,23 +825,15 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static ExtractClassPostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final ExtractClassPostcondition.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_pPackage = new PParameter("package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$package = new PParameter("$package", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pClass = new PParameter("class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$class = new PParameter("$class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pAttribute = new PParameter("attribute", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
+    private final PParameter parameter_$attribute = new PParameter("$attribute", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_pAttribute_class_name = new PParameter("attribute_class_name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
-    
-    private final PParameter parameter_pAttribute_reference_name = new PParameter("attribute_reference_name", "java.lang.String", new JavaTransitiveInstancesKey(java.lang.String.class), PParameterDirection.INOUT);
-    
-    private final PParameter parameter_pAttribute_class = new PParameter("attribute_class", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
-    
-    private final PParameter parameter_pAttribute_reference = new PParameter("attribute_reference", "se.mdh.idt.benji.trace.Trace", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mdh.se/idt/benji/trace/Trace", "Trace")), PParameterDirection.INOUT);
-    
-    private final List<PParameter> parameters = Arrays.asList(parameter_pPackage, parameter_pClass, parameter_pAttribute, parameter_pAttribute_class_name, parameter_pAttribute_reference_name, parameter_pAttribute_class, parameter_pAttribute_reference);
+    private final List<PParameter> parameters = Arrays.asList(parameter_$package, parameter_$class, parameter_$attribute);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -1020,7 +846,7 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("package","class","attribute","attribute_class_name","attribute_reference_name","attribute_class","attribute_reference");
+      return Arrays.asList("$package","$class","$attribute");
     }
     
     @Override
@@ -1030,47 +856,75 @@ public final class ExtractClassPostcondition extends BaseGeneratedEMFQuerySpecif
     
     @Override
     public Set<PBody> doGetContainedBodies() {
+      setEvaluationHints(new QueryEvaluationHint(null, QueryEvaluationHint.BackendRequirement.UNSPECIFIED));
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_package = body.getOrCreateVariableByName("package");
-          PVariable var_class = body.getOrCreateVariableByName("class");
-          PVariable var_attribute = body.getOrCreateVariableByName("attribute");
-          PVariable var_attribute_class_name = body.getOrCreateVariableByName("attribute_class_name");
-          PVariable var_attribute_reference_name = body.getOrCreateVariableByName("attribute_reference_name");
+          PVariable var_$package = body.getOrCreateVariableByName("$package");
+          PVariable var_$class = body.getOrCreateVariableByName("$class");
+          PVariable var_$attribute = body.getOrCreateVariableByName("$attribute");
+          PVariable var_attribute_name = body.getOrCreateVariableByName("attribute_name");
           PVariable var_attribute_class = body.getOrCreateVariableByName("attribute_class");
+          PVariable var_attribute_class_name = body.getOrCreateVariableByName("attribute_class_name");
           PVariable var_attribute_reference = body.getOrCreateVariableByName("attribute_reference");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_attribute_class_name), new JavaTransitiveInstancesKey(java.lang.String.class));
-          new TypeFilterConstraint(body, Tuples.flatTupleOf(var_attribute_reference_name), new JavaTransitiveInstancesKey(java.lang.String.class));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_attribute_class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_attribute_reference), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$package), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$class), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_$attribute), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.mdh.se/idt/benji/trace/Trace", "Trace")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_package, parameter_pPackage),
-             new ExportedParameter(body, var_class, parameter_pClass),
-             new ExportedParameter(body, var_attribute, parameter_pAttribute),
-             new ExportedParameter(body, var_attribute_class_name, parameter_pAttribute_class_name),
-             new ExportedParameter(body, var_attribute_reference_name, parameter_pAttribute_reference_name),
-             new ExportedParameter(body, var_attribute_class, parameter_pAttribute_class),
-             new ExportedParameter(body, var_attribute_reference, parameter_pAttribute_reference)
+             new ExportedParameter(body, var_$package, parameter_$package),
+             new ExportedParameter(body, var_$class, parameter_$class),
+             new ExportedParameter(body, var_$attribute, parameter_$attribute)
           ));
-          // 	find created_package_class (^package, attribute_class)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_package, var_attribute_class), Created_package_class.instance().getInternalQueryRepresentation());
-          // 	find set_class_name (attribute_class, attribute_class_name)
+          // 	// package	find preserved_package ($package)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package), Preserved_package.instance().getInternalQueryRepresentation());
+          // 	// class	find preserved_class ($class)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class), Preserved_class.instance().getInternalQueryRepresentation());
+          // 	find preserved_package_class ($package, $class)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package, var_$class), Preserved_package_class.instance().getInternalQueryRepresentation());
+          // 	// attribute	find deleted_attribute($attribute)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$attribute), Deleted_attribute.instance().getInternalQueryRepresentation());
+          // 	find unset_attribute_name($attribute, attribute_name)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$attribute, var_attribute_name), Unset_attribute_name.instance().getInternalQueryRepresentation());
+          // 	// attribute class	find created_class (attribute_class)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute_class), Created_class.instance().getInternalQueryRepresentation());
+          // 	find added_package_class($package, attribute_class)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$package, var_attribute_class), Added_package_class.instance().getInternalQueryRepresentation());
+          // 	find set_class_name(attribute_class, attribute_class_name)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute_class, var_attribute_class_name), Set_class_name.instance().getInternalQueryRepresentation());
-          // 	find created_class_reference (class, attribute_reference)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var_attribute_reference), Created_class_reference.instance().getInternalQueryRepresentation());
-          // 	find set_reference_name (attribute_reference, attribute_reference_name)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute_reference, var_attribute_reference_name), Set_reference_name.instance().getInternalQueryRepresentation());
-          // 	find set_reference_type (attribute_reference, attribute_class)
+          // 	attribute_class_name == eval(attribute_name.toFirstUpper)
+          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
+          new ExpressionEvaluation(body, new IExpressionEvaluator() {
+          
+              @Override
+              public String getShortDescription() {
+                  return "Expression evaluation from pattern ExtractClassPostcondition";
+              }
+              
+              @Override
+              public Iterable<String> getInputParameterNames() {
+                  return Arrays.asList("attribute_name");}
+          
+              @Override
+              public Object evaluateExpression(IValueProvider provider) throws Exception {
+                  String attribute_name = (String) provider.getValue("attribute_name");
+                  return evaluateExpression_1_1(attribute_name);
+              }
+          },  var__virtual_0_ ); 
+          new Equality(body, var_attribute_class_name, var__virtual_0_);
+          // 	// attribute reference	find created_reference(attribute_reference)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute_reference), Created_reference.instance().getInternalQueryRepresentation());
+          // 	find set_reference_type(attribute_reference, attribute_class)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_attribute_reference, var_attribute_class), Set_reference_type.instance().getInternalQueryRepresentation());
-          // 	find deleted_class_attribute (class, attribute)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_class, var_attribute), Deleted_class_attribute.instance().getInternalQueryRepresentation());
+          // 	find added_class_reference($class, attribute_reference)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_$class, var_attribute_reference), Added_class_reference.instance().getInternalQueryRepresentation());
           bodies.add(body);
       }
       return bodies;
     }
+  }
+  
+  private static String evaluateExpression_1_1(final String attribute_name) {
+    String _firstUpper = StringExtensions.toFirstUpper(attribute_name);
+    return _firstUpper;
   }
 }

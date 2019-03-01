@@ -75,6 +75,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public se.mdh.idt.benji.examples.refactorings.simplecore.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
@@ -85,6 +86,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public se.mdh.idt.benji.examples.refactorings.simplecore.Class createClass() {
 		ClassImpl class_ = new ClassImpl();
 		return class_;
@@ -95,6 +97,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
@@ -105,6 +108,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Reference createReference() {
 		ReferenceImpl reference = new ReferenceImpl();
 		return reference;
@@ -115,6 +119,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
@@ -125,6 +130,7 @@ public class SimplecoreFactoryImpl extends EFactoryImpl implements SimplecoreFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplecorePackage getSimplecorePackage() {
 		return (SimplecorePackage)getEPackage();
 	}

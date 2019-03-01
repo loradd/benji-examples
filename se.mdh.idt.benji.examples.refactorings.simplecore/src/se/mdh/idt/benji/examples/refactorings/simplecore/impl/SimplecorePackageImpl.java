@@ -94,7 +94,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SimplecorePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -108,7 +108,8 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 		if (isInited) return (SimplecorePackage)EPackage.Registry.INSTANCE.getEPackage(SimplecorePackage.eNS_URI);
 
 		// Obtain or create and register package
-		SimplecorePackageImpl theSimplecorePackage = (SimplecorePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplecorePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplecorePackageImpl());
+		Object registeredSimplecorePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SimplecorePackageImpl theSimplecorePackage = registeredSimplecorePackage instanceof SimplecorePackageImpl ? (SimplecorePackageImpl)registeredSimplecorePackage : new SimplecorePackageImpl();
 
 		isInited = true;
 
@@ -124,7 +125,6 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 		// Mark meta-data to indicate it can't be changed
 		theSimplecorePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SimplecorePackage.eNS_URI, theSimplecorePackage);
 		return theSimplecorePackage;
@@ -135,6 +135,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNamedElement() {
 		return namedElementEClass;
 	}
@@ -144,6 +145,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNamedElement_Name() {
 		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -153,6 +155,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPackage() {
 		return packageEClass;
 	}
@@ -162,6 +165,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPackage_Uri() {
 		return (EAttribute)packageEClass.getEStructuralFeatures().get(0);
 	}
@@ -171,7 +175,8 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_SubPackages() {
+	@Override
+	public EReference getPackage_Subpackages() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -180,6 +185,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPackage_Classes() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(2);
 	}
@@ -189,7 +195,8 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_DataTypes() {
+	@Override
+	public EReference getPackage_Datatypes() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -198,6 +205,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClass_() {
 		return classEClass;
 	}
@@ -207,6 +215,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getClass_Abstract() {
 		return (EAttribute)classEClass.getEStructuralFeatures().get(0);
 	}
@@ -216,7 +225,8 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_SuperClasses() {
+	@Override
+	public EReference getClass_Super() {
 		return (EReference)classEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -225,6 +235,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_Attributes() {
 		return (EReference)classEClass.getEStructuralFeatures().get(2);
 	}
@@ -234,6 +245,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClass_References() {
 		return (EReference)classEClass.getEStructuralFeatures().get(3);
 	}
@@ -243,6 +255,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -252,6 +265,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttribute_Type() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -261,6 +275,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getReference() {
 		return referenceEClass;
 	}
@@ -270,6 +285,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReference_Type() {
 		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -279,6 +295,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getReference_Opposite() {
 		return (EReference)referenceEClass.getEStructuralFeatures().get(1);
 	}
@@ -288,6 +305,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDataType() {
 		return dataTypeEClass;
 	}
@@ -297,6 +315,7 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplecoreFactory getSimplecoreFactory() {
 		return (SimplecoreFactory)getEFactoryInstance();
 	}
@@ -325,13 +344,13 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 
 		packageEClass = createEClass(PACKAGE);
 		createEAttribute(packageEClass, PACKAGE__URI);
-		createEReference(packageEClass, PACKAGE__SUB_PACKAGES);
+		createEReference(packageEClass, PACKAGE__SUBPACKAGES);
 		createEReference(packageEClass, PACKAGE__CLASSES);
-		createEReference(packageEClass, PACKAGE__DATA_TYPES);
+		createEReference(packageEClass, PACKAGE__DATATYPES);
 
 		classEClass = createEClass(CLASS);
 		createEAttribute(classEClass, CLASS__ABSTRACT);
-		createEReference(classEClass, CLASS__SUPER_CLASSES);
+		createEReference(classEClass, CLASS__SUPER);
 		createEReference(classEClass, CLASS__ATTRIBUTES);
 		createEReference(classEClass, CLASS__REFERENCES);
 
@@ -388,13 +407,13 @@ public class SimplecorePackageImpl extends EPackageImpl implements SimplecorePac
 
 		initEClass(packageEClass, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackage_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackage_SubPackages(), this.getPackage(), null, "subPackages", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Subpackages(), this.getPackage(), null, "subpackages", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackage_Classes(), this.getClass_(), null, "classes", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackage_DataTypes(), this.getDataType(), null, "dataTypes", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Datatypes(), this.getDataType(), null, "datatypes", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getClass_Abstract(), theEcorePackage.getEBooleanObject(), "abstract", null, 0, 1, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_SuperClasses(), this.getClass_(), null, "superClasses", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_Super(), this.getClass_(), null, "super", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_Attributes(), this.getAttribute(), null, "attributes", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_References(), this.getReference(), null, "references", null, 0, -1, se.mdh.idt.benji.examples.refactorings.simplecore.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
